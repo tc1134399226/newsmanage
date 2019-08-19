@@ -26,7 +26,7 @@
 
     <!-- 4、配置mybatis接口扫描器,扫描dao -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.qf.dao"></property>
+        <property name="basePackage" value="com.qf.news.dao"></property>
         <property name="sqlSessionFactoryBeanName" value="sessionFactory"></property>
     </bean>
 

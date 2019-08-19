@@ -4,7 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.news.dao.NewsMapper">
 
-    <select id="testMethod" resultType="com.qf.news.pojo.Test">
-        select * from userinfo;
+    <select id="listAllArticleByStatus" resultType="com.qf.news.vo.ArticleTypeVo">
+        select a.*,ar.areaName,t.typeName from article a
+        inner join area ar on ar.areaId = a.areaId
+        inner join type t on t.typeId = a.typeId
+        where a.`status` = 2
     </select>
 </mapper>

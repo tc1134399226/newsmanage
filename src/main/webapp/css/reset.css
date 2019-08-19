@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,select,td{margin:0;padding:0} 
+body{font:12px "宋体","Arial Narrow",HELVETICA;background:#fff; word-wrap:break-word;}
+a{text-decoration:none}
+em,i,strong,b{font-style:normal;font-weight: 100;}
+li{list-style:none}
+img{border:0} 
+table{border-collapse:collapse;border-spacing:0}
+.ind{text-indent:2em}
+.noborder{border:0;}
+.clear:after{content:"." ;clear:both;height:0;overflow:hidden;visibility:hidden;display:block}

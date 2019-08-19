@@ -1,0 +1,248 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+.wrapper {
+    width: 1020px;
+    margin: 0 auto;
+}
+
+
+/*header部分**************/
+
+header {
+    background: #ccc;
+}
+
+header .header {
+    display: flex;
+    width: 1020px;
+    justify-content: space-between;
+}
+
+header .header>a {
+    background: pink;
+    height: 50px;
+}
+
+header .header>a img {
+    width: 100px;
+    height: 50px;
+    display: block;
+}
+
+header .header ul {
+    display: flex;
+}
+
+header .header ul li {
+    display: flex;
+    background: greenyellow;
+}
+
+
+/* header .header ul li a {} */
+
+
+/* header .header ul li a img {} */
+
+header .header ul li input {
+    width: 50px;
+    height: 50px;
+}
+
+
+/*nav部分********/
+
+nav {
+    background: #f00;
+}
+
+
+/* nav .nav {} */
+
+nav .nav ul {
+    display: flex;
+}
+
+nav .nav ul li {
+    height: 50px;
+    font: 20px/50px "";
+    flex: 1;
+}
+
+nav .nav ul li:nth-last-of-type(1) a {
+    color: rebeccapurple;
+}
+
+nav .nav ul li a {
+    color: #fff;
+}
+
+
+/*section开始了************/
+
+section {}
+
+section .section {}
+
+
+/* section .section .main1 开始了******************************************** */
+
+section .section .main1 {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+section .section .main1 .banner {
+    position: relative;
+    /* background: green; */
+    overflow: hidden;
+    width: 400px;
+}
+
+section .section .main1 .banner ul {
+    display: flex;
+    height: 200px;
+    width: 2000px;
+}
+
+
+/* section .section .banner ul li {} */
+
+section .section .main1 .banner ul li img {
+    width: 400px;
+    height: 200px;
+    display: block;
+}
+
+section .section .main1 .banner .ctrl_box {
+    width: 400px;
+    position: absolute;
+    top: 100px;
+    display: flex;
+    justify-content: space-between;
+}
+
+section .section .main1 .banner .ctrl_box span {
+    float: left;
+    color: red;
+    width: 20px;
+    height: 20px;
+    background: rgba(188, 143, 143, 0.664);
+    text-align: center;
+    font: 20px/20px "";
+    cursor: pointer;
+}
+
+section .section .main1 dl {
+    width: 500px;
+    /* background: pink; */
+}
+
+
+/* section .section .main1 dl dt {}
+
+section .section .main1 dl dt dd {} */
+
+
+/* section .section .main2 开始了******************************************** */
+
+section .section .main2 {
+    /* background: greenyellow; */
+}
+
+section .section .main2>ul {
+    display: flex;
+}
+
+section .section .main2>ul>li {
+    flex: 1;
+    margin: 20px;
+}
+
+section .section .main2>ul>li h2 {
+    color: #f00;
+}
+
+
+/* section .section .main2>ul>li p {}
+
+section .section .main2>ul>li>ol {}
+
+section .section .main2>ul>li>ol li {} */
+
+
+/* section .section .main3 开始了******************************************** */
+
+section .section .main3 {
+    display: flex;
+    justify-content: space-between;
+    width: 800px;
+    flex-flow: row wrap;
+    /* align-items: center; */
+}
+
+section .section .main3 .minnav {
+    display: flex;
+    /* background: #ccc; */
+    width: 800px;
+}
+
+section .section .main3 .minnav li {
+    width: 60px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+section .section .main3 .minnav li a {
+    color: orange;
+}
+
+section .section .main3 .minnav li:nth-of-type(1) a {
+    color: red;
+    font-size: 30px;
+}
+
+section .section .main3 .photo {
+    /* background: chartreuse; */
+}
+
+section .section .main3 .photo li {}
+
+section .section .main3 .news {
+    margin: 0 20px;
+    /* background: #999; */
+}
+
+
+/* section .section .main3 .news .new1 {} */
+
+section .section .main3 .news .new1 dt {
+    font: 800 18px/18px "";
+}
+
+
+/* section .section .main3 .news .new1 dd {}
+
+section .section .main3 .news .new2 {} */
+
+section .section .main3 .news .new2 dt {
+    font: 800 18px/18px "";
+}
+
+section .section .main3 .news .new2 dd {}
+
+section .section .main3 .more {}
+
+section .section .main3 .more ul {}
+
+section .section .main3 .more ul li {}
+
+section .section .main3 .more ul li h2 {
+    color: #f00;
+}
+
+section .section .main3 .more ul li p {}

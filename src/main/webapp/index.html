@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!--网站描述保持在50字左右-->
+    <meta name="Description" content="环球网 - 最大环球网站" />
+    <!--网站的关键字 最好不要超过50个词-->
+    <meta name="Keywords" content="滴滴,哒哒,哈哈,嘿嘿" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.tb.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="jquery/jquery-1.11.1.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="header wrapper">
+            <a href="#"><img src="http://t1.huanqiucdn.cn/ed9715bdbbc03761688a3d50513e91fb.jpg" alt="logo" title="这是logo图片"></a>
+            <ul>
+                <li>
+                    <input type="button" value="注册">
+                </li>
+                <li>
+                    <input type="button" value="登录">
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav wrapper">
+            <ul>
+                <li><a href="#">国际</a></li>
+                <li><a href="#">内地</a></li>
+                <li><a href="#">港澳</a></li>
+                <li><a href="#">台湾</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section>
+        <div class="section wrapper">
+            <!-- 这里是main1部分 包括一个轮播图和一个新闻 -->
+            <div class="main1">
+                <div class="banner">
+                    <ul>
+                        <li><img src="img/1.jpg" /></li>
+                        <li><img src="img/2.jpg" /></li>
+                        <li><img src="img/3.jpg" /></li>
+                        <li><img src="img/4.jpg" /></li>
+                        <li><img src="img/5.jpg" /></li>
+                    </ul>
+
+                    <div class="ctrl_box">
+                        <span class="ctrl left_ctrl">&lt;</span>
+                        <span class="ctrl right_ctrl">&gt;</span>
+                    </div>
+                </div>
+
+                <dl>
+                    <dt><h2>一个理念一个理念一个理念一个理念一个理念</h2></dt>
+                    <dd>
+                        <p>习近平习近平习近平习近平习近平习<br> 近平习近平习近平习近平习近平</p>
+                    </dd>
+                    <dt><h2>一个理念一个理念一个理念一个理念一个理念</h2></dt>
+                    <dd>
+                        <p>习近平习近平习近平习近平习近平习<br> 近平习近平习近平习近平习近平</p>
+                    </dd>
+                    <dt><h2>一个理念一个理念一个理念一个理念一个理念</h2></dt>
+                    <dd>
+                        <p>习近平习近平习近平习近平习近平习<br> 近平习近平习近平习近平习近平</p>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="main3">
+                <ul class="minnav">
+                    <li><a href="#">军事</a></li>
+                </ul>
+                <ul class="photo">
+                    <li>这里可以放一个轮播图。。。</li>
+                    <li>这里可以放一个图片</li>
+                </ul>
+                <div class="news">
+                    <dl class="new1" id="dataNews">
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                    </dl>
+                    <dl class="new2">
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                    </dl>
+                </div>
+                <div class="more">
+                    <h2 style="color: red">最新</h2>
+                    <div>
+                        <p>这里放两张图片</p>
+                        <p>words...</p>
+                        <p>china</p>
+                        <p>中国茅台...</p>
+                        <p>德州品牌</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="main3">
+                <ul class="minnav">
+                    <li><a href="#">军事</a></li>
+                </ul>
+                <ul class="photo">
+                    <li>这里可以放一个轮播图。。。</li>
+                    <li>这里可以放一个图片</li>
+                </ul>
+                <div class="news">
+                    <dl class="new1" id="dataNews2">
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                    </dl>
+                    <dl class="new2">
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                        <dd>特朗普回应</dd>
+                    </dl>
+                </div>
+                <div class="more">
+                    <h2 style="color: red">最新</h2>
+                    <div>
+                        <p>这里放两张图片</p>
+                        <p>words...</p>
+                        <p>china</p>
+                        <p>中国茅台...</p>
+                        <p>德州品牌</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <footer>
+    </footer>
+
+</body>
+<script>
+    $('.right_ctrl').click(function() {
+        $('.banner ul').stop(true, true).animate({
+            marginLeft: '-200px'
+        }, 500, function() {
+            $('.banner ul li').first().appendTo($('.banner ul'))
+            $(this).css({
+                marginLeft: '0px'
+            })
+        })
+    })
+    $('.left_ctrl').click(function() {
+        $('.banner ul li').last().prependTo($('.banner ul'));
+        $('.banner ul').css({
+            marginLeft: '-400px'
+        });
+        $('.banner ul').stop(true, true).animate({
+            marginLeft: '0px'
+        }, 500)
+    })
+
+    var timer = setInterval(function() {
+        $('.banner ul').stop(true, true).animate({
+            marginLeft: '-400px'
+        }, 500, function() {
+            $('.banner ul li').first().appendTo($('.banner ul'))
+            $(this).css({
+                marginLeft: '0px'
+            })
+        })
+    }, 3000);
+
+    $('.banner').mouseover(function() {
+        clearInterval(timer)
+    }).mouseout(function() {
+        timer = setInterval(function() {
+            $('.banner ul').stop(true, true).animate({
+                marginLeft: '-400px'
+            }, 500, function() {
+                $('.banner ul li').first().appendTo($('.banner ul'))
+                $(this).css({
+                    marginLeft: '0px'
+                })
+            })
+        }, 3000);
+    });
+</script>
+
+<script>
+    var area;
+    var type;
+    function initPage(){
+        $.ajax({
+            //请求方式
+            type: "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/listAllArticleByStatus",
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    $("#dataNews").empty();
+                    var str1 = "";
+                    $(result).each(function (index, item) {
+                        if (item.areaName == "内地") {
+                            if (item.typeName == "军事") {
+                                str1 += "<p>";
+                                str1 += item.mainTitle;
+                                str1 += "</p>";
+                            }
+                        }
+                    });
+                    $("#dataNews").append(str1);
+                }
+            },
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+
+    initPage();
+</script>
+
+</html>
