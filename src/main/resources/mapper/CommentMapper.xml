@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.news.dao.CommentMapper">
+    <resultMap id="commentList" type="com.qf.news.vo.CommentVO">
+        <id property="comId" column="comId"/>
+        <result property="userId" column="userId"/>
+        <result property="nickName" column="nickName"/>
+        <result property="content" column="content"/>
+        <result property="status" column="status"/>
+        <result property="createTime" column="createTime"/>
+        <result property="icon" column="icon"/>
+    </resultMap>
+    <select id="allComment" resultMap="commentList">
+        select c.*,u.icon icon from comment c left join userinfo u on c.userId=u.userId where c.status=1
+    </select>
+    <insert id="addComment" parameterType="com.qf.news.pojo.CommentInfo">
+        insert into comment (userId,nickName,content,status,createTime) values (#{userId},#{nickName}
+        ,#{content},1,CURRENT_TIMESTAMP)
+    </insert>
+    <update id="deleteCommentByComId" parameterType="long">
+        update comment set status =0  where comId=#{comId};
+    </update>
+</mapper>

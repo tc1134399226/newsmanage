@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.news.dao.ArticleMapper">
+    <select id="getMyArtByUserId" parameterType="com.qf.news.pojo.UserInfo" resultType="com.qf.news.pojo.ArticleInfo">
+        select * from article where userId=#{userId} and status!=0
+    </select>
+    <select id="getMyDraftByUserId" parameterType="com.qf.news.pojo.UserInfo" resultType="com.qf.news.pojo.ArticleInfo">
+        select * from article where userId=#{userId} and status=0
+    </select>
+    <delete id="deleteMyDraftByArticleId" parameterType="Long" >
+        delete from article  where articleId=#{articleId}
+    </delete>
+    <insert id="addCollectByArticleIdAndUserId" parameterType="Long" >
+        delete from article  where articleId=#{articleId}
+    </insert>
+</mapper>

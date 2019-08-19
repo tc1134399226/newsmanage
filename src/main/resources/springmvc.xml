@@ -7,9 +7,10 @@
       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
     <!-- 1、配置自定控制器扫描路径 -->
     <!--这里配置的是controller的路径-->
-    <context:component-scan base-package="com.qf">
-        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-    </context:component-scan>
+<!--    <context:component-scan base-package="com.qf">-->
+<!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+<!--    </context:component-scan>-->
+    <context:component-scan base-package="com.qf.news.controller"></context:component-scan>
     <!-- 2、配置静态资源处理 -->
     <mvc:default-servlet-handler />
     <!-- 3、配置注解驱动 -->
@@ -20,7 +21,11 @@
             <bean class="org.springframework.http.converter.StringHttpMessageConverter">
                 <property name="supportedMediaTypes">
                     <list>
+                        <value>text/plain;charset=utf-8</value>
                         <value>text/html;charset=UTF-8</value>
+                        <value>text/json;charset=UTF-8</value>
+                        <value>application/json;charset=UTF-8</value>
+                        <value>*/*;charset=UTF-8</value>
                     </list>
                 </property>
             </bean>

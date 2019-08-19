@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.news.dao.CollectionMapper">
+    <resultMap id="collectlist" type="com.qf.news.vo.CollectionVO">
+        <id property="colId" column="colId"/>
+        <result property="userId" column="user_id"/>
+        <result property="articleId" column="articleId"/>
+        <result property="colTime" column="colTime"/>
+        <result property="areaId" column="areaId"/>
+        <result property="articleName" column="articleName"/>
+        <result property="typeId" column="typeId"/>
+        <result property="mainTitle" column="mainTitle"/>
+        <result property="subTitle" column="subTitle"/>
+        <result property="content" column="content"/>
+        <result property="artTime" column="artTime"/>
+    </resultMap>
+    <select id="getCollectionByUserId" parameterType="com.qf.news.pojo.UserInfo" resultMap="collectlist">
+select c.colId,c.userId,c.articleId,a.createTime colTime, a.areaId,a.articleName,a.typeId,a.mainTitle,
+a.subTitle,a.content,a.createTime artTime
+from collection c left join article a on a.userId=c.userId  where c.userId=#{userId}
+and c.status=1 and a.status=1
+    </select>
+    <update id="deleteCollectionByColId" parameterType="Long" >
+        update collection set status=0 where colId=#{colId}
+    </update>
+</mapper>

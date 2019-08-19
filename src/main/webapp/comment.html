@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>评论模块</title>
+    <meta charset="UTF-8">
+    <meta charset="GB18030">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <style type="text/css">
+        li {
+            list-style-type: none;
+            cursor:pointer;
+        }
+        table tbody tr:nth-child(odd){background:#F4F4F4;}
+        table tbody td:nth-child(even){color:#C00;}
+           .content{
+               font-size: 20px;
+           }
+        .button-group{
+            margin: 0px auto;
+            width: 600px;
+            text-align: left;
+        }
+        .leaveMsgArea{
+            margin: 0px auto;
+            width: 600px;
+            height: 200px;
+            border: 1px solid gray;
+        }
+        #comment{
+            margin: 0px 200px;
+        }
+        img{
+            border-radius: 30px;
+            width:60px;
+            height:60px;
+            float: left;
+        }
+        .user{
+            /*float: left;*/
+            font-size: 15px;
+        }
+        button{
+            border: none;
+            outline: none;
+        }
+        /*#splicPage{*/
+        /*    text-align:center*/
+        /*}*/
+    </style>
+</head>
+<body>
+<!--onclick="leaveMsg.getContent(event)"-->
+<!--<textarea cols =10 rows =10  id="leaveMsgArea"></textarea>-->
+<div class="button-group">
+    <div class="leaveMsgArea" contenteditable="true" id="leaveMsgArea">
+    </div>
+    <button type="button"   value="评论" onclick="commitComment()">提交评论</button>
+</div>
+
+<!--<input type="textarea" class="LeavingMessage" id="ComMessage"/><br>-->
+<!--<input type="button" value="评论" onclick="commitComment()">-->
+<div id="comment">
+
+</div>
+<div id="addReplyText"></div>
+<div class="table-responsive">
+    <table class="table  table-bordered" id = "dataTable">
+        <tfoot>
+        <tr >
+            <td colspan="6" align="center">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#">上一页</a></li>
+                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">下一页</a></li>
+                </ul>
+            </td>
+        </tr>
+
+        </tfoot>
+    </table>
+</div>
+</body>
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="script/docs.min.js"></script>
+<script>
+    //清空table
+    //初始化页面
+    function initPage(){
+        var pageNum=window.location.search.split("=")[1];
+        console.log(pageNum)
+        var requestURL="allComment";
+
+        if(pageNum==null){
+            pageNum=1
+        }
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+
+            //请求成功
+            success : function(result) {
+                $("#comment").html("");
+                $("#leaveMsgArea").html("");
+                $("#addReplyText").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    console.log(item);
+
+
+                    var   trStr="<img src=\""+item.icon+"\"><br>";
+                    console.log(item.icon)
+                    trStr+="<div class='user'>"
+                    trStr+="用户名:"+item.nickName+"<br>";
+                    // trStr+="<td><input type=\"checkbox\"></td>";
+                    trStr+=item.createTime+"<br>";
+                    trStr+="</div>"
+                    trStr+="<br>"
+                    trStr+="<div class='content'>"
+                    trStr+=item.content+"<br>";
+                    trStr+="</div>"
+                    trStr+="<hr>"
+                    trStr+="<button type=\"button\" onclick='addReply("+item.repId+","+item.comId+")'><a href='#addReplyText'>回复</a></button>&nbsp;"
+                    trStr+="<button type=\"button\" id='addReply' " + "onclick='deleteComment("+item.userId+","+item.comId+")'>删除</button>&nbsp;"
+                    trStr+="<div style='margin-left: 100px; font-size: 15px;' id=\""+item.comId+"\">";
+                    trStr+="</div>"
+                    var comName=item.nickName;
+                    console.log("--------"+item.userId)
+                    reply(item.userId,item.comId,comName)
+                    $("#comment").append(trStr);
+                });
+
+                if (pageNum<=1){
+                    var   splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var  	splicPage="<li><a href=\"comment.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+
+                }
+                console.log(111)
+                console.log(result.pages)
+                for(var i=1;i<=result.pages;i++){
+                    splicPage +="<li><a href=\"comment.html?pageNum="+i+"\">"+i+"</a></li>";
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a href=\"comment.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    initPage();
+    function reply(userId,comId,comName) {
+        console.log(comId)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "http://localhost:8080//getReplyByComId?comId="+comId,
+            //数据，json字符串
+            data:JSON.stringify({
+                "comId":comId,
+                "userId":userId
+            }),
+            //请求成功
+            success: function (result) {
+                $(result).each(function(index,item){
+                    console.log(item)
+                    console.log(item.createTime)
+                    var trStr="&nbsp&nbsp&nbsp"
+                    if (item.cnickName!=null){
+                        trStr+="<img src=\""+item.icon+"\"><br>";
+                        console.log(item.icon)
+                        trStr+="用户:"+item.nickName+"回复了"+item.cnickName+"<br>";
+                        trStr+=item.createTime+"<br>"
+                    } else {
+                        trStr+="<img src=\""+item.icon+"\"><br>";
+                        console.log(item.icon)
+                        trStr+="用户:"+item.nickName+"回复了"+comName+"<br>";
+                        trStr+=item.createTime+"<br>"
+                    }
+                    trStr+="&nbsp&nbsp&nbsp"
+                    trStr+="<div class='content'>"
+                    trStr+=item.content+"<br>";
+                    trStr+="</div>"
+                    trStr+="<hr>"
+                    trStr+="<button type=\"button\" id='addReply' " + "onclick='addReply("+item.repId+","+item.comId+")'><a href='#addReplyText'>回复</a></button>&nbsp;"
+                    trStr+="<button type=\"button\" id='addReply' " + "onclick='deleteReply("+item.userId+","+item.repId+")'>删除</button>&nbsp;"
+                    trStr+="<div id='"+item.repId+"'>"
+                    trStr+="</div>"
+                    $("#"+comId+"").append(trStr);
+                })
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+
+    }
+    function addReply(repId,comId) {
+        var  str="<div class=\"button-group\">";
+            str+="<div class=\"leaveMsgArea\" contenteditable=\"true\" id=\"replyMsgArea\">"
+        str+="</div>"
+            str+=" <button type=\"button\"   onclick=\"commitReply("+repId+","+comId+")\">提交回复</button>"
+        str+="</div>"
+        $("#addReplyText").append(str);
+
+    }
+    function commitComment() {
+        var text=document.getElementById("leaveMsgArea").innerText;
+        console.log(text)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "addComment",
+            data:JSON.stringify({
+                "content":text
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("提交评论失败")
+                }
+
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    function commitReply(repId,comId) {
+        // $("#replyMsgArea").style.display = 'none';
+        var text=document.getElementById("replyMsgArea").innerText;
+        console.log(text)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "addReplyByReplyInfo",
+            data:JSON.stringify({
+                "content":text,
+                "repId":repId,
+                "comId":comId
+
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("操作失败")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    function deleteReply(userId,repId) {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "deleteReplyByRepId",
+            data:JSON.stringify({
+                "repId":repId,
+                "userId":userId
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("无法删除他人回复")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    function deleteComment(userId,comId) {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "deleteCommentByComId",
+            data:JSON.stringify({
+                "comId":comId,
+                    "userId":userId
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("无法删除他人评论")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    </script>
+</html>

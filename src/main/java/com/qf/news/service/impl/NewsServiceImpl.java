@@ -19,7 +19,6 @@ public class NewsServiceImpl implements NewsService {
      * 查询新闻的信息 地区和类型
      * @return
      */
-    @Override
     public List<ArticleTypeVo> listAllArticleByStatus() {
         return newsMapper.listAllArticleByStatus();
     }
