@@ -1,6 +1,7 @@
 package com.qf.news.dao;
 
 import com.qf.news.pojo.UserInfo;
+import com.qf.news.vo.ArticleTypeVO;
 import com.qf.news.vo.CollectionVO;
 
 
@@ -20,4 +21,12 @@ public interface CollectionMapper {
      * @return
      */
     public Integer deleteCollectionByColId(Long colId);
+
+    /**
+     * 通过ArticleId和UserId添加收藏
+     * 其中userId是 收藏着userId 不是文章发布者userId
+     * @param articleTypeVO
+     * @return
+     */
+    public Integer addCollectByArticleIdAndUserId(ArticleTypeVO articleTypeVO);
 }

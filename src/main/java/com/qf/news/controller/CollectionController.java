@@ -4,8 +4,10 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.CollectionService;
+import com.qf.news.vo.ArticleTypeVO;
 import com.qf.news.vo.CollectionVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,5 +60,20 @@ public class CollectionController {
             return false;
         }
         return collectionService.deleteCollectionByColId(colId);
+    }
+
+    /**
+     * 通过ArticleId和UserId添加收藏
+     * 其中userId是 收藏着userId 不是文章发布者userId
+     * @param articleTypeVO
+     * @return
+     */
+    @RequestMapping("addCollectByArticleIdAndUserId")
+    public boolean addCollectByArticleIdAndUserId(@RequestBody ArticleTypeVO articleTypeVO){
+
+        if (articleTypeVO==null){
+            return false;
+        }
+        return collectionService.addCollectByArticleIdAndUserId(articleTypeVO);
     }
 }

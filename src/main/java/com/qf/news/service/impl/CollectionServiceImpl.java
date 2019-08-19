@@ -4,6 +4,7 @@ package com.qf.news.service.impl;
 import com.qf.news.dao.CollectionMapper;
 import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.CollectionService;
+import com.qf.news.vo.ArticleTypeVO;
 import com.qf.news.vo.CollectionVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,15 @@ public class CollectionServiceImpl implements CollectionService {
      */
     public boolean deleteCollectionByColId(Long colId) {
         return collectionMapper.deleteCollectionByColId(colId)>0;
+    }
+
+    /**
+     * 通过ArticleId和UserId添加收藏
+     * 其中userId是 收藏着userId 不是文章发布者userId
+     * @param articleTypeVO
+     * @return
+     */
+    public boolean addCollectByArticleIdAndUserId(ArticleTypeVO articleTypeVO) {
+        return collectionMapper.addCollectByArticleIdAndUserId(articleTypeVO)>0;
     }
 }

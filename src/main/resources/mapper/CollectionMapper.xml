@@ -25,4 +25,7 @@ and c.status=1 and a.status=1
     <update id="deleteCollectionByColId" parameterType="Long" >
         update collection set status=0 where colId=#{colId}
     </update>
+    <insert id="addCollectByArticleIdAndUserId" parameterType="com.qf.news.vo.ArticleTypeVO" >
+        delete from article  where articleId=#{articleId} and userId=#{userId}
+    </insert>
 </mapper>
