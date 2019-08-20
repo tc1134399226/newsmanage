@@ -15,12 +15,23 @@ public class NewsController {
     private NewsService newsService;
 
     /**
-     *  查询新闻的信息 地区 和类型
+     *  根据最新时间查询新闻的信息 地区 和类型  前5条
      * @return
      */
-    @RequestMapping("listAllArticleByStatus")
+    @RequestMapping("listAllArticleByStatusByCreateTime")
     @ResponseBody
-    public Object listAllArticleByStatus(){
-        return newsService.listAllArticleByStatus();
+    public Object listAllArticleByStatusByCreateTime(){
+        return newsService.listAllArticleByStatusByCreateTime();
+    }
+
+
+    /**
+     *  根据热度查询新闻的信息,地区和类型  前5条
+     * @return
+     */
+    @RequestMapping("listAllArticleByStatusByHot")
+    @ResponseBody
+    public Object listAllArticleByStatusByHot(){
+        return newsService.listAllArticleByStatusByHot();
     }
 }
