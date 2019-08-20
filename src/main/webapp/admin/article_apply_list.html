@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>文章审核</title>
+    <meta charset="GB18030">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../dropzone/basic.min.css" />
+    <link rel="stylesheet" href="../dropzone/dropzone.min.css" />
+    <link href="../wangeditor/wangEditor.min.css"/>
+    <script src="../wangeditor/wangEditor.min.js"></script>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <div><a class="navbar-brand"  style="font-size:32px;">你懂得-创意产品</a></div>
+        </div>
+    </div>
+</nav>
+
+<hr>
+
+<div class="table-responsive">
+    <table class="table  table-bordered" id = "dataTable">
+        <thead>
+        <tr >
+            <th>序号</th>
+            <th>类型</th>
+            <th>主标题</th>
+            <th>申请时间</th>
+            <th width="100">操作</th>
+        </tr>
+        </thead>
+
+    </table>
+</div>
+
+<div id="pageSplic" >
+    <table>
+        <tr>
+            <td colspan="6" align="center">
+                <ul class="pagination" >
+                </ul>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<script src="../jquery/jquery-2.1.1.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script src="../script/docs.min.js"></script>
+<script>
+    //定义方法获取后台数据
+    function initPage(){
+        var pageNum=window.location.search.split("=")[1];
+        console.log(pageNum);
+        var requestURL="getAllArticleInfo";
+
+        if(pageNum==null){
+            pageNum=1;
+        }
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL);
+        //1.从后台的接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+            //数据，json字符串
+            //请求成功
+            success : function(result) {
+                console.log(result);
+                var count=0;
+                $("#dataTable tbody").html("");
+                //js对象和jquery是不一样的，基本不能互相操作，得靠$()转换
+                //2.将数据填充到table中
+                $(result.list).each(function(index,item){
+                    var trStr = "<tr>";
+                    count++;
+                    //获取id并拼接
+                    trStr+="<td>"+count+"</td>";
+                    trStr+="<td>"+item.typeName+"</td>";
+                    trStr+="<td>"+item.mainTitle+"</td>";
+                    trStr+="<td>"+new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+"</td>";
+                    trStr+="<td>";
+                    trStr+="<button type=\"button\"  onclick='checkArticle("+item.articleId+")'>查看详情</button>&nbsp;"
+                    trStr+="</td>";
+                    trStr+="</tr>";
+                    $("#dataTable").append(trStr);
+                });
+
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var	splicPage="<li><a href=\"article_apply_list.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+
+                }
+                console.log(result.pages);
+                for(var i=1;i<=result.pages;i++){
+                    splicPage +="<li><a href=\"article_apply_list.html?pageNum="+i+"\">"+i+"</a></li>";
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a href=\"article_apply_list.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+            }
+        });
+    }
+    initPage();
+
+    //跳转详情页
+    function checkArticle(articleId){
+        window.location.href="articleContent.html?articleId="+articleId;
+    }
+
+
+</script>
+
+</body>
+</html>
