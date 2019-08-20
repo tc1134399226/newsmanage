@@ -12,7 +12,4 @@
     <delete id="deleteMyDraftByArticleId" parameterType="Long" >
         delete from article  where articleId=#{articleId}
     </delete>
-    <insert id="addCollectByArticleIdAndUserId" parameterType="Long" >
-        delete from article  where articleId=#{articleId}
-    </insert>
 </mapper>
