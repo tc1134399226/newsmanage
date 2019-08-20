@@ -5,16 +5,16 @@
 <mapper namespace="com.qf.news.dao.NewsMapper">
 
     <select id="listAllArticleByStatusByCreateTime" resultType="com.qf.news.vo.ArticleTypeVO">
-        select a.*,ar.areaName,t.typeName from article a
-        inner join area ar on ar.areaId = a.areaId
+        select ar.areaName,t.typeName,a.* from article a
         inner join type t on t.typeId = a.typeId
-        where a.`status` = 2 order by createTime DESC limit 0,10
+        inner join area ar on ar.areaId=a.areaId
+        where a.`status` = 2 order by createTime DESC
     </select>
 
     <select id="listAllArticleByStatusByHot" resultType="com.qf.news.vo.ArticleTypeVO">
         select a.*,ar.areaName,t.typeName from article a
         inner join area ar on ar.areaId = a.areaId
         inner join type t on t.typeId = a.typeId
-        where a.`status` = 2 order by hot DESC limit 0,10
+        where a.`status` = 2 order by hot DESC
     </select>
 </mapper>
