@@ -1,0 +1,33 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.sysuser.dao.EditorMapper">
+
+    <!--数据库中添加(更新)申请成为编辑的个人信息-->
+    <update id="applyEditor" parameterType="com.qf.xwfb.dto.EditorApplyDTO">
+        update userinfo set realName =#{realName},idCardBack =#{idCardBack},idCardFront =#{idCardFront} ,updateTime=CURRENT_TIMESTAMP where userId=#{userId} ;
+    </update>
+
+    <!--获取所有申请成为编辑的用户信息-->
+    <select id="getAllEditorApply" resultType="com.qf.xwfb.pojo.UserInfo">
+        select * from userinfo where status = 1
+    </select>
+
+    <!--通过id来找到申请成为编辑的用户的详细信息-->
+    <select id="getEditorApplyById" parameterType="int" resultType="com.qf.xwfb.pojo.UserInfo">
+        select * from userinfo where status = 1 and userId=#{userId}
+    </select>
+
+    <!--根据用户id来删除没通过编辑审核的人员信息(数据库中数据不删除)-->
+    <update id="deleteApply" parameterType="int">
+        update userinfo set status =0 ,updateTime=CURRENT_TIMESTAMP where userId=#{userId}
+    </update>
+
+    <!--将通过编辑审核的信息更新到数据库中(改变userInfo表中status来实现)-->
+    <update id="addEditor"  parameterType="int">
+        update userinfo set status =2 ,updateTime=CURRENT_TIMESTAMP where userId=#{userId}
+    </update>
+
+
+
+</mapper>
