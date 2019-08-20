@@ -137,7 +137,7 @@
     //显示用户收藏文章第一页
     function myCollectionPage() {
         var pageNum=1;
-        var requestURL="getCollectionByUserId";
+        var requestURL="news/getCollectionByUserId";
         requestURL+="?pageNum="+pageNum;
         console.log(requestURL)
         //1.从后台的listAllUserInfo接口获取数据
@@ -216,7 +216,7 @@
                }
 
         console.log(pageNum)
-        var requestURL="getCollectionByUserId";
+        var requestURL="news/getCollectionByUserId";
         if(pageNum==null){
             pageNum=1
         }
@@ -295,7 +295,7 @@
             //接受数据类型
             dataType: "json",
             //请求地址
-            url: "deleteCollectionByColId?colId="+colId,
+            url: "news/deleteCollectionByColId?colId="+colId,
             //数据，json字符串
             //请求成功
             success: function (result) {
@@ -313,7 +313,7 @@
     //点击按钮时触发这个方法,目的是为了回到分页第一页
     //显示用户文章第一页
     function myArticlePage() {
-        var requestURL="getMyArtByUserId";
+        var requestURL="news/getMyArtByUserId";
          var   pageNum=1
 
         requestURL+="?pageNum="+pageNum;
@@ -396,7 +396,7 @@
         }
 
         console.log(pageNum)
-        var requestURL="getMyArtByUserId";
+        var requestURL="news/getMyArtByUserId";
         if(pageNum==null){
             pageNum=1
         }
@@ -479,7 +479,7 @@
     //显示用户草稿页面第一页
     function myDraftPage() {
         var pageNum=1;
-        var requestURL="getMyDraftByUserId";
+        var requestURL="news/getMyDraftByUserId";
         requestURL+="?pageNum="+pageNum;
         console.log(requestURL)
         //1.从后台的listAllUserInfo接口获取数据
@@ -555,7 +555,7 @@
         }
 
         console.log(pageNum)
-        var requestURL="getMyDraftByUserId";
+        var requestURL="news/getMyDraftByUserId";
         if(pageNum==null){
             pageNum=1
         }
@@ -635,7 +635,7 @@
             //接受数据类型
             dataType: "json",
             //请求地址
-            url: "deleteMyDraftByArticleId?articleId="+articleId,
+            url: "news/deleteMyDraftByArticleId?articleId="+articleId,
             //数据，json字符串
             //请求成功
             success: function (result) {
