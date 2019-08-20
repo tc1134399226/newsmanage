@@ -154,18 +154,18 @@
                 if (pageNum<=1){
                     var   splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var  	splicPage="<li><a href=\"comment.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+                    var  	splicPage="<li><a href=\"news/comment.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
 
                 }
                 console.log(111)
                 console.log(result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"comment.html?pageNum="+i+"\">"+i+"</a></li>";
+                    splicPage +="<li><a href=\"news/comment.html?pageNum="+i+"\">"+i+"</a></li>";
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"comment.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a href=\"news/comment.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);

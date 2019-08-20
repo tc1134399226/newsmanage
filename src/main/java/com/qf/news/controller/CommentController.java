@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
+@RequestMapping("news")
 public class CommentController {
     @Autowired
     CommentService commentService;

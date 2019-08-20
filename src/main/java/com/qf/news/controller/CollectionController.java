@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
+@RequestMapping("news")
 public class CollectionController {
 
     @Autowired
@@ -31,7 +32,7 @@ public class CollectionController {
     public Object getCollectionByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
                                                     Integer pageNum , HttpSession session){
         //,produces = "text/html;charset=UTF-8"
-        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+      UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
 
         //测试
 //        UserInfo userInfo=new UserInfo();
