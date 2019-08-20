@@ -7,12 +7,14 @@ import com.qf.sysuser.dto.EditorApplyDTO;
 import com.qf.sysuser.pojo.UserInfo;
 import com.qf.sysuser.service.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class EditorServiceImpl implements EditorService {
+    @Qualifier("editMapper")
     @Autowired
     EditorMapper editorMapper;
 

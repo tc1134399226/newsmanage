@@ -4,9 +4,11 @@ package com.qf.sysuser.dao;
 
 import com.qf.sysuser.dto.EditorApplyDTO;
 import com.qf.sysuser.pojo.UserInfo;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository("editMapper")
 public interface EditorMapper {
 
     //将申请成为编辑的个人信息添加(更新)到userInfo表中

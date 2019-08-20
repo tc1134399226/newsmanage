@@ -7,12 +7,14 @@ import com.qf.sysuser.pojo.ArticleInfo;
 import com.qf.sysuser.service.ArticleInfoService;
 import com.qf.sysuser.vo.ArticleInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ArticleInfoServiceImpl implements ArticleInfoService {
+    @Qualifier("artiMapper")
     @Autowired
     ArticleInfoMapper articleInfoMapper;
 
