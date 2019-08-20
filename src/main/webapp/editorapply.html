@@ -67,7 +67,7 @@
             addRemoveLinks: true,
             parallelUploads: 1,// 一次上传的文件数量
             //previewsContainer:"#preview", // 上传图片的预览窗口
-            dictDefaultMessage: '上传您的身份证人像面',
+            dictDefaultMessage: '点击或者拖拽上传您的身份证人像面',
             dictMaxFilesExceeded: "您最多只能上传1个文件！",
             dictResponseError: '文件上传失败!',
             dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
@@ -114,7 +114,7 @@
             addRemoveLinks: true,
             parallelUploads: 1,// 一次上传的文件数量
             //previewsContainer:"#preview", // 上传图片的预览窗口
-            dictDefaultMessage: '上传您的身份证国徽面',
+            dictDefaultMessage: '点击或者拖拽上传您的身份证国徽面',
             dictMaxFilesExceeded: "您最多只能上传1个文件！",
             dictResponseError: '文件上传失败!',
             dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
@@ -163,7 +163,7 @@
             //请求成功
             success : function(result) {
               if(result!=null){
-                alert("已申请,请勿重复提交!");
+                alert("已有一个申请,请勿重复提交!");
 
                 window.location.href="userhome.html";
               }else{
@@ -188,12 +188,13 @@
                   ),
                   //请求成功
                   success : function(result) {
+                    alert("已提交,正在审核中,请稍后...")
                     console.log(result);
 
                   },
                   //请求失败，包含具体的错误信息
                   error : function(e){
-
+                    alert("申请失败!")
                     console.log(e.status);
                     console.log(e.responseText);
                   }

@@ -4,19 +4,19 @@
 <mapper namespace="com.qf.sysuser.dao.ArticleInfoMapper">
 
     <!--根据文章id来改变文章的status(通过审核或者不通过)-->
-     <update id="updateArticleStatus" parameterType="com.qf.xwfb.pojo.ArticleInfo">
+     <update id="updateArticleStatus" parameterType="com.qf.sysuser.pojo.ArticleInfo">
             update article set status = #{status} ,updateTime=CURRENT_TIMESTAMP where articleId = #{articleId}
      </update>
 
 
     <!--获取所有文章信息-->
-    <select id="getAllArticleInfo" resultType="com.qf.xwfb.vo.ArticleInfoVO">
+    <select id="getAllArticleInfo" resultType="com.qf.sysuser.vo.ArticleInfoVO">
         select * from article a,type t where  a.typeId=t.typeId and status = 1
     </select>
 
 
     <!--根据文章id获取详细信息-->
-    <select id="getArticleInfoById" parameterType="int" resultType="com.qf.xwfb.vo.ArticleInfoVO">
+    <select id="getArticleInfoById" parameterType="int" resultType="com.qf.sysuser.vo.ArticleInfoVO">
         select * from article a,type t where  a.typeId=t.typeId and status = 1 and articleId=#{articleId}
     </select>
 
