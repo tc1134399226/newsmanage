@@ -86,7 +86,7 @@
         //接受数据类型
         dataType:"json",
         //请求地址
-        url : "getEditorApplyById?userId="+userId,
+        url : "sysuser/getEditorApplyById?userId="+userId,
         //数据，json字符串
         //请求成功
         success : function(result) {
@@ -130,7 +130,7 @@
             //接受数据类型
             dataType:"json",
             //请求地址
-            url : "addEditor?userId="+userId,
+            url : "sysuser/addEditor?userId="+userId,
 
             //请求成功
             success : function(result) {
@@ -158,7 +158,7 @@
             //接受数据类型
             dataType:"json",
             //请求地址
-            url : "deleteApply?userId="+userId,
+            url : "sysuser/deleteApply?userId="+userId,
             //数据，json字符串
             // data : JSON.stringify(
             //     {

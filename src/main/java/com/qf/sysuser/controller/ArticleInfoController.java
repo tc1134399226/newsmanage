@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@RequestMapping("admin/sysuser")
 @RestController
 public class ArticleInfoController {
     @Autowired
@@ -24,7 +25,7 @@ public class ArticleInfoController {
      * @param articleInfo
      * @return
      */
-    @RequestMapping("admin/updateArticleStatus")
+    @RequestMapping("updateArticleStatus")
     public Object updateArticleStatus(@RequestBody ArticleInfo articleInfo){
         return this.articleInfoService.updateArticleStatus(articleInfo);
 
@@ -34,7 +35,7 @@ public class ArticleInfoController {
      * 获取所有需要审核的文章信息
      * @return
      */
-    @RequestMapping("admin/getAllArticleInfo")
+    @RequestMapping("getAllArticleInfo")
     public Object getAllArticleInfo(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum){
         int pageSize=2;//每页显示记录数
         //初始化pageHelper对象
@@ -51,7 +52,7 @@ public class ArticleInfoController {
      * @param articleId
      * @return
      */
-    @RequestMapping("admin/getArticleInfoById")
+    @RequestMapping("getArticleInfoById")
     public Object getArticleInfoById(@RequestParam int articleId){
         return articleInfoService.getArticleInfoById(articleId);
     }

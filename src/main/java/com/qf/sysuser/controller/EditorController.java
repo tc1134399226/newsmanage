@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@RequestMapping("admin/sysuser")
 @RestController
 public class EditorController {
     @Autowired
@@ -45,7 +45,7 @@ public class EditorController {
      * @param userId
      * @return
      */
-    @RequestMapping("admin/deleteApply")
+    @RequestMapping("deleteApply")
     public Object deleteApply(@RequestParam int userId){
         return this.editorService.deleteApply(userId);
     }
@@ -56,7 +56,7 @@ public class EditorController {
      * @param userId
      * @return
      */
-    @RequestMapping("admin/addEditor")
+    @RequestMapping("addEditor")
     public Object addEditor(@RequestParam int userId){
         return this.editorService.addEditor(userId);
     }
@@ -67,14 +67,14 @@ public class EditorController {
      * @param userId
      * @return
      */
-    @RequestMapping("admin/getEditorApplyById")
+    @RequestMapping("getEditorApplyById")
     public Object getEditorApplyById(@RequestParam int userId){
         return this.editorService.getEditorApplyById(userId);
     }
 
 
     //分页显示列表
-    @RequestMapping("admin/page")
+    @RequestMapping("page")
     public Object showlist(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum) {
         int pageSize=4;//每页显示记录数
         //初始化pageHelper对象

@@ -15,6 +15,7 @@ import java.util.UUID;
 /**
  * Created by DELL on 2019/8/7.
  */
+
 @Controller
 @RequestMapping("fileUpAndDown")
 public class IdcardUpLoadController {
