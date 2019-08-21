@@ -4,6 +4,9 @@ package com.qf.news.controller;
 import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.NewsUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -29,7 +33,17 @@ public class NewsUserInfoController {
      * @return
      */
     @RequestMapping("loginCheck")
-    public Object loginCheck(@RequestBody UserInfo userInfo, HttpSession session){
+    public Object loginCheck(@RequestBody UserInfo userInfo, HttpSession session,
+                             BindingResult bindingResult, ModelMap modelMap){
+        if (bindingResult.hasErrors()){
+            List<ObjectError> allErrors = bindingResult.getAllErrors();
+            for (ObjectError error:
+                    allErrors){
+                System.out.println(error);
+                modelMap.put(error.getObjectName(),error.toString());
+            }
+            return false;
+        }
         UserInfo userInfo1 = userInfoService.loginCheck(userInfo);
 
         //登录成功
@@ -40,6 +54,8 @@ public class NewsUserInfoController {
         }else{
             //登录失败
         }
+
+
 
         return userInfo1;
     }
