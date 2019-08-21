@@ -35,8 +35,8 @@ and sr.sysId = su.userid and r.roleid = sr.roleid
         insert into userinfo(userId,
         account,nickName,
         password,idCard,mobile,sex,icon,status,createTime,updateTime)
-        values(DEFAULT,#{account},#{nickName},#{password},#{idCard},#{mobile},'无',
-        #{icon},0,now(),now(),)
+        values(DEFAULT,#{account},#{nickName},#{password},#{idCard},#{mobile},#{sex},
+        #{icon},0,now(),now())
     </insert>
 
     <!--用户名重复检测-->
