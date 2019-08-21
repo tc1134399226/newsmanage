@@ -34,8 +34,9 @@ and sr.sysId = su.userid and r.roleid = sr.roleid
     <insert id="register" parameterType="com.qf.news.pojo.UserInfo">
         insert into userinfo(userId,
         account,nickName,
-        password,idCard,mobile,sex,status,createTime,updateTime,roleId)
-        values(DEFAULT,#{account},#{nickName},#{password},#{idCard},#{mobile},'无',0,now(),now(),0)
+        password,idCard,mobile,sex,icon,status,createTime,updateTime)
+        values(DEFAULT,#{account},#{nickName},#{password},#{idCard},#{mobile},'无',
+        #{icon},0,now(),now(),)
     </insert>
 
     <!--用户名重复检测-->

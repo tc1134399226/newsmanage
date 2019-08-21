@@ -109,6 +109,11 @@ public class UserServiceImpl implements SysUserService {
         return i > 0;
     }
 
+    //管理员登录
+    public User sysUserLogin(User user) {
+        return sysUserDao.sysUserLogin(user);
+    }
+
 
 //    /**
 //     *  初始化用户菜单

@@ -26,4 +26,8 @@ public interface SysUserService {
 
     //初始化用户菜单
 //    public List<MenuInfo> userLoginInit(User user);
+
+
+    //管理员登录
+    public User sysUserLogin(User user);
 }
