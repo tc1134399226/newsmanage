@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻发布</title>
+    <link href="wangeditor/wangEditor.min.css"/>
+    <script src="wangeditor/wangEditor.min.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+
+
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/docs.min.js"></script>
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <link rel="stylesheet" href="dropzone/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+
+    <script src="dropzone/dropzone.min.js"></script>
+
+</head>
+<body >
+
+
+<!--<style>-->
+    <!--body{text-align:center}-->
+    <!--.editorClass{margin:0 auto;width:600px;height:80px;}-->
+    <!--/* CSS注释：设置对象边框、宽度、高度 便于观察布局效果 */-->
+
+<!--</style>-->
+
+
+<style>
+    /*body{position: relative;height: 1000px;}*/
+    /*.lastDiv{position: absolute;bottom: 0;left: 0;height: 20px;width: 100%;}*/
+
+    body{ padding-bottom:50px;}
+    .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
+        height:50px; background-color:#AAAAAA; z-index:9999;}
+</style>
+<!--<div class="header"></div>-->
+<!--<div class="main"></div>-->
+<!--<div class="lastDiv"></div>-->
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">新闻发布<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
+    <div class="panel-body">
+        <form role="form">
+            <!--<div class="form-group">-->
+                <!--<label >作者姓名</label>-->
+                <!--<input type="text" class="form-control" id="articleName" >-->
+            <!--</div>-->
+
+            <div class="form-group">
+                <label >所属地区</label>
+                <select type="text" class="form-control" id="areaId"  list="sexlist">
+
+                    <option value="1">国际</option>
+                    <option value="2">国内</option>
+                    <option value="3">港澳</option>
+                    <option value="4">台海</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label >新闻类型</label>
+                <select type="text" class="form-control" id="typeId"  list="sexlist" >
+
+                    <option value="1">军事</option>
+                    <option value="2">财经</option>
+                    <option value="3">科技</option>
+                    <option value="4">娱乐</option>
+                    <option value="5">艺术</option>
+                    <option value="6">旅游</option>
+                    <option value="7">健康</option>
+                    <option value="8">体育</option>
+                    <option value="9">博览</option>
+                    <option value="10">汽车</option>
+                    <option value="11">其他</option>
+                </select>
+
+            </div>
+
+            <div class="form-group">
+                <label >主标题</label>
+                <input type="text" class="form-control" id="mainTitle" >
+            </div>
+            <div class="form-group">
+                <label >副标题</label>
+                <input type="text" class="form-control" id="subTitle" >
+            </div>
+            <div class="form-group">
+                <label >温馨提示</label>
+                <input type="text" class="form-control" id="remindText"
+                       readonly="readonly" value="文字和图片宽度保持一致使页面美观">
+            </div>
+            <div class="form-group">
+                <!--状态-->
+                <input type="hidden" class="form-control" id="status" >
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+    <div id="editor"style="max-width:800px;margin:50px;" class="editorClass">
+
+    </div>
+
+<div id="dropzoneDiv" class="dropzone"style="max-width:800px;margin:50px;"></div>
+
+<div align="center" id="textDiv" class="lastDiv">
+    <button type="button" class="btn btn-success" onclick="commitArticle()"><i class="glyphicon glyphicon-edit"></i> 提交</button>
+    <button type="button" class="btn btn-danger" onclick="getArticleId(content)"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+
+</div>
+
+<script>
+
+
+    var img1;
+    // var str=window.location.search;
+    // var userId=str.split("=")[1];
+
+    Dropzone.options.dropzoneDiv = {
+        url: "news/upload", // 文件提交地址
+        method: "post",  // 也可用put
+        paramName: "dropzFile", // 默认为file
+        maxFiles: 1,// 一次性上传的文件数量上限
+        maxFilesize: 2, // 文件大小，单位：MB
+        acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+        addRemoveLinks: true,
+        parallelUploads: 1,// 一次上传的文件数量
+        //previewsContainer:"#preview", // 上传图片的预览窗口
+        dictDefaultMessage: '上传封面图',
+        dictMaxFilesExceeded: "您最多只能上传1个文件！",
+        dictResponseError: '文件上传失败!',
+        dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+        dictFallbackMessage: "浏览器不受支持",
+        dictFileTooBig: "文件过大上传文件最大支持.",
+        dictRemoveLinks: "删除",
+        dictCancelUpload: "取消",
+        init: function () {
+            this.on("addedfile", function (file) {
+                // 上传文件时触发的事件
+            });
+            this.on("success", function (file, data) {
+                // 上传成功触发的事件
+                console.log(data);
+
+                img1= data.filePath;
+                var status = data.status;
+                if(status==200){
+                    var filePath = data.filePath;
+                    $("#imgUrl").val(filePath);
+                }
+
+                console.log(file);
+            });
+            this.on("error", function (file, data) {
+                // 上传失败触发的事件
+                console.error(data);
+                console.log(file);
+            });
+            this.on("removedfile", function (file) {
+                // 删除文件时触发的方法
+            });
+        }
+
+    }
+
+</script>
+
+
+    <!--<div align="center" id="textDiv" class="lastDiv">-->
+        <!--<button type="button" class="btn btn-success" onclick="commitArticle()"><i class="glyphicon glyphicon-edit"></i> 提交</button>-->
+        <!--<button type="button" class="btn btn-danger" onclick="getArticleId(content)"><i class="glyphicon glyphicon-refresh"></i> 重置</button>-->
+
+    <!--</div>-->
+
+
+
+<input type="button" id="test1" value="拿html"/>
+    <input type="button" id="test2" value="拿text"/>
+
+    <script>
+
+        var content;
+
+        var E = window.wangEditor;
+        //声明
+        var editor = new E("#editor");
+        //设置
+        //开启debug模式
+        editor.customConfig.debug = true;
+        // 关闭粘贴内容中的样式
+        editor.customConfig.pasteFilterStyle = false;
+        // 忽略粘贴内容中的图片
+        editor.customConfig.pasteIgnoreImg = false;
+        // 使用 base64 保存图片
+        // editor.customConfig.uploadImgShowBase64 = true
+        // 上传图片到服务器
+        editor.customConfig.uploadFileName = 'editorFile'; //设置文件上传的参数名称
+        editor.customConfig.uploadImgServer = 'news/upload1'; //设置上传文件的服务器路径
+        editor.customConfig.uploadImgMaxSize = 3 * 512 * 1024; // 将图片大小限制为 3M
+        //自定义上传图片事件
+        editor.customConfig.uploadImgHooks = {
+            before: function(xhr, editor, files) {
+
+            },
+            success: function(xhr, editor, result) {
+                console.log("上传成功");
+
+                content=editor.txt.html();
+
+
+            },
+            fail: function(xhr, editor, result) {
+                console.log("上传失败,原因是" + result);
+
+            },
+            error: function(xhr, editor) {
+                console.log("上传出错");
+            },
+            timeout: function(xhr, editor) {
+                console.log("上传超时");
+            }
+        }
+
+        //初始化
+        editor.create();
+        //js（早绑定/晚绑定）
+        //获取html
+        $("#test1").bind("click",function(){
+            content=editor.txt.html();
+            alert(editor.txt.html());
+            // $("#txtdiv").var(editor.txt.html());
+        });
+        //获取文本
+        $("#test2").bind("click",function(){
+            alert(editor.txt.text());
+        });
+
+
+    </script>
+
+    <!--<button type="button" class="btn btn-success" onclick="commitArticle()"><i class="glyphicon glyphicon-edit"></i> 提交</button>-->
+    <!--<button type="button" class="btn btn-danger" onclick="getArticleId(content)"><i class="glyphicon glyphicon-refresh"></i> 重置</button>-->
+
+
+    <script type="text/javascript">
+
+        // var str=window.location.search;
+        // var userId=str.split("=")[1];
+        //
+        // console.log(userName+":"+password);
+
+        //定义articleId
+        var articleId;
+
+        function getArticleId(content) {
+            $.ajax({
+                //请求方式
+                type: "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType: "json",
+                //请求地址
+                url: "news/getArticleInfoIdById",
+                //数据，json字符串
+                data : JSON.stringify(
+                    {
+                        "content":editor.txt.html()
+                    }
+                ),
+                //数据，json字符串
+                //请求成功
+                success: function (result) {
+                    console.log(result);
+                    articleId=result.articleId;
+                    // alert(articleId);
+                    // //发布成功后转发
+                    window.location.href="articleContent.html?articleId="+articleId;
+                },
+                //请求失败，包含具体的错误信息
+                error: function (e) {
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+
+        }
+
+        function commitArticle() {
+
+            //定义articleId
+            // var articleId;
+
+            // var articleName = $("#articleName").val();
+            // if(articleName.length<1){
+            //     alert("新闻类型不能为空");
+            //     return ;
+            // }
+
+            var status = $("#status").val();
+            var areaId = $("#areaId").val();
+            //获取类型Id
+            var typeId = $("#typeId").val();
+            var mainTitle = $("#mainTitle").val();
+            if(mainTitle.length<1){
+                alert("主标题不能为空");
+                return ;
+            }
+            var status = $("#status").val();
+            var subTitle = $("#subTitle").val();
+            // console.log(userName+":"+password);
+            if(subTitle.length<1){
+                alert("副标题不能为空");
+                return ;
+            }
+
+            $.ajax({
+                //请求方式
+                type : "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType:"json",
+                //请求地址
+                url : "news/commitArticle",
+                //数据，json字符串
+                data : JSON.stringify(
+                    {
+                        "status":status,
+                        "areaId":areaId,
+                        "typeId":typeId,
+                        "mainTitle":mainTitle,
+                        "subTitle":subTitle,
+                        "content":editor.txt.html()
+                    }
+                ),
+                //请求成功
+                success : function(result) {
+                    console.log(result);
+                    if(result){
+                        getArticleId(editor.txt.html());
+                        uploadCover();
+                        console.log(result);
+
+                        alert("发布成功");
+                    }else{
+                        console.log(e);
+                    }
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+
+        }
+
+
+
+        function uploadCover() {
+
+            $.ajax({
+                //请求方式
+                type : "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType:"json",
+                //请求地址
+                url : "news/uploadCover",
+                //数据，json字符串
+                data : JSON.stringify(
+                    {
+                        "content":editor.txt.html(),
+                        "cover":img1
+
+                    }
+                ),
+                //请求成功
+                success : function(result) {
+                    console.log(result);
+                    alert("背景图上传成功");
+                    alert(img1);
+
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+            //window.location.href="个人主页";
+        }
+
+    </script>
+</body>
+</html>

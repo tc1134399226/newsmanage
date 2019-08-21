@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布后的新闻</title>
+    <link href="wangeditor/wangEditor.min.css"/>
+    <script src="wangeditor/wangEditor.min.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/docs.min.js"></script>
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <link rel="stylesheet" href="dropzone/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+</head>
+<body style="text-align:center;">
+
+
+<style>
+    body{text-align:center}
+    .form-group{margin:0 auto;width:600px;height:80px;}
+    /* CSS注释：设置对象边框、宽度、高度 便于观察布局效果 */
+
+</style>
+
+<style>
+    /*body{position: relative;height: 1000px;}*/
+    /*.lastDiv{position: absolute;bottom: 0;left: 0;height: 20px;width: 100%;}*/
+
+    body{ padding-bottom:50px;}
+    .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
+        height:50px; z-index:9999;}
+</style>
+<!--<div class="header"></div>-->
+<!--<div class="main"></div>-->
+<!--<div class="lastDiv"></div>-->
+
+
+<style type="text/css">
+    <!--设置DIV块的边界为5px-->
+    div{margin:5px;border:0;padding:0;}
+    #mainTitle{
+
+        background-color:lavender;
+    }
+    #subTitle{
+        background-color:lavender;
+    }
+</style>
+
+        <div class="form-group" style="text-align:center;margin-bottom:1px;" >
+            <label >主标题</label>
+            <input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center " >
+        </div>
+<hr>
+        <div class="form-group" style="text-align:center;margin-top:2px;">
+            <label >副标题</label>
+            <input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center ">
+        </div>
+<hr>
+        <div class="form-group" id="contentStr"
+             style="text-align:center;width:800px; height:300px;color:black" align="center">
+            <label >新闻内容:</label>
+        </div>
+
+<!--<hr>-->
+
+        <!--<div class="form-group" style="text-align:center;" id="coverImg"-->
+             <!--style="text-align:center;width:100px; height:100px;color:#0000FF" align="center">-->
+            <!--<label >封面图</label>-->
+            <!--<br>-->
+        <!--</div>-->
+<hr>
+
+        <div align="center" id="textDiv" class="lastDiv">
+            <button type="button" class="btn btn-success" onclick="returnCheck()" ><i class="glyphicon glyphicon-edit"></i>返回修改</button>
+            <button type="button" class="btn btn-danger" onclick="checkCommit()"><i class="glyphicon glyphicon-refresh"></i> 确认提交</button>
+
+        </div>
+
+
+
+<script type="text/javascript">
+
+    var strCon;
+    // var strCover;
+    var str=window.location.search;
+    var articleId=str.split("=")[1];
+
+
+    $.ajax({
+        //请求方式
+        type : "GET",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/getReleaseInfoById?articleId="+articleId,
+        //数据，json字符串
+        //请求成功
+        success : function(result) {
+
+            console.log(result);
+            $("#mainTitle").val(result.mainTitle);
+            $("#subTitle").val(result.subTitle);
+            // var coverSrc=new Image();
+            //
+            // coverSrc.src=result.cover;
+            //
+            // $("#coverImg").append(coverSrc);
+
+            strCon=result.content;
+
+            //整体拼接到div里面去
+            $("#contentStr").append(strCon);
+            alert("获取Ip");
+            getIp(strCon);
+
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
+
+    // console.log(content);
+
+
+
+    function returnCheck() {
+        window.location.href="checkContent.html?articleId="+articleId;
+
+    }
+
+
+    function checkCommit() {
+        $.ajax({
+            //请求方式
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/updateStatus?articleId="+articleId,
+            //数据，json字符串
+            //请求成功
+            success : function(result) {
+                alert("修改成功并返回用户页面");
+                // window.location.href="urer.html";
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+
+
+function getIp(strCon){
+    $.ajax({
+        //请求方式
+        type : "POST",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/getIP",
+        //数据，json字符串
+        //请求成功
+        data : JSON.stringify(
+            {
+                "articleId":articleId
+            }
+        ),
+        success : function(result) {
+            console.log(result);
+            if(result){
+                console.log(result);
+
+                alert("获取Ip成功了吗");
+            }else{
+                console.log(e);
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
+
+
+}
+
+</script>
+
+
+
+</body>
+</html>
