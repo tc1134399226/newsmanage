@@ -1,6 +1,8 @@
 package com.qf.sysuser.controller;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
@@ -8,9 +10,7 @@ import com.qf.sysuser.vo.MenuInfoVO;
 import com.qf.sysuser.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
