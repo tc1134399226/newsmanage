@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>设置-个人信息</title>
+    <link rel="stylesheet" href="dropzone/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+    <script src="dropzone/dropzone.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
+</head>
+
+<body>
+    <!-- 头部栏位 -->
+    <!--页面顶部-->
+<div id="nav-bottom">
+	<!--顶部-->
+	<div class="nav-top">
+		<div class="top">
+			<div class="py-container">
+				<div class="shortcut">
+					<ul class="fl">
+						<li class="f-item">您好！</li>
+						<li class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>
+					</ul>
+					<ul class="fr">
+						<li class="f-item">我的空间</li>
+						<li class="f-item space"></li>
+						<li class="f-item"><a href="main.html" target="_blank">新闻首页</a></li>
+						<li class="f-item space"></li>
+
+						<li class="f-item">关注品优购</li>
+						<li class="f-item space"></li>
+						<li class="f-item" id="service">
+							<span>客户服务</span>
+							<ul class="service">
+								<li><a href="cooperation.html" target="_blank">合作招商</a></li>
+								<li><a href="shoplogin.html" target="_blank">商家后台</a></li>
+								<li><a href="cooperation.html" target="_blank">合作招商</a></li>
+								<li><a href="#">商家后台</a></li>
+							</ul>
+						</li>
+						<li class="f-item space"></li>
+						<li class="f-item">网站导航</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!--头部-->
+		<div class="header">
+			<div class="py-container">
+				<div class="yui3-g Logo">
+					<div class="yui3-u Left logoArea">
+						<a class="logo-bd" title="gold_experience" href="main.html" target="_blank"></a>
+					</div>
+					<div class="yui3-u Center searchArea">
+						<div class="search">
+							<form action="" class="sui-form form-inline">
+								<!--searchAutoComplete-->
+
+							</form>
+						</div>
+
+					</div>
+					<div class="yui3-u Right shopArea">
+						<div class="fr shopcar">
+							<div class="show-shopcar" id="shopcar">
+								<span class="car"></span>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="yui3-g NavList">
+					<div class="yui3-u Left all-sort">
+						<h4>新闻分类</h4>
+					</div>
+					<div class="yui3-u Center navArea">
+						<ul class="nav">
+							<li class="f-item">政治</li>
+							<li class="f-item">经济</li>
+							<li class="f-item">军事</li>
+							<li class="f-item">民生</li>
+
+							<li class="f-item"><a href="seckill-index.html" target="_blank">娱乐</a></li>
+						</ul>
+					</div>
+					<div class="yui3-u Right"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+
+<script type="text/javascript" src="js/plugins/jquery.easing/jquery.easing.min.js"></script>
+<script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
+<script type="text/javascript" src="js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
+<script type="text/javascript" src="js/widget/nav.js"></script>
+<script type="text/javascript" src="js/plugins/birthday/birthday.js"></script>
+<script type="text/javascript" src="js/plugins/citypicker/distpicker.data.js"></script>
+<script type="text/javascript" src="js/plugins/citypicker/distpicker.js"></script>
+<script type="text/javascript" src="js/pages/main.js"></script>
+<script>
+            $(function() {               
+                $.ms_DatePicker({
+                    YearSelector: "#select_year2",
+                    MonthSelector: "#select_month2",
+                    DaySelector: "#select_day2"
+                });
+            });
+        </script>
+</body>
+    <!--header-->
+    <div id="account">
+        <div class="py-container">
+            <div class="yui3-g home">
+                <!--左侧列表-->
+                <div class="yui3-u-1-6 list">
+
+                    <div class="person-info">
+
+                        <div class="person-account">
+                            <span class="name">Michelle</span>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="list-items">
+                        <dl>
+							<dt><i>·</i> 个人空间</dt>
+							<dd ><a href="home-index.html"   >我的收藏</a></dd>
+							<dd><a href="home-order-pay.html" >我的什么</a></dd>
+
+						</dl>
+						<dl>
+							<dt><i>·</i> 权限申请</dt>
+							<dd><a href="home-person-collect.html" >申请小编</a></dd>
+							<dd><a href="home-person-footmark.html" >新闻审核</a></dd>
+						</dl>
+
+						<dl>
+							<dt><i>·</i> 设置</dt>
+							<dd><a href="home-setting-info.html" class="list-active">信息修改</a></dd>
+							<dd><a href="home-setting-safe.html" >安全管理</a></dd>
+						</dl>
+                    </div>
+                </div>
+                <!--右侧主内容-->
+                <div class="yui3-u-5-6">
+					<div class="panel-body">
+						<form role="form">
+							<div class="form-group">
+								<input type="hidden" class="form-control" id="userId" value="test">
+
+							</div>
+
+
+                            <div class="form-group">
+                                <label >用户头像</label>
+                                <img  src="" id="icon">
+								<div class="form-group has-success has-feedback">
+									<div id="dropzoneDiv" class="dropzone"></div>
+									<input type="hidden" id="imgUrl"/>
+								</div>
+                            </div>
+                            <form class="form-horizontal" role="form">
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">昵称</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="nickName" placeholder="请输入名字">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">手机号码</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="mobile" placeholder="请输入姓">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">身份证号</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="idCard" placeholder="请输入姓">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label  class="col-sm-2 control-label">性别</label>
+                                    <div class="col-sm-10">
+                                   
+										<select class="form-control" id="sex">
+											<option>男</option>
+											<option>女</option>
+										</select>
+                                    </div>
+                                </div>
+
+
+                            </form>
+
+							<button type="button" class="btn btn-success" onclick="updateUser()"><i class="glyphicon glyphicon-edit"></i> 修改</button>
+						</form>
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    Dropzone.options.dropzoneDiv = {
+        url: "upload", // 文件提交地址
+        method: "post",  // 也可用put
+        paramName: "dropzFile", // 默认为file
+        maxFiles: 1,// 一次性上传的文件数量上限
+        maxFilesize: 2, // 文件大小，单位：MB
+        acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+        addRemoveLinks: true,
+        parallelUploads: 1,// 一次上传的文件数量
+        //previewsContainer:"#preview", // 上传图片的预览窗口
+        dictDefaultMessage: '点此上传新头像',
+        dictMaxFilesExceeded: "您最多只能上传1个文件！",
+        dictResponseError: '文件上传失败!',
+        dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+        dictFallbackMessage: "浏览器不受支持",
+        dictFileTooBig: "文件过大上传文件最大支持.",
+        dictRemoveLinks: "删除",
+        dictCancelUpload: "取消",
+        init: function () {
+            this.on("addedfile", function (file) {
+                // 上传文件时触发的事件
+            });
+            this.on("success", function (file, data) {
+                // 上传成功触发的事件
+                console.log(data);
+                var status = data.status;
+                if(status==200){
+                    var filePath = data.filePath;
+                    $("#imgUrl").val(filePath);
+                }
+
+                console.log(file);
+            });
+            this.on("error", function (file, data) {
+                // 上传失败触发的事件
+                console.error(data);
+                console.log(file);
+            });
+            this.on("removedfile", function (file) {
+                // 删除文件时触发的方法
+            });
+        }
+
+    }
+
+</script>
+<script>
+    //获取超链接地址栏上的userId
+    var params = window.location.search;
+    var id = params.split("=")[1];
+    // alert(id);
+
+    //通过ajax从后台获取。
+    $.ajax({
+        //请求方式GET/POST
+        type: "GET",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType: "json",
+        //请求地址
+        url: "getUserInfoById?userId="+id,
+        //数据，json字符串
+        //请求成功
+        success: function (result) {
+            console.log(result);
+            $("#userId").val(result.userId);
+            $("#nickName").val(result.nickName);
+            $("#mobile").val(result.mobile);
+            $("#sex").val(result.sex);
+            $("#idCard").val(result.idCard);
+            $("#icon").attr('src',result.icon);
+            $("#status").val(result.status);
+//              if(result){
+//                  alert("删除成功");
+//                  initPage();
+//              }else {
+//                  alert("删除失败")
+//              }
+        },
+        error: function (e) {
+            console.error(e);
+//              console.log(e);
+        }
+    });
+
+
+    function updateUser(){
+        //1.修改
+//		  alert("inner updateUser");
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "editUserInfoById",
+            //传递参数
+            data:JSON.stringify(
+                {
+                    "userId":$("#userId").val(),
+                    "nickName":$("#nickName").val(),
+                    "mobile":$("#mobile").val(),
+                    "idCard":$("#idCard").val(),
+                    "sex":$("#sex").val(),
+                    "icon":$("#imgUrl").val()
+
+                }
+            ),
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (e) {
+                console.error(e);
+            }
+        })
+        //2.跳转
+        window.location.href = "userInfo.html?userId="+id;
+    }
+
+</script>
+
+    <!-- 底部栏位 -->
+    <!--页面底部-->
+<div class="clearfix footer">
+	<div class="py-container">
+		<div class="footlink">
+
+
+		</div>
+	</div>
+</div>
+<!--页面底部END-->
+
+
+
+</html>
