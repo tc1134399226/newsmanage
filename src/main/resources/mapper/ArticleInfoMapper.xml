@@ -21,8 +21,11 @@
     </select>
 
     <!--获取所有已通过审核文章信息-->
-    <select id="getArticleInfo" resultType="com.qf.sysuser.vo.ArticleInfoVO">
-        select * from article a,type t where  a.typeId=t.typeId and a.status = 2
+    <select id="getArticleInfo" parameterType="com.qf.sysuser.pojo.ArticleInfo" resultType="com.qf.sysuser.vo.ArticleInfoVO">
+        select * from article a,type t where  a.typeId=t.typeId and a.status =#{status}
+        <if test="mainTitle != null and mainTitle != ''">
+            and a.mainTitle like "%${mainTitle}%"
+        </if>
     </select>
 
 
@@ -30,5 +33,6 @@
     <select id="getArticleInfoBy" parameterType="int" resultType="com.qf.sysuser.vo.ArticleInfoVO">
         select * from article a,type t where  a.typeId=t.typeId and a.status = 2 and a.articleId=#{articleId}
     </select>
+
 
 </mapper>

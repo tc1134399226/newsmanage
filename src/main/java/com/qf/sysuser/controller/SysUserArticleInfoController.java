@@ -63,12 +63,13 @@ public class SysUserArticleInfoController {
      * @return
      */
     @RequestMapping("getArticleInfo")
-    public Object getArticleInfo(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum){
+    public Object getArticleInfo(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum,@RequestBody ArticleInfo articleInfo){
         int pageSize=2;//每页显示记录数
+        System.out.println(articleInfo);
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, pageSize);
         //获取所有申请的文章信息
-        List<ArticleInfoVO> allArticleInfoVO = sysUserArticleInfoService.getArticleInfo();
+        List<ArticleInfoVO> allArticleInfoVO = sysUserArticleInfoService.getArticleInfo(articleInfo);
         //将获取的ArticleInfo信息封装到PageInfo中
         PageInfo<ArticleInfoVO> ArticleInfoPageInfo = new PageInfo<ArticleInfoVO>(allArticleInfoVO);
         return ArticleInfoPageInfo;
@@ -83,4 +84,6 @@ public class SysUserArticleInfoController {
     public Object getArticleInfoBy(@RequestParam int articleId){
         return sysUserArticleInfoService.getArticleInfoBy(articleId);
     }
+
+
 }

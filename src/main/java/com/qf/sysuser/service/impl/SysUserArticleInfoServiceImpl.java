@@ -32,12 +32,14 @@ public class SysUserArticleInfoServiceImpl implements SysUserArticleInfoService 
     }
 
     //获取所有已通过审核的文章信息
-    public List<ArticleInfoVO> getArticleInfo() {
-        return this.sysUserArticleInfoMapper.getArticleInfo();
+    public List<ArticleInfoVO> getArticleInfo(ArticleInfo articleInfo) {
+        return this.sysUserArticleInfoMapper.getArticleInfo(articleInfo);
     }
 
     //根据文章id获取已通过审核的文章详细信息
     public ArticleInfoVO getArticleInfoBy(int id) {
         return this.sysUserArticleInfoMapper.getArticleInfoBy(id);
     }
+
+
 }

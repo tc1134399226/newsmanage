@@ -18,7 +18,7 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("fileUpAndDown")
-public class IdcardUpLoadController {
+public class SysUserIdcardUpLoadController {
     /**
      * 上传身份证照片
      * @param dropzFile
