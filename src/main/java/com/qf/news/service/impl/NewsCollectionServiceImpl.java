@@ -3,6 +3,7 @@ package com.qf.news.service.impl;
 
 import com.qf.news.dao.NewsCollectionMapper;
 import com.qf.news.pojo.UserInfo;
+
 import com.qf.news.service.NewsCollectionService;
 import com.qf.news.vo.ArticleTypeVO;
 import com.qf.news.vo.CollectionVO;

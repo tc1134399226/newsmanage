@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.sysuser.dao.SysRoleInfoDao">
+
+    <select id="listRoleByUserId" resultType="com.qf.sysuser.vo.RoleInfoVO" parameterType="int">
+    SELECT *,'0' selected from roleinfo r where r.roleid not in(
+    select r.roleid a from roleinfo r left join sys_role ur on ur.roleid = r.roleid where ur.sysId =#{userid}
+    )
+    UNION
+    SELECT *,'1' selected from roleinfo r where r.roleid  in(
+    select r.roleid a from roleinfo r left join sys_role ur on ur.roleid = r.roleid where ur.sysId =#{userid}
+		)
+    </select>
+
+    <insert id="addRoleAnd">
+        insert into sys_role values(default,#{userid},#{roleid})
+    </insert>
+
+    <delete id="delRoleAnd">
+        delete from sys_role where sysId=#{userid} and roleid=#{roleid}
+    </delete>
+
+    <select id="listAllRoleInfo" resultType="com.qf.sysuser.pojo.RoleInfo">
+        select * from roleinfo where status = 1
+    </select>
+</mapper>

@@ -52,6 +52,11 @@ header .header ul li input {
 }
 
 
+/* header .header ul li input:hover{
+
+} */
+
+
 /*nav部分********/
 
 nav {
@@ -97,30 +102,31 @@ section .section .main1 {
 
 section .section .main1 .banner {
     position: relative;
-    /* background: green; */
+    background: green;
     overflow: hidden;
-    width: 400px;
+    width: 720px;
 }
 
 section .section .main1 .banner ul {
     display: flex;
-    height: 200px;
-    width: 2000px;
+    height: 405px;
+    width: 3600px;
 }
 
 
 /* section .section .banner ul li {} */
 
 section .section .main1 .banner ul li img {
-    width: 400px;
-    height: 200px;
+    /* width: 400px; */
+    width: 720px;
+    height: 405px;
     display: block;
 }
 
 section .section .main1 .banner .ctrl_box {
-    width: 400px;
+    width: 571px;
     position: absolute;
-    top: 100px;
+    top: 179px;
     display: flex;
     justify-content: space-between;
 }
@@ -139,12 +145,23 @@ section .section .main1 .banner .ctrl_box span {
 section .section .main1 dl {
     width: 500px;
     /* background: pink; */
+    padding-left: 50px;
+}
+
+section .section .main1 dl dt {
+    color: #595855;
+    font: 800 24px/36px "楷体";
+}
+
+section .section .main1 dl dd {
+    color: #595855;
+    font: 16px/16px "楷体";
 }
 
 
-/* section .section .main1 dl dt {}
-
-section .section .main1 dl dt dd {} */
+/* section .section .main1 dl dd:hover {
+    color: pink;
+} */
 
 
 /* section .section .main2 开始了******************************************** */
@@ -179,9 +196,16 @@ section .section .main2>ul>li>ol li {} */
 section .section .main3 {
     display: flex;
     justify-content: space-between;
-    width: 800px;
+
     flex-flow: row wrap;
     /* align-items: center; */
+}
+
+section .section .contentdiv{
+    width: 1200px;
+    height: 537px;
+    float: left;
+    display: block;
 }
 
 section .section .main3 .minnav {
@@ -191,8 +215,8 @@ section .section .main3 .minnav {
 }
 
 section .section .main3 .minnav li {
-    width: 60px;
-    height: 50px;
+    width: 68px;
+    height: 72px;
     text-align: center;
     line-height: 50px;
 }
@@ -206,6 +230,19 @@ section .section .main3 .minnav li:nth-of-type(1) a {
     font-size: 30px;
 }
 
+section .section .main3 .leftphoto{
+    padding-top: 18px;
+    height: 264px;
+}
+
+section .section .main3 .leftphoto img{
+    border: 0;
+    width: 340px;
+    height: 227px;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
 section .section .main3 .photo {
     /* background: chartreuse; */
 }
@@ -214,14 +251,29 @@ section .section .main3 .photo li {}
 
 section .section .main3 .news {
     margin: 0 20px;
+    width: 426px;
+    padding-left: 40px;
+    float: left;
     /* background: #999; */
 }
 
 
+
+
 /* section .section .main3 .news .new1 {} */
 
-section .section .main3 .news .new1 dt {
-    font: 800 18px/18px "";
+section .section .main3 .news .new1 dd {
+    font: 18px/18px "";
+    height: 38px;
+    line-height: 38px;
+    font-size: 16px;
+    width: 426px;
+}
+
+section .section .main3 .news h2 {
+    font-size: 22px;
+    color: #cd0001;
+    font-weight: normal;
 }
 
 
@@ -229,8 +281,11 @@ section .section .main3 .news .new1 dt {
 
 section .section .main3 .news .new2 {} */
 
-section .section .main3 .news .new2 dt {
-    font: 800 18px/18px "";
+section .section .main3 .news .new2 dd {
+    font: 18px/18px "";
+    height: 38px;
+    line-height: 38px;
+    font-size: 16px;
 }
 
 section .section .main3 .news .new2 dd {}
@@ -241,8 +296,10 @@ section .section .main3 .more ul {}
 
 section .section .main3 .more ul li {}
 
-section .section .main3 .more ul li h2 {
-    color: #f00;
+section .section .main3 .more h2 {
+    font-size: 22px;
+    color: #cd0001;
+    font-weight: normal;
 }
 
 section .section .main3 .more ul li p {}

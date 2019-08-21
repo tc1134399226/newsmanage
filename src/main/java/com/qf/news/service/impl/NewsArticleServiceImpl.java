@@ -6,6 +6,7 @@ import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.NewsArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 @Service
 public class NewsArticleServiceImpl implements NewsArticleService {
     @Autowired
-    NewsArticleMapper newsArticleMapper;
+    NewsArticleMapper articleMapper;
 
     /**
      * 通过UserInfo参数中的UserId获取我的文章(分页)
@@ -21,7 +22,7 @@ public class NewsArticleServiceImpl implements NewsArticleService {
      * @return
      */
     public List<ArticleInfo> getMyArtByUserId(UserInfo userInfo) {
-        return newsArticleMapper.getMyArtByUserId(userInfo);
+        return articleMapper.getMyArtByUserId(userInfo);
     }
 
     /**
@@ -30,7 +31,7 @@ public class NewsArticleServiceImpl implements NewsArticleService {
      * @return
      */
     public List<ArticleInfo> getMyDraftByUserId(UserInfo userInfo) {
-        return newsArticleMapper.getMyDraftByUserId(userInfo);
+        return articleMapper.getMyDraftByUserId(userInfo);
     }
 
     /**
@@ -39,6 +40,6 @@ public class NewsArticleServiceImpl implements NewsArticleService {
      * @return
      */
     public boolean deleteMyDraftByArticleId(Long articleId) {
-        return newsArticleMapper.deleteMyDraftByArticleId(articleId)>0;
+        return articleMapper.deleteMyDraftByArticleId(articleId)>0;
     }
 }

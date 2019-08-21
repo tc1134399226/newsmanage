@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>编辑在线申请</title>
+    <meta charset="GB18030">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="dropzone/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+    <script src="dropzone/dropzone.min.js"></script>
+
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <div><a class="navbar-brand"  style="font-size:32px;">你懂得-创意产品</a></div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <form class="form-signin" role="form">
+        <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 申请成为编辑</h2>
+
+        <div >
+          <input type="text" class="form-control" id="realName" placeholder="请输入您的真实姓名" style="margin-top:10px;">
+
+        </div>
+        <br>
+
+
+          <div class="form-group has-success has-feedback">
+
+              <div id="dropzoneDiv1" class="dropzone"></div><br>
+              <div id="dropzoneDiv2" class="dropzone"></div>
+
+          </div>
+
+        <a class="btn btn-lg btn-success btn-block" onclick="register()"> 申请</a>
+      </form>
+    </div>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script>
+
+      var img1;
+      var img2;
+      var str=window.location.search;
+      var userId=str.split("=")[1];
+
+        Dropzone.options.dropzoneDiv1 = {
+            url: "fileUpAndDown/upload", // 文件提交地址
+            method: "post",  // 也可用put
+            paramName: "dropzFile", // 默认为file
+            maxFiles: 1,// 一次性上传的文件数量上限
+            maxFilesize: 2, // 文件大小，单位：MB
+            acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+            addRemoveLinks: true,
+            parallelUploads: 1,// 一次上传的文件数量
+            //previewsContainer:"#preview", // 上传图片的预览窗口
+            dictDefaultMessage: '点击或者拖拽上传您的身份证人像面',
+            dictMaxFilesExceeded: "您最多只能上传1个文件！",
+            dictResponseError: '文件上传失败!',
+            dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+            dictFallbackMessage: "浏览器不受支持",
+            dictFileTooBig: "文件过大上传文件最大支持.",
+            dictRemoveLinks: "删除",
+            dictCancelUpload: "取消",
+            init: function () {
+                this.on("addedfile", function (file) {
+                    // 上传文件时触发的事件
+                });
+                this.on("success", function (file, data) {
+                    // 上传成功触发的事件
+                    console.log(data);
+                    img1= data.filePath;
+                    var status = data.status;
+                    if(status==200){
+                        var filePath = data.filePath;
+                        $("#imgUrl").val(filePath);
+                    }
+
+                    console.log(file);
+                });
+                this.on("error", function (file, data) {
+                    // 上传失败触发的事件
+                    console.error(data);
+                    console.log(file);
+                });
+                this.on("removedfile", function (file) {
+                    // 删除文件时触发的方法
+                });
+            }
+
+        };
+
+
+        Dropzone.options.dropzoneDiv2 = {
+            url: "fileUpAndDown/upload", // 文件提交地址
+            method: "post",  // 也可用put
+            paramName: "dropzFile", // 默认为file
+            maxFiles: 1,// 一次性上传的文件数量上限
+            maxFilesize: 2, // 文件大小，单位：MB
+            acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+            addRemoveLinks: true,
+            parallelUploads: 1,// 一次上传的文件数量
+            //previewsContainer:"#preview", // 上传图片的预览窗口
+            dictDefaultMessage: '点击或者拖拽上传您的身份证国徽面',
+            dictMaxFilesExceeded: "您最多只能上传1个文件！",
+            dictResponseError: '文件上传失败!',
+            dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+            dictFallbackMessage: "浏览器不受支持",
+            dictFileTooBig: "文件过大上传文件最大支持.",
+            dictRemoveLinks: "删除",
+            dictCancelUpload: "取消",
+            init: function () {
+                this.on("addedfile", function (file) {
+                    // 上传文件时触发的事件
+                });
+                this.on("success", function (file, data) {
+                    // 上传成功触发的事件
+                    console.log(data);
+                    img2= data.filePath;
+                    if(status==200){
+                        var filePath = data.filePath;
+                        $("#imgUrl").val(filePath);
+                    }
+
+                    console.log(file);
+                });
+                this.on("error", function (file, data) {
+                    // 上传失败触发的事件
+                    console.error(data);
+                    console.log(file);
+                });
+                this.on("removedfile", function (file) {
+                    // 删除文件时触发的方法
+                });
+            }
+
+        };
+
+        function register() {
+          $.ajax({
+            //请求方式
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "admin/getEditorApplyById?userId="+userId,
+            //数据，json字符串
+            //请求成功
+            success : function(result) {
+              if(result!=null){
+                alert("已有一个申请,请勿重复提交!");
+
+                window.location.href="userhome.html";
+              }else{
+
+                $.ajax({
+                  //请求方式
+                  type : "POST",
+                  //请求的媒体类型
+                  contentType: "application/json;charset=UTF-8",
+                  //接受数据类型
+                  dataType:"json",
+                  //请求地址
+                  url : "applyEditor",
+                  //数据，json字符串
+                  data : JSON.stringify(
+                          {
+                            "userId":userId,
+                            "realName":$("#realName").val(),
+                            "idCardBack":img1,
+                            "idCardFront":img2
+                          }
+                  ),
+                  //请求成功
+                  success : function(result) {
+                    alert("已提交,正在审核中,请稍后...")
+                    console.log(result);
+
+                  },
+                  //请求失败，包含具体的错误信息
+                  error : function(e){
+                    alert("申请失败!")
+                    console.log(e.status);
+                    console.log(e.responseText);
+                  }
+                });
+
+                  window.location.href="userhome.html";
+              }
+
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+
+              console.log(e.status);
+              console.log(e.responseText);
+            }
+          });
+        }
+
+
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.news.dao.NewsArticleInfoMapper">
+
+
+    <!--根据articleId查询编辑的新闻显示到预览页面-->
+    <select id="getReleaseInfoById" parameterType="int" resultType="com.qf.news.pojo.ArticleInfo">
+       select * from article where articleId=#{articleId}
+    </select>
+
+    <!--用户在前台输入新闻添加到数据库-->
+    <insert id="commitArticle" parameterType="com.qf.news.pojo.ArticleInfo">
+       INSERT into article
+       (articleId,areaId,userId,typeId,mainTitle,subTitle,content,status,createTime,updateTime)
+       VALUES
+       (DEFAULT,#{areaId},#{userId},#{typeId},#{mainTitle},#{subTitle},#{content},#{status},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+    </insert>
+
+    <!--修改处于编辑未提交审核状态的新闻-->
+    <update id="secondCommitArticle" parameterType="com.qf.news.pojo.ArticleInfo">
+       update article set
+       areaId=#{areaId},userId=#{userId},typeId=#{typeId},
+       mainTitle=#{mainTitle},subTitle=#{subTitle},content=#{content},status=#{status},updateTime=CURRENT_TIMESTAMP
+       where
+       articleId=#{articleId}
+    </update>
+
+
+    <!--根据输入的新闻内容查询获取articleId-->
+    <select id="getArticleInfoIdById" parameterType="com.qf.news.pojo.ArticleInfo" resultType="com.qf.news.pojo.ArticleInfo">
+        select * from article where content=#{content}
+    </select>
+
+    <!--修改新闻状态-->
+    <update id="updateStatus" parameterType="int">
+        UPDATE article set status=1,updateTime=CURRENT_TIMESTAMP  where articleId=#{articleId}
+    </update>
+
+    <!--得到用户ip-->
+    <update id="getIP" parameterType="com.qf.news.pojo.ArticleInfo">
+       UPDATE article set ip=#{ip} where articleId=#{articleId}
+    </update>
+
+    <!--得到封面图地址-->
+    <update id="uploadCover" parameterType="com.qf.news.pojo.ArticleInfo">
+        UPDATE article set cover=#{cover} where content=#{content}
+    </update>
+</mapper>

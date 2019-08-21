@@ -2,6 +2,9 @@ package com.qf.news.dao;
 
 
 import com.qf.news.pojo.UserInfo;
+import com.qf.news.vo.MenuInfoVO;
+
+import java.util.List;
 
 public interface NewsUserInfoMapper {
 
@@ -14,5 +17,7 @@ public interface NewsUserInfoMapper {
     public UserInfo getUserInfoById(int id);
 
     public int editUserInfoById(UserInfo userInfo);
+
+    public List<MenuInfoVO> userLoginInit(UserInfo userInfo);
 }
 
