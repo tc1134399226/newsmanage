@@ -134,6 +134,11 @@ public class SysUserController {
 //        }
 //    }
 
+    /**
+     * 管理员登录
+     * @param user
+     * @return
+     */
     @RequestMapping("sysUserLogin")
     @ResponseBody
     public User sysUserLogin(@RequestBody User user){
