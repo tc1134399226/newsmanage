@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository("editMapper")
-public interface EditorMapper {
+@Repository
+public interface SysUserEditorMapper {
 
     //将申请成为编辑的个人信息添加(更新)到userInfo表中
     public int applyEditor(EditorApplyDTO editorApplyDTO);
