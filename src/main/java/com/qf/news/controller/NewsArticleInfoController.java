@@ -107,7 +107,7 @@ public class NewsArticleInfoController {
     public boolean secondCommitArticle(@RequestBody ArticleInfo articleInfo){
         return newsArticleInfoService.secondCommitArticle(articleInfo);
     }
-    
+
     /**
      * 获取ip值
      * @param articleInfo

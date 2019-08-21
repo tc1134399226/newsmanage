@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/sysuser")
+@RequestMapping("admin/sysuser")
 public class SysUserController {
 
     @Autowired
@@ -36,14 +36,14 @@ public class SysUserController {
 //    public Object saveUser(@RequestBody User user){
 //        return userService.registerUser(user);
 //    }
-//
-//    @RequestMapping("/listAllUserInfo")
-//    @ResponseBody
-//    public Object listAllUserInfo(){
-//        List<User> allUser = userService.getAllUser();
-//        return allUser;
-//    }
 //*/
+    @RequestMapping("/listAllUserInfo")
+    @ResponseBody
+    public Object listAllUserInfo(){
+        List<User> allUser = sysUserService.getAllUser();
+        return allUser;
+    }
+
 
     /**
      * 删除单个用户
