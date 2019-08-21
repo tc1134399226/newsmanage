@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
+
     @Autowired
     ArticleMapper articleMapper;
 

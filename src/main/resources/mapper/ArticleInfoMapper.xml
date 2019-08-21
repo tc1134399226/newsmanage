@@ -17,7 +17,7 @@
 
     <!--根据文章id获取详细信息-->
     <select id="getArticleInfoById" parameterType="int" resultType="com.qf.sysuser.vo.ArticleInfoVO">
-        select * from article a,type t where  a.typeId=t.typeId and a.tatus = 1 and a.articleId=#{articleId}
+        select * from article a,type t where  a.typeId=t.typeId and a.status = 1 and a.articleId=#{articleId}
     </select>
 
 
