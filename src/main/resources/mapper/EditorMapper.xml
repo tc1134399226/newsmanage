@@ -1,7 +1,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.sysuser.dao.EditorMapper">
+<mapper namespace="com.qf.sysuser.dao.SysUserEditorMapper">
 
     <!--数据库中添加(更新)申请成为编辑的个人信息-->
     <update id="applyEditor" parameterType="com.qf.sysuser.dto.EditorApplyDTO">

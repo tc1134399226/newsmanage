@@ -79,6 +79,4 @@
         and rm.roleid = r.roleid and m.mid = rm.mid and u.status = 1 order by mid) tb1
         on m.mid = tb1.parentid
     </select>
-
-
 </mapper>

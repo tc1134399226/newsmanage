@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻详情页</title>
+
+    <meta charset="GB18030">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../dropzone/basic.min.css" />
+    <link rel="stylesheet" href="../dropzone/dropzone.min.css" />
+    <link href="../wangeditor/wangEditor.min.css"/>
+    <script src="../wangeditor/wangEditor.min.js"></script>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <div><a class="navbar-brand"  style="font-size:32px;">你懂得-创意产品</a></div>
+        </div>
+    </div>
+</nav>
+
+<hr>
+<div class="form-group" style="text-align:center;" id="cover">
+    <label >封面图:</label>
+    <br>
+</div>
+<hr>
+
+
+<div class="form-group" style="text-align:center;" id="mainTitle">
+    <label >主标题:</label>
+    <br>
+</div>
+<hr>
+
+
+<div class="form-group" style="text-align:center;" id="subTitle">
+    <label >副标题:</label><br>
+</div>
+
+<hr>
+
+<div class="form-group" id="contentStr" style="text-align:center;">
+    <label >新闻内容:</label>
+    <br>
+</div>
+
+<hr>
+
+<div  style="text-align:center;">
+    <button type="button" class='btn btn-danger btn-xs' onclick='refuse()'><i class=' glyphicon glyphicon-remove' ></i>下架</button>&nbsp;
+</div>
+<script type="text/javascript">
+
+    var strCon1;
+    var strCon2;
+    var strCon3;
+    var str=window.location.search;
+    var articleId=str.split("=")[1];
+
+
+    $.ajax({
+        //请求方式
+        type : "GET",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "sysuser/getArticleInfoBy?articleId="+articleId,
+        //数据，json字符串
+        //请求成功
+        success : function(result) {
+
+            console.log(result);
+            //展示封面图
+            if (result.cover!=null&&result.cover!="") {
+                var i=new Image();
+                i.src=result.cover;
+                $("#cover").append(i);
+            }else{
+                var j="<p>您还没有上传图片!</p>";
+                $("#cover").append(j);
+            }
+
+            strCon1=result.mainTitle;
+            //整体拼接到div里面去
+            $("#mainTitle").append(strCon1);
+
+            strCon2=result.subTitle;
+            //整体拼接到div里面去
+            $("#subTitle").append(strCon2);
+
+            strCon3=result.content;
+            //整体拼接到div里面去
+            $("#contentStr").append(strCon3);
+
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
+
+
+    //下架
+    function refuse() {
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "sysuser/updateArticleStatus",
+            //数据，json字符串
+            data : JSON.stringify(
+                {
+                    "articleId":articleId,
+                    "status":"4"
+                }
+            ),
+            //请求成功
+            success : function(result) {
+                console.log(result);
+                if(result){
+                    alert("已成功下架");
+                    window.location.href="article.html"
+                }else{
+                    alert("修改失败");
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+            }
+        });
+    }
+
+
+</script>
+</body>
+</html>
