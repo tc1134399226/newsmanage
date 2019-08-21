@@ -19,8 +19,10 @@ public interface SysUserArticleInfoService {
     public ArticleInfoVO getArticleInfoById(int id);
 
     //获取所有已通过审核的文章信息
-    public List<ArticleInfoVO> getArticleInfo();
+    public List<ArticleInfoVO> getArticleInfo(ArticleInfo articleInfo);
 
     //根据文章id获取已通过审核的文章详细信息
     public ArticleInfoVO getArticleInfoBy(int id);
+
+
 }

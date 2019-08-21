@@ -5,7 +5,7 @@ import com.qf.news.pojo.ArticleInfo;
 import org.springframework.stereotype.Repository;
 
 
-@Repository("newsArticleInfoMapper")
+//@Repository("newsArticleInfoMapper")
 public interface NewsArticleInfoMapper {
     //根据articleId查询编辑的新闻显示到预览页面
     public ArticleInfo getReleaseInfoById(int releaseId);
