@@ -82,7 +82,6 @@ public class UserServiceImpl implements SysUserService {
      * @param user
      * @return
      */
-    @Override
     public List<User> selectData(User user) {
         return sysUserDao.selectData(user);
     }

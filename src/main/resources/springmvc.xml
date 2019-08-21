@@ -10,7 +10,7 @@
 <!--    <context:component-scan base-package="com.qf">-->
 <!--        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
 <!--    </context:component-scan>-->
-    <context:component-scan base-package="com.qf.news.controller"></context:component-scan>
+    <context:component-scan base-package="com.qf.*.controller"></context:component-scan>
     <!-- 2、配置静态资源处理 -->
     <mvc:default-servlet-handler />
     <!-- 3、配置注解驱动 -->

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @RequestMapping("admin/sysuser")
 @RestController
-public class EditorController {
+public class SysUserEditorController {
     @Autowired
     EditorService editorService;
 
