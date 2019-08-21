@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>文章审核</title>
+    <title>文章列表</title>
     <meta charset="GB18030">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,7 +38,7 @@
             <th>序号</th>
             <th>类型</th>
             <th>主标题</th>
-            <th>申请时间</th>
+            <th>上架时间</th>
             <th width="100">操作</th>
         </tr>
         </thead>
@@ -65,7 +65,7 @@
     function initPage(){
         var pageNum=window.location.search.split("=")[1];
         console.log(pageNum);
-        var requestURL="getAllArticleInfo";
+        var requestURL="sysuser/getArticleInfo";
 
         if(pageNum==null){
             pageNum=1;
@@ -108,17 +108,17 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"article_apply_list.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+                    var	splicPage="<li><a href=\"article.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
 
                 }
                 console.log(result.pages);
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"article_apply_list.html?pageNum="+i+"\">"+i+"</a></li>";
+                    splicPage +="<li><a href=\"article.html?pageNum="+i+"\">"+i+"</a></li>";
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"article_apply_list.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a href=\"article.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -134,7 +134,7 @@
 
     //跳转详情页
     function checkArticle(articleId){
-        window.location.href="articleContent.html?articleId="+articleId;
+        window.location.href="article_details.html?articleId="+articleId;
     }
 
 

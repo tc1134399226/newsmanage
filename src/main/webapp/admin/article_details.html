@@ -30,38 +30,37 @@
     </div>
 </nav>
 
-   <hr>
-        <div class="form-group" style="text-align:center;" id="cover">
-            <label >封面图:</label>
-            <br>
-        </div>
-        <hr>
+<hr>
+<div class="form-group" style="text-align:center;" id="cover">
+    <label >封面图:</label>
+    <br>
+</div>
+<hr>
 
 
-        <div class="form-group" style="text-align:center;" id="mainTitle">
-            <label >主标题:</label>
-            <br>
-        </div>
-        <hr>
+<div class="form-group" style="text-align:center;" id="mainTitle">
+    <label >主标题:</label>
+    <br>
+</div>
+<hr>
 
 
-        <div class="form-group" style="text-align:center;" id="subTitle">
-            <label >副标题:</label><br>
-        </div>
+<div class="form-group" style="text-align:center;" id="subTitle">
+    <label >副标题:</label><br>
+</div>
 
-        <hr>
+<hr>
 
-        <div class="form-group" id="contentStr" style="text-align:center;">
-            <label >新闻内容:</label>
-            <br>
-        </div>
+<div class="form-group" id="contentStr" style="text-align:center;">
+    <label >新闻内容:</label>
+    <br>
+</div>
 
-        <hr>
+<hr>
 
-        <div  style="text-align:center;">
-        <button type="button" class='btn btn-success btn-xs' onclick='agree()'><i class=' glyphicon glyphicon-check' ></i>通过</button>&nbsp;
-        <button type="button" class='btn btn-danger btn-xs' onclick='refuse()'><i class=' glyphicon glyphicon-remove' ></i>驳回</button>&nbsp;
-        </div>
+<div  style="text-align:center;">
+    <button type="button" class='btn btn-danger btn-xs' onclick='refuse()'><i class=' glyphicon glyphicon-remove' ></i>下架</button>&nbsp;
+</div>
 <script type="text/javascript">
 
     var strCon1;
@@ -79,7 +78,7 @@
         //接受数据类型
         dataType:"json",
         //请求地址
-        url : "sysuser/getArticleInfoById?articleId="+articleId,
+        url : "sysuser/getArticleInfoBy?articleId="+articleId,
         //数据，json字符串
         //请求成功
         success : function(result) {
@@ -115,42 +114,8 @@
         }
     });
 
-    //同意成为编辑
-    function agree() {
-        $.ajax({
-            //请求方式
-            type : "POST",
-            //请求的媒体类型
-            contentType: "application/json;charset=UTF-8",
-            //接受数据类型
-            dataType:"json",
-            //请求地址
-            url : "sysuser/updateArticleStatus",
-            //数据，json字符串
-            data : JSON.stringify(
-                {
-                    "articleId":articleId,
-                    "status":"2"
-                }
-            ),
-            //请求成功
-            success : function(result) {
-                console.log(result);
-                if(result){
-                    alert("已通过审核");
-                    window.location.href="article_apply_list.html"
-                }else{
-                    alert("修改失败");
-                }
-            },
-            //请求失败，包含具体的错误信息
-            error : function(e){
-                console.error(e);
-            }
-        });
-    }
 
-    //拒绝编辑请求
+    //下架
     function refuse() {
         $.ajax({
             //请求方式
@@ -165,15 +130,15 @@
             data : JSON.stringify(
                 {
                     "articleId":articleId,
-                    "status":"3"
+                    "status":"4"
                 }
             ),
             //请求成功
             success : function(result) {
                 console.log(result);
                 if(result){
-                    alert("已驳回请求");
-                    window.location.href="article_apply_list.html"
+                    alert("已成功下架");
+                    window.location.href="article.html"
                 }else{
                     alert("修改失败");
                 }
