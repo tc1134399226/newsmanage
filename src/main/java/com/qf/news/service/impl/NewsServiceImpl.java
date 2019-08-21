@@ -26,7 +26,7 @@ public class NewsServiceImpl implements NewsService {
      * 根据热度查询新闻的信息,地区和类型  前5条
      * @return
      */
-    @Override
+
     public List<ArticleTypeVO> listAllArticleByStatusByHot() {
         return newsMapper.listAllArticleByStatusByHot();
     }

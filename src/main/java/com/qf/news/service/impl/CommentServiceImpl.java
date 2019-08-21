@@ -1,25 +1,27 @@
 package com.qf.news.service.impl;
 
-import com.qf.news.dao.CommentMapper;
+import com.qf.news.dao.NewsCommentMapper;
 import com.qf.news.pojo.CommentInfo;
-import com.qf.news.service.CommentService;
-import com.qf.news.vo.CommentVO;
+import com.qf.news.service.NewsCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CommentServiceImpl implements CommentService {
+public class CommentServiceImpl implements NewsCommentService {
+
+    @Qualifier("newsCommentMapper")
     @Autowired
-    CommentMapper commentMapper;
+    NewsCommentMapper newsCommentMapper;
 
     /**
      * 获取所有的评论
      * @return
      */
     public List<com.qf.news.vo.CommentVO> allComment() {
-        List<com.qf.news.vo.CommentVO> commentVOS = commentMapper.allComment();
+        List<com.qf.news.vo.CommentVO> commentVOS = newsCommentMapper.allComment();
         for (com.qf.news.vo.CommentVO c :
                 commentVOS ) {
 //            try {
@@ -44,7 +46,7 @@ public class CommentServiceImpl implements CommentService {
      * @return
      */
     public boolean addComment(CommentInfo commentInfo) {
-       return commentMapper.addComment(commentInfo)>0;
+       return newsCommentMapper.addComment(commentInfo)>0;
 
     }
 
@@ -54,7 +56,7 @@ public class CommentServiceImpl implements CommentService {
      * @return
      */
     public boolean deleteCommentByComId(long comId) {
-        return commentMapper.deleteCommentByComId(comId)>0;
+        return newsCommentMapper.deleteCommentByComId(comId)>0;
     }
 
     private class CommentVO {

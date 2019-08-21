@@ -1,22 +1,24 @@
 package com.qf.news.service.impl;
 
 
-import com.qf.news.dao.CollectionMapper;
+import com.qf.news.dao.NewsCollectionMapper;
 import com.qf.news.pojo.UserInfo;
-import com.qf.news.service.CollectionService;
+import com.qf.news.service.NewsCollectionService;
 import com.qf.news.vo.ArticleTypeVO;
 import com.qf.news.vo.CollectionVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 
 @Service
-public class CollectionServiceImpl implements CollectionService {
+public class CollectionServiceImpl implements NewsCollectionService {
 
+    @Qualifier("newsCollectionMapper")
     @Autowired
-    CollectionMapper collectionMapper;
+    NewsCollectionMapper newsCollectionMapper;
 
     /**
      * 通过UserId获取我收藏的文章(分页)
@@ -24,7 +26,7 @@ public class CollectionServiceImpl implements CollectionService {
      * @return
      */
     public List<CollectionVO> getCollectionByUserId(UserInfo userInfo) {
-        return collectionMapper.getCollectionByUserId(userInfo);
+        return newsCollectionMapper.getCollectionByUserId(userInfo);
     }
 
     /**
@@ -33,7 +35,7 @@ public class CollectionServiceImpl implements CollectionService {
      * @return
      */
     public boolean deleteCollectionByColId(Long colId) {
-        return collectionMapper.deleteCollectionByColId(colId)>0;
+        return newsCollectionMapper.deleteCollectionByColId(colId)>0;
     }
 
     /**
@@ -43,6 +45,6 @@ public class CollectionServiceImpl implements CollectionService {
      * @return
      */
     public boolean addCollectByArticleIdAndUserId(ArticleTypeVO articleTypeVO) {
-        return collectionMapper.addCollectByArticleIdAndUserId(articleTypeVO)>0;
+        return newsCollectionMapper.addCollectByArticleIdAndUserId(articleTypeVO)>0;
     }
 }

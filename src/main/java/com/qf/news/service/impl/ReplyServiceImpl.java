@@ -1,9 +1,9 @@
 package com.qf.news.service.impl;
 
 
-import com.qf.news.dao.ReplyMapper;
+import com.qf.news.dao.NewsReplyMapper;
 import com.qf.news.pojo.ReplyInfo;
-import com.qf.news.service.ReplyService;
+import com.qf.news.service.NewsReplyService;
 
 import com.qf.news.vo.ReplyVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ReplyServiceImpl implements ReplyService {
+public class ReplyServiceImpl implements NewsReplyService {
     @Autowired
-    ReplyMapper replyMapper;
+    NewsReplyMapper newsReplyMapper;
 
     /**
      * 通过ComId获取到这条评论的回复
@@ -22,7 +22,7 @@ public class ReplyServiceImpl implements ReplyService {
      * @return
      */
     public List<ReplyVO> getReplyByComId(long comId) {
-        return replyMapper.getReplyByComId(comId);
+        return newsReplyMapper.getReplyByComId(comId);
     }
 
     /**
@@ -31,7 +31,7 @@ public class ReplyServiceImpl implements ReplyService {
      * @return
      */
     public boolean addReplyByReplyInfo(ReplyInfo replyInfo) {
-        return replyMapper.addReplyByReplyInfo(replyInfo)>0;
+        return newsReplyMapper.addReplyByReplyInfo(replyInfo)>0;
     }
 
     /**
@@ -40,6 +40,6 @@ public class ReplyServiceImpl implements ReplyService {
      * @return
      */
     public boolean deleteReplyByRepId(long repId) {
-        return replyMapper.deleteReplyByRepId(repId)>0;
+        return newsReplyMapper.deleteReplyByRepId(repId)>0;
     }
 }
