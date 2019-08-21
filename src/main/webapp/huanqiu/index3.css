@@ -92,7 +92,7 @@ html{ overflow-x:hidden;overflow-y:auto;}
 .indexTitle span.udline2 { width:90px;}
 .indexTitle span.udline3 { width:110px;}
 
-.indexBTitle { height:72px; line-height:72px; position:relative;}
+.indexBTitle { height:70px; line-height:72px; position:relative;}
 .indexBTitle strong { font-size:34px; color:#cd0001; float:left; font-family:'fzzhjn'; font-weight:normal;}
 .indexBTitle a { color:#ad815e; font-size:14px; padding-left:9px; background-image:url(https://t1.huanqiucdn.cn/6e0aba0b2301eabdbf581b4d817c5db8.png);background-repeat:no-repeat; background-position:0 -119px; margin-left:9px; float:left;}
 .indexBTitle a:hover { color:#cb0000;}
