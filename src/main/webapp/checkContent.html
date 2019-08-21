@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻发布</title>
+    <link href="wangeditor/wangEditor.min.css"/>
+    <script src="wangeditor/wangEditor.min.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+
+
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/docs.min.js"></script>
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
+
+    <link rel="stylesheet" href="dropzone/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+
+</head>
+<body>
+
+
+<style>
+    body{text-align:center}
+    .form-group{margin:0 auto;width:400px;height:100px;}
+    /* CSS注释：设置对象边框、宽度、高度 便于观察布局效果 */
+
+</style>
+
+<style>
+
+    .ui-select {
+        text-align: center;
+        /* 加border只是为了看到边框*/
+        border:solid 1px;
+    }
+    .ui-select select {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 3em;
+        opacity: 0;
+    }
+
+</style>
+
+
+<style>
+    body{ padding-bottom:50px;}
+    .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
+        height:50px; background-color:#AAAAAA; z-index:9999;}
+</style>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="text-align:center ">新闻修改<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
+    <div class="panel-body">
+        <form role="form">
+            <!--<div class="form-group" style="text-align:center ">-->
+                <!--<label >作者姓名</label>-->
+                <!--<input type="text" class="form-control" id="articleName" style="text-align:center ">-->
+            <!--</div>-->
+
+            <div class="form-group" style="text-align:center ">
+                <label >所属地区</label>
+                <select type="text" class="form-control" id="areaId"  list="sexlist" style="text-align: center; text-align-last: center;">
+
+                    <option value="1">国际</option>
+                    <option value="2">国内</option>
+                    <option value="3">台海</option>
+                </select>
+            </div>
+            <div class="form-group" style="text-align:center ">
+                <label >新闻类型</label>
+                <select type="text" class="form-control" id="typeId"  list="sexlist" style="text-align: center; text-align-last: center;">
+
+                    <option value="4">军事</option>
+                    <option value="5">财经</option>
+                    <option value="6">科技</option>
+                    <option value="7">汽车</option>
+                    <option value="8">艺术</option>
+                    <option value="9">旅游</option>
+                    <option value="10">健康</option>
+                    <option value="11">体育</option>
+                    <option value="12">博览</option>
+                    <option value="13">其他</option>
+                </select>
+
+            </div>
+
+            <div class="form-group" style="text-align:center ">
+                <label >主标题</label>
+                <input type="text" class="form-control" id="mainTitle" style="text-align:center ">
+            </div>
+            <div class="form-group" style="text-align:center ">
+                <label >副标题</label>
+                <input type="text" class="form-control" id="subTitle" style="text-align:center ">
+            </div>
+            <div class="form-group" style="text-align:center ">
+                <!--状态-->
+                <input type="hidden" class="form-control" id="status"style="text-align:center " >
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+
+
+<div id="editor"style="max-width:800px;margin:50px;">
+    <div id="txtdiv" style="border:0px solid gray;height:225px; width:400px;">
+
+    </div>
+</div>
+
+<div align="center" id="textDiv" class="lastDiv">
+
+    <button type="button" class="btn btn-success" onclick="checkCommit()">
+        <i class="glyphicon glyphicon-edit"></i> 确认提交</button>
+
+</div>
+
+<!--<input type="button" id="test1" value="拿html"/>-->
+<!--<input type="button" id="test2" value="拿text"/>-->
+
+
+
+
+
+
+<script>
+
+    var contentCon;
+
+    var E = window.wangEditor;
+    //声明
+    var editor = new E("#editor");
+    //设置
+    //开启debug模式
+    editor.customConfig.debug = true;
+    // 关闭粘贴内容中的样式
+    editor.customConfig.pasteFilterStyle = false;
+    // 忽略粘贴内容中的图片
+    editor.customConfig.pasteIgnoreImg = false;
+    // 使用 base64 保存图片
+    // editor.customConfig.uploadImgShowBase64 = true
+    // 上传图片到服务器
+    editor.customConfig.uploadFileName = 'editorFile'; //设置文件上传的参数名称
+    editor.customConfig.uploadImgServer = 'news/upload1'; //设置上传文件的服务器路径
+    editor.customConfig.uploadImgMaxSize = 3 * 512 * 1024; // 将图片大小限制为 3M
+    //自定义上传图片事件
+    editor.customConfig.uploadImgHooks = {
+        before: function(xhr, editor, files) {
+
+        },
+        success: function(xhr, editor, result) {
+            console.log("上传成功");
+
+            // alert(content);
+
+
+        },
+        fail: function(xhr, editor, result) {
+            console.log("上传失败,原因是" + result);
+
+        },
+        error: function(xhr, editor) {
+            console.log("上传出错");
+        },
+        timeout: function(xhr, editor) {
+            console.log("上传超时");
+        }
+    }
+
+    //初始化
+    editor.create();
+    //js（早绑定/晚绑定）
+    //获取html
+    $("#test1").bind("click",function(){
+
+        //获取HTML
+        contentCon=editor.txt.html();
+        alert(editor.txt.html());
+
+    });
+    //获取文本
+    $("#test2").bind("click",function(){
+        alert(editor.txt.text());
+    });
+
+
+</script>
+
+<script type="text/javascript">
+
+    var str=window.location.search;
+    var articleId=str.split("=")[1];
+
+    $.ajax({
+        //请求方式
+        type : "GET",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/getReleaseInfoById?articleId="+articleId,
+        //数据，json字符串
+        //请求成功
+        success : function(result) {
+
+            console.log(result);
+            $("#articleName").val(result.articleName);
+            $("#mainTitle").val(result.mainTitle);
+            $("#subTitle").val(result.subTitle);
+            var strCon=result.content;
+
+            //整体拼接到div里面去
+            $("#txtdiv").append(strCon);
+
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
+    
+    function updateStatus() {
+        $.ajax({
+            //请求方式
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/updateStatus?articleId="+articleId,
+            //数据，json字符串
+            //请求成功
+            success : function(result) {
+                alert("修改成功");
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+        
+    }
+
+
+    function checkCommit() {
+
+
+        var status = $("#status").val();
+        var areaId = $("#areaId").val();
+        //获取类型Id
+        var typeId = $("#typeId").val();
+        var mainTitle = $("#mainTitle").val();
+        if(mainTitle.length<1){
+            alert("主标题不能为空");
+            return ;
+        }
+        var status = $("#status").val();
+        var subTitle = $("#subTitle").val();
+        // console.log(userName+":"+password);
+        if(subTitle.length<1){
+            alert("副标题");
+            return ;
+        }
+
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/secondCommitArticle",
+            //数据，json字符串
+            data : JSON.stringify(
+                {
+                    "areaId":areaId,
+                    "typeId":typeId,
+                    "mainTitle":mainTitle,
+                    "subTitle":subTitle,
+                    "content":editor.txt.html(),
+                    "articleId":articleId
+                }
+            ),
+            //请求成功
+            success : function(result) {
+                console.log(result);
+                if(result){
+                    console.log(result);
+
+                    alert("发布成功");
+                    updateStatus();
+                    // window.location.href="urer.html";
+                }else{
+                    // console.log(e);
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+
+
+</script>
+
+</body>
+</html>

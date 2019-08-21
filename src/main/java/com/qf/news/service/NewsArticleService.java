@@ -5,7 +5,7 @@ import com.qf.news.pojo.UserInfo;
 
 import java.util.List;
 
-public interface ArticleService {
+public interface NewsArticleService {
     /**
      * 通过UserInfo参数中的UserId获取我的文章(分页)
      * @param userInfo

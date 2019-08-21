@@ -6,7 +6,7 @@ import com.qf.news.vo.ReplyVO;
 
 import java.util.List;
 
-public interface ReplyService {
+public interface NewsReplyService {
     /**
      * 通过ComId获取到这条评论的回复
      * @param comId
