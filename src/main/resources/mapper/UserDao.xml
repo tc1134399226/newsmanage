@@ -79,8 +79,4 @@
         and rm.roleid = r.roleid and m.mid = rm.mid and u.status = 1 order by mid) tb1
         on m.mid = tb1.parentid
     </select>
-
-    <select id="getgarbageType" resultType="com.qf.sysuser.vo.Garbage">
-        select * from garbage where name like '%${name}%'
-    </select>
 </mapper>
