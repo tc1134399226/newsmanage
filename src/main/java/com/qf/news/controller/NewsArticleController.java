@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
-@RequestMapping("news")
+@RequestMapping(" ")
 public class NewsArticleController {
 
     @Autowired

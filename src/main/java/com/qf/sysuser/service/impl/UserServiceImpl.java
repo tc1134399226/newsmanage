@@ -2,7 +2,6 @@ package com.qf.sysuser.service.impl;
 
 import com.qf.sysuser.dao.SysUserDao;
 import com.qf.sysuser.dto.UserIdsDTO;
-import com.qf.sysuser.pojo.MenuInfo;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
 import com.qf.sysuser.vo.MenuInfoVO;
@@ -15,7 +14,7 @@ import java.util.List;
 public class UserServiceImpl implements SysUserService {
 
     @Autowired
-    private SysUserDao sysUserDao;
+    SysUserDao sysUserDao;
 
 
 //    public boolean getUserByuserNameAndPassword(User user) {
