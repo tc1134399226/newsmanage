@@ -1,6 +1,9 @@
 package com.qf.sysuser.vo;
 
+import com.qf.news.pojo.Sysuser;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class RoleInfoVO {
@@ -8,4 +11,6 @@ public class RoleInfoVO {
     String rolename;
     String shortname;
     boolean selected;
+    private List<MenuInfoVO> menuInfoList;
+    private   List<Sysuser> userInfoList;
 }

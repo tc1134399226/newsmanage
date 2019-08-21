@@ -5,6 +5,7 @@ import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.MenuInfo;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
+import com.qf.sysuser.vo.MenuInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -82,7 +83,7 @@ public class UserServiceImpl implements SysUserService {
      * @param user
      * @return
      */
-    @Override
+
     public List<User> selectData(User user) {
         return sysUserDao.selectData(user);
     }
@@ -111,13 +112,13 @@ public class UserServiceImpl implements SysUserService {
     }
 
 
-//    /**
-//     *  初始化用户菜单
-//     * @param user
-//     * @return
-//     */
-//    public List<MenuInfo> userLoginInit(User user) {
-//        return sysUserDao.userLoginInit(user);
-//    }
+    /**
+     *  初始化用户菜单
+     * @param user
+     * @return
+     */
+    public List<MenuInfoVO> userLoginInit(User user) {
+        return sysUserDao.userLoginInit(user);
+    }
 
 }

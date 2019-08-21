@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <style>
+        .tree li {
+            list-style-type: none;
+            cursor:pointer;
+        }
+        table tbody tr:nth-child(odd){background:#F4F4F4;}
+        table tbody td:nth-child(even){color:#C00;}
+    </style>
+
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/docs.min.js"></script>
+
+</head>
+<body>
+<ul style="padding-left:0px;" class="list-group">
+
+</ul>
+
+<script>
+    $.ajax({
+        //请求方式GET/POST
+        type : "POST",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/initMenuList",
+        data:JSON.stringify({
+            // "username":"汤成",
+            // "password":"1234"
+        }),
+
+
+        //请求成功
+        success : function(result) {
+             $(".list-group").html("");
+            $(result).each(function(index,item){
+                console.log(item);
+                if(index==0){
+                    var    str="<li class=\"list-group-item\">";
+                }else {
+                    var      str="  <li class=\"list-group-item tree-closed\">";
+                }
+                str += "<span><i class=\"glyphicon glyphicon-th-large\"></i>"+item.menuName+"<span class=\"badge\" style=\"float:right\">"+item.childMenus.length+"</span></span>";
+                str+="<ul style=\"margin-top:10px;\">";
+                var childMenus=item.childMenus;
+                $(childMenus).each(function(indexChild,itemChild){
+                    console.log(itemChild)
+                    str+="<li style=\"height:30px;\">";
+                    str+="<a href="+itemChild.menuUrl+" ><i class="+itemChild.menuIcon+"></i>"+itemChild.menuName+"</a>"
+                    str+="</li>" ;
+                });
+                str+="</ul>"
+                str+="</li>"
+                $(".list-group").append(str);
+            })
+        },
+
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.error(e);
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
+
+</script>
+
+<script>
+    $(function () {
+        $(".list-group-item").click(function(){
+            if ( $(this).find("ul") ) {
+                $(this).toggleClass("tree-closed");
+                if ( $(this).hasClass("tree-closed") ) {
+                    $("ul", this).hide("fast");
+                } else {
+                    $("ul", this).show("fast");
+                }
+            }
+        });
+    });
+</script>
+<!--
+</body>
+</html>

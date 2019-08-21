@@ -3,33 +3,33 @@
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.news.dao.NewsUserInfoMapper">
-    <resultMap id="userInfoMapTwo" type="com.qf.news.vo.MenuInfoVO">
-        <id column="pid" property="mid"></id>
-        <result column="pname" property="menuName"></result>
-        <result column="picon" property="menuIcon"></result>
-        <result column="purl" property="menuUrl"></result>
-        <collection property="childMenus" ofType="com.qf.news.pojo.MenuInfo">
-            <id column="mid" property="mid"></id>
-            <result column="menuName" property="menuName"></result>
-            <result column="menuIcon" property="menuIcon"></result>
-            <result column="menu_url" property="menuUrl"></result>
-            <result column="parentid" property="parentId"></result>
-        </collection>
-    </resultMap>
+<!--    <resultMap id="userInfoMapTwo" type="com.qf.news.vo.MenuInfoVO">-->
+<!--        <id column="pid" property="mid"></id>-->
+<!--        <result column="pname" property="menuName"></result>-->
+<!--        <result column="picon" property="menuIcon"></result>-->
+<!--        <result column="purl" property="menuUrl"></result>-->
+<!--        <collection property="childMenus" ofType="com.qf.news.pojo.MenuInfo">-->
+<!--            <id column="mid" property="mid"></id>-->
+<!--            <result column="menuName" property="menuName"></result>-->
+<!--            <result column="menuIcon" property="menuIcon"></result>-->
+<!--            <result column="menu_url" property="menuUrl"></result>-->
+<!--            <result column="parentid" property="parentId"></result>-->
+<!--        </collection>-->
+<!--    </resultMap>-->
 
     <!--登录查询语句-->
     <select id="loginCheck" resultType="com.qf.news.pojo.UserInfo" parameterType="com.qf.news.pojo.UserInfo">
         SELECT * FROM userinfo where account = #{account} and password = #{password}
     </select>
 <!--    二级菜单-->
-    <select id="userLoginInit" resultMap="userInfoMapTwo" parameterType="com.qf.news.pojo.UserInfo">
-  select m.mid pid,m.menuname pname,m.menuicon picon,m.menu_url purl,tb1.* from menuinfo m RIGHT JOIN
-    (select m.* from sysuser su,sys_role sr,roleinfo r,role_menu rm,menuinfo m
-    where su.username = #{username} and su.password = #{password}
-and sr.sysId = su.userid and r.roleid = sr.roleid
-    and rm.roleid = r.roleid and m.mid = rm.mid and su.status = 1 and parentid is not null order by mid) tb1
-    on m.mid = tb1.parentid
-</select>
+<!--    <select id="userLoginInit" resultMap="userInfoMapTwo" parameterType="com.qf.news.pojo.UserInfo">-->
+<!--  select m.mid pid,m.menuname pname,m.menuicon picon,m.menu_url purl,tb1.* from menuinfo m RIGHT JOIN-->
+<!--    (select m.* from sysuser su,sys_role sr,roleinfo r,role_menu rm,menuinfo m-->
+<!--    where su.username = #{username} and su.password = #{password}-->
+<!--and sr.sysId = su.userid and r.roleid = sr.roleid-->
+<!--    and rm.roleid = r.roleid and m.mid = rm.mid and su.status = 1 and parentid is not null order by mid) tb1-->
+<!--    on m.mid = tb1.parentid-->
+<!--</select>-->
     <!--注册语句-->
     <insert id="register" parameterType="com.qf.news.pojo.UserInfo">
         insert into userinfo(userId,

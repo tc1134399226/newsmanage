@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.sysuser.dao.UserDao">
+<mapper namespace="com.qf.sysuser.dao.SysUserDao">
     <select id="getAllUser" resultType="com.qf.sysuser.pojo.User">
         select * from sysuser where status = 1
     </select>
@@ -57,12 +57,12 @@
         #{areaCode},#{status},null)
     </insert>
 
-    <resultMap id="sysuserMap" type="com.qf.sysuser.pojo.MenuInfo">
+    <resultMap id="sysuserMap" type="com.qf.sysuser.vo.MenuInfoVO">
         <id column="pid" property="mid"></id>
         <result column="pname" property="menuName"></result>
         <result column="picon" property="menuIcon"></result>
         <result column="purl" property="menuUrl"></result>
-        <collection property="childMenus" ofType="com.qf.sysuser.pojo.MenuInfo">
+        <collection property="childMenus" ofType="com.qf.sysuser.vo.MenuInfoVO">
             <id column="mid" property="mid"></id>
             <result column="menuname" property="menuName"></result>
             <result column="menuicon" property="menuIcon"></result>
@@ -73,10 +73,11 @@
 
     <!--用户登录所需菜单信息-->
     <select id="userLoginInit" resultMap="sysuserMap" parameterType="com.qf.sysuser.pojo.User">
-        select m.mid pid,m.menuname pname,m.menuicon picon,m.menu_url purl,tb1.* from menuinfo m RIGHT JOIN
-        (select m.* from sysuser u,sys_role ur,roleinfo r,role_menu rm,menuinfo m
-        where u.username = #{username} and u.`password` = #{password} and ur.sysId = u.userid and r.roleid = ur.roleid
-        and rm.roleid = r.roleid and m.mid = rm.mid and u.status = 1 order by mid) tb1
-        on m.mid = tb1.parentid
+select m.mid pid,m.menuname pname,m.menuicon picon,m.menu_url purl,tb1.* from menuinfo m RIGHT JOIN
+    (select m.* from sysuser su,sys_role sr,roleinfo r,role_menu rm,menuinfo m
+    where su.username = #{userName} and su.password = #{password}
+and sr.sysId = su.userid and r.roleid = sr.roleid
+    and rm.roleid = r.roleid and m.mid = rm.mid and su.status = 1 and parentid is not null order by mid) tb1
+    on m.mid = tb1.parentid
     </select>
 </mapper>

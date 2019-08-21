@@ -4,6 +4,7 @@ package com.qf.sysuser.service;
 import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.MenuInfo;
 import com.qf.sysuser.pojo.User;
+import com.qf.sysuser.vo.MenuInfoVO;
 
 import java.util.List;
 
@@ -25,5 +26,5 @@ public interface SysUserService {
     public boolean insertUser(User user);
 
     //初始化用户菜单
-//    public List<MenuInfo> userLoginInit(User user);
+    public List<MenuInfoVO> userLoginInit(User user);
 }

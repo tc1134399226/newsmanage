@@ -33,17 +33,8 @@ public class NewsUserInfoController {
      * @return
      */
     @RequestMapping("loginCheck")
-    public Object loginCheck(@RequestBody UserInfo userInfo, HttpSession session,
-                             BindingResult bindingResult, ModelMap modelMap){
-        if (bindingResult.hasErrors()){
-            List<ObjectError> allErrors = bindingResult.getAllErrors();
-            for (ObjectError error:
-                    allErrors){
-                System.out.println(error);
-                modelMap.put(error.getObjectName(),error.toString());
-            }
-            return false;
-        }
+    public Object loginCheck(@RequestBody UserInfo userInfo, HttpSession session){
+
         UserInfo userInfo1 = userInfoService.loginCheck(userInfo);
 
         //登录成功
@@ -54,9 +45,6 @@ public class NewsUserInfoController {
         }else{
             //登录失败
         }
-
-
-
         return userInfo1;
     }
     //用户注册
