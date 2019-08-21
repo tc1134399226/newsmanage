@@ -79,4 +79,11 @@
         and rm.roleid = r.roleid and m.mid = rm.mid and u.status = 1 order by mid) tb1
         on m.mid = tb1.parentid
     </select>
+
+
+    <!--管理员登录-->
+    <select id="sysUserLogin" parameterType="com.qf.sysuser.pojo.User" resultType="com.qf.sysuser.pojo.User">
+        select * from sysuser where username=#{username} and password=#{password}
+    </select>
+
 </mapper>

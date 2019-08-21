@@ -13,17 +13,17 @@
 	<style>
 
 	</style>
-<head>
+	<head>
 
-<title>登录</title>
-<style>
-/*.container{
-		max-width: 900px;
-		padding-top: 100px;
-	}
-	*/
-</style>
-</head>
+		<title>登录</title>
+		<style>
+			/*.container{
+                    max-width: 900px;
+                    padding-top: 100px;
+                }
+                */
+		</style>
+	</head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container">
@@ -46,6 +46,13 @@
 			<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		</div>
 
+		<div class="form-group has-success has-feedback">
+			<select class="form-control" >
+				<option value="user">用户</option>
+				<option value="sysUser">管理员</option>
+			</select>
+		</div>
+
 		<div class="checkbox">
 			<label>
 				<input type="checkbox" value="remember-me"> 记住我
@@ -58,12 +65,14 @@
 				<a href="reg.html">我要注册</a>
 			</label>
 		</div>
-		<a class="btn btn-lg btn-success btn-block" onclick="dologin()" > 登录</a>
+		<a class="btn btn-lg btn-success btn-block" onclick="checkType()" > 登录</a>
 	</form>
 </div>
 <script src="jquery/jquery-2.1.1.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script>
+	// var account = $("#account").val();
+	// var password = $("#password").val();
 	function dologin() {
 
 		//1.获取用户名与密码
@@ -102,6 +111,59 @@
 				console.log(e.responseText);
 			}
 		});
+	}
+
+
+	function sysUserLogin() {
+		//1.获取姓名与密码
+		var account = $("#account").val();
+		var password = $("#password").val();
+		console.log(account+":"+password);
+
+		$.ajax({
+			//请求方式
+			type : "POST",
+			//请求的媒体类型
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType:"json",
+			//请求地址
+			url : "sysuser/sysUserLogin",
+			//数据，json字符串
+			data : JSON.stringify(
+					{
+						"username":account,
+						"password":password
+					}
+			),
+			//请求成功
+			success : function(result) {
+				console.log(result);
+				if(result != null){
+					window.location.href = "main.html";
+					// window.location.href="userInfo.html?userId="+result.userId;
+					// window.location.href="userInfo.html?userId="+result.userId;
+				}else{
+					alert("姓名或密码错误");
+				}
+			},
+			//请求失败，包含具体的错误信息
+			error : function(e){
+				console.log(e.status);
+				console.log(e.responseText);
+			}
+		});
+	}
+
+	function checkType() {
+		var type = $(":selected").val();
+		if ( type == "user" ) {
+			dologin();
+			// window.location.href = "main.html";
+		} else {
+			sysUserLogin();
+			// window.location.href = "member.html";
+		}
 	}
 </script>
 </body>

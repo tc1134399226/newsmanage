@@ -134,5 +134,10 @@ public class SysUserController {
 //        }
 //    }
 
+    @RequestMapping("sysUserLogin")
+    @ResponseBody
+    public User sysUserLogin(@RequestBody User user){
+        return sysUserService.sysUserLogin(user);
+    }
 
 }
