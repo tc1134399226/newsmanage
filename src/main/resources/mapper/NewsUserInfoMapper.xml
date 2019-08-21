@@ -36,8 +36,7 @@ and sr.sysId = su.userid and r.roleid = sr.roleid
         account,nickName,
         password,idCard,mobile,sex,icon,status,createTime,updateTime)
         values(DEFAULT,#{account},#{nickName},#{password},#{idCard},#{mobile},'无',
-        'http://localhost:8080/static/upload/8e6f462b-cfe7-4267-947b-ad4547ae486a.jpg'
-        ,0,now(),now(),)
+        #{icon},0,now(),now(),)
     </insert>
 
     <!--用户名重复检测-->
