@@ -85,6 +85,7 @@ public interface SysUserDao {
      */
     public List<MenuInfoVO> userLoginInit(User user);
 
-
+    //管理员登录
+    public User sysUserLogin(User user);
 
 }

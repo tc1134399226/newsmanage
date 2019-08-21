@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("roleinfo")
+@RequestMapping("admin/roleinfo")
 public class SysUserRoleInfoController {
 
     @Autowired

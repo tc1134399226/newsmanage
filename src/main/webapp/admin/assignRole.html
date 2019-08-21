@@ -216,7 +216,7 @@
 			//接受数据类型
 			dataType:"json",
 			//请求地址
-			url : "http://localhost:8080/newsmanage/roleinfo/getRoleInfoById?userid="+value,
+			url : "roleinfo/getRoleInfoById?userid="+value,
 			//数据，json字符串
 			//请求成功
 			success : function(result) {+
@@ -269,7 +269,7 @@
 				//请求的媒体类型
 				contentType: "application/json;charset=UTF-8",
 				//请求地址
-				url : "http://localhost:8080/newsmanage/roleinfo/addRoleUser",
+				url : "roleinfo/addRoleUser",
 				//数据，json字符串
 				data : JSON.stringify({
 					"userid":value,
@@ -308,7 +308,7 @@
 				//请求的媒体类型
 				contentType: "application/json;charset=UTF-8",
 				//请求地址
-				url : "http://localhost:8080/newsmanage/roleinfo/delRoleUser",
+				url : "roleinfo/delRoleUser",
 				//数据，json字符串
 				data : JSON.stringify({
 					"userid":value,

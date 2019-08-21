@@ -1,8 +1,6 @@
 package com.qf.sysuser.controller;
 
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
@@ -10,7 +8,9 @@ import com.qf.sysuser.vo.MenuInfoVO;
 import com.qf.sysuser.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -51,6 +51,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("deleteUser")
+    @ResponseBody
     public boolean deleteUser(@RequestBody User user){
        return sysUserService.deleteUser(user.getUserid());
     }
@@ -61,6 +62,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("deleteCheckUser")
+    @ResponseBody
     public boolean deleteCheckUser(@RequestBody UserIdsDTO userIdsDTO){
         return sysUserService.deleteUser(userIdsDTO);
     }
@@ -71,6 +73,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("getUserById")
+    @ResponseBody
     public User getUserById(@RequestBody User user){
         User userById = sysUserService.getUserById(user);
         return userById;
@@ -82,6 +85,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("updateUser")
+    @ResponseBody
     public boolean updateUser(@RequestBody User user){
         boolean flg = sysUserService.updateUser(user);
         return flg;
@@ -93,6 +97,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("selectData")
+    @ResponseBody
     public List<User> selectData(@RequestBody User user){
         return sysUserService.selectData(user);
     }
@@ -104,6 +109,7 @@ public class SysUserController {
      * @return
      */
     @RequestMapping("insertUser")
+    @ResponseBody
     public boolean insertUser(@RequestBody User user){
         return sysUserService.insertUser(user);
     }
@@ -136,5 +142,15 @@ public class SysUserController {
         }
     }
 
+    /**
+     * 管理员登录
+     * @param user
+     * @return
+     */
+    @RequestMapping("sysUserLogin")
+    @ResponseBody
+    public User sysUserLogin(@RequestBody User user){
+        return sysUserService.sysUserLogin(user);
+    }
 
 }

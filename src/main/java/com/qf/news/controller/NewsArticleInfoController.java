@@ -108,8 +108,14 @@ public class NewsArticleInfoController {
         return newsArticleInfoService.secondCommitArticle(articleInfo);
     }
 
-
-
+    /**
+     * 获取ip值
+     * @param articleInfo
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @RequestMapping("getIP")
     @ResponseBody
     public void doGet(@RequestBody ArticleInfo articleInfo, HttpServletRequest request, HttpServletResponse response)
@@ -123,18 +129,10 @@ public class NewsArticleInfoController {
         String host=request.getRemoteHost();//返回发出请求的客户机的主机名
         int port =request.getRemotePort();//返回发出请求的客户机的端口号。
         String IP=request.getRemoteHost();
-        System.out.println(ip);
-        System.out.println(url);
-        System.out.println(uri);
-        System.out.println(params);
-        System.out.println(host);
-        System.out.println(port);
-        System.out.println(IP);
-
 //
-        articleInfo.setIp(ip);
+        articleInfo.setIp(ip); //赋值
 //
-
+        //存储ip地址值到数据库
         newsArticleInfoService.getIP(articleInfo);
     }
 
@@ -177,6 +175,11 @@ public class NewsArticleInfoController {
     }
 
 
+    /**
+     * 获取新闻封面图
+     * @param articleInfo
+     * @return
+     */
     @RequestMapping("uploadCover")
     @ResponseBody
     public boolean uploadCover(@RequestBody ArticleInfo articleInfo){

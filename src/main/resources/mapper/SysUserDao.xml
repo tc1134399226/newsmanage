@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.sysuser.dao.SysUserDao">
+<<<<<<< HEAD
     <select id="getAllUser" resultType="com.qf.sysuser.pojo.User">
         select * from sysuser where status = 1
     </select>
@@ -80,4 +81,20 @@ and sr.sysId = su.userid and r.roleid = sr.roleid
     and rm.roleid = r.roleid and m.mid = rm.mid and su.status = 1 and parentid is not null order by mid) tb1
     on m.mid = tb1.parentid
     </select>
+
+
+<!--      解掉注释后 要把mvc 都接触 注释-->
+<!--    &lt;!&ndash;管理员登录&ndash;&gt;-->
+<!--    <select id="sysUserLogin" parameterType="com.qf.sysuser.pojo.User" resultType="com.qf.sysuser.pojo.User">-->
+<!--        select * from sysuser where username=#{username} and password=#{password}-->
+<!--    </select>-->
+
+=======
+
+    <!--管理员登录-->
+    <select id="sysUserLogin" parameterType="com.qf.sysuser.pojo.User" resultType="com.qf.sysuser.pojo.User">
+        select * from sysuser where username=#{username} and password=#{password}
+    </select>
+
+>>>>>>> origin/master
 </mapper>
