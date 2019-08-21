@@ -29,7 +29,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<div><a class="navbar-brand" style="font-size:32px;" href="#">众筹平台 - 用户维护</a></div>
+			<div><a class="navbar-brand" style="font-size:32px;" href="#">新闻发布系统</a></div>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -134,7 +134,7 @@
 		var account = $("#account").val();
 		$.ajax({
 			type:"post",
-			url:"http://localhost:8080/newsmanage/sysuser/selectData",
+			url:"sysuser/selectData",
 			contentType: "application/json;charset=UTF-8",
 			//接受数据类型
 			dataType:"json",
@@ -172,7 +172,19 @@
 	}
 	//初始化页面
 	function initPage(){
-
+		var pageNum=window.location.search.split("=")[1];
+		console.log("111"+pageNum)
+		if (pageNum==undefined){
+			console.log("111")
+			pageNum=1;
+		}
+		console.log(pageNum)
+		var requestURL="sysuser/listAllUserInfo";
+		if(pageNum==null){
+			pageNum=1
+		}
+		requestURL+="?pageNum="+pageNum;
+		console.log(requestURL)
 		//1.从后台的listAllUserInfo接口获取数据
 		$.ajax({
 			//请求方式
@@ -182,13 +194,15 @@
 			//接受数据类型
 			dataType:"json",
 			//请求地址
-			url : "http://localhost:8080/newsmanage/sysuser/listAllUserInfo",
+			url : requestURL,
 			//数据，json字符串
 			//请求成功
 			success : function(result) {
 //                    console.log(result);
 				//2.将数据填充到table中
-				$(result).each(function(index,item){
+				$(result.list).each(function(index,item){
+					//  content
+					$(".pagination").html("");
 					console.log(item);
 					var trStr = "<tbody>";
 					trStr = "<tr id='tr"+item.userid+"'>";
@@ -207,7 +221,26 @@
 					trStr+="</tbody>";
 					$("#dataTable").append(trStr);
 				});
+				if (pageNum<=1){
+					var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+				} else {
+					var	splicPage="<li><a href=\"user.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+
+				}
+				console.log(111)
+				console.log(result.pages)
+				for(var i=1;i<=result.pages;i++){
+					splicPage +="<li><a href=\"user.html?pageNum="+i+"\">"+i+"</a></li>";
+				}
+				if (pageNum>=result.pages) {
+					splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+				}else {
+					splicPage+="<li><a href=\"user.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+				}
+				$(".pagination").html("");
+				$(".pagination").append(splicPage);
 			},
+
 			//请求失败，包含具体的错误信息
 			error : function(e){
 				console.log(e.status);
@@ -224,7 +257,7 @@
 	function removeUser(userid){
 		$.ajax({
 			type:"POST",
-			url:"http://localhost:8080/newsmanage/sysuser/deleteUser",
+			url:"sysuser/deleteUser",
 			contentType: "application/json;charset=UTF-8",
 			//接受数据类型
 			dataType:"json",
@@ -270,7 +303,7 @@
 		}
 		$.ajax({
 			type:"POST",
-			url:"http://localhost:8080/newsmanage/sysuser/deleteCheckUser",
+			url:"sysuser/deleteCheckUser",
 			contentType: "application/json;charset=UTF-8",
 			//接受数据类型
 			dataType:"json",

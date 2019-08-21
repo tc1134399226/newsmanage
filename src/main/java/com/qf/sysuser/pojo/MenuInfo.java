@@ -9,9 +9,7 @@ public class MenuInfo {
     int mid;
     String menuName;
     String menuIcon;
-    String menuUrl = "";
+    String menuUrl ;
     int parentId;
-    List<MenuInfo> childMenus;
-    List<RoleInfo> roleInfoList;
 
 }

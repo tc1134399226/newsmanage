@@ -24,7 +24,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<div><a class="navbar-brand" style="font-size:32px;" href="user.html">众筹平台 - 用户维护</a></div>
+			<div><a class="navbar-brand" style="font-size:32px;" href="user.html">新闻发布系统 - 用户维护</a></div>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -184,6 +184,7 @@
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../script/docs.min.js"></script>
 <script type="text/javascript">
+	$(".tree").load("menu.html");
 	$(function () {
 		$(".list-group-item").click(function(){
 			if ( $(this).find("ul") ) {
@@ -200,6 +201,7 @@
 
 <script>
 	var value = localStorage["name"];
+	console.log(value)
 	// alert(value);
 
 	initPage();
@@ -214,7 +216,7 @@
 			//接受数据类型
 			dataType:"json",
 			//请求地址
-			url : "http://localhost:8080/newsmanage/roleinfo/getRoleInfoById?userid="+value,
+			url : "roleinfo/getRoleInfoById?userid="+value,
 			//数据，json字符串
 			//请求成功
 			success : function(result) {+
@@ -267,7 +269,7 @@
 				//请求的媒体类型
 				contentType: "application/json;charset=UTF-8",
 				//请求地址
-				url : "http://localhost:8080/newsmanage/roleinfo/addRoleUser",
+				url : "roleinfo/addRoleUser",
 				//数据，json字符串
 				data : JSON.stringify({
 					"userid":value,
@@ -306,7 +308,7 @@
 				//请求的媒体类型
 				contentType: "application/json;charset=UTF-8",
 				//请求地址
-				url : "http://localhost:8080/newsmanage/roleinfo/delRoleUser",
+				url : "roleinfo/delRoleUser",
 				//数据，json字符串
 				data : JSON.stringify({
 					"userid":value,

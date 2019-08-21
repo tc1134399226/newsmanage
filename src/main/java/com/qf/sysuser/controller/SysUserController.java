@@ -4,46 +4,46 @@ package com.qf.sysuser.controller;
 import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
+import com.qf.sysuser.vo.MenuInfoVO;
+import com.qf.sysuser.vo.UserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@Controller
-@RequestMapping("/sysuser")
+@RestController
+@RequestMapping("admin/sysuser")
 public class SysUserController {
 
     @Autowired
     private SysUserService sysUserService;
 
-//    /*
-//    @RequestMapping("/loginCheck")
-//    @ResponseBody
-//    public boolean loginCheck(@RequestBody User user, HttpSession session ){
-//        List<MenuInfo> menuInfoList = userService.userLoginInit(user);
-//        if (menuInfoList!=null){
-//            session.setAttribute("menuInfoList",menuInfoList);
-//            session.setAttribute("userinfo",user);
-//        }
-//        return userService.getUserByuserNameAndPassword(user);
-//    }
-//
-//    @RequestMapping("/registerUser")
-//    @ResponseBody
-//    public Object saveUser(@RequestBody User user){
-//        return userService.registerUser(user);
-//    }
-//
-//    @RequestMapping("/listAllUserInfo")
-//    @ResponseBody
-//    public Object listAllUserInfo(){
-//        List<User> allUser = userService.getAllUser();
-//        return allUser;
-//    }
-//*/
+
+  /*
+    @RequestMapping("/registerUser")
+    @ResponseBody
+    public Object saveUser(@RequestBody User user){
+        return userService.registerUser(user);
+    }
+*/
+    @RequestMapping("/listAllUserInfo")
+    @ResponseBody
+    public Object listAllUserInfo(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
+                                              Integer pageNum) {
+        System.out.println(pageNum);
+        //一页有多少条数据
+        int defaultPageSize = 2;
+        //初始化pageHelper对象
+        PageHelper.startPage(pageNum, defaultPageSize);
+        List<User> allUser = sysUserService.getAllUser();
+        System.out.println(allUser);
+        PageInfo<User> allUserPageInfo = new PageInfo<User>(allUser);
+        return allUserPageInfo;
+    }
 
     /**
      * 删除单个用户
@@ -114,26 +114,39 @@ public class SysUserController {
         return sysUserService.insertUser(user);
     }
 
-//    /**
-//     * 初始化用户菜单
-//     * @param userInfo
-//     * @param session
-//     * @return
-//     */
-//    @RequestMapping("initMenuList")
-//    @ResponseBody
-//    public Object initMenuList(@RequestBody(required = false) User userInfo,HttpSession session){
+    /**
+     * 初始化用户菜单
+     * @param userInfo
+     * @param session
+     * @return
+     */
+    @RequestMapping("initMenuList")
+    public Object initMenuList(@RequestBody(required = false) User userInfo,HttpSession session){
+        System.out.println(1111);
+        User user=new User();
+        user.setUsername("王涛");
+        user.setPassword("123456");
+        List<MenuInfoVO> menuInfos = sysUserService.userLoginInit(user);
+        System.out.println(3333);
+        System.out.println(menuInfos);
 //        if(session.getAttribute("menuInfoList")==null){
-//            if(userInfo!=null){
-//                return userService.userLoginInit(userInfo);
-//            }else {
-//                return null;
-//            }
-//        }else{
+        if (menuInfos==null) {
+            if (userInfo != null) {
+                return sysUserService.userLoginInit(userInfo);
+            } else {
+                return null;
+            }
+        }else{
 //            return session.getAttribute("menuInfoList");
-//        }
-//    }
+         return    menuInfos;
+        }
+    }
 
+    /**
+     * 管理员登录
+     * @param user
+     * @return
+     */
     @RequestMapping("sysUserLogin")
     @ResponseBody
     public User sysUserLogin(@RequestBody User user){

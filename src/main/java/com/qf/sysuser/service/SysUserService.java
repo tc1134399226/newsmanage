@@ -25,6 +25,7 @@ public interface SysUserService {
     public boolean insertUser(User user);
 
     //初始化用户菜单
+    public List<MenuInfoVO> userLoginInit(User user);
 //    public List<MenuInfo> userLoginInit(User user);
 
 

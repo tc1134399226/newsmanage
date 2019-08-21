@@ -29,7 +29,17 @@
     </div>
 </nav>
 
-<hr>
+<br>
+<form class="form-inline" role="form" style="float:left;">
+    <div class="form-group has-feedback">
+        <div class="input-group">
+            <div class="input-group-addon">主标题</div>
+            <input class="form-control has-success" type="text" placeholder="请输入主标题关键字" id="mainTitle">
+        </div>
+    </div>
+    <button type="button" class="btn btn-warning" onclick="initPage()"><i class="glyphicon glyphicon-search" ></i> 查询</button>
+</form>
+<hr/>
 
 <div class="table-responsive">
     <table class="table  table-bordered" id = "dataTable">
@@ -75,7 +85,7 @@
         //1.从后台的接口获取数据
         $.ajax({
             //请求方式GET/POST
-            type : "GET",
+            type : "POST",
             //请求的媒体类型
             contentType: "application/json;charset=UTF-8",
             //接受数据类型
@@ -83,6 +93,11 @@
             //请求地址
             url : requestURL,
             //数据，json字符串
+            data : JSON.stringify(
+                            {
+                                "mainTitle":$("#mainTitle").val(),
+                                "status":"2"
+                            }),
             //请求成功
             success : function(result) {
                 console.log(result);
@@ -131,6 +146,8 @@
         });
     }
     initPage();
+
+
 
     //跳转详情页
     function checkArticle(articleId){
