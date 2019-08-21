@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="GB18030">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/login.css">
+      <script src="dropzone/basic.min.css"></script>
+
+	<style>
+
+	</style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <div><a class="navbar-brand" href="index.html" style="font-size:32px;">不新的新闻网</a></div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <form class="form-signin" role="form">
+        <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 用户注册</h2>
+		  <div class="form-group has-success has-feedback">
+			<input type="text" class="form-control" id="account" placeholder="请输入账号"  onblur="checkAccount()" autofocus>
+            <div class='tips'>必须是以字母开头，只能包含字母数字下划线和减号，4到16位</div>
+		  </div>
+          <div class="form-group has-success has-feedback">
+              <input type="text" class="form-control" id="nickName" placeholder="请输入用户昵称" style="margin-top:10px;">
+
+          </div>
+		  <div class="form-group has-success has-feedback">
+			<input type="text" class="form-control" id="password" placeholder="请输入用户密码" style="margin-top:10px;">
+            <div class='tips'>长度不能小于6位</div>
+		  </div>
+
+
+          <div class="form-group has-success has-feedback">
+            <input type="text" class="form-control" id="repassword" placeholder="请确认密码" style="margin-top:10px;">
+
+          </div>
+
+          <div class="form-group has-success has-feedback">
+              <input type="text"  class="form-control" id="idCard" placeholder="请输入身份证号" style="margin-top:10px;">
+
+          </div>
+
+
+          <div class="form-group has-success has-feedback">
+              <input type="text" class="form-control" id="mobile" placeholder="请输入手机号码" style="margin-top:10px;">
+
+          </div>
+
+
+
+
+          <div class="checkbox">
+          <label>
+            忘记密码
+          </label>
+          <label style="float:right">
+            <a href="login.html">我有账号</a>
+          </label>
+        </div>
+        <a class="btn btn-lg btn-success btn-block" onclick="registerUser()"> 注册</a>
+      </form>
+    </div>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+  <script>
+      function registerUser() {
+          var  account = $("#account").val();
+          var  nickName = $("#nickName").val();
+          var  password = $("#password").val();
+          var  idCard = $("#idCard").val();
+          var  mobile = $("#mobile").val();
+
+        var regx = /^1[35789][0-9]{9}$/;
+        if (!regx.test(mobile)) {
+          alert("号码错误,请输入正确的手机号码");
+          return;
+        }
+        var acc = /^[A-Za-z]{1}[A-Za-z0-9]{3,15}$/
+        if (!acc.test(account)) {
+          alert("账号格式错误，请重新确认");
+          return;
+        }
+
+        if (nickName.length == 0 || nickName.indexOf(":") != -1) {
+          alert("昵称不能为空或者包含冒号");
+          return;
+        }
+        var p = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+        if(!p.test(idCard)){
+          alert("身份证号码错误，请仔细检查！");
+          return;
+        }
+
+        var repassword = $("#repassword").val();
+        if (password.length < 6) {
+          alert("密码不能少于六位");
+          return;
+        }
+        if (password != repassword) {
+          alert("两次密码输入不一致,请重新输入");
+          return;
+        }
+
+
+          $.ajax({
+              //请求方式
+              type : "POST",
+              //请求的媒体类型
+              contentType: "application/json;charset=UTF-8",
+              //接受数据类型
+              dataType:"json",
+              //请求地址
+              url : "registerUserInfo",
+              //数据，json字符串
+              data : JSON.stringify(
+                  {
+                      "account":account,
+                      "nickName":nickName,
+                      "password":password,
+                      "idCard":idCard,
+                      "mobile":mobile
+
+                  }
+              ),
+              //请求成功
+              success : function(result) {
+                  console.log(result);
+                  if(result){
+                      window.location.href="login.html";
+                  }else{
+                      alert("注册失败");
+                  }
+              },
+              //请求失败，包含具体的错误信息
+              error : function(e){
+                  console.log(e.status);
+                  console.log(e.responseText);
+              }
+          });
+
+      }
+
+      function checkAccount() {
+        var  account = $("#account").val();
+        $.ajax({
+          //请求方式
+          type : "POST",
+          //请求的媒体类型
+          contentType: "application/json;charset=UTF-8",
+          //接受数据类型
+          dataType:"json",
+          //请求地址
+          url : "checkAccount",
+          //数据，json字符串
+          data : JSON.stringify(
+                  {
+                    "account":account
+
+                  }
+          ),
+          //请求成功
+          success : function(result) {
+            console.log(result);
+            if(result){
+              alert("用户名已存在，请重新输入");
+            }else{
+
+            }
+          },
+          //请求失败，包含具体的错误信息
+          error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+          }
+        });
+
+      }
+
+  </script>
+  </body>
+</html>

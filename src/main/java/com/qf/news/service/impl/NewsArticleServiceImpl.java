@@ -1,19 +1,19 @@
 package com.qf.news.service.impl;
 
 
-import com.qf.news.dao.ArticleMapper;
+import com.qf.news.dao.NewsArticleMapper;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.UserInfo;
-import com.qf.news.service.ArticleService;
+import com.qf.news.service.NewsArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ArticleServiceImpl implements ArticleService {
+public class NewsArticleServiceImpl implements NewsArticleService {
     @Autowired
-    ArticleMapper articleMapper;
+    NewsArticleMapper newsArticleMapper;
 
     /**
      * 通过UserInfo参数中的UserId获取我的文章(分页)
@@ -21,7 +21,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     public List<ArticleInfo> getMyArtByUserId(UserInfo userInfo) {
-        return articleMapper.getMyArtByUserId(userInfo);
+        return newsArticleMapper.getMyArtByUserId(userInfo);
     }
 
     /**
@@ -30,7 +30,7 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     public List<ArticleInfo> getMyDraftByUserId(UserInfo userInfo) {
-        return articleMapper.getMyDraftByUserId(userInfo);
+        return newsArticleMapper.getMyDraftByUserId(userInfo);
     }
 
     /**
@@ -39,6 +39,6 @@ public class ArticleServiceImpl implements ArticleService {
      * @return
      */
     public boolean deleteMyDraftByArticleId(Long articleId) {
-        return articleMapper.deleteMyDraftByArticleId(articleId)>0;
+        return newsArticleMapper.deleteMyDraftByArticleId(articleId)>0;
     }
 }

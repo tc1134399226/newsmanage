@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.news.dao.CommentMapper">
+<mapper namespace="com.qf.news.dao.NewsCommentMapper">
     <resultMap id="commentList" type="com.qf.news.vo.CommentVO">
         <id property="comId" column="comId"/>
         <result property="userId" column="userId"/>
@@ -22,4 +22,7 @@
     <update id="deleteCommentByComId" parameterType="long">
         update comment set status =0  where comId=#{comId};
     </update>
+    <select id="getCommentByComId" parameterType="Long" resultType="com.qf.news.pojo.CommentInfo">
+        select * from comment where comId=#{comId}
+    </select>
 </mapper>

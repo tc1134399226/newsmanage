@@ -2,7 +2,7 @@ package com.qf.news.controller;
 
 import com.qf.news.pojo.ReplyInfo;
 import com.qf.news.pojo.UserInfo;
-import com.qf.news.service.ReplyService;
+import com.qf.news.service.NewsReplyService;
 import com.qf.news.vo.ReplyVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,10 +14,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("news")
-public class ReplyController {
+public class NewsReplyController {
 
     @Autowired
-    ReplyService replyService;
+    NewsReplyService newsReplyService;
 //    @Autowired
 //    UserService userService;
 
@@ -29,7 +29,7 @@ public class ReplyController {
     @RequestMapping("getReplyByComId")
     public Object getReplyByComId(@RequestBody ReplyVO replyVO){
 
-        List<ReplyVO> replyByComId = replyService.getReplyByComId(replyVO.getComId());
+        List<ReplyVO> replyByComId = newsReplyService.getReplyByComId(replyVO.getComId());
         System.out.println(replyByComId);
         return replyByComId;
     }
@@ -42,17 +42,17 @@ public class ReplyController {
      */
     @RequestMapping("addReplyByReplyInfo")
     public Object addReplyByReplyInfo(@RequestBody ReplyInfo replyInfo , HttpSession session){
-        UserInfo user = (UserInfo) session.getAttribute("userInfo");
-        if (user==null){
-            return "login";
-        }
+//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//        if (userInfo==null){
+//            return "login";
+//        }
         //保证程序健壮性
 //        UserInfo userInfo = userService.checkName(user);
 //        if (userInfo==null){
 //            return false;
 //        }
-//        replyInfo.setUserId(3);
-//        replyInfo.setNickName("zzg");
+        replyInfo.setUserId(1);
+        replyInfo.setNickName("cg");
 ////        replyInfo.setUserId(user.getUserId());
 ////        replyInfo.setNickName(user.getNickName());
         //获得个人信息
@@ -60,7 +60,7 @@ public class ReplyController {
        if (replyInfo==null){
            return  false;
        }
-        return replyService.addReplyByReplyInfo(replyInfo);
+        return newsReplyService.addReplyByReplyInfo(replyInfo);
     }
 
     /**
@@ -92,6 +92,6 @@ public class ReplyController {
         if (repId<=0){
             return  false;
         }
-        return replyService.deleteReplyByRepId(repId);
+        return newsReplyService.deleteReplyByRepId(repId);
     }
 }

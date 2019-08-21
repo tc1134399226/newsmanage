@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.news.dao.NewsMessageMapper">
+<select id="getReadMessageByUserId" parameterType="Integer" resultType="com.qf.news.vo.MessageVO">
+    select m.*,u.nickName from message m left join userinfo u on u.userId=m.senderId
+    where m.status=1 and m.userId=#{userId}
+</select>
+    <delete id="deleteReadMessageByMgeId" parameterType="Long">
+        delete from message where  mgeId=#{mgeId}
+    </delete>
+    
+<select id="getUnreadMessageByUserId" resultType="com.qf.news.vo.MessageVO">
+    select m.*,u.nickName from message m left join userinfo u on u.userId=m.senderId
+        where m.status=0 and m.userId=#{userId}
+</select>
+    <update id="removeUnreadMessageByMgeId" parameterType="Long">
+        update message set status=1 where mgeId=#{mgeId}
+    </update>
+    <insert id="sendMessageByReplyVO" parameterType="com.qf.news.vo.ReplyVO">
+        insert into message (userId,senderId,mainTitle,content,createTime,status)
+        values (#{cuserId},#{userId},#{mainTitle},#{content},CURRENT_TIMESTAMP,0)
+    </insert>
+    <insert id="sendSystemMessage" parameterType="com.qf.news.pojo.Message">
+        insert into message (userId,senderId,mainTitle,content,createTime,status)
+        values (#{userId},#{senderId},#{mainTitle},#{content},CURRENT_TIMESTAMP,0)
+    </insert>
+</mapper>

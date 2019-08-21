@@ -1,9 +1,8 @@
 package com.qf.news.service.impl;
 
 import com.qf.news.dao.NewsMapper;
-import com.qf.news.pojo.Article;
 import com.qf.news.service.NewsService;
-import com.qf.news.vo.ArticleTypeVo;
+import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class NewsServiceImpl implements NewsService {
      * 查询新闻的信息 地区和类型
      * @return
      */
-    public List<ArticleTypeVo> listAllArticleByStatus() {
+    public List<ArticleTypeVO> listAllArticleByStatus() {
         return newsMapper.listAllArticleByStatus();
     }
 }

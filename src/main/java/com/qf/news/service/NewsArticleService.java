@@ -1,12 +1,11 @@
-package com.qf.news.dao;
+package com.qf.news.service;
 
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.UserInfo;
 
-
 import java.util.List;
 
-public interface ArticleMapper {
+public interface NewsArticleService {
     /**
      * 通过UserInfo参数中的UserId获取我的文章(分页)
      * @param userInfo
@@ -26,5 +25,5 @@ public interface ArticleMapper {
      * @param articleId
      * @return
      */
-    public int  deleteMyDraftByArticleId(Long articleId);
+    public boolean  deleteMyDraftByArticleId(Long articleId);
 }

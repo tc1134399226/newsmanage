@@ -6,7 +6,7 @@ import com.qf.news.vo.CommentVO;
 
 import java.util.List;
 
-public interface CommentService {
+public interface NewsCommentService {
     /**
      * 获取所有的评论
      * @return
@@ -26,4 +26,10 @@ public interface CommentService {
      * @return
      */
     public boolean deleteCommentByComId(long comId);
+    /**
+     * 通过comId获取评论
+     * @param comId
+     * @return
+     */
+    public CommentInfo getCommentByComId(long comId);
 }

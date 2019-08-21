@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>详情页</title>
+    <meta charset="GB18030">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../dropzone/basic.min.css" />
+    <link rel="stylesheet" href="../dropzone/dropzone.min.css" />
+    <link href="../wangeditor/wangEditor.min.css"/>
+    <script src="../wangeditor/wangEditor.min.js"></script>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <div><a class="navbar-brand"  style="font-size:32px;">你懂得-创意产品</a></div>
+        </div>
+    </div>
+</nav>
+
+<hr>
+
+<div class="form-group" style="text-align:center;" id="realName">
+    <label >真实姓名:</label>
+    <br>
+</div>
+<hr>
+<div class="form-group" style="text-align:center;" id="idCard">
+    <label >身份证号:</label>
+    <br>
+</div>
+
+<hr>
+
+<div class="form-group" id="mobile" style="text-align:center;">
+    <label >手机号:</label>
+    <br>
+</div>
+<hr>
+
+<div class="form-group" style="text-align:center;" id="idCardBack">
+    <label >身份证头像面:</label>
+<br>
+</div>
+
+<hr>
+<div class="form-group" style="text-align:center;" id="idCardFront">
+    <label >身份证国徽面:</label>
+    <br>
+</div>
+
+<hr>
+
+<div  style="text-align:center;">
+    <button type="button" class='btn btn-success btn-xs' onclick='agree()'><i class=' glyphicon glyphicon-check' ></i>通过</button>&nbsp;
+    <button type="button" class='btn btn-danger btn-xs' onclick='refuse()'><i class=' glyphicon glyphicon-remove' ></i>驳回</button>&nbsp;
+</div>
+
+
+<script type="text/javascript">
+
+    //定义全局变量
+    var str1;
+    var str2;
+    var str3;
+    var params=window.location.search;
+    var userId=params.split("=")[1];
+
+    $.ajax({
+        //请求方式
+        type : "GET",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "sysuser/getEditorApplyById?userId="+userId,
+        //数据，json字符串
+        //请求成功
+        success : function(result) {
+
+            console.log(result);
+
+            str1=result.realName;
+            //整体拼接到div里面去
+            $("#realName").append(str1);
+
+            str2=result.idCard;
+            //整体拼接到div里面去
+            $("#idCard").append(str2);
+
+            str3=result.mobile;
+            $("#mobile").append(str3);
+
+            var i=new Image();
+            i.src=result.idCardBack;
+            //str4=result.idCardBack;
+            $("#idCardBack").append(i);
+
+            var j=new Image();
+            j.src=result.idCardFront;
+            $("#idCardFront").append(j);
+
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
+
+    function agree() {
+        $.ajax({
+            //请求方式
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "sysuser/addEditor?userId="+userId,
+
+            //请求成功
+            success : function(result) {
+                console.log(result);
+                if(result){
+                    alert("已通过审核");
+                    window.location.href="editor_apply_list.html";
+                }else{
+                    alert("修改失败");
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+            }
+        });
+    }
+
+    function refuse() {
+        $.ajax({
+            //请求方式
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "sysuser/deleteApply?userId="+userId,
+            //数据，json字符串
+            // data : JSON.stringify(
+            //     {
+            //         "userId":userId
+            //
+            //     }
+            // ),
+            //请求成功
+            success : function(result) {
+                console.log(result);
+                if(result){
+                    alert("已驳回请求");
+                    window.location.href="editor_apply_list.html";
+                }else{
+                    alert("修改失败");
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+            }
+        });
+    }
+
+
+</script>
+
+
+</body>
+</html>

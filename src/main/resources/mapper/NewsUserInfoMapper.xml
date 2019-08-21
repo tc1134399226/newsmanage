@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.news.dao.NewsUserInfoMapper">
+
+
+    <!--登录查询语句-->
+    <select id="loginCheck" resultType="com.qf.news.pojo.UserInfo" parameterType="com.qf.news.pojo.UserInfo">
+        SELECT * FROM userinfo where account = #{account} and password = #{password}
+    </select>
+
+    <!--注册语句-->
+    <insert id="register" parameterType="com.qf.news.pojo.UserInfo">
+        insert into userinfo(userId,
+        account,nickName,
+        password,idCard,mobile,sex,status,createTime,updateTime,roleId)
+        values(DEFAULT,#{account},#{nickName},#{password},#{idCard},#{mobile},'无',0,now(),now(),0)
+    </insert>
+
+    <!--用户名重复检测-->
+    <select id="checkAccount" resultType="com.qf.news.pojo.UserInfo" parameterType="com.qf.news.pojo.UserInfo">
+        select userId from userinfo where account = #{account}
+    </select>
+
+    <!--个人空间获取用户信息-->
+    <select id="getUserInfoById" parameterType="int" resultType="com.qf.news.pojo.UserInfo">
+        select * from userinfo where  userid = #{userid}
+    </select>
+
+    <!--个人空间修改用户信息-->
+    <update id="editUserInfoById" parameterType="com.qf.news.pojo.UserInfo">
+        update  userinfo set
+        <trim suffixOverrides=",">
+            <if test="nickName !=null and nickName!=''">
+                nickName = #{nickName},
+            </if>
+            <if test="idCard !=null and idCard !=''">
+                idCard = #{idCard},
+            </if>
+            <if test="mobile !=null and mobile!=''">
+                mobile = #{mobile},
+            </if>
+            <if test="sex !=null and sex!=''">
+                sex = #{sex},
+            </if>
+            <if test="icon !=null and icon!=''">
+                icon = #{icon},
+            </if>
+            <if test="icon !=null and icon!=''">
+                updateTime = now(),
+            </if>
+
+        </trim>
+        where  userId = #{userId}
+    </update>
+
+
+</mapper>

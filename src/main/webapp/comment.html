@@ -126,11 +126,11 @@
                 // var pagename=window.location.pathname
                 // console.log(pagename);
                 $(result.list).each(function(index,item){
-                    console.log(item);
+                    // console.log(item);
 
 
                     var   trStr="<img src=\""+item.icon+"\"><br>";
-                    console.log(item.icon)
+                    // console.log(item.icon)
                     trStr+="<div class='user'>"
                     trStr+="用户名:"+item.nickName+"<br>";
                     // trStr+="<td><input type=\"checkbox\"></td>";
@@ -189,7 +189,7 @@
             //接受数据类型
             dataType: "json",
             //请求地址
-            url: "http://localhost:8080//getReplyByComId?comId="+comId,
+            url: "news/getReplyByComId?comId="+comId,
             //数据，json字符串
             data:JSON.stringify({
                 "comId":comId,
@@ -203,12 +203,12 @@
                     var trStr="&nbsp&nbsp&nbsp"
                     if (item.cnickName!=null){
                         trStr+="<img src=\""+item.icon+"\"><br>";
-                        console.log(item.icon)
+                        // console.log(item.icon)
                         trStr+="用户:"+item.nickName+"回复了"+item.cnickName+"<br>";
                         trStr+=item.createTime+"<br>"
                     } else {
                         trStr+="<img src=\""+item.icon+"\"><br>";
-                        console.log(item.icon)
+                        // console.log(item.icon)
                         trStr+="用户:"+item.nickName+"回复了"+comName+"<br>";
                         trStr+=item.createTime+"<br>"
                     }
@@ -250,7 +250,7 @@
             //接受数据类型
             dataType: "json",
             //请求地址
-            url: "addComment",
+            url: "news/addComment",
             data:JSON.stringify({
                 "content":text
             }),
@@ -281,7 +281,7 @@
             //接受数据类型
             dataType: "json",
             //请求地址
-            url: "addReplyByReplyInfo",
+            url: "news/addReplyByReplyInfo",
             data:JSON.stringify({
                 "content":text,
                 "repId":repId,
@@ -291,6 +291,7 @@
             //数据，json字符串
             //请求成功
             success: function (result) {
+                sendMessage(repId,comId)
                 if (result) {
                     initPage();
                 }else {
@@ -311,7 +312,7 @@
             //接受数据类型
             dataType: "json",
             //请求地址
-            url: "deleteReplyByRepId",
+            url: "news/deleteReplyByRepId",
             data:JSON.stringify({
                 "repId":repId,
                 "userId":userId
@@ -331,6 +332,7 @@
         })
     }
     function deleteComment(userId,comId) {
+
         $.ajax({
             //请求方式GET/POST
             type: "POST",
@@ -339,7 +341,7 @@
             //接受数据类型
             dataType: "json",
             //请求地址
-            url: "deleteCommentByComId",
+            url: "news/deleteCommentByComId",
             data:JSON.stringify({
                 "comId":comId,
                     "userId":userId
@@ -351,6 +353,46 @@
                     initPage();
                 }else {
                     alert("无法删除他人评论")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+
+
+    //调用方法需要传递被发送者id
+    // function sendMessage(userId) {
+    function sendMessage(repId,comId) {
+        console.log(repId)
+        console.log(comId)
+        //repId是被回复消息的id
+        //comId被回复评论的id
+        var text=document.getElementById("replyMsgArea").innerText;
+        console.log("消息内容")
+        console.log(text)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/sendMessageByReplyVO",
+            data:JSON.stringify({
+                "content":text,
+                "crepId":repId,
+                "comId":comId
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("操作失败")
                 }
             },
             error: function (e) {

@@ -1,7 +1,6 @@
 package com.qf.news.dao;
 
-import com.qf.news.pojo.Article;
-import com.qf.news.vo.ArticleTypeVo;
+import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,5 +12,5 @@ public interface NewsMapper {
      * 查询新闻的信息 地区和类型
      * @return
      */
-    public List<ArticleTypeVo> listAllArticleByStatus();
+    public List<ArticleTypeVO> listAllArticleByStatus();
 }

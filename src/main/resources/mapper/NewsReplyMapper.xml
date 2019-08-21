@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-    <mapper namespace="com.qf.news.dao.ReplyMapper">
+    <mapper namespace="com.qf.news.dao.NewsReplyMapper">
     <resultMap id="replyList" type="com.qf.news.vo.ReplyVO">
         <id property="repId" column="repId"/>
         <result property="comId" column="comId"/>
@@ -32,4 +32,7 @@
     <update id="deleteReplyByRepId" parameterType="long">
         update reply set status =0  where repId=#{repId};
     </update>
+    <select id="getReplyByRepId" parameterType="Long" resultType="com.qf.news.pojo.ReplyInfo">
+        select * from reply where repId=#{repId}
+    </select>
 </mapper>

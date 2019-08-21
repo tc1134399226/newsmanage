@@ -8,7 +8,7 @@ import com.qf.news.vo.CollectionVO;
 
 import java.util.List;
 
-public interface CollectionService {
+public interface NewsCollectionService {
   /**
    * 通过UserId获取我收藏的文章(分页)
    * @param userInfo

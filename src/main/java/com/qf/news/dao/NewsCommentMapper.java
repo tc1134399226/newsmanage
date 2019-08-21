@@ -6,7 +6,7 @@ import com.qf.news.vo.CommentVO;
 
 import java.util.List;
 
-public interface CommentMapper {
+public interface NewsCommentMapper {
     /**
      * 获取所有的评论
      * @return
@@ -26,5 +26,12 @@ public interface CommentMapper {
      * @return
      */
     public Integer deleteCommentByComId(long comId);
+
+    /**
+     * 通过comId获取评论
+     * @param comId
+     * @return
+     */
+    public CommentInfo getCommentByComId(long comId);
 
 }

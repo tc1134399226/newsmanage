@@ -77,6 +77,8 @@
     <input type="button" value="我的收藏" onclick="myCollectionPage()">
     <input type="button" value="我的文章" onclick="myArticlePage()">
     <input type="button" value="草稿" onclick="myDraftPage()">
+    <input type="button" value="未读消息" onclick="myUnreadMessagePage()">
+    <input type="button" value="已读消息" onclick="myReadMessagePage()">
 <!--    <input type="button" value="选择" onclick="AllCollection()">-->
 <!--    <input type="button" value="删除" onclick="deleteAllArticle()">-->
 </div>
@@ -127,6 +129,10 @@
             myArticle()
         }else if (select=="myDraft"){
             myDraft()
+        }else if (select=="unreadMessage"){
+            myUnreadMessage()
+        }else  if (select=="readMessage"){
+            myReadMessage()
         }else {
             myCollection();
         }
@@ -650,58 +656,417 @@
             }
         })
     }
+    //点击按钮时触发这个方法,目的是为了回到分页第一页
+    //显示用户未读消息第一页
+    function myUnreadMessagePage() {
+        var pageNum=1;
+        var requestURL="news/getUnreadMessageByUserId";
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+
+            //请求成功
+            success : function(result) {
+                $(".content").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    console.log(item);
+                    //获取id并拼接
+                    var trStr = "<div class='data'>";
+                    //获取id并拼接
+                    trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
+                    // trStr+="<div class='partOne'><input type=\"checkbox\"></div>";
+                    if (item.senderId==666) {
+                        trStr+="<div class='partSev'>"+item.nickName+"</div>";
+                    }else {
+                        trStr += "<div class='partSev'>发信人:" + item.nickName + "</div>";
+                    }
+                    trStr+="<div class='partSev'>"+item.createTime+"</div>";
+                    trStr +="<div style='float: right;margin-right: 100px'>"
+                        trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='removeUnread(" + item.mgeId + ")'></i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
+                    trStr+="</div>";
+                    trStr+="</div>";
+                    trStr+="<hr>";
+                    $(".content").append(trStr);
+                });
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=unreadMessage"+"\" id='start'>上一页</a></li>"
+
+                }
+                console.log(111)
+                console.log(result.pages)
+                for(var i=1;i<=result.pages;i++){
+                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=unreadMessage"+"\">"+i+"</a></li>";
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=unreadMessage"+"\" id='end'>下一页</a></li>";
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    //点击分页的页数和上,下页时触发这个方法
+    //显示用户未读信息指定页
+    function myUnreadMessage(){
+
+        var pageNum=window.location.search.split("=")[1];
+        if (pageNum.indexOf("&type") != -1){
+            pageNum=pageNum.split("&type")[0]
+        }
+
+        console.log(pageNum)
+        var requestURL="news/getUnreadMessageByUserId";
+        if(pageNum==null){
+            pageNum=1
+        }
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+
+            //请求成功
+            success : function(result) {
+                $(".content").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    console.log(item);
+                    //获取id并拼接
+                    var trStr = "<div class='data'>";
+                    //获取id并拼接
+                    trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
+                    if (item.senderId==666) {
+                        trStr+="<div class='partSev'>"+item.nickName+"</div>";
+                    }else {
+                        trStr += "<div class='partSev'>发信人:" + item.nickName + "</div>";
+                    }
+                    trStr+="<div class='partSev'>"+item.createTime+"</div>";
+                    trStr +="<div style='float: right;margin-right: 100px'>"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='removeUnread(" + item.mgeId + ")'></i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
+                    trStr+="</div>";
+                    trStr+="</div>";
+                    trStr+="<hr>";
+                    $(".content").append(trStr);
+                });
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=unreadMessage"+"\" id='start'>上一页</a></li>"
+
+                }
+                console.log(111)
+                console.log(result.pages)
+                for(var i=1;i<=result.pages;i++){
+                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=unreadMessage"+"\">"+i+"</a></li>";
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=unreadMessage"+"\" id='end'>下一页</a></li>";
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+
+    }
+    //点击按钮时触发这个方法,目的是为了回到分页第一页
+    //显示用户未读消息第一页
+    function myReadMessagePage() {
+        var pageNum=1;
+        var requestURL="news/getReadMessageByUserId";
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+
+            //请求成功
+            success : function(result) {
+                $(".content").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    console.log(item);
+                    //获取id并拼接
+                    var trStr = "<div class='data'>";
+                    //获取id并拼接
+                    trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
+                    // trStr+="<div class='partOne'><input type=\"checkbox\"></div>";
+                    if (item.senderId==666) {
+                        trStr+="<div class='partSev'>"+item.nickName+"</div>";
+                    }else {
+                        trStr += "<div class='partSev'>发信人:" + item.nickName + "</div>";
+                    }
+                    trStr+="<div class='partSev'>"+item.createTime+"</div>";
+                    trStr +="<div style='float: right;margin-right: 100px'>"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId + ")'></i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
+                    trStr+="</div>";
+                    trStr+="</div>";
+                    trStr+="<hr>";
+                    $(".content").append(trStr);
+                });
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=readMessage"+"\" id='start'>上一页</a></li>"
+
+                }
+                console.log(111)
+                console.log(result.pages)
+                for(var i=1;i<=result.pages;i++){
+                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=readMessage"+"\">"+i+"</a></li>";
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=readMessage"+"\" id='end'>下一页</a></li>";
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    //点击分页的页数和上,下页时触发这个方法
+    //显示用户未读信息指定页
+    function myReadMessage(){
+
+        var pageNum=window.location.search.split("=")[1];
+        if (pageNum.indexOf("&type") != -1){
+            pageNum=pageNum.split("&type")[0]
+        }
+
+        console.log(pageNum)
+        var requestURL="news/getReadMessageByUserId";
+        if(pageNum==null){
+            pageNum=1
+        }
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+
+            //请求成功
+            success : function(result) {
+                $(".content").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    console.log(item);
+                    //获取id并拼接
+                    var trStr = "<div class='data'>";
+                    //获取id并拼接
+                    trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
+                    // trStr+="<div class='partOne'><input type=\"checkbox\"></div>";
+                    if (item.senderId==666) {
+                        trStr+="<div class='partSev'>"+item.nickName+"</div>";
+                    }else {
+                        trStr += "<div class='partSev'>发信人:" + item.nickName + "</div>";
+                    }
+                    trStr+="<div class='partSev'>"+item.createTime+"</div>";
+                    trStr +="<div style='float: right;margin-right: 100px'>"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId + ")'></i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
+                    trStr+="</div>";
+                    trStr+="</div>";
+                    trStr+="<hr>";
+                    $(".content").append(trStr);
+                });
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=readMessage"+"\" id='start'>上一页</a></li>"
+
+                }
+                console.log(111)
+                console.log(result.pages)
+                for(var i=1;i<=result.pages;i++){
+                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=readMessage"+"\">"+i+"</a></li>";
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=readMessage"+"\" id='end'>下一页</a></li>";
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+
+    }
+function removeUnread(mgeId) {
+    $.ajax({
+        //请求方式GET/POST
+        type: "GET",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType: "json",
+        //请求地址
+        url: "news/removeUnreadMessageByMgeId?mgeId=" + mgeId,
+        //数据，json字符串
+        //请求成功
+        success: function (result) {
+            if (result) {
+                initpage();
+            } else {
+                alert("移除失败")
+            }
+        },
+        error: function (e) {
+            console.log(e);
+        }
+    })
+    }
+    function deleteMessage(mgeId) {
+        $.ajax({
+            //请求方式GET/POST
+            type: "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/deleteReadMessageByMgeId?mgeId=" + mgeId,
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                console.log(result)
+                if (result) {
+                    initpage();
+                } else {
+                    alert("彻底删除失败")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    
+    
+
     //给文章区域命名
     function areaName(areaId) {
-        if (areaId==1){
+        if (areaId == 1) {
             return "国际"
-        } else  if(areaId==2){
+        } else if (areaId == 2) {
             return "内地"
-        }else if (areaId==3){
+        } else if (areaId == 3) {
             return "港澳"
-        }else {
+        } else {
             return "台海"
         }
     }
+
     //给文章类型命名
     function typeName(typeId) {
-        if (typeId==1){
+        if (typeId == 1) {
             return "军事"
-        } else  if (typeId==2){
+        } else if (typeId == 2) {
             return "财经"
-        } else if (typeId==2){
+        } else if (typeId == 2) {
             return "财经"
-        } else if (typeId==3){
+        } else if (typeId == 3) {
             return "科技"
-        } else if (typeId==4){
+        } else if (typeId == 4) {
             return "娱乐"
-        } else if (typeId==5){
+        } else if (typeId == 5) {
             return "艺术"
-        } else if (typeId==6){
+        } else if (typeId == 6) {
             return "旅游"
-        } else if (typeId==7){
+        } else if (typeId == 7) {
             return "健康"
-        } else if (typeId==8){
+        } else if (typeId == 8) {
             return "体育"
-        } else if (typeId==9){
+        } else if (typeId == 9) {
             return "博览"
-        } else if (typeId==10){
+        } else if (typeId == 10) {
             return "汽车"
-        } else if (typeId==11){
+        } else if (typeId == 11) {
             return "其他"
         }
-            }
-            //给文章状态命名
-            function statusName(status) {
-                if (status==0){
-                    return "草稿"
-                } else if (status==1){
-                    return "未审核"
-                } else if (status==2){
-                    return "已上架"
-                } else if (status==3){
-                    return "审核不通过"
-                }
-            }
+    }
 
+    //给文章状态命名
+    function statusName(status) {
+        if (status == 0) {
+            return "草稿"
+        } else if (status == 1) {
+            return "未审核"
+        } else if (status == 2) {
+            return "已上架"
+        } else if (status == 3) {
+            return "审核不通过"
+        }
+
+}
 </script>
 </html>

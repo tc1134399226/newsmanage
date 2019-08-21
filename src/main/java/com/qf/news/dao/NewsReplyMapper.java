@@ -6,7 +6,7 @@ import com.qf.news.vo.ReplyVO;
 
 import java.util.List;
 
-public interface ReplyMapper {
+public interface NewsReplyMapper {
    /**
     * 通过ComId获取到这条评论的回复
     * @param comId
@@ -27,4 +27,11 @@ public interface ReplyMapper {
     * @return
     */
    public Integer deleteReplyByRepId(long repId);
+
+   /**
+    * 通过repId获取回复
+    * @param repId
+    * @return
+    */
+   public ReplyInfo  getReplyByRepId(Long repId);
 }

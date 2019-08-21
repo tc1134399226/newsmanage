@@ -3,7 +3,7 @@ package com.qf.news.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.news.pojo.UserInfo;
-import com.qf.news.service.CollectionService;
+import com.qf.news.service.NewsCollectionService;
 import com.qf.news.vo.ArticleTypeVO;
 import com.qf.news.vo.CollectionVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("news")
-public class CollectionController {
+public class NewsCollectionController {
 
     @Autowired
-    CollectionService collectionService;
+    NewsCollectionService newsCollectionService;
 
     /**
      * 通过UserId获取我收藏的文章(分页)
@@ -36,7 +36,6 @@ public class CollectionController {
 
         //测试
 //        UserInfo userInfo=new UserInfo();
-//        userInfo.setUserId(1);
         if (userInfo==null){
             return "login";
         }
@@ -45,7 +44,7 @@ public class CollectionController {
         int defaultPageSize=2;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum,defaultPageSize);
-        List<CollectionVO> collectionByUserId = collectionService.getCollectionByUserId(userInfo);
+        List<CollectionVO> collectionByUserId = newsCollectionService.getCollectionByUserId(userInfo);
         PageInfo<CollectionVO> collectionVOPageInfo = new PageInfo<CollectionVO>(collectionByUserId);
         return collectionVOPageInfo;
     }
@@ -60,7 +59,7 @@ public class CollectionController {
         if (colId==0){
             return false;
         }
-        return collectionService.deleteCollectionByColId(colId);
+        return newsCollectionService.deleteCollectionByColId(colId);
     }
 
     /**
@@ -75,6 +74,6 @@ public class CollectionController {
         if (articleTypeVO==null){
             return false;
         }
-        return collectionService.addCollectByArticleIdAndUserId(articleTypeVO);
+        return newsCollectionService.addCollectByArticleIdAndUserId(articleTypeVO);
     }
 }

@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 
 import com.qf.news.pojo.CommentInfo;
 import com.qf.news.pojo.UserInfo;
-import com.qf.news.service.CommentService;
+import com.qf.news.service.NewsCommentService;
 import com.qf.news.vo.CommentVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,9 +18,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("news")
-public class CommentController {
+public class NewsCommentController {
     @Autowired
-    CommentService commentService;
+    NewsCommentService newsCommentService;
 //    @Autowired
 //    UserService userService;
 
@@ -36,7 +36,7 @@ public class CommentController {
         int defaultPageSize=2;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum,defaultPageSize);
-        List<CommentVO> commentInfos = commentService.allComment();
+        List<CommentVO> commentInfos = newsCommentService.allComment();
         PageInfo<CommentVO> commentInfoPageInfo = new PageInfo<CommentVO>(commentInfos);
         return commentInfoPageInfo;
     }
@@ -67,7 +67,7 @@ public class CommentController {
         if (commentInfo==null){
             return false;
         }
-        return commentService.addComment(commentInfo);
+        return newsCommentService.addComment(commentInfo);
     }
 
     /**
@@ -99,7 +99,7 @@ public class CommentController {
         }
         System.out.println(commentInfo);
 
-        return commentService.deleteCommentByComId(comId);
+        return newsCommentService.deleteCommentByComId(comId);
     }
 
 }

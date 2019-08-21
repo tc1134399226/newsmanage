@@ -1,17 +1,18 @@
-package com.qf.news.pojo;
+package com.qf.news.vo;
 
 import lombok.Data;
 
 import java.sql.Timestamp;
 @Data
-public class Message {
+public class MessageVO {
     private Long mgeId;
     private Long userId;
-    private long senderId;
+    private Long senderId;
     private String mainTitle;
     private String content;
     private int status;
     private Timestamp createTime;
+    private String nickName;
 
     public String getCreateTime() {
         return createTime.toString();

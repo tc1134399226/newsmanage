@@ -5,18 +5,26 @@ import java.sql.Timestamp;
 public class ReplyVO {
     private long repId;
     private long comId;
-    private long userId;
+    private long userId;//发送消息的人
     private String nickName;
-    private long parentId;
-    private String content;
+    private long parentId;//被回复消息id
+    private String content;//回复内容
     private Integer status;
     private String icon;
     private long crepId;
-    private long cuserId;
+    private long cuserId;//被人回复人id
     private String cnickName;
-    private String ccontent;
+    private String ccontent;//被回复内容
     private Timestamp createTime;
+    private String mainTitle;
 
+    public String getMainTitle() {
+        return mainTitle;
+    }
+
+    public void setMainTitle(String mainTitle) {
+        this.mainTitle = mainTitle;
+    }
 
     public String getCreateTime() {
         return createTime.toString();
@@ -139,6 +147,7 @@ public class ReplyVO {
                 ", cnickName='" + cnickName + '\'' +
                 ", ccontent='" + ccontent + '\'' +
                 ", createTime=" + createTime +
+                ", mainTitle='" + mainTitle + '\'' +
                 '}';
     }
 }

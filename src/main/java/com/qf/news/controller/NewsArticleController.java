@@ -6,7 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.UserInfo;
-import com.qf.news.service.ArticleService;
+import com.qf.news.service.NewsArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,10 +17,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("news")
-public class ArticleController {
+public class NewsArticleController {
 
     @Autowired
-    ArticleService articleService;
+    NewsArticleService newsArticleService;
 
     /**
      * 通过UserId获取我的文章(分页)
@@ -46,7 +46,7 @@ public class ArticleController {
         int defaultPageSize=2;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum,defaultPageSize);
-        List<ArticleInfo> myArtByUserId = articleService.getMyArtByUserId(userInfo);
+        List<ArticleInfo> myArtByUserId = newsArticleService.getMyArtByUserId(userInfo);
         System.out.println(myArtByUserId);
         PageInfo<ArticleInfo> articleInfoPageInfo = new PageInfo<ArticleInfo>(myArtByUserId);
         return articleInfoPageInfo;
@@ -76,7 +76,7 @@ public class ArticleController {
         int defaultPageSize=2;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum,defaultPageSize);
-        List<ArticleInfo> myArtByUserId = articleService.getMyDraftByUserId(userInfo);
+        List<ArticleInfo> myArtByUserId = newsArticleService.getMyDraftByUserId(userInfo);
         System.out.println(myArtByUserId);
         PageInfo<ArticleInfo> articleInfoPageInfo = new PageInfo<ArticleInfo>(myArtByUserId);
         return articleInfoPageInfo;
@@ -92,6 +92,6 @@ public class ArticleController {
         if (articleId==0){
             return false;
         }
-        return articleService.deleteMyDraftByArticleId(articleId);
+        return newsArticleService.deleteMyDraftByArticleId(articleId);
     }
 }

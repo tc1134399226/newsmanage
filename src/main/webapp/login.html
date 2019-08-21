@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="GB18030">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="keys" content="">
+	<meta name="author" content="">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/login.css">
+	<style>
+
+	</style>
+<head>
+
+<title>登录</title>
+<style>
+/*.container{
+		max-width: 900px;
+		padding-top: 100px;
+	}
+	*/
+</style>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="navbar-header">
+			<div><a class="navbar-brand" href="index.html" style="font-size:32px;">不新的新闻网</a></div>
+		</div>
+	</div>
+</nav>
+
+<div class="container">
+
+	<form class="form-signin" role="form">
+		<h2 class="form-signin-heading"><i class="glyphicon glyphicon-user"></i> 用户登录</h2>
+		<div class="form-group has-success has-feedback">
+			<input type="text" class="form-control" id="account" placeholder="请输入登录账号" autofocus>
+			<span class="glyphicon glyphicon-user form-control-feedback"></span>
+		</div>
+		<div class="form-group has-success has-feedback">
+			<input type="text" class="form-control" id="password" placeholder="请输入登录密码" style="margin-top:10px;">
+			<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+		</div>
+
+		<div class="checkbox">
+			<label>
+				<input type="checkbox" value="remember-me"> 记住我
+			</label>
+			<br>
+			<label>
+
+			</label>
+			<label style="float:right">
+				<a href="reg.html">我要注册</a>
+			</label>
+		</div>
+		<a class="btn btn-lg btn-success btn-block" onclick="dologin()" > 登录</a>
+	</form>
+</div>
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script>
+	function dologin() {
+
+		//1.获取用户名与密码
+		var account = $("#account").val();
+		var password = $("#password").val();
+		console.log(account+":"+password);
+
+		$.ajax({
+			//请求方式
+			type : "POST",
+			//请求的媒体类型
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType:"json",
+			//请求地址
+			url : "loginCheck",
+			//数据，json字符串
+			data : JSON.stringify(
+					{
+						"account":account,
+						"password":password
+					}
+			),
+			//请求成功
+			success : function(result) {
+				console.log(result);
+				if(result != null){
+					window.location.href="userInfo.html?userId="+result.userId;
+				}else{
+					alert("用户名或密码错误");
+				}
+			},
+			//请求失败，包含具体的错误信息
+			error : function(e){
+				console.log(e.status);
+				console.log(e.responseText);
+			}
+		});
+	}
+</script>
+</body>
