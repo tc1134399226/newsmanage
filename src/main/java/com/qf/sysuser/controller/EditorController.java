@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.sysuser.dto.EditorApplyDTO;
 import com.qf.sysuser.pojo.UserInfo;
-import com.qf.sysuser.service.SysUserEditorService;
+import com.qf.sysuser.service.EditorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 @RequestMapping("admin/sysuser")
 @RestController
-public class SysUserEditorController {
+public class EditorController {
     @Autowired
-    SysUserEditorService sysUserEditorService;
+    EditorService editorService;
 
     /**
      * 将申请成为编辑的个人信息添加(更新)到userInfo表中
@@ -26,7 +26,7 @@ public class SysUserEditorController {
     @RequestMapping("applyEditor")
     public Object applyEditor(@RequestBody EditorApplyDTO editorApplyDTO){
         System.out.println(editorApplyDTO);
-        return sysUserEditorService.applyEditor(editorApplyDTO);
+        return editorService.applyEditor(editorApplyDTO);
     }
 
 
@@ -36,7 +36,7 @@ public class SysUserEditorController {
      */
 //    @RequestMapping("admin/getAllEditorApply")
 //    public Object getAllEditorApply(){
-//        return this.sysUserEditorService.getAllEditorApply();
+//        return this.editorService.getAllEditorApply();
 //    }
 
 
@@ -47,7 +47,7 @@ public class SysUserEditorController {
      */
     @RequestMapping("deleteApply")
     public Object deleteApply(@RequestParam int userId){
-        return this.sysUserEditorService.deleteApply(userId);
+        return this.editorService.deleteApply(userId);
     }
 
 
@@ -58,7 +58,7 @@ public class SysUserEditorController {
      */
     @RequestMapping("addEditor")
     public Object addEditor(@RequestParam int userId){
-        return this.sysUserEditorService.addEditor(userId);
+        return this.editorService.addEditor(userId);
     }
 
 
@@ -69,7 +69,7 @@ public class SysUserEditorController {
      */
     @RequestMapping("getEditorApplyById")
     public Object getEditorApplyById(@RequestParam int userId){
-        return this.sysUserEditorService.getEditorApplyById(userId);
+        return this.editorService.getEditorApplyById(userId);
     }
 
 
@@ -80,7 +80,7 @@ public class SysUserEditorController {
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, pageSize);
         //获取所有申请成为编辑的用户信息
-        List<UserInfo> allEditorApply = sysUserEditorService.getAllEditorApply();
+        List<UserInfo> allEditorApply = editorService.getAllEditorApply();
 
         //将获取的userInfo信息封装到PageInfo中
         PageInfo<UserInfo> userInfoPageInfo = new PageInfo<UserInfo>(allEditorApply);
