@@ -44,9 +44,8 @@ public class NewsUserInfoController {
         UserInfo userInfo1 = userInfoService.loginCheck(userInfo);
         //登录成功
         if(userInfo1!=null){
-            System.out.println(userInfo1);
             session.setAttribute("userInfo",userInfo1);
-
+            System.out.println("userInfo session存储成功了"+session.getAttribute("userInfo"));
         }else{
             //登录失败
         }
@@ -108,7 +107,7 @@ public class NewsUserInfoController {
         dropzFile.transferTo(destFile);
         result.put("status",200);
         //http://localhost:8080/xxxxx/xxxx.jpg
-        result.put("filePath","http://localhost:8080/static/upload/"+destFileName);
+        result.put("filePath","static/upload/"+destFileName);
         return result;
     }
     //生成并获取手机验证码
@@ -123,6 +122,11 @@ public class NewsUserInfoController {
 
     }
 
-
+    @RequestMapping("getSession")
+    public Object getSession(HttpSession session){
+        Object user = session.getAttribute("userInfo");
+        System.out.println("获取的session"+user);
+        return user;
+    }
 
 }

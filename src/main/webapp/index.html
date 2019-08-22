@@ -22,7 +22,7 @@
             <a href="#"><img src="http://t1.huanqiucdn.cn/ed9715bdbbc03761688a3d50513e91fb.jpg" alt="logo"
                     title="这是logo图片"></a>
 			<div class="login_btn">
-				<ul>
+				<ul id="loginData">
                 <li>
                     <a href="login.html"><input type="button" value="登录"></a>
                 </li>
@@ -36,7 +36,7 @@
 
     <nav>
         <div class="nav wrapper">
-            <ul>
+            <ul id="loginSuccess">
                 <li><a href="#">国际</a></li>
                 <li><a href="#">内地</a></li>
                 <li><a href="#">港澳</a></li>
@@ -785,9 +785,7 @@
 							}
 						}
 					});
-					$("#dataHot" +
-							"" +
-							""+i).append(str);
+					$("#dataHot"+i).append(str);
 				}
 			}
 		})
@@ -807,7 +805,12 @@
         //数据，json字符串
         //请求成功
         success : function(result) {
-
+        	console.log(result);
+			if (result!=null){
+				$("#loginData").empty();
+				var str = "<li><a href='userInfo.html?userId="+result.userId+"'>个人中心</a></li>";
+				$("#loginSuccess").append(str);
+			}
         }
         })
 
