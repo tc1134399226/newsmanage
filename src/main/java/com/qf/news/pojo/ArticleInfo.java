@@ -16,7 +16,7 @@ public class ArticleInfo {
     private Integer status;
     private Timestamp createTime;
     private Timestamp updateTime;
-    private String ip;
+    private String userIp;
     private String cover;
 
 
