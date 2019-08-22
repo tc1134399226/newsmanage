@@ -794,5 +794,22 @@
 	}
 
 	initpage();
+
+    $.ajax({
+        //请求方式
+        type : "GET",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/getSession",
+        //数据，json字符串
+        //请求成功
+        success : function(result) {
+
+        }
+        })
+
 </script>
 </html>

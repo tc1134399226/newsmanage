@@ -42,7 +42,6 @@ public class NewsUserInfoController {
     public Object loginCheck(@RequestBody UserInfo userInfo, HttpSession session){
 
         UserInfo userInfo1 = userInfoService.loginCheck(userInfo);
-
         //登录成功
         if(userInfo1!=null){
             System.out.println(userInfo1);
