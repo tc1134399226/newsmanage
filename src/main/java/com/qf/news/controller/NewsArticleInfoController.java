@@ -130,7 +130,7 @@ public class NewsArticleInfoController {
         int port =request.getRemotePort();//返回发出请求的客户机的端口号。
         String IP=request.getRemoteHost();
 //
-        articleInfo.setIp(ip); //赋值
+        articleInfo.setUserIp(ip); //赋值
 //
         //存储ip地址值到数据库
         newsArticleInfoService.getIP(articleInfo);

@@ -39,7 +39,7 @@
 
     <!--得到用户ip-->
     <update id="getIP" parameterType="com.qf.news.pojo.ArticleInfo">
-       UPDATE article set ip=#{ip} where articleId=#{articleId}
+       UPDATE article set userIp=#{userIp} where articleId=#{articleId}
     </update>
 
     <!--得到封面图地址-->

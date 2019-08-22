@@ -12,9 +12,33 @@
 
     <link rel="stylesheet" type="text/css" href="css/webbase.css" />
     <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
+
+
+
+
+	<script src="jquery/jquery-2.1.1.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="script/docs.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="keys" content="">
+	<meta name="author" content="">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="dropzone/dropzone.min.css" />
 </head>
 
 <body>
+
+<style>
+	body{ padding-bottom:50px;}
+	.lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
+		height:50px; background-color:gainsboro; z-index:9999;}
+
+	.div-inline{ display:inline}
+</style>
+
     <!-- 头部栏位 -->
     <!--页面顶部-->
 <div id="nav-bottom">
@@ -33,7 +57,7 @@
 						<li class="f-item"><a href="main.html" target="_blank">新闻首页</a></li>
 						<li class="f-item space"></li>
 
-						<li class="f-item">关注品优购</li>
+						<li class="f-item">热点新闻</li>
 						<li class="f-item space"></li>
 						<li class="f-item" id="service">
 							<span>客户服务</span>
@@ -53,29 +77,29 @@
 
 		<!--头部-->
 		<div class="header">
-			<div class="py-container">
-				<div class="yui3-g Logo">
-					<div class="yui3-u Left logoArea">
-						<a class="logo-bd" title="gold_experience" href="main.html" target="_blank"></a>
-					</div>
-					<div class="yui3-u Center searchArea">
-						<div class="search">
-							<form action="" class="sui-form form-inline">
-								<!--searchAutoComplete-->
+			<!--<div class="py-container">-->
+				<!--<div class="yui3-g Logo">-->
+					<!--<div class="yui3-u Left logoArea">-->
+						<!--<a class="logo-bd" title="gold_experience" href="main.html" target="_blank"></a>-->
+					<!--</div>-->
+					<!--<div class="yui3-u Center searchArea">-->
+						<!--<div class="search">-->
+							<!--<form action="" class="sui-form form-inline">-->
+								<!--&lt;!&ndash;searchAutoComplete&ndash;&gt;-->
 
-							</form>
-						</div>
+							<!--</form>-->
+						<!--</div>-->
 
-					</div>
-					<div class="yui3-u Right shopArea">
-						<div class="fr shopcar">
-							<div class="show-shopcar" id="shopcar">
-								<span class="car"></span>
+					<!--</div>-->
+					<!--<div class="yui3-u Right shopArea">-->
+						<!--<div class="fr shopcar">-->
+							<!--<div class="show-shopcar" id="shopcar">-->
+								<!--<span class="car"></span>-->
 
-							</div>
-						</div>
-					</div>
-				</div>
+							<!--</div>-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
 
 				<div class="yui3-g NavList">
 					<div class="yui3-u Left all-sort">
@@ -83,12 +107,17 @@
 					</div>
 					<div class="yui3-u Center navArea">
 						<ul class="nav">
-							<li class="f-item">政治</li>
-							<li class="f-item">经济</li>
-							<li class="f-item">军事</li>
-							<li class="f-item">民生</li>
 
-							<li class="f-item"><a href="seckill-index.html" target="_blank">娱乐</a></li>
+							<li class="f-item">军事</li>
+							<li class="f-item">财经</li>
+							<li class="f-item">科技</li>
+							<li class="f-item">娱乐</li>
+							<li class="f-item">旅游</li>
+							<li class="f-item">健康</li>
+							<li class="f-item">体育</li>
+							<li class="f-item">其他</li>
+
+							<!--<li class="f-item"><a href="seckill-index.html" target="_blank">娱乐</a></li>-->
 						</ul>
 					</div>
 					<div class="yui3-u Right"></div>
@@ -107,7 +136,7 @@
         <div class="py-container">
             <div class="yui3-g home">
                 <!--左侧列表-->
-                <div class="yui3-u-1-6 list">
+                <div class="yui3-u-1-6 list" style="background-color:#a83c3a;">
 
                     <div class="person-info">
 
@@ -117,6 +146,7 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
+
                     <div class="list-items">
                         <dl>
 							<dt><i>·</i> 个人空间</dt>
@@ -124,12 +154,19 @@
 							<dd><a href="home-order-pay.html" >我的什么</a></dd>
 
 						</dl>
+						<hr>
+						<hr>
+						<hr>
+						<hr>
 						<dl>
 							<dt><i>·</i> 权限申请</dt>
 							<dd><a href="home-person-collect.html" >申请小编</a></dd>
 							<dd><a href="home-person-footmark.html" >新闻审核</a></dd>
 						</dl>
-
+						<hr>
+						<hr>
+						<hr>
+						<hr>
 						<dl>
 							<dt><i>·</i> 设置</dt>
 							<dd><a href="home-setting-info.html" class="list-active">信息修改</a></dd>
@@ -140,40 +177,60 @@
                 <!--右侧主内容-->
                 <div class="yui3-u-5-6">
 					<div class="panel-body">
-						<form role="form">
+						<!--<form role="form">-->
 							<div class="form-group">
 								<input type="hidden" class="form-control" id="userId" value="test">
 
 							</div>
 
+                            <div>
+								<div class="form-group" style="width:210px;height:150px;float:left;">
+									<label >用户头像</label>
+									<img  src="" id="icon">
 
-                            <div class="form-group">
-                                <label >用户头像</label>
-                                <img  src="" id="icon">
-								<div class="form-group has-success has-feedback">
-									<div id="dropzoneDiv" class="dropzone"></div>
+								</div>
+
+								<div class="form-group has-success has-feedback" align="left" style="width:210px;height:150px;float:left;" >
+									<div id="dropzoneDiv" class="dropzone" ></div>
 									<input type="hidden" id="imgUrl"/>
 								</div>
-                            </div>
+
+							</div>
+
+
                             <form class="form-horizontal" role="form">
+
+								<div class="form-group">
+
+									<div class="col-sm-10">
+										<input type="hidden" class="form-control"  placeholder="请输入名字" >
+									</div>
+									<hr>
+								</div>
                                 <div class="form-group">
                                     <label  class="col-sm-2 control-label">昵称</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="nickName" placeholder="请输入名字">
                                     </div>
+									<hr>
                                 </div>
+								<hr>
                                 <div class="form-group">
                                     <label  class="col-sm-2 control-label">手机号码</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="mobile" placeholder="请输入姓">
                                     </div>
+									<hr>
                                 </div>
+								<hr>
                                 <div class="form-group">
                                     <label  class="col-sm-2 control-label">身份证号</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="idCard" placeholder="请输入姓">
                                     </div>
+									<hr>
                                 </div>
+								<hr>
                                 <div class="form-group">
                                     <label  class="col-sm-2 control-label">性别</label>
                                     <div class="col-sm-10">
@@ -184,17 +241,35 @@
 										</select>
                                     </div>
                                 </div>
-
+								<hr>
 
                             </form>
 
+							<div align="center" id="textDiv" class="lastDiv">
 							<button type="button" class="btn btn-success" onclick="updateUser()"><i class="glyphicon glyphicon-edit"></i> 修改</button>
-						</form>
+						</div>
+
+
+							<!--<div class="form-group has-success has-feedback" align="center"  >-->
+								<!--<div id="dropzoneDiv" class="dropzone" style="max-width:800px;margin:50px;"></div>-->
+								<!--<input type="hidden" id="imgUrl"/>-->
+							<!--</div>-->
+						<!--</form>-->
+
 					</div>
+
                 </div>
             </div>
         </div>
     </div>
+
+
+<!--<div class="form-group has-success has-feedback" align="left"  >-->
+	<!--<div id="dropzoneDiv" class="dropzone" style="max-width:800px;margin:50px;"></div>-->
+	<!--<input type="hidden" id="imgUrl"/>-->
+<!--</div>-->
+
+
 <script>
     Dropzone.options.dropzoneDiv = {
         url: "news/upload1", // 文件提交地址
