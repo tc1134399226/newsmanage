@@ -92,7 +92,7 @@
 
             <div class="form-group">
                 <label >主标题</label>
-                <input type="text" class="form-control" id="mainTitle" >
+                <input type="text" class="form-control" id="mainTitle">
             </div>
             <div class="form-group">
                 <label >副标题</label>
@@ -105,7 +105,7 @@
             </div>
             <div class="form-group">
                 <!--状态-->
-                <input type="hidden" class="form-control" id="status" >
+                <input type="hidden" class="form-control" id="status" value="0">
             </div>
         </form>
 
@@ -191,9 +191,6 @@
     <!--</div>-->
 
 
-
-<input type="button" id="test1" value="拿html"/>
-    <input type="button" id="test2" value="拿text"/>
 
     <script>
 
@@ -323,12 +320,18 @@
             if(mainTitle.length<1){
                 alert("主标题不能为空");
                 return ;
+            }else if (mainTitle.length>40){
+                alert("标题字数不能超过20个");
+                return ;
             }
             var status = $("#status").val();
             var subTitle = $("#subTitle").val();
             // console.log(userName+":"+password);
             if(subTitle.length<1){
                 alert("副标题不能为空");
+                return ;
+            }else if(subTitle.length>40){
+                alert("标题字数不能超过20个");
                 return ;
             }
 
@@ -359,8 +362,6 @@
                         getArticleId(editor.txt.html());
                         uploadCover();
                         console.log(result);
-
-                        alert("发布成功");
                     }else{
                         console.log(e);
                     }

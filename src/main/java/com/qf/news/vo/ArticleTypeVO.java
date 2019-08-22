@@ -10,10 +10,11 @@ public class ArticleTypeVO {
     public Integer typeId;
     private Integer userId;
     private String mainTitle;
-    private String content;
+    private String subTitle;
     private Timestamp createTime;
     private String areaName;
     private String typeName;
+    private Integer hot;
     private Long comNum;//评论数
     private Long articleLoveNum;//新闻点赞数
 }

@@ -7,7 +7,7 @@ import com.qf.sysuser.pojo.UserInfo;
 
 import java.util.List;
 
-public interface EditorService {
+public interface SysUserEditorService {
     //将申请成为编辑的个人信息添加(更新)到userInfo表中
     public boolean applyEditor(EditorApplyDTO editorApplyDTO);
 
