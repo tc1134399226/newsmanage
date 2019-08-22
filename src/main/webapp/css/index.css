@@ -203,6 +203,7 @@ section .section .main2>ul>li>ol li {} */
 /* section .section .main3 开始了******************************************** */
 
 section .section .main3 {
+    margin-bottom: 40px;
     display: flex;
     justify-content: space-between;
     width: 1200px;

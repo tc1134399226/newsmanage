@@ -15,7 +15,7 @@ public class NewsController {
     private NewsService newsService;
 
     /**
-     *  根据最新时间查询新闻的信息 地区 和类型  前5条
+     *  根据最新时间查询新闻的信息 地区 和类型
      * @return
      */
     @RequestMapping("listAllArticleByStatusByCreateTime")
@@ -26,7 +26,7 @@ public class NewsController {
 
 
     /**
-     *  根据热度查询新闻的信息,地区和类型  前5条
+     *  根据热度查询新闻的信息,地区和类型
      * @return
      */
     @RequestMapping("listAllArticleByStatusByHot")
