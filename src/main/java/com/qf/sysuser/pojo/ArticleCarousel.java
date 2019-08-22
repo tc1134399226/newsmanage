@@ -1,12 +1,11 @@
 package com.qf.sysuser.pojo;
 
-
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Data
-public class ArticleInfo {
+public class ArticleCarousel {
 
     Integer articleId;
     Integer areaId;
@@ -16,18 +15,8 @@ public class ArticleInfo {
     String mainTitle;
     String subTitle;
     String content;
-    Integer status;
-    Integer state;
     Timestamp createTime;
     Timestamp updateTime;
-
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
 
     public Integer getArticleId() {
         return articleId;
@@ -93,14 +82,6 @@ public class ArticleInfo {
         this.content = content;
     }
 
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
     public Timestamp getCreateTime() {
         return createTime;
     }
@@ -117,9 +98,10 @@ public class ArticleInfo {
         this.updateTime = updateTime;
     }
 
+
     @Override
     public String toString() {
-        return "ArticleInfo{" +
+        return "ArticleCarousel{" +
                 "articleId=" + articleId +
                 ", areaId=" + areaId +
                 ", userId=" + userId +
@@ -128,8 +110,6 @@ public class ArticleInfo {
                 ", mainTitle='" + mainTitle + '\'' +
                 ", subTitle='" + subTitle + '\'' +
                 ", content='" + content + '\'' +
-                ", status=" + status +
-                ", state=" + state +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';
