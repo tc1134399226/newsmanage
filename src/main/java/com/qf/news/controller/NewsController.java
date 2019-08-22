@@ -21,17 +21,17 @@ public class NewsController {
     @RequestMapping("listAllArticleByStatusByCreateTime")
     @ResponseBody
     public Object listAllArticleByStatusByCreateTime(){
-        return newsService.listAllArticleByStatus();
+        return newsService.listAllArticleByStatusByCreateTime();
     }
 
 
     /**
-     *  根据热度查询新闻的信息,地区和类型
+     * 通过创建时间查询所有审核已通过的新闻
      * @return
      */
     @RequestMapping("listAllArticleByStatusByHot")
     @ResponseBody
     public Object listAllArticleByStatusByHot(){
-        return newsService.listAllArticleByStatus();
+        return newsService.listAllArticleByStatusByHot();
     }
 }

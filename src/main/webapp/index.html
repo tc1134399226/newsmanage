@@ -102,7 +102,7 @@
             <div class="main3">
                 <ul class="minnav">
                     <li><a href="#">军事</a></li>
-
+					<li><a href="#">更多</a></li>
                 </ul>
 
                 <div class="photo">
@@ -138,10 +138,8 @@
 					</div>
                 </div>
                 <div class="centerNews">
-                    <dl class="new1">
-                        <dt>
-							<h2>最新</h2>	
-						</dt>
+					<h2>最新</h2>
+					<dl class="new1" id="dataNew0">
 						<dd>
 							<p>弟臭弟弟臭弟弟11111111111111</p>
 						</dd>
@@ -175,10 +173,8 @@
                     </dl>
                 </div>
                 <div class="rightNews">
-                    <dl class="new2">
-                        <dt>
-							<h2>最热</h2>	
-						</dt>
+					<h2>最热</h2>
+                    <dl class="new2" id="dataHot0">
 						<dd>
 							<p>臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟</p>
 						</dd>
@@ -217,6 +213,7 @@
             <div class="main3">
                 <ul class="minnav">
                     <li><a href="#">财经</a></li>
+					<li><a href="#">更多</a></li>
                 </ul>
 
                 <div class="photo">
@@ -252,10 +249,9 @@
 					</div>
                 </div>
                 <div class="centerNews">
-                    <dl class="new1">
-                        <dt>
-							<h2>最新</h2>	
-						</dt>
+					<h2>最新</h2>
+					<dl class="new1">
+
 						<dd>
 							<p>臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟</p>
 						</dd>
@@ -289,10 +285,9 @@
                     </dl>
                 </div>
                 <div class="rightNews">
-                    <dl class="new2">
-                        <dt>
-							<h2>最热</h2>	
-						</dt>
+					<h2>最热</h2>
+					<dl class="new2">
+
 						<dd>
 							<p>臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟</p>
 						</dd>
@@ -331,6 +326,7 @@
 			<div class="main3">
                 <ul class="minnav">
                     <li><a href="#">科技</a></li>
+					<li><a href="#">更多</a></li>
 
                 </ul>
 
@@ -367,10 +363,9 @@
 					</div>
                 </div>
                 <div class="centerNews">
-                    <dl class="new1">
-                        <dt>
-							<h2>最热</h2>
-						</dt>
+					<h2>最新</h2>
+					<dl class="new1">
+
 						<dd>
 							<p>臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟</p>
 						</dd>
@@ -404,10 +399,9 @@
                     </dl>
                 </div>
                 <div class="rightNews">
-                    <dl class="new2">
-                        <dt>
-							<h2>最新</h2>
-						</dt>
+					<h2>最热</h2>
+					<dl class="new2">
+
 						<dd>
 							<p>臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟</p>
 						</dd>
@@ -445,7 +439,7 @@
 			<div class="main3">
 				<ul class="minnav">
 					<li><a href="#">娱乐</a></li>
-
+					<li><a href="#">更多</a></li>
 				</ul>
 
 				<div class="photo">
@@ -481,10 +475,9 @@
 					</div>
 				</div>
 				<div class="centerNews">
+					<h2>最新</h2>
 					<dl class="new1">
-						<dt>
-							<h2>最新</h2>
-						</dt>
+
 						<dd>
 							<p>臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟</p>
 						</dd>
@@ -518,10 +511,9 @@
 					</dl>
 				</div>
 				<div class="rightNews">
+					<h2>最热</h2>
 					<dl class="new2">
-						<dt>
-							<h2>最热</h2>
-						</dt>
+
 						<dd>
 							<p>臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟</p>
 						</dd>
@@ -559,7 +551,7 @@
 			<div class="main3">
 				<ul class="minnav">
 					<li><a href="#">生活</a></li>
-
+					<li><a href="#">更多</a></li>
 				</ul>
 
 				<div class="photo">
@@ -595,10 +587,9 @@
 					</div>
 				</div>
 				<div class="centerNews">
+					<h2>最新</h2>
 					<dl class="new1">
-						<dt>
-							<h2>最新</h2>
-						</dt>
+
 						<dd>
 							<p>臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟</p>
 						</dd>
@@ -632,10 +623,8 @@
 					</dl>
 				</div>
 				<div class="rightNews">
+					<h2>最热</h2>
 					<dl class="new2">
-						<dt>
-							<h2>最新</h2>
-						</dt>
 						<dd>
 							<p>臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟臭弟弟</p>
 						</dd>
@@ -726,6 +715,11 @@
 
 <script>
 
+	var area = window.location.search.split("=")[1];
+	if (area==null){
+		area = "内地";
+	}
+	var type = new Array("军事","财经","科技","娱乐","生活");
 	function initpage() {
 		$.ajax({
 			//请求方式
@@ -735,13 +729,68 @@
 			//接受数据类型
 			dataType:"json",
 			//请求地址
-			url : "sysuser/listAllArticleByStatusByCreateTime",
+			url : "news/listAllArticleByStatusByCreateTime",
 			//数据，json字符串
 			//请求成功
 			success : function(result) {
-
+				for (var i=0;i<type.length;i++){
+					var str = "";
+					var count = 0;
+					$("#dataNew"+i).empty();
+					$(result).each(function(index,item) {
+						if (item.areaName==area){
+							if (item.typeName==type[i]){
+								str += "<dd>";
+								str += "<p>"+item.mainTitle+"</p>";
+								str += "</dd>";
+								count +=1;
+								if (count>=10){
+									return false;
+								}
+							}
+						}
+					});
+					$("#dataNew"+i).append(str);
+				}
 			}
 			})
+
+		$.ajax({
+			//请求方式
+			type : "GET",
+			//请求的媒体类型
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType:"json",
+			//请求地址
+			url : "news/listAllArticleByStatusByHot",
+			//数据，json字符串
+			//请求成功
+			success : function(result) {
+				for (var i=0;i<type.length;i++){
+					console.log(result)
+					var str = "";
+					var count = 0;
+					$("#dataHot"+i).empty();
+					$(result).each(function(index,item) {
+						if (item.areaName==area){
+							if (item.typeName==type[i]){
+								str += "<dd>";
+								str += "<p>"+item.mainTitle+"</p>";
+								str += "</dd>";
+								count +=1;
+								if (count>=10){
+									return false;
+								}
+							}
+						}
+					});
+					$("#dataHot" +
+							"" +
+							""+i).append(str);
+				}
+			}
+		})
 	}
 
 	initpage();
