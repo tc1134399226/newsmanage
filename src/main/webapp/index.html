@@ -37,10 +37,10 @@
     <nav>
         <div class="nav wrapper">
             <ul id="loginSuccess">
-                <li><a href="#">国际</a></li>
-                <li><a href="#">内地</a></li>
-                <li><a href="#">港澳</a></li>
-                <li><a href="#">台湾</a></li>
+                <li><a href="index.html?area=国际">国际</a></li>
+                <li><a href="index.html?area=内地">内地</a></li>
+                <li><a href="index.html?area=港澳">港澳</a></li>
+                <li><a style="color: #FFFFFF" href="index.html?area=台海">台湾</a></li>
             </ul>
         </div>
     </nav>
@@ -714,8 +714,8 @@
 
 
 <script>
-
-	var area = window.location.search.split("=")[1];
+	var s = decodeURI(decodeURI(location.search));
+	var area = s.split("=")[1];
 	if (area==null){
 		area = "内地";
 	}
@@ -813,6 +813,20 @@
 			}
         }
         })
+
+	$.ajax({
+		//请求方式
+		type : "GET",
+		//请求的媒体类型
+		contentType: "application/json;charset=UTF-8",
+		//接受数据类型
+		dataType:"json",
+		//请求地址
+		url : "news/getMainImg",
+		success : function(result) {
+			console.log(result)
+		}
+		});
 
 </script>
 </html>

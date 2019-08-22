@@ -34,4 +34,14 @@ public class NewsController {
     public Object listAllArticleByStatusByHot(){
         return newsService.listAllArticleByStatusByHot();
     }
+
+    /**
+     * 获取轮播图
+     * @return
+     */
+    @RequestMapping("getMainImg")
+    @ResponseBody
+    public Object getMainImg(){
+        return newsService.getMainImg();
+    }
 }

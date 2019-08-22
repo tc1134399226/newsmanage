@@ -15,4 +15,5 @@ public class ArticleTypeVO {
     private String areaName;
     private String typeName;
     private Integer hot;
+    private String cover;
 }
