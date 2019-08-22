@@ -12,9 +12,9 @@
     <!--用户在前台输入新闻添加到数据库-->
     <insert id="commitArticle" parameterType="com.qf.news.pojo.ArticleInfo">
        INSERT into article
-       (articleId,areaId,userId,typeId,mainTitle,subTitle,content,status,createTime,updateTime)
+       (articleId,areaId,userId,typeId,mainTitle,subTitle,content,status,createTime,updateTime,state)
        VALUES
-       (DEFAULT,#{areaId},#{userId},#{typeId},#{mainTitle},#{subTitle},#{content},#{status},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+       (DEFAULT,#{areaId},#{userId},#{typeId},#{mainTitle},#{subTitle},#{content},#{status},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,#{state})
     </insert>
 
     <!--修改处于编辑未提交审核状态的新闻-->
