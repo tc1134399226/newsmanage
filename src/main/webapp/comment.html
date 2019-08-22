@@ -50,6 +50,7 @@
             border: none;
             outline: none;
         }
+
         /*#splicPage{*/
         /*    text-align:center*/
         /*}*/
@@ -95,13 +96,14 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="script/docs.min.js"></script>
 <script>
+    // glyphicon glyphicon-heart style='color: red'
     //清空table
     //初始化页面
     function initPage(){
         var pageNum=window.location.search.split("=")[1];
         console.log(pageNum)
-        var requestURL="news/allComment";
-
+        //通过文章id显示所有评论
+        var requestURL="news/allComment"
         if(pageNum==null){
             pageNum=1
         }
@@ -134,7 +136,15 @@
                     trStr+="<div class='user'>"
                     trStr+="用户名:"+item.nickName+"<br>";
                     // trStr+="<td><input type=\"checkbox\"></td>";
-                    trStr+=item.createTime+"<br>";
+                    trStr+=item.createTime+"&nbsp;";
+                    //判断是否已被点赞
+                   if (item.loveStatus==1){
+
+                       trStr+="<button  id='love"+item.comId+"' type=\"button\" style='color:red ' onclick='clickLoveComment("+item.comId+")' class='glyphicon glyphicon-heart'  ></button>"
+                   } else if (item.loveStatus==0) {
+                       trStr += "<button id='Love"+item.comId+"'  type=\"button\"    onclick='clickLoveComment("+item.comId+")' class='glyphicon glyphicon-heart' ></button>"
+                   }
+                    trStr+=item.comLoveNum
                     trStr+="</div>"
                     trStr+="<br>"
                     trStr+="<div class='content'>"
@@ -142,12 +152,12 @@
                     trStr+="</div>"
                     trStr+="<hr>"
                     trStr+="<button type=\"button\" onclick='addReply("+item.repId+","+item.comId+")'><a href='#addReplyText'>回复</a></button>&nbsp;"
-                    trStr+="<button type=\"button\" id='addReply' " + "onclick='deleteComment("+item.userId+","+item.comId+")'>删除</button>&nbsp;"
-                    trStr+="<div style='margin-left: 100px; font-size: 15px;' id=\""+item.comId+"\">";
+                    trStr+="<button type=\"button\" id='deleteReply' " + "onclick='deleteComment("+item.userId+","+item.comId+")'>删除</button>&nbsp;"
+                    trStr+="<div style='margin-left: 100px; font-size: 15px;' id=\"c"+item.comId+"\">";
                     trStr+="</div>"
                     var comName=item.nickName;
                     console.log("--------"+item.userId)
-                    reply(item.userId,item.comId,comName)
+                    reply(item.userId,item.comId,comName,item.repId)
                     $("#comment").append(trStr);
                 });
 
@@ -179,7 +189,7 @@
         });
     }
     initPage();
-    function reply(userId,comId,comName) {
+    function reply(userId,comId,comName,repId) {
         console.log(comId)
         $.ajax({
             //请求方式GET/POST
@@ -218,10 +228,10 @@
                     trStr+="</div>"
                     trStr+="<hr>"
                     trStr+="<button type=\"button\" id='addReply' " + "onclick='addReply("+item.repId+","+item.comId+")'><a href='#addReplyText'>回复</a></button>&nbsp;"
-                    trStr+="<button type=\"button\" id='addReply' " + "onclick='deleteReply("+item.userId+","+item.repId+")'>删除</button>&nbsp;"
-                    trStr+="<div id='"+item.repId+"'>"
+                    trStr+="<button type=\"button\" id='deleteReply' " + "onclick='deleteReply("+item.userId+","+item.repId+")'>删除</button>&nbsp;"
+                    trStr+="<div id='r"+item.repId+"'>"
                     trStr+="</div>"
-                    $("#"+comId+"").append(trStr);
+                    $("#c"+comId+"").append(trStr);
                 })
             },
             error: function (e) {
@@ -257,6 +267,8 @@
             //数据，json字符串
             //请求成功
             success: function (result) {
+                //评论的话用userId和新闻id来发私信
+                // sendMessage(repId,comId)
                 if (result) {
                     initPage();
                 }else {
@@ -367,6 +379,10 @@
     function sendMessage(repId,comId) {
         console.log(repId)
         console.log(comId)
+        // var test=window.location.href.split("#")[0];
+        var test=window.location.href;
+        alert(test);
+
         //repId是被回复消息的id
         //comId被回复评论的id
         var text=document.getElementById("replyMsgArea").innerText;
@@ -384,7 +400,8 @@
             data:JSON.stringify({
                 "content":text,
                 "crepId":repId,
-                "comId":comId
+                "comId":comId,
+                "mgeUrl":test
             }),
             //数据，json字符串
             //请求成功
@@ -400,5 +417,78 @@
             }
         })
     }
+
+    // function loveComment(comId,trStr){
+    //     $.ajax({
+    //         //请求方式GET/POST
+    //         type: "POST",
+    //         //请求的媒体类型
+    //         contentType: "application/json;charset=UTF-8",
+    //         //接受数据类型
+    //         dataType: "json",
+    //         //请求地址
+    //         url: "news/checkLoveComment",
+    //         data:JSON.stringify({
+    //             "comId":comId,
+    //         }),
+    //         //数据，json字符串
+    //         //请求成功
+    //         success: function (result) {
+    //             if (result) {
+    //                 trStr+="<button type=\"button\" class='glyphicon glyphicon-heart'  style='color: red' onclick='clickLoveComment("+comId+")'></button>"
+    //                // trStr+="<button type=\"button\"  class='glyphicon glyphicon-heart'style='color: red'  onclick='clickLoveComment("+comId+")'></button>;"
+    //                 console.log(trStr)
+    //                 return trStr;
+    //             }else{
+    //                 trStr+="<button type=\"button\" class='glyphicon glyphicon-heart'   onclick='clickLoveComment("+comId+")'></button>"
+    //                 // trStr+="<button type=\"button\"  class='glyphicon glyphicon-heart'  onclick='clickLoveComment("+comId+")'></button>;"
+    //                 console.log(trStr)
+    //                 return trStr;
+    //             }
+    //         },
+    //         error: function (e) {
+    //             console.log(111)
+    //             console.log(e);
+    //         }
+    //     })
+    // }
+    function clickLoveComment(comId) {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/addLoveComment",
+            data:JSON.stringify({
+                "comId":comId,
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                        initPage()
+                    // $("div").css("color") 设置color属性值. $(element).css(style)
+                    // console.log($("#love"+comId).css("color"))
+                    // if ($('#love'+comId).css("color")=="rgb(51, 51, 51)"){
+                    //     console.log(1)
+                    //     $("#love"+comId).css("color","rgb(255, 0, 0)")
+                    // }else {
+                    //     console.log(2)
+                    //     $("#love"+comId).css("color")=="rgb(51, 51, 51)"
+                    // }
+                }else {
+                alert("点赞失败")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+
+
     </script>
 </html>

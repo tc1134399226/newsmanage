@@ -17,6 +17,15 @@ public class ReplyVO {
     private String ccontent;//被回复内容
     private Timestamp createTime;
     private String mainTitle;
+    private String mgeUrl;
+
+    public String getMgeUrl() {
+        return mgeUrl;
+    }
+
+    public void setMgeUrl(String mgeUrl) {
+        this.mgeUrl = mgeUrl;
+    }
 
     public String getMainTitle() {
         return mainTitle;
@@ -148,6 +157,7 @@ public class ReplyVO {
                 ", ccontent='" + ccontent + '\'' +
                 ", createTime=" + createTime +
                 ", mainTitle='" + mainTitle + '\'' +
+                ", mgeUrl='" + mgeUrl + '\'' +
                 '}';
     }
 }

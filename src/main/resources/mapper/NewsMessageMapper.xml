@@ -5,10 +5,10 @@
 <mapper namespace="com.qf.news.dao.NewsMessageMapper">
 <select id="getReadMessageByUserId" parameterType="Long" resultType="com.qf.news.vo.MessageVO">
     select m.*,u.nickName from message m left join userinfo u on u.userId=m.senderId
-    where m.status=1 and m.userId=#{userId}
+    where m.status=1 and m.userId=#{userId} order by mgeId desc
 </select>
     <delete id="deleteReadMessageByMgeId" parameterType="Long">
-        delete from message where  mgeId=#{mgeId}
+        delete from message where  mgeId=#{mgeId}  order by mgeId desc
     </delete>
     
 <select id="getUnreadMessageByUserId" resultType="com.qf.news.vo.MessageVO">
@@ -19,8 +19,8 @@
         update message set status=1 where mgeId=#{mgeId}
     </update>
     <insert id="sendMessageByReplyVO" parameterType="com.qf.news.vo.ReplyVO">
-        insert into message (userId,senderId,mainTitle,content,createTime,status)
-        values (#{cuserId},#{userId},#{mainTitle},#{content},CURRENT_TIMESTAMP,0)
+        insert into message (userId,senderId,mainTitle,content,createTime,status,repId,comId,mgeUrl)
+        values (#{cuserId},#{userId},#{mainTitle},#{content},CURRENT_TIMESTAMP,0,#{repId},#{comId},#{mgeUrl})
     </insert>
     <insert id="sendSystemMessage" parameterType="com.qf.news.pojo.Message">
         insert into message (userId,senderId,mainTitle,content,createTime,status)

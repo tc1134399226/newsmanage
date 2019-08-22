@@ -4,18 +4,13 @@ import lombok.Data;
 
 import java.sql.Timestamp;
 @Data
-public class Message {
-    private Long mgeId;
-    private Long userId;
-    private long senderId;
-    private String mainTitle;
-    private String content;
+public class LoveArticle {
+    private long laId;
+    private long userId;
+    private long articleId;
     private int status;
     private Timestamp createTime;
-    private long repId;
-    private long comId;
-    private String mgeUrl;
-
+    private Timestamp updateTime;
     public String getCreateTime() {
         return createTime.toString();
     }
@@ -24,4 +19,11 @@ public class Message {
         this.createTime = createTime;
     }
 
+    public String getUpdateTime() {
+        return updateTime.toString();
+    }
+
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
 }

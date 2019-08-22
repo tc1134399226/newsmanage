@@ -14,4 +14,6 @@ public class ArticleTypeVO {
     private Timestamp createTime;
     private String areaName;
     private String typeName;
+    private Long comNum;//评论数
+    private Long articleLoveNum;//新闻点赞数
 }

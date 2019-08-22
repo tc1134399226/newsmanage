@@ -122,6 +122,7 @@ public class SysUserController {
      */
     @RequestMapping("initMenuList")
     public Object initMenuList(@RequestBody(required = false) User userInfo,HttpSession session){
+//        MenuInfoVO menuInfos = (MenuInfoVO) session.getAttribute("menuInfoList");
         System.out.println(1111);
         User user=new User();
         user.setUsername("王涛");
