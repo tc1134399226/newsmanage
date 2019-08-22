@@ -268,10 +268,12 @@
       </div>
     </div>
 
-    <script src="jquery/jquery-2.1.1.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="script/docs.min.js"></script>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+	<script src="../script/docs.min.js"></script>
         <script type="text/javascript">
+			// ½ÇÉ«²Ëµ¥
+			$(".tree").load("menu.html");
             $(function () {
 			    $(".list-group-item").click(function(){
 				    if ( $(this).find("ul") ) {
