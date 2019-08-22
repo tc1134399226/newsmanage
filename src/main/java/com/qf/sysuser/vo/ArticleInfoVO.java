@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 public class ArticleInfoVO {
 
     Integer articleId;
+    Integer areaId;
     Integer userId;
     Integer typeId;
     String cover;
@@ -15,7 +16,7 @@ public class ArticleInfoVO {
     String subTitle;
     String content;
     Integer status;
-    Timestamp creatTime;
+    Timestamp createTime;
     Timestamp updateTime;
     String typeName;
 
@@ -25,6 +26,14 @@ public class ArticleInfoVO {
 
     public void setArticleId(Integer articleId) {
         this.articleId = articleId;
+    }
+
+    public Integer getAreaId() {
+        return areaId;
+    }
+
+    public void setAreaId(Integer areaId) {
+        this.areaId = areaId;
     }
 
     public Integer getUserId() {
@@ -83,12 +92,12 @@ public class ArticleInfoVO {
         this.status = status;
     }
 
-    public Timestamp getCreatTime() {
-        return creatTime;
+    public Timestamp getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatTime(Timestamp creatTime) {
-        this.creatTime = creatTime;
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
     }
 
     public Timestamp getUpdateTime() {
@@ -105,22 +114,5 @@ public class ArticleInfoVO {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
-    }
-
-    @Override
-    public String toString() {
-        return "ArticleInfoVO{" +
-                "articleId=" + articleId +
-                ", userId=" + userId +
-                ", typeId=" + typeId +
-                ", cover='" + cover + '\'' +
-                ", mainTitle='" + mainTitle + '\'' +
-                ", subTitle='" + subTitle + '\'' +
-                ", content='" + content + '\'' +
-                ", status=" + status +
-                ", creatTime=" + creatTime +
-                ", updateTime=" + updateTime +
-                ", typeName='" + typeName + '\'' +
-                '}';
     }
 }
