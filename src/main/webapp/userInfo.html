@@ -275,7 +275,7 @@
 
 <script>
     Dropzone.options.dropzoneDiv = {
-        url: "upload", // 文件提交地址
+        url: "news/upload1", // 文件提交地址
         method: "post",  // 也可用put
         paramName: "dropzFile", // 默认为file
         maxFiles: 1,// 一次性上传的文件数量上限
@@ -335,7 +335,7 @@
         //接受数据类型
         dataType: "json",
         //请求地址
-        url: "getUserInfoById?userId="+id,
+        url: "news/getUserInfoById?userId="+id,
         //数据，json字符串
         //请求成功
         success: function (result) {
@@ -372,7 +372,7 @@
             //接受数据类型
             dataType: "json",
             //请求地址
-            url: "editUserInfoById",
+            url: "news/editUserInfoById",
             //传递参数
             data:JSON.stringify(
                 {

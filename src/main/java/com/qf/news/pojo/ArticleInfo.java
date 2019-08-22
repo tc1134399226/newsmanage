@@ -18,6 +18,5 @@ public class ArticleInfo {
     private Timestamp updateTime;
     private String userIp;
     private String cover;
-
-
+    private Integer state = 0; //后台轮播图状态  新加
 }

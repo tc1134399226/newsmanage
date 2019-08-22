@@ -10,8 +10,9 @@ public class ArticleTypeVO {
     public Integer typeId;
     private Integer userId;
     private String mainTitle;
-    private String content;
+    private String subTitle;
     private Timestamp createTime;
     private String areaName;
     private String typeName;
+    private Integer hot;
 }

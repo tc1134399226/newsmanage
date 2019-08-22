@@ -2,8 +2,10 @@ package com.qf.news.controller;
 
 
 import com.qf.news.pojo.UserInfo;
+import com.qf.news.service.AliyunSmsService;
 import com.qf.news.service.NewsUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -19,12 +21,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+
 @RestController
+@RequestMapping("news")
 public class NewsUserInfoController {
 
     //自动注入
     @Autowired
     NewsUserInfoService userInfoService;
+    @Autowired
+    AliyunSmsService aliyunSmsService;
 
     /**
      * 用户登录，并将用户信息放入session
@@ -78,7 +84,7 @@ public class NewsUserInfoController {
 
 
     //头像上传存储
-    @RequestMapping("upload")
+    @RequestMapping("upload1")
     @ResponseBody
     public Map<String, Object> upload(MultipartFile dropzFile, HttpServletRequest request) throws IOException {
         System.out.println("inner upload");
@@ -106,7 +112,17 @@ public class NewsUserInfoController {
         result.put("filePath","http://localhost:8080/static/upload/"+destFileName);
         return result;
     }
+    //生成并获取手机验证码
+    @RequestMapping("getVerifyCode")
+    public Object getPhoneCode(@RequestParam String mobile){
+        if (mobile==null&&mobile==""){
+            return  false;
 
+        }
+        String str = aliyunSmsService.getPhonemsg(mobile);
+        return str;
+
+    }
 
 
 
