@@ -1,4 +1,4 @@
-package com.qf.code.service;
+package com.qf.news.service;
 
 public interface AliyunSmsService {
     /**

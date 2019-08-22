@@ -2,6 +2,7 @@ package com.qf.news.controller;
 
 
 import com.qf.news.pojo.UserInfo;
+import com.qf.news.service.AliyunSmsService;
 import com.qf.news.service.NewsUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,8 @@ public class NewsUserInfoController {
     //自动注入
     @Autowired
     NewsUserInfoService userInfoService;
+    @Autowired
+    AliyunSmsService aliyunSmsService;
 
     /**
      * 用户登录，并将用户信息放入session
@@ -109,7 +112,17 @@ public class NewsUserInfoController {
         result.put("filePath","http://localhost:8080/static/upload/"+destFileName);
         return result;
     }
+    //生成并获取手机验证码
+    @RequestMapping("getVerifyCode")
+    public Object getPhoneCode(@RequestParam String mobile){
+        if (mobile==null&&mobile==""){
+            return  false;
 
+        }
+        String str = aliyunSmsService.getPhonemsg(mobile);
+        return str;
+
+    }
 
 
 

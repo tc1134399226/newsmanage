@@ -1,4 +1,4 @@
-package com.qf.code.service.impl;
+package com.qf.news.service.impl;
 
 public class StaticPeram {
     /**

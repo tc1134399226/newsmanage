@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/login.css">
+
+
 	<style>
 
 	</style>
@@ -18,7 +20,7 @@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <div><a class="navbar-brand" href="index.html" style="font-size:32px;">环球网</a></div>
+          <div><a class="navbar-brand" href="index.html" style="font-size:32px;">不新的新闻网</a></div>
         </div>
       </div>
     </nav>
@@ -46,20 +48,21 @@
 
           </div>
 
-          <div class="form-group has-success has-feedback">
-              <input type="text"  class="form-control" id="idCard" placeholder="请输入身份证号" style="margin-top:10px;">
-
-          </div>
 
 
           <div class="form-group has-success has-feedback">
-              <input type="text" class="form-control" id="mobile" placeholder="请输入手机号码" style="margin-top:10px;">
+              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="请输入手机号"/>
+            <button type="button" class="sendVerifyCode" >获取验证码</button>
+
+          </div>
+          <div class="form-group has-success has-feedback">
+            <input type="text" class="form-control" id="code" placeholder="请输入验证码" style="margin-top:10px;">
 
           </div>
 
-          <div class="checkbox">
+        <div class="checkbox">
           <label>
-            忘记密码
+          
           </label>
           <label style="float:right">
             <a href="login.html">我有账号</a>
@@ -73,12 +76,69 @@
 
 
   <script>
+      var $mobile;
+      var icodes;
+      $(function() {
+          //短信验证码倒计时
+          var countdownHandler = function () {
+              var $button = $(".sendVerifyCode");
+              var number = 60;
+              var countdown = function () {
+                  if (number == 0) {
+                      $button.attr("disabled", false);
+                      $button.html("发送验证码");
+                      number = 60;
+                      return;
+                  } else {
+                      $button.attr("disabled",true);
+                      $button.html(number + "秒 重新发送");
+                      number--;
+                  }
+                  setTimeout(countdown,1000);
+              }
+              setTimeout(countdown,1000);
+          }
+          //发送短信验证码
+          $(".sendVerifyCode").on("click", function() {
+              $mobile = $("input[name=mobile]");
+              var data = {};
+              data.mobile = $.trim($mobile.val());
+              if (data.mobile == '') {
+                  alert('请输入手机号码');
+                  return;
+              }
+              var reg = /^1[345678]\d{9}$/;
+              if (!reg.test(data.mobile)) {
+                  alert('请输入合法的手机号码');
+                  return;
+              }
+              $.ajax({
+                  url: "news/getVerifyCode?mobile=" + data.mobile,
+                  async: false,
+                  type: "GET",
+                  dataType: "json",
+                  data: data,
+                  success: function (result) {
+                      if (result) {
+                        var icode = result;
+                          countdownHandler();
+                          icodes = icode;
+                          return ;
+                      }
+                      alert("failed");
+                  }
+              })
+          })
+      });
       function registerUser() {
           var  account = $("#account").val();
           var  nickName = $("#nickName").val();
           var  password = $("#password").val();
-          var  idCard = $("#idCard").val();
           var  mobile = $("#mobile").val();
+          var code = $("#code").val();
+
+
+
 
         var regx = /^1[35789][0-9]{9}$/;
         if (!regx.test(mobile)) {
@@ -95,11 +155,11 @@
           alert("昵称不能为空或者包含冒号");
           return;
         }
-        var p = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
-        if(!p.test(idCard)){
-          alert("身份证号码错误，请仔细检查！");
-          return;
-        }
+        // var p = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+        // if(!p.test(idCard)){
+        //   alert("身份证号码错误，请仔细检查！");
+        //   return;
+        // }
 
         var repassword = $("#repassword").val();
         if (password.length < 6) {
@@ -108,6 +168,12 @@
         }
         if (password != repassword) {
           alert("两次密码输入不一致,请重新输入");
+          return;
+        }
+
+
+        if (code != icodes) {
+          alert("验证码错误,请重新输入");
           return;
         }
 
@@ -127,10 +193,9 @@
                       "account":account,
                       "nickName":nickName,
                       "password":password,
-                      "idCard":idCard,
+                      "idCard":'0',
                       "mobile":mobile,
-                      "sex":'无',
-                       "icon":'static/upload/icon.jpg'
+                    "icon":'http://localhost:8080/static/upload/icon.jpg'
 
                   }
               ),
@@ -185,6 +250,7 @@
             console.log(e.responseText);
           }
         });
+
       }
 
   </script>
