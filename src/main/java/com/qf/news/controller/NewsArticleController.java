@@ -31,11 +31,11 @@ public class NewsArticleController {
     @RequestMapping("getMyArtByUserId")
     public Object getMyArtByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
                                                 Integer pageNum , HttpSession session){
-        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
 
 //        //测试
-//        UserInfo userInfo=new UserInfo();
-//        userInfo.setUserId(1);
+        UserInfo userInfo=new UserInfo();
+        userInfo.setUserId(1);
         System.out.println(userInfo);
         if (userInfo==null){
             return "login";
@@ -61,11 +61,11 @@ public class NewsArticleController {
     @RequestMapping("getMyDraftByUserId")
     public Object getMyDraftByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
                                            Integer pageNum , HttpSession session){
-        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
 
         //测试
-//        UserInfo userInfo=new UserInfo();
-//        userInfo.setUserId(1);
+        UserInfo userInfo=new UserInfo();
+        userInfo.setUserId(1);
         System.out.println(userInfo);
         if (userInfo==null){
             return "login";

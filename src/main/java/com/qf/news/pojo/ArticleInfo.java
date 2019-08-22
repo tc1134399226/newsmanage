@@ -16,8 +16,7 @@ public class ArticleInfo {
     private Integer status;
     private Timestamp createTime;
     private Timestamp updateTime;
-    private String ip;
+    private String userIp;
     private String cover;
-
-
+    private Integer state = 0; //后台轮播图状态  新加
 }

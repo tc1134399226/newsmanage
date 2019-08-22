@@ -2,9 +2,9 @@ package com.qf.sysuser.service.impl;
 
 import com.qf.sysuser.dao.SysUserDao;
 import com.qf.sysuser.dto.UserIdsDTO;
-import com.qf.sysuser.pojo.MenuInfo;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
+import com.qf.sysuser.vo.MenuInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
 public class UserServiceImpl implements SysUserService {
 
     @Autowired
-    private SysUserDao sysUserDao;
+    SysUserDao sysUserDao;
 
 
 //    public boolean getUserByuserNameAndPassword(User user) {
@@ -115,13 +115,13 @@ public class UserServiceImpl implements SysUserService {
     }
 
 
-//    /**
-//     *  初始化用户菜单
-//     * @param user
-//     * @return
-//     */
-//    public List<MenuInfo> userLoginInit(User user) {
-//        return sysUserDao.userLoginInit(user);
-//    }
+    /**
+     *  初始化用户菜单
+     * @param user
+     * @return
+     */
+    public List<MenuInfoVO> userLoginInit(User user) {
+        return sysUserDao.userLoginInit(user);
+    }
 
 }

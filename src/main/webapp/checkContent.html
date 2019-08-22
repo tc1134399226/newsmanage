@@ -118,7 +118,7 @@
 
 
 <div id="editor"style="max-width:800px;margin:50px;">
-    <div id="txtdiv" style="border:0px solid gray;height:225px; width:400px;">
+    <div id="txtdiv" style="border:0px solid gray;height:225px; width:400px;text-align: left">
 
     </div>
 </div>
@@ -129,13 +129,6 @@
         <i class="glyphicon glyphicon-edit"></i> 确认提交</button>
 
 </div>
-
-<!--<input type="button" id="test1" value="拿html"/>-->
-<!--<input type="button" id="test2" value="拿text"/>-->
-
-
-
-
 
 
 <script>
@@ -249,7 +242,6 @@
             //数据，json字符串
             //请求成功
             success : function(result) {
-                alert("修改成功");
             },
             //请求失败，包含具体的错误信息
             error : function(e){
@@ -272,12 +264,18 @@
         if(mainTitle.length<1){
             alert("主标题不能为空");
             return ;
+        }else if (mainTitle.length>40){
+            alert("标题字数不能超过20个");
+            return ;
         }
         var status = $("#status").val();
         var subTitle = $("#subTitle").val();
         // console.log(userName+":"+password);
         if(subTitle.length<1){
             alert("副标题");
+            return ;
+        }else if(subTitle.length>40){
+            alert("标题字数不能超过20个");
             return ;
         }
 
@@ -307,9 +305,7 @@
                 if(result){
                     console.log(result);
 
-                    alert("发布成功");
                     updateStatus();
-                    // window.location.href="urer.html";
                 }else{
                     // console.log(e);
                 }

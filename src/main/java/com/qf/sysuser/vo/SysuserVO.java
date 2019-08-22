@@ -1,4 +1,4 @@
-package com.qf.news.vo;
+package com.qf.sysuser.vo;
 
 import lombok.Data;
 

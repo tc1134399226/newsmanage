@@ -3,6 +3,7 @@ package com.qf.sysuser.dao;
 import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.MenuInfo;
 import com.qf.sysuser.pojo.User;
+import com.qf.sysuser.vo.MenuInfoVO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -82,7 +83,7 @@ public interface SysUserDao {
      * @param user
      * @return
      */
-    public List<MenuInfo> userLoginInit(User user);
+    public List<MenuInfoVO> userLoginInit(User user);
 
     //管理员登录
     public User sysUserLogin(User user);
