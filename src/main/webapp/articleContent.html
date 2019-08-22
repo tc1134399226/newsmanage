@@ -124,7 +124,6 @@
 
             //整体拼接到div里面去
             $("#contentStr").append(strCon);
-            alert("获取Ip");
             getIp(strCon);
 
         },
@@ -158,7 +157,6 @@
             //数据，json字符串
             //请求成功
             success : function(result) {
-                alert("修改成功并返回用户页面");
                 // window.location.href="urer.html";
             },
             //请求失败，包含具体的错误信息
@@ -191,8 +189,6 @@ function getIp(strCon){
             console.log(result);
             if(result){
                 console.log(result);
-
-                alert("获取Ip成功了吗");
             }else{
                 console.log(e);
             }
