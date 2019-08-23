@@ -3,6 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.news.dao.NewsArticleInfoMapper">
 
+<select id="getArticleAndLoveNumAndComNum" parameterType="long" resultType="com.qf.news.vo.ArticleTypeVO">
+SELECT tb1.*,b.articleLoveNum ,c.timeArticleLoveNum,d.timeComNum from (
+(SELECT a.*,
+ IFNULL(la.status,0) articleLoveStatus,COUNT(c.comId) comNum
+from article a LEFT JOIN love_article la on la.articleId=a.articleId
+LEFT JOIN comment c on c.articleId=a.articleId
+where a.articleId=#{param2}  and la.userId=#{param1} ) tb1,
+(SELECT COUNT(la.articleId) articleLoveNum from article a LEFT JOIN love_article la on la.articleId= a.articleId
+where a.articleId=#{param2} and la.status=1 ) b,
+(SELECT COUNT(la.articleId) timeArticleLoveNum from article a LEFT JOIN love_article la on la.articleId= a.articleId
+where a.articleId=#{param2} and la.status=1 and la.updateTime >= now()-interval 15 day )c,
+(select COUNT(comId) timeComNum from comment
+where articleId=#{param2} and createTime >= now()-interval 15 day)d
+)
+</select>
 
     <!--根据articleId查询编辑的新闻显示到预览页面-->
     <select id="getReleaseInfoById" parameterType="int" resultType="com.qf.news.pojo.ArticleInfo">
@@ -45,5 +60,22 @@
     <!--得到封面图地址-->
     <update id="uploadCover" parameterType="com.qf.news.pojo.ArticleInfo">
         UPDATE article set cover=#{cover} where content=#{content}
+    </update>
+    <select id="getLoveArticleByArticleIdAndUserId"  parameterType="long" resultType="com.qf.news.pojo.LoveArticle">
+        select * from love_article where userId=#{param1} and articleId=#{param2}
+    </select>
+    <insert id="addLoveArticle" parameterType="long">
+         insert into love_article (userId,articleId,status,createTime,updateTime)
+         values (#{param1},#{param2},1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+    </insert>
+    <update id="updateLoveArticle" parameterType="com.qf.news.pojo.LoveArticle">
+             update love_article
+             <if test="status=='0'.toString()">
+              set status=1,updateTime=CURRENT_TIMESTAMP
+             </if>
+        <if test="status!=null and status!=''and status=='1'.toString()">
+            set status=0,updateTime=CURRENT_TIMESTAMP
+        </if>
+         where userId=#{userId} and articleId=#{userId}
     </update>
 </mapper>

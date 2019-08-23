@@ -129,8 +129,6 @@
                 // console.log(pagename);
                 $(result.list).each(function(index,item){
                     // console.log(item);
-
-
                     var   trStr="<img src=\""+item.icon+"\"><br>";
                     // console.log(item.icon)
                     trStr+="<div class='user'>"
@@ -139,10 +137,9 @@
                     trStr+=item.createTime+"&nbsp;";
                     //判断是否已被点赞
                    if (item.loveStatus==1){
-
-                       trStr+="<button  id='love"+item.comId+"' type=\"button\" style='color:red ' onclick='clickLoveComment("+item.comId+")' class='glyphicon glyphicon-heart'  ></button>"
+                       trStr+="<button   type=\"button\" style='color:red ' onclick='clickLoveComment("+item.comId+")' class='glyphicon glyphicon-heart'  ></button>"
                    } else if (item.loveStatus==0) {
-                       trStr += "<button id='Love"+item.comId+"'  type=\"button\"    onclick='clickLoveComment("+item.comId+")' class='glyphicon glyphicon-heart' ></button>"
+                       trStr += "<button   type=\"button\"  style='color:black '   onclick='clickLoveComment("+item.comId+")' class='glyphicon glyphicon-heart' ></button>"
                    }
                     trStr+=item.comLoveNum
                     trStr+="</div>"
@@ -418,40 +415,6 @@
         })
     }
 
-    // function loveComment(comId,trStr){
-    //     $.ajax({
-    //         //请求方式GET/POST
-    //         type: "POST",
-    //         //请求的媒体类型
-    //         contentType: "application/json;charset=UTF-8",
-    //         //接受数据类型
-    //         dataType: "json",
-    //         //请求地址
-    //         url: "news/checkLoveComment",
-    //         data:JSON.stringify({
-    //             "comId":comId,
-    //         }),
-    //         //数据，json字符串
-    //         //请求成功
-    //         success: function (result) {
-    //             if (result) {
-    //                 trStr+="<button type=\"button\" class='glyphicon glyphicon-heart'  style='color: red' onclick='clickLoveComment("+comId+")'></button>"
-    //                // trStr+="<button type=\"button\"  class='glyphicon glyphicon-heart'style='color: red'  onclick='clickLoveComment("+comId+")'></button>;"
-    //                 console.log(trStr)
-    //                 return trStr;
-    //             }else{
-    //                 trStr+="<button type=\"button\" class='glyphicon glyphicon-heart'   onclick='clickLoveComment("+comId+")'></button>"
-    //                 // trStr+="<button type=\"button\"  class='glyphicon glyphicon-heart'  onclick='clickLoveComment("+comId+")'></button>;"
-    //                 console.log(trStr)
-    //                 return trStr;
-    //             }
-    //         },
-    //         error: function (e) {
-    //             console.log(111)
-    //             console.log(e);
-    //         }
-    //     })
-    // }
     function clickLoveComment(comId) {
         $.ajax({
             //请求方式GET/POST
@@ -470,14 +433,26 @@
             success: function (result) {
                 if (result) {
                         initPage()
-                    // $("div").css("color") 设置color属性值. $(element).css(style)
-                    // console.log($("#love"+comId).css("color"))
-                    // if ($('#love'+comId).css("color")=="rgb(51, 51, 51)"){
+                    // $(document).click(function(e) { // 在页面任意位置点击而触发此事件
+                    //     $(e.target).attr("id");       // e.target表示被点击的目标
+                    // })//此方法对于想要获取击元素获得当前点击元素信息如id，value，等信息，无法准确定位，获取，因此需要this，及当前之意
+                    // console.log( $(document).click(function(e) { $(e.target).attr("color"); }))
+                    // $('body').on('click','.showModel',function(){
+                    // window.alert(this.innerHTML);
+
+                    // $(document).click(function (e){  //需要第二次才能点赞成功
+                    //     var v_id=e.target.style.color;
+                    //     console.log(v_id);
+                    // });
+                    // var srcElement=window.event.target;
+                    // console.log($(srcElement).)
+                    // console.log($(srcElement).css("color"))
+                    // if ($(srcElement).css("color")=="rgb(255, 0, 0)"){
                     //     console.log(1)
-                    //     $("#love"+comId).css("color","rgb(255, 0, 0)")
+                    //     $(srcElement).css("color","rgb(51, 51, 51)")
                     // }else {
                     //     console.log(2)
-                    //     $("#love"+comId).css("color")=="rgb(51, 51, 51)"
+                    //     $(srcElement).css("color","rgb(255, 0, 0)")
                     // }
                 }else {
                 alert("点赞失败")

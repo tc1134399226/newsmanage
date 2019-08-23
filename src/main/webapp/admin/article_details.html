@@ -21,7 +21,11 @@
 
 </head>
 <body>
-
+<div class="col-sm-3 col-md-2 sidebar">
+    <div class="tree">
+    </div>
+</div>
+<div>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -57,12 +61,12 @@
 </div>
 
 <hr>
-
+</div>
 <div  style="text-align:center;">
     <button type="button" class='btn btn-danger btn-xs' onclick='refuse()'><i class=' glyphicon glyphicon-remove' ></i>下架</button>&nbsp;
 </div>
 <script type="text/javascript">
-
+    $(".tree").load("menu.html");
     var strCon1;
     var strCon2;
     var strCon3;
@@ -152,5 +156,6 @@
 
 
 </script>
+
 </body>
 </html>
