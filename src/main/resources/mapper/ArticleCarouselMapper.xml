@@ -40,4 +40,9 @@
         delete from article_carousel where  articleId=#{articleId}
     </delete>
 
+    <!--根据id查询轮播新闻详情信息-->
+    <select id="getArticleCarouselById" parameterType="int" resultType="com.qf.sysuser.pojo.ArticleCarousel">
+        select * from article_carousel  where   articleId=#{articleId}
+    </select>
+
 </mapper>

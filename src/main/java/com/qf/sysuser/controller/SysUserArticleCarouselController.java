@@ -60,9 +60,10 @@ public class SysUserArticleCarouselController {
         return sysUserArticleCarouselService.updateArticleState(articleId);
     }
 
-    //查询所有轮播新闻信息
-    @RequestMapping("getAllArticleCarousel")
-    public Object getAllArticleCarousel(){
-        return sysUserArticleCarouselService.getAllArticleCarousel();
+
+    //根据id查询轮播新闻详情信息
+    @RequestMapping("getArticleCarouselById")
+    public Object getArticleCarouselById(@RequestParam int articleId){
+        return sysUserArticleCarouselService.getArticleCarouselById(articleId);
     }
 }
