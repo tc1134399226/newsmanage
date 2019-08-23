@@ -158,7 +158,7 @@
             //接受数据类型
             dataType:"json",
             //请求地址
-            url : "admin/getEditorApplyById?userId="+userId,
+            url : "admin/sysuser/getEditorApplyById?userId="+userId,
             //数据，json字符串
             //请求成功
             success : function(result) {
@@ -176,7 +176,7 @@
                   //接受数据类型
                   dataType:"json",
                   //请求地址
-                  url : "applyEditor",
+                  url : "admin/sysuser/applyEditor",
                   //数据，json字符串
                   data : JSON.stringify(
                           {
