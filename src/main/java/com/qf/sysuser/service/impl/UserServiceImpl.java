@@ -44,19 +44,19 @@ public class UserServiceImpl implements SysUserService {
         return i > 0;
     }
 
-//    public boolean registerUser(User user) {
-//        if (user.getUsername()==null||"".equals(user.getUsername())||user.getAccount()==null
-//        ||"".equals(user.getAccount())){
-//            return false;
-//        }
-//        User user1 = sysUserDao.getUserByuserName(user);
-//        if (user1!=null){
-//            return false;
-//        }else {
-//            int i = sysUserDao.saveUser(user);
-//            return i > 0;
-//        }
-//    }
+    public boolean registerUser(User user) {
+        if (user.getUsername()==null||"".equals(user.getUsername())||user.getAccount()==null
+        ||"".equals(user.getAccount())){
+            return false;
+        }
+        User user1 = sysUserDao.getUserByuserName(user);
+        if (user1!=null){
+            return false;
+        }else {
+            int i = sysUserDao.saveUser(user);
+            return i > 0;
+        }
+    }
 
     /**
      * 通过用户id获取用户信息

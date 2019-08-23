@@ -50,7 +50,7 @@ public class SysUserIdcardUpLoadController {
         dropzFile.transferTo(destFile);
         result.put("status",200);
         //http://localhost:8080/xxxxx/xxxx.jpg
-        result.put("filePath","http://localhost:8080/static/upload/"+destFileName);
+        result.put("filePath","static/upload/"+destFileName);
         return result;
     }
 

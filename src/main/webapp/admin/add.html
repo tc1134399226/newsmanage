@@ -7,10 +7,10 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/doc.min.css">
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/font-awesome.min.css">
+	<link rel="stylesheet" href="../css/main.css">
+	<link rel="stylesheet" href="../css/doc.min.css">
 	<style>
 		.tree li {
 			list-style-type: none;
@@ -138,7 +138,7 @@
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">用户名称</label>
-							<input type="text" class="form-control" id="account" placeholder="请输入用户名称">
+							<input type="text" class="form-control" id="account" placeholder="请输入用户名称" onblur="checkAccount()">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputPassword1">密码</label>
@@ -152,12 +152,10 @@
 						<div class="form-group">
 							<label for="exampleInputEmail1">手机号</label>
 							<input type="email" class="form-control" id="mobile" value="">
-							<p class="help-block label label-warning">请输入合法的 mobile</p>
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">区域号</label>
-							<input type="email" class="form-control" id="areaCode" value="+86">
-							<p class="help-block label label-warning">请输入区域号, 格式为： +xx</p>
+							<input type="email" class="form-control" id="areaCode" placeholder="+86">
 						</div>
 						<button type="button" class="btn btn-success" onclick="commitUserInfo()"><i class="glyphicon glyphicon-plus"></i> 新增</button>
 						<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
@@ -193,9 +191,9 @@
 		</div>
 	</div>
 </div>
-<script src="jquery/jquery-2.1.1.min.js"></script>
-<script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="script/docs.min.js"></script>
+<script src="../jquery/jquery-2.1.1.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script src="../script/docs.min.js"></script>
 <script type="text/javascript">
 	$(function () {
 		$(".list-group-item").click(function(){
@@ -220,6 +218,11 @@
 		var areaCode = $("#areaCode").val();
 		var status = 1;
 
+        var regx = /^1[35789][0-9]{9}$/;
+        if (!regx.test(mobile)) {
+            alert("号码错误,请输入正确的手机号码");
+            return;
+        }
 		$.ajax({
 			//请求方式
 			type: "POST",
@@ -252,6 +255,42 @@
 			}
 		});
 	}
+
+    function checkAccount() {
+        var  account = $("#account").val();
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "sysuser/registerUser",
+            //数据，json字符串
+            data : JSON.stringify(
+                {
+                    "account":account
+                }
+            ),
+            //请求成功
+            success : function(result) {
+                console.log(result);
+                if(result){
+                    $("#account").val("");
+                    alert("用户名已存在，请重新输入");
+                }else{
+
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+
+    }
 </script>
 </body>
 </html>

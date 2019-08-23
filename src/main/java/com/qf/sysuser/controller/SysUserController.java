@@ -24,20 +24,20 @@ public class SysUserController {
     private SysUserService sysUserService;
 
 
-  /*
+
     @RequestMapping("/registerUser")
     @ResponseBody
     public Object saveUser(@RequestBody User user){
-        return userService.registerUser(user);
+        return sysUserService.registerUser(user);
     }
-*/
+
     @RequestMapping("/listAllUserInfo")
     @ResponseBody
     public Object listAllUserInfo(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
                                               Integer pageNum) {
         System.out.println(pageNum);
         //一页有多少条数据
-        int defaultPageSize = 2;
+        int defaultPageSize = 10;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, defaultPageSize);
         List<User> allUser = sysUserService.getAllUser();
@@ -157,5 +157,6 @@ public class SysUserController {
         }
         return sysUserService.sysUserLogin(user);
     }
+
 
 }
