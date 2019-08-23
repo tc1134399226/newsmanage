@@ -742,7 +742,7 @@
 						if (item.areaName==area){
 							if (item.typeName==type[i]){
 								str += "<dd>";
-								str += "<p>"+item.mainTitle+"</p>";
+								str += "<a href='article_carousel_details.html?articleId="+item.articleId+"'><p>"+item.mainTitle+"</p>";
 								str += "</dd>";
 								count +=1;
 								if (count>=10){
@@ -756,6 +756,7 @@
 			}
 			})
 
+		//获取最热新闻
 		$.ajax({
 			//请求方式
 			type : "GET",
@@ -829,7 +830,7 @@
 			$("#dataImg").empty();
 			var fiveImg = "";
 			$(result).each(function(index,item) {
-				fiveImg +="<a href='#'><li><img src='"+item.cover+"'></li></a>"
+				fiveImg +="<a href='article_carousel_details.html?articleId="+item.articleId+"'><li><img src='"+item.cover+"'></li></a>"
 			})
 			$("#dataImg").append(fiveImg)
 		}

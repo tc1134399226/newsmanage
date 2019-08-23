@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>轮播详情页</title>
+    <title>新闻详情页面</title>
 
     <meta charset="GB18030">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,33 +30,33 @@
     </div>
 </nav>
 
-   <hr>
-        <div class="form-group" style="text-align:center;" id="cover">
-            <label >封面图:</label>
-            <br>
-        </div>
-        <hr>
+<hr>
+<div class="form-group" style="text-align:center;" id="cover">
+    <label >封面图:</label>
+    <br>
+</div>
+<hr>
 
 
-        <div class="form-group" style="text-align:center;" id="mainTitle">
-            <label >主标题:</label>
-            <br>
-        </div>
-        <hr>
+<div class="form-group" style="text-align:center;" id="mainTitle">
+    <label >主标题:</label>
+    <br>
+</div>
+<hr>
 
 
-        <div class="form-group" style="text-align:center;" id="subTitle">
-            <label >副标题:</label><br>
-        </div>
+<div class="form-group" style="text-align:center;" id="subTitle">
+    <label >副标题:</label><br>
+</div>
 
-        <hr>
+<hr>
 
-        <div class="form-group" id="contentStr" style="text-align:center;">
-            <label >新闻内容:</label>
-            <br>
-        </div>
+<div class="form-group" id="contentStr" style="text-align:center;">
+    <label >新闻内容:</label>
+    <br>
+</div>
 
-        <hr>
+<hr>
 
 <script type="text/javascript">
 
@@ -75,7 +75,7 @@
         //接受数据类型
         dataType:"json",
         //请求地址
-        url : "admin/sysuser/getArticleCarouselById?articleId="+articleId,
+        url : "admin/sysuser/getArticleInfoBy?articleId="+articleId,
         //数据，json字符串
         //请求成功
         success : function(result) {

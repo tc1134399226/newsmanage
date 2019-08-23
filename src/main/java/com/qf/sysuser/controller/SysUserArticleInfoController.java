@@ -82,7 +82,7 @@ public class SysUserArticleInfoController {
      */
     @RequestMapping("getArticleInfoBy")
     public Object getArticleInfoBy(@RequestParam int articleId){
-        return sysUserArticleInfoService.getArticleInfoBy(articleId);
+       return sysUserArticleInfoService.getArticleInfoBy(articleId);
     }
 
 
