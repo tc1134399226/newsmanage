@@ -25,4 +25,7 @@ public interface SysUserArticleCarouselDao {
 
     //根据这个id删除掉这条新闻信息
     public int deleteArticleUseId(int articleId);
+
+    //根据id查询轮播新闻详情信息
+    public ArticleCarousel getArticleCarouselById(int articleId);
 }

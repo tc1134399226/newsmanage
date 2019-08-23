@@ -30,4 +30,12 @@ public class NewsServiceImpl implements NewsService {
     public List<ArticleTypeVO> listAllArticleByStatusByHot() {
         return newsMapper.listAllArticleByStatusByHot();
     }
+
+    /**
+     * 获取轮播图
+     * @return
+     */
+    public List<ArticleTypeVO> getMainImg() {
+        return newsMapper.getMainImg();
+    }
 }

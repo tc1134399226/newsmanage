@@ -31,18 +31,23 @@ public class SysUserArticleCarouselServiceImpl implements SysUserArticleCarousel
         return sysUserArticleCarouselDao.updateArticleState(articleId)>0;
     }
 
-    //查询所有轮播新闻信息
-    public List<ArticleCarousel> getAllArticleCarousel() {
-        return sysUserArticleCarouselDao.getAllArticleCarousel();
-    }
+            //查询所有轮播新闻信息
+            public List<ArticleCarousel> getAllArticleCarousel() {
+                return sysUserArticleCarouselDao.getAllArticleCarousel();
+            }
 
-    //查询最早添加的新闻id
-    public ArticleCarousel selectArticleId() {
-        return sysUserArticleCarouselDao.selectArticleId();
-    }
+            //查询最早添加的新闻id
+            public ArticleCarousel selectArticleId() {
+                return sysUserArticleCarouselDao.selectArticleId();
+            }
 
-    //根据这个id删除掉这条新闻信息
-    public boolean deleteArticleUseId(int articleId) {
-        return sysUserArticleCarouselDao.deleteArticleUseId(articleId)>0;
+            //根据这个id删除掉这条新闻信息
+            public boolean deleteArticleUseId(int articleId) {
+                return sysUserArticleCarouselDao.deleteArticleUseId(articleId)>0;
+            }
+
+            //根据id查询轮播新闻详情信息
+            public ArticleCarousel getArticleCarouselById(int articleId) {
+                return sysUserArticleCarouselDao.getArticleCarouselById(articleId);
     }
 }

@@ -71,7 +71,7 @@
         </collection>
     </resultMap>
 
-    <!--用户登录所需菜单信息-->
+    <!--管理员登录所需菜单信息-->
     <select id="userLoginInit" resultMap="sysuserMap" parameterType="com.qf.sysuser.pojo.User">
     select m.mid pid,m.menuname pname,m.menuicon picon,m.menu_url purl,tb1.* from menuinfo m RIGHT JOIN
     (select m.* from sysuser su,sys_role sr,roleinfo r,role_menu rm,menuinfo m

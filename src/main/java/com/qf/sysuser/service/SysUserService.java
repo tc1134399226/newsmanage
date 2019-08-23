@@ -32,4 +32,6 @@ public interface SysUserService {
 
     //管理员登录
     public User sysUserLogin(User user);
+
+    public boolean registerUser(User user) ;
 }

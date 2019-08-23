@@ -20,4 +20,10 @@ public interface NewsMapper {
      * @return
      */
     public List<ArticleTypeVO> listAllArticleByStatusByHot();
+
+    /**
+     * 获取轮播图
+     * @return
+     */
+    public List<ArticleTypeVO> getMainImg();
 }
