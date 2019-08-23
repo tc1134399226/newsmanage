@@ -22,7 +22,7 @@
             <a href="#"><img src="http://t1.huanqiucdn.cn/ed9715bdbbc03761688a3d50513e91fb.jpg" alt="logo"
                     title="这是logo图片"></a>
 			<div class="login_btn">
-				<ul>
+				<ul id="loginData">
                 <li>
                     <a href="login.html"><input type="button" value="登录"></a>
                 </li>
@@ -36,11 +36,11 @@
 
     <nav>
         <div class="nav wrapper">
-            <ul>
-                <li><a href="#">国际</a></li>
-                <li><a href="#">内地</a></li>
-                <li><a href="#">港澳</a></li>
-                <li><a href="#">台湾</a></li>
+            <ul id="loginSuccess">
+                <li><a href="index.html?area=国际">国际</a></li>
+                <li><a href="index.html?area=内地">内地</a></li>
+                <li><a href="index.html?area=港澳">港澳</a></li>
+                <li><a style="color: #FFFFFF" href="index.html?area=台海">台湾</a></li>
             </ul>
         </div>
     </nav>
@@ -49,12 +49,12 @@
             <!-- 这里是main1部分 包括一个轮播图和一个新闻 -->
             <div class="main1">
                 <div class="banner">
-                    <ul>
-                        <li><img src="img/1.jpg" /></li>
-                        <li><img src="img/2.jpg" /></li>
-                        <li><img src="img/3.jpg" /></li>
-                        <li><img src="img/4.jpg" /></li>
-                        <li><img src="img/5.jpg" /></li>
+                    <ul id="dataImg">
+						<a href="#"><li><img src="img/1.jpg" /></li></a>
+						<a href="#"> <li><img src="img/2.jpg" /></li></a>
+						<a href="#"><li><img src="img/3.jpg" /></li></a>
+						<a href="#"><li><img src="img/4.jpg" /></li></a>
+						<a href="#"><li><img src="img/5.jpg" /></li></a>
                     </ul>
 
                     <div class="ctrl_box">
@@ -714,12 +714,13 @@
 
 
 <script>
-
-	var area = window.location.search.split("=")[1];
+	var s = decodeURI(decodeURI(location.search));
+	var area = s.split("=")[1];
 	if (area==null){
 		area = "内地";
 	}
 	var type = new Array("军事","财经","科技","娱乐","生活");
+	//填充新闻内容
 	function initpage() {
 		$.ajax({
 			//请求方式
@@ -785,16 +786,14 @@
 							}
 						}
 					});
-					$("#dataHot" +
-							"" +
-							""+i).append(str);
+					$("#dataHot"+i).append(str);
 				}
 			}
 		})
 	}
 
 	initpage();
-
+	//用户登录状态
     $.ajax({
         //请求方式
         type : "GET",
@@ -807,9 +806,34 @@
         //数据，json字符串
         //请求成功
         success : function(result) {
-
+        	console.log(result);
+			if (result!=null){
+				$("#loginData").empty();
+				var str = "<li><a href='userInfo.html?userId="+result.userId+"'>个人中心</a></li>";
+				$("#loginSuccess").append(str);
+			}
         }
         })
+
+	//获取轮播图图片
+	$.ajax({
+		//请求方式
+		type : "GET",
+		//请求的媒体类型
+		contentType: "application/json;charset=UTF-8",
+		//接受数据类型
+		dataType:"json",
+		//请求地址
+		url : "news/getMainImg",
+		success : function(result) {
+			$("#dataImg").empty();
+			var fiveImg = "";
+			$(result).each(function(index,item) {
+				fiveImg +="<a href='#'><li><img src='"+item.cover+"'></li></a>"
+			})
+			$("#dataImg").append(fiveImg)
+		}
+		});
 
 </script>
 </html>

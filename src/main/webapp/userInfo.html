@@ -25,6 +25,8 @@
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/login.css">
 	<link rel="stylesheet" href="dropzone/dropzone.min.css" />
+
+
 </head>
 
 <body>
@@ -104,19 +106,10 @@
 					</div>
 					<div class="yui3-u Center navArea">
 						<ul class="nav">
-							&emsp;&emsp;
-							<li class="f-item">国际</li>
-							&emsp;&emsp;
-							<li class="f-item">内地</li>
-							&emsp;&emsp;
-							<li class="f-item">港澳</li>
-							&emsp;&emsp;
-							<li class="f-item">台海</li>
-							<!--<li class="f-item">旅游</li>-->
-							<!--<li class="f-item">健康</li>-->
-							<!--<li class="f-item">体育</li>-->
-							<!--<li class="f-item">其他</li>-->
-
+							<a href="index.html?area=国际"><li class="f-item">国际</li></a>
+							<a href="index.html?area=内地"><li class="f-item">内地</li></a>
+							<a href="index.html?area=港澳"><li class="f-item">港澳</li></a>
+							<a href="index.html?area=台海"><li class="f-item">台海</li></a>
 							<!--<li class="f-item"><a href="seckill-index.html" target="_blank">娱乐</a></li>-->
 						</ul>
 					</div>
@@ -193,8 +186,8 @@
 
 								</div>
 
-								<div class="form-group has-success has-feedback" align="left" style="width:210px;height:150px;float:left;" >
-									<div id="dropzoneDiv" class="dropzone" ></div>
+								<div class="form-group has-success has-feedback" align="left" style="float:left;" >
+									<div id="dropzoneDiv" class="dropzone"></div>
 									<input type="hidden" id="imgUrl"/>
 								</div>
 
@@ -211,7 +204,7 @@
 									<hr>
 								</div>
                                 <div class="form-group">
-                                    <label  class="col-sm-2 control-label">昵称</label>
+                                    <label  class="col-sm-2 control-label">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" id="nickName" placeholder="请输入昵称">
                                     </div>
@@ -235,7 +228,7 @@
                                 </div>
 								<hr>
                                 <div class="form-group">
-                                    <label  class="col-sm-2 control-label">性别</label>
+                                    <label  class="col-sm-2 control-label">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</label>
                                     <div class="col-sm-10">
                                    
 										<select class="form-control" id="sex">
@@ -275,11 +268,11 @@
 
 <script>
     Dropzone.options.dropzoneDiv = {
-        url: "news/upload1", // 文件提交地址
+        url: "news/upload", // 文件提交地址
         method: "post",  // 也可用put
         paramName: "dropzFile", // 默认为file
         maxFiles: 1,// 一次性上传的文件数量上限
-        maxFilesize: 2, // 文件大小，单位：MB
+        maxFilesize: 2, // 文件大小，单位：M
         acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
         addRemoveLinks: true,
         parallelUploads: 1,// 一次上传的文件数量
