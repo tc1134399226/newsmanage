@@ -84,7 +84,7 @@ nav .nav ul li {
     flex: 1;
 }
 
-nav .nav ul li:nth-last-of-type(1) a {
+nav .nav ul li:nth-last-of-type(5) a {
     color: rebeccapurple;
 }
 

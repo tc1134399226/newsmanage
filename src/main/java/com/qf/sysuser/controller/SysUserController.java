@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -149,7 +150,11 @@ public class SysUserController {
      */
     @RequestMapping("sysUserLogin")
     @ResponseBody
-    public User sysUserLogin(@RequestBody User user){
+    public User sysUserLogin(@RequestBody User user, HttpSession session){
+        List<MenuInfoVO> menuInfoList = sysUserService.userLoginInit(user);
+        if (menuInfoList!=null){
+            session.setAttribute("menuInfoList",menuInfoList);
+        }
         return sysUserService.sysUserLogin(user);
     }
 

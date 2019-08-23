@@ -42,12 +42,9 @@ public class NewsUserInfoController {
     public Object loginCheck(@RequestBody UserInfo userInfo, HttpSession session){
 
         UserInfo userInfo1 = userInfoService.loginCheck(userInfo);
-
         //登录成功
         if(userInfo1!=null){
-            System.out.println(userInfo1);
             session.setAttribute("userInfo",userInfo1);
-
         }else{
             //登录失败
         }
@@ -82,36 +79,6 @@ public class NewsUserInfoController {
         return this.userInfoService.editUserInfoById(userInfo);
     }
 
-
-    //头像上传存储
-    @RequestMapping("upload1")
-    @ResponseBody
-    public Map<String, Object> upload(MultipartFile dropzFile, HttpServletRequest request) throws IOException {
-        System.out.println("inner upload");
-        Map<String, Object> result = new HashMap<String, Object>();
-
-        //创建文件需要存储的路径
-        String destPathName = request.getSession().getServletContext().getRealPath("/static/upload");
-        File destPath = new File(destPathName);
-        //如果目标文件夹不存在我就创建它
-        if(!destPath.exists()){
-            destPath.mkdirs();
-        }
-        //获取文件的后缀名
-        String fileSuffix = dropzFile.getOriginalFilename().substring(dropzFile.getOriginalFilename().lastIndexOf("."));
-
-        String destFileName = UUID.randomUUID()+fileSuffix;
-        System.out.println(destFileName);
-        File destFile = new File(destPath,destFileName);
-        if(!destFile.exists()){
-            destFile.createNewFile();
-        }
-        dropzFile.transferTo(destFile);
-        result.put("status",200);
-        //http://localhost:8080/xxxxx/xxxx.jpg
-        result.put("filePath","http://localhost:8080/static/upload/"+destFileName);
-        return result;
-    }
     //生成并获取手机验证码
     @RequestMapping("getVerifyCode")
     public Object getPhoneCode(@RequestParam String mobile){
@@ -124,6 +91,10 @@ public class NewsUserInfoController {
 
     }
 
-
+    @RequestMapping("getSession")
+    public Object getSession(HttpSession session){
+        Object user = session.getAttribute("userInfo");
+        return user;
+    }
 
 }

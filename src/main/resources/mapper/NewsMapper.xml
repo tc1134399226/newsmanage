@@ -17,4 +17,8 @@
         inner join type t on t.typeId = a.typeId
         where a.`status` = 2 ORDER BY a.hot desc
     </select>
+
+    <select id="getMainImg" resultType="com.qf.news.vo.ArticleTypeVO">
+        select * from article_carousel
+    </select>
 </mapper>
