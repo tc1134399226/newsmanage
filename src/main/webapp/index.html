@@ -49,12 +49,12 @@
             <!-- 这里是main1部分 包括一个轮播图和一个新闻 -->
             <div class="main1">
                 <div class="banner">
-                    <ul>
-                        <li><img src="img/1.jpg" /></li>
-                        <li><img src="img/2.jpg" /></li>
-                        <li><img src="img/3.jpg" /></li>
-                        <li><img src="img/4.jpg" /></li>
-                        <li><img src="img/5.jpg" /></li>
+                    <ul id="dataImg">
+						<a href="#"><li><img src="img/1.jpg" /></li></a>
+						<a href="#"> <li><img src="img/2.jpg" /></li></a>
+						<a href="#"><li><img src="img/3.jpg" /></li></a>
+						<a href="#"><li><img src="img/4.jpg" /></li></a>
+						<a href="#"><li><img src="img/5.jpg" /></li></a>
                     </ul>
 
                     <div class="ctrl_box">
@@ -720,6 +720,7 @@
 		area = "内地";
 	}
 	var type = new Array("军事","财经","科技","娱乐","生活");
+	//填充新闻内容
 	function initpage() {
 		$.ajax({
 			//请求方式
@@ -792,7 +793,7 @@
 	}
 
 	initpage();
-
+	//用户登录状态
     $.ajax({
         //请求方式
         type : "GET",
@@ -814,6 +815,7 @@
         }
         })
 
+	//获取轮播图图片
 	$.ajax({
 		//请求方式
 		type : "GET",
@@ -824,7 +826,12 @@
 		//请求地址
 		url : "news/getMainImg",
 		success : function(result) {
-			console.log(result)
+			$("#dataImg").empty();
+			var fiveImg = "";
+			$(result).each(function(index,item) {
+				fiveImg +="<a href='#'><li><img src='"+item.cover+"'></li></a>"
+			})
+			$("#dataImg").append(fiveImg)
 		}
 		});
 
