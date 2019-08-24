@@ -106,8 +106,11 @@ public class NewsArticleInfoController {
     @RequestMapping("commitArticle")
     @ResponseBody
     public boolean commitArticle(@RequestBody ArticleInfo articleInfo){
-        return newsArticleInfoService.commitArticle(articleInfo);
-
+        if (articleInfo.getArticleId()!=0){
+            return newsArticleInfoService.uploadArticle(articleInfo);
+        }else {
+            return newsArticleInfoService.commitArticle(articleInfo);
+        }
     }
 
     //根据输入的新闻内容查询获取articleId

@@ -76,4 +76,9 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
             return newsArticleInfoMapper.updateLoveArticle(loveArticleByArticleIdAndUserId)>0;
         }
     }
+
+    @Override
+    public boolean uploadArticle(ArticleInfo articleInfo) {
+        return newsArticleInfoMapper.uploadArticle(articleInfo)>0;
+    }
 }

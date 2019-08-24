@@ -59,6 +59,13 @@ public interface NewsArticleInfoMapper {
      * @return
      */
     public Integer updateLoveArticle (LoveArticle loveArticle);
+
+    /**
+     * 通过文章id更新文章
+     * @param articleInfo
+     * @return
+     */
+    public int uploadArticle(ArticleInfo articleInfo);
 }
 
 

@@ -83,13 +83,7 @@
                     <option value="2">财经</option>
                     <option value="3">科技</option>
                     <option value="4">娱乐</option>
-                    <option value="5">艺术</option>
-                    <option value="6">旅游</option>
-                    <option value="7">健康</option>
-                    <option value="8">体育</option>
-                    <option value="9">博览</option>
-                    <option value="10">汽车</option>
-                    <option value="11">其他</option>
+                    <option value="4">生活</option>
                 </select>
 
             </div>
@@ -114,6 +108,8 @@
         </form>
 
     </div>
+
+
 </div>
 
 
@@ -156,7 +152,7 @@
 
     <div class="form-group has-success has-feedback" align="left" style="float:left;" >
         <div id="dropzoneDiv" class="dropzone">
-            <img  src="" id="cover" width="150" height="150">
+<!--            <img  src="" id="cover" width="150" height="150">-->
         </div>
         <input type="hidden" id="imgUrl"/>
     </div>
@@ -167,7 +163,7 @@
     </div>
 
     <div id="coverDiv" class="coverPictureDiv" style="width:100px;height:150px;float:left;">
-        <img  src="" id="cover" width="150" height="150">
+<!--        <img  src="" id="cover" width="150" height="150">-->
     </div>
 
 </div>
@@ -175,56 +171,56 @@
 <script>
 
 
-    var img1;
-    // var str=window.location.search;
-    // var userId=str.split("=")[1];
+   var img1;
+   // var str=window.location.search;
+   // var userId=str.split("=")[1];
 
-    Dropzone.options.dropzoneDiv = {
-        url: "fileUpAndDown/upload", // 文件提交地址
-        method: "post",  // 也可用put
-        paramName: "dropzFile", // 默认为file
-        maxFiles: 1,// 一次性上传的文件数量上限
-        maxFilesize: 2, // 文件大小，单位：MB
-        acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
-        addRemoveLinks: true,
-        parallelUploads: 1,// 一次上传的文件数量
-        //previewsContainer:"#preview", // 上传图片的预览窗口
-        dictDefaultMessage: '上传封面图',
-        dictMaxFilesExceeded: "您最多只能上传1个文件！",
-        dictResponseError: '文件上传失败!',
-        dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
-        dictFallbackMessage: "浏览器不受支持",
-        dictFileTooBig: "文件过大上传文件最大支持.",
-        dictRemoveLinks: "删除",
-        dictCancelUpload: "取消",
-        init: function () {
-            this.on("addedfile", function (file) {
-                // 上传文件时触发的事件
-            });
-            this.on("success", function (file, data) {
-                // 上传成功触发的事件
-                console.log(data);
+   var myDropzone = Dropzone.options.dropzoneDiv = {
+       url: "fileUpAndDown/upload", // 文件提交地址
+       method: "post",  // 也可用put
+       paramName: "dropzFile", // 默认为file
+       maxFiles: 1,// 一次性上传的文件数量上限
+       maxFilesize: 2, // 文件大小，单位：MB
+       acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+       addRemoveLinks: true,
+       parallelUploads: 1,// 一次上传的文件数量
+       //previewsContainer:"#preview", // 上传图片的预览窗口
+       dictDefaultMessage: '上传封面图',
+       dictMaxFilesExceeded: "您最多只能上传1个文件！",
+       dictResponseError: '文件上传失败!',
+       dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+       dictFallbackMessage: "浏览器不受支持",
+       dictFileTooBig: "文件过大上传文件最大支持.",
+       dictRemoveLinks: "删除",
+       dictCancelUpload: "取消",
+       init: function () {
+           this.on("addedfile", function (file) {
+               // 上传文件时触发的事件
+           });
+           this.on("success", function (file, data) {
+               // 上传成功触发的事件
+               console.log(data);
 
-                img1= data.filePath;
-                var status = data.status;
-                if(status==200){
-                    var filePath = data.filePath;
-                    $("#imgUrl").val(filePath);
-                }
+               img1= data.filePath;
+               var status = data.status;
+               if(status==200){
+                   var filePath = data.filePath;
+                   $("#imgUrl").val(filePath);
+               }
 
-                console.log(file);
-            });
-            this.on("error", function (file, data) {
-                // 上传失败触发的事件
-                console.error(data);
-                console.log(file);
-            });
-            this.on("removedfile", function (file) {
-                // 删除文件时触发的方法
-            });
-        }
+               console.log(file);
+           });
+           this.on("error", function (file, data) {
+               // 上传失败触发的事件
+               console.error(data);
+               console.log(file);
+           });
+           this.on("removedfile", function (file) {
+               // 删除文件时触发的方法
+           });
+       }
 
-    }
+   }
 
 </script>
 
@@ -279,12 +275,12 @@
         //获取html
         $("#test1").bind("click",function(){
             content=editor.txt.html();
-            alert(editor.txt.html());
+            // alert(editor.txt.html());
             // $("#txtdiv").var(editor.txt.html());
         });
         //获取文本
         $("#test2").bind("click",function(){
-            alert(editor.txt.text());
+            // alert(editor.txt.text());
         });
 
 
@@ -293,54 +289,125 @@
 
     <script type="text/javascript">
 
-        // var str=window.location.search;
-        // var userId=str.split("=")[1];
+        // var img1;
+        // // var str=window.location.search;
+        // // var userId=str.split("=")[1];
+        // Dropzone.autoDiscover = false;
+        // var myDropzone = new Dropzone("#dropzoneDiv",{
+        //     url: "fileUpAndDown/upload", // 文件提交地址
+        //     method: "post",  // 也可用put
+        //     paramName: "dropzFile", // 默认为file
+        //     maxFiles: 1,// 一次性上传的文件数量上限
+        //     maxFilesize: 2, // 文件大小，单位：MB
+        //     acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+        //     addRemoveLinks: true,
+        //     parallelUploads: 1,// 一次上传的文件数量
+        //     previewsContainer:"#preview", // 上传图片的预览窗口
+        //     dictDefaultMessage: '上传封面图',
+        //     dictMaxFilesExceeded: "您最多只能上传1个文件！",
+        //     dictResponseError: '文件上传失败!',
+        //     dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+        //     dictFallbackMessage: "浏览器不受支持",
+        //     dictFileTooBig: "文件过大上传文件最大支持.",
+        //     dictRemoveLinks: "删除",
+        //     dictCancelUpload: "取消",
+        //     // dictDefaultMessage :
+        //     //     '<span class="bigger-150 bolder"><i class="ace-icon fa fa-caret-right red"></i> 拖拽文件到此处</span> \
+        //     //     <span class="smaller-80 grey">(或点击下面的上传按钮选择待上传文件)</span> <br /> \
+        //     //     <i class="upload-icon ace-icon fa fa-cloud-upload blue fa-3x"></i><img style="width: 50px;height: 50px;" src="http://localhost:8080/newsmanage/static/upload/icon.jpg">'
+        //     // ,
+        //     init: function () {
+        //         this.on("addedfile", function (file) {
+        //             // 上传文件时触发的事件
+        //         });
+        //         this.on("success", function (file, data) {
+        //             // 上传成功触发的事件
+        //             console.log(data);
         //
-        // console.log(userName+":"+password);
+        //             img1= data.filePath;
+        //             var status = data.status;
+        //             if(status==200){
+        //                 var filePath = data.filePath;
+        //                 $("#imgUrl").val(filePath);
+        //             }
+        //
+        //             console.log(file);
+        //         });
+        //         this.on("error", function (file, data) {
+        //             // 上传失败触发的事件
+        //             console.error(data);
+        //             console.log(file);
+        //         });
+        //         this.on("removedfile", function (file) {
+        //             // 删除文件时触发的方法
+        //         });
+        //
+        //     }
+        //
+        // })
+        // var mockFile = {
+        //     name: "http://localhost:8080/newsmanage/static/upload/icon.jpg",
+        //     size: 12345,
+        // };
+        // myDropzone.emit("addedfile", mockFile);
+        // // myDropzone.thumbnailHeight = 100
+        // // myDropzone.thumbnailWidth = 100
+        // myDropzone.emit("thumbnail", mockFile, "http://localhost:8080/newsmanage/static/upload/icon.jpg");
 
 
         var str=window.location.search;
         var articleId=str.split("=")[1];
-
-
-        $.ajax({
-            //请求方式
-            type : "GET",
-            //请求的媒体类型
-            contentType: "application/json;charset=UTF-8",
-            //接受数据类型
-            dataType:"json",
-            //请求地址
-            url : "news/getReleaseInfoById?articleId="+articleId,
-            //数据，json字符串
-            //请求成功
-            success : function(result) {
-
-                console.log(result);
-                $("#mainTitle").val(result.mainTitle);
-                $("#subTitle").val(result.subTitle);
-                // var coverSrc=new Image();
-                //
-                // coverSrc.src=result.cover;
-                //
-                // $("#coverImg").append(coverSrc);
-
-                strCon=result.content;
-
-                //整体拼接到div里面去
-                $("#contentStr").append(strCon);
-
-                $("#cover").attr('src',result.cover);
-
-            },
-            //请求失败，包含具体的错误信息
-            error : function(e){
-                console.log(e.status);
-                console.log(e.responseText);
+        if (typeof(articleId)==undefined){
+            articleId=0;
+        }
+        function initpage(){
+            if (articleId==null){
+                return;
             }
-        });
+            $.ajax({
+                //请求方式
+                type : "GET",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType:"json",
+                //请求地址
+                url : "news/getReleaseInfoById?articleId="+articleId,
+                //数据，json字符串
+                success : function(result) {
 
+                    console.log(result);
+                    $("#mainTitle").val(result.mainTitle);
+                    $("#subTitle").val(result.subTitle);
+                    // var coverSrc=new Image();
+                    //
+                    // coverSrc.src=result.cover;
+                    //
+                    // $("#coverImg").append(coverSrc);
 
+                    strCon=result.content;
+
+                    //整体拼接到div里面去
+                    $("#contentStr").append(strCon);
+                    if (result.cover!=null){
+                        var str = "<img src='"+result.cover+"' width='150' height='150'>"
+                        $("#coverDiv").append(str);
+                    } else {
+                        $("#coverDiv").empty()
+                    }
+
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+        }
+
+        initpage();
+
+        //获取文章id
         function getArticleId(content) {
             $.ajax({
                 //请求方式
@@ -375,9 +442,13 @@
 
         }
 
+        //预览
         function commitArticle() {
 
-
+            var newsId = articleId;
+            if (newsId==null||newsId==""){
+                newsId=0;
+            }
             var status = $("#status").val();
             var areaId = $("#areaId").val();
             //获取类型Id
@@ -413,6 +484,7 @@
                 //数据，json字符串
                 data : JSON.stringify(
                     {
+                        "articleId":newsId,
                         "status":status,
                         "areaId":areaId,
                         "typeId":typeId,
@@ -442,7 +514,7 @@
         }
 
 
-
+        //更新封面图
         function uploadCover() {
 
             $.ajax({
@@ -465,7 +537,7 @@
                 //请求成功
                 success : function(result) {
                     console.log(result);
-                    alert("背景图上传成功");
+                    alert("封面图上传成功");
                     alert(img1);
 
                 },
@@ -480,7 +552,7 @@
         }
 
 
-
+        //更新文章状态
         function updateStatus() {
             $.ajax({
                 //请求方式
@@ -504,7 +576,7 @@
 
         }
 
-
+        //最终提交
         function checkCommit() {
 
 
@@ -524,7 +596,7 @@
             var subTitle = $("#subTitle").val();
             // console.log(userName+":"+password);
             if(subTitle.length<1){
-                alert("副标题");
+                alert("副标题不能为空");
                 return ;
             }else if(subTitle.length>40){
                 alert("标题字数不能超过20个");
@@ -557,7 +629,6 @@
                     console.log(result);
                     if(result){
                         console.log(result);
-
                         updateStatus();
                     }else{
                         // console.log(e);

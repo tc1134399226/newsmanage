@@ -78,4 +78,9 @@ where articleId=#{param2} and createTime >= now()-interval 15 day)d
         </if>
          where userId=#{userId} and articleId=#{userId}
     </update>
+
+    <update id="uploadArticle">
+        update article set areaId =#{areaId},typeId=#{typeId},mainTitle=#{mainTitle} ,subTitle=#{subTitle},content=#{content}
+        where articleId = #{articleId}
+    </update>
 </mapper>
