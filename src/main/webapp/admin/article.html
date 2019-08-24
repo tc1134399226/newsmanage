@@ -17,10 +17,25 @@
     <link href="../wangeditor/wangEditor.min.css"/>
     <script src="../wangeditor/wangEditor.min.js"></script>
     <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <style>
+        .cont{
+            float: right;
+            width: 82%;
+            height: 100%;
+        }
+        #pageSplic{
+            /*text-align: center;*/
+            margin-left: 30%;
+        }
 
+    </style>
 </head>
 <body>
-
+<div class="col-sm-3 col-md-2 sidebar">
+    <div class="tree">
+    </div>
+</div>
+<div class="cont">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -28,7 +43,6 @@
         </div>
     </div>
 </nav>
-
 <br>
 <form class="form-inline" role="form" style="float:left;">
     <div class="form-group has-feedback">
@@ -40,7 +54,6 @@
     <button type="button" class="btn btn-warning" onclick="initPage()"><i class="glyphicon glyphicon-search" ></i> 查询</button>
 </form>
 <hr/>
-
 <div class="table-responsive">
     <table class="table  table-bordered" id = "dataTable">
         <thead>
@@ -66,11 +79,12 @@
         </tr>
     </table>
 </div>
-
+</div>
 <script src="../jquery/jquery-2.1.1.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../script/docs.min.js"></script>
 <script>
+    $(".tree").load("menu.html");
     //定义方法获取后台数据
     function initPage(){
         var pageNum=window.location.search.split("=")[1];

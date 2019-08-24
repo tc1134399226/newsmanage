@@ -118,6 +118,7 @@ public Object deleteReadMessageByMgeId(@RequestParam Long mgeId){
         }
         replyVO.setUserId(userInfo.getUserId());
         replyVO.setNickName(userInfo.getNickName());
+        System.out.println(replyVO);
         return newsMessageService.sendMessageByReplyVO(replyVO);
     }
 

@@ -31,12 +31,15 @@ public class NewsCommentController {
      */
     @RequestMapping("allComment")
     public Object allComment(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
-                                         Integer pageNum){
+                                         Integer pageNum,HttpSession session){
+        Long articleId = (Long)session.getAttribute("articleId");
+       //测试
+        articleId=(long)1;
         //一页有多少条数据
         int defaultPageSize=2;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum,defaultPageSize);
-        List<CommentVO> commentInfos = newsCommentService.allComment();
+        List<CommentVO> commentInfos = newsCommentService.allComment(articleId);
         PageInfo<CommentVO> commentInfoPageInfo = new PageInfo<CommentVO>(commentInfos);
         return commentInfoPageInfo;
     }
@@ -102,4 +105,34 @@ public class NewsCommentController {
         return newsCommentService.deleteCommentByComId(comId);
     }
 
+    @RequestMapping("addLoveComment")
+    public Object addLoveComment(@RequestBody CommentInfo commentInfo , HttpSession session){
+        UserInfo user = (UserInfo) session.getAttribute("userInfo");
+
+//       if (user==null){
+//           return "login";
+//       }
+
+        commentInfo.setUserId(1);
+        System.out.println(commentInfo);
+        if (commentInfo==null){
+            return false;
+        }
+        return newsCommentService.addLoveComment(commentInfo);
+    }
+
+
+    @RequestMapping("checkLoveComment")
+    public Object checkLoveComment(@RequestBody CommentInfo commentInfo , HttpSession session){
+        UserInfo user = (UserInfo) session.getAttribute("userInfo");
+//       if (user==null){
+//           return "login";
+//       }
+        commentInfo.setUserId(1);
+        System.out.println(commentInfo);
+        if (commentInfo==null){
+            return false;
+        }
+        return newsCommentService.checkLoveComment(commentInfo);
+    }
 }

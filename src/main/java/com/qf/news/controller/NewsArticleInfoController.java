@@ -2,6 +2,8 @@ package com.qf.news.controller;
 
 
 import com.qf.news.pojo.ArticleInfo;
+import com.qf.news.pojo.LoveArticle;
+import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.NewsArticleInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
@@ -79,9 +82,24 @@ public class NewsArticleInfoController {
     //根据articleId查询编辑的新闻显示到预览页面
     @RequestMapping("getReleaseInfoById")
     @ResponseBody
-    public ArticleInfo getReleaseInfoById(@RequestParam int articleId){
+    public ArticleInfo getReleaseInfoById(@RequestParam int articleId,
+                                          HttpSession session){
+//        long articleId1 = (Long)session.getAttribute("articleId");
         return newsArticleInfoService.getReleaseInfoById(articleId);
     }
+
+    @RequestMapping("getArticleAndLoveNumAndComNum")
+    @ResponseBody
+    public Object getArticleAndLoveNumAndComNum( HttpSession session){
+//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//        long articleId = (Long)session.getAttribute("articleId");
+//        if (userInfo.getUserId()==0||articleId==0){
+//          return false;
+//      }
+//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(userInfo.getUserId(),articleId);
+        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1,1);
+    }
+
 
     //用户在前台输入新闻添加到数据库
     @RequestMapping("commitArticle")
@@ -188,6 +206,18 @@ public class NewsArticleInfoController {
     @ResponseBody
     public boolean uploadCover(@RequestBody ArticleInfo articleInfo){
         return newsArticleInfoService.uploadCover(articleInfo);
+    }
+
+    @RequestMapping("loveArticle")
+    @ResponseBody
+    public boolean loveArticle(HttpSession session){
+        //        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//        long articleId = (Long)session.getAttribute("articleId");
+//        if (userInfo.getUserId()==0||articleId==0){
+//          return false;
+//      }
+//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(userInfo.getUserId(),articleId);
+        return newsArticleInfoService.loveArticle(1,1);
     }
 
 }

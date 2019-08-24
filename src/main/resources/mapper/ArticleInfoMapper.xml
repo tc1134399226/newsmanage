@@ -34,5 +34,4 @@
         select * from article a,type t where  a.typeId=t.typeId and a.status = 2 and a.articleId=#{articleId}
     </select>
 
-
 </mapper>

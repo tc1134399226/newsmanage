@@ -101,4 +101,13 @@ public class NewsArticleController {
         }
         return newsArticleService.deleteMyDraftByArticleId(articleId);
     }
+    @RequestMapping("getcomNumAndLoveNum")
+    public Object getcomNumAndLoveNum(@RequestParam Long articleId){
+        if (articleId==0){
+            return false;
+        }
+        return newsArticleService.getcomNumAndLoveNum(articleId);
+    }
+
+
 }

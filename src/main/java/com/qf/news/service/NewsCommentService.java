@@ -2,6 +2,7 @@ package com.qf.news.service;
 
 
 import com.qf.news.pojo.CommentInfo;
+import com.qf.news.pojo.LoveComment;
 import com.qf.news.vo.CommentVO;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface NewsCommentService {
      * 获取所有的评论
      * @return
      */
-    public List<CommentVO> allComment();
+    public List<CommentVO> allComment(Long articleId);
 
     /**
      * 添加评论
@@ -32,4 +33,17 @@ public interface NewsCommentService {
      * @return
      */
     public CommentInfo getCommentByComId(long comId);
+
+    /**
+     * 点赞(或取消点赞)
+     * @param commentInfo
+     * @return
+     */
+    public boolean addLoveComment(CommentInfo commentInfo);
+    /**
+     * 检测这个用户是否已经点过赞
+     * @param commentInfo
+     * @return
+     */
+    public boolean checkLoveComment(CommentInfo commentInfo);
 }
