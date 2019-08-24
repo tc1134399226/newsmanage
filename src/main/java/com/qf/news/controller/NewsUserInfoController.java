@@ -2,6 +2,7 @@ package com.qf.news.controller;
 
 
 import com.qf.news.pojo.UserInfo;
+import com.qf.sysuser.service.SysUserService;
 import com.qf.news.service.NewsUserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -78,6 +79,8 @@ public class NewsUserInfoController {
         System.out.println(userInfo);
         return this.userInfoService.editUserInfoById(userInfo);
     }
+
+
 
 
     //头像上传存储

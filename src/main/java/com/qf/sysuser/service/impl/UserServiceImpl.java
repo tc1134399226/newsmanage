@@ -115,6 +115,8 @@ public class UserServiceImpl implements SysUserService {
     }
 
 
+
+
     /**
      *  初始化用户菜单
      * @param user

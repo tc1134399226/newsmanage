@@ -140,7 +140,7 @@
 			success : function(result) {
 				console.log(result);
 				if(result != null){
-					window.location.href = "admin/main.html";
+					window.location.href = "admin/main.html?userId="+result.userId;
 					// window.location.href="userInfo.html?userId="+result.userId;
 					// window.location.href="userInfo.html?userId="+result.userId;
 				}else{

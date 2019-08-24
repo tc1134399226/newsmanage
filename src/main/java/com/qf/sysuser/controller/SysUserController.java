@@ -22,7 +22,6 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
-
   /*
     @RequestMapping("/registerUser")
     @ResponseBody
