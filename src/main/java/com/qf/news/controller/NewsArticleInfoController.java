@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -169,4 +170,16 @@ public class NewsArticleInfoController {
         return newsArticleInfoService.loveArticle(1,1);
     }
 
+    //显示新闻
+    @RequestMapping("fileshow")
+    @ResponseBody
+    public void showload(String filename,HttpServletResponse response) throws Exception{
+        File file = new File("static/upload",filename);
+        byte[] bs = null;
+        FileInputStream is = new FileInputStream(file);
+        bs = new byte[is.available()];
+        int read = is.read(bs);
+        response.getOutputStream().write(bs,0,read);
+        is.close();
+    }
 }
