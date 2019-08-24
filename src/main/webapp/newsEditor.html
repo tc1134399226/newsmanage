@@ -44,7 +44,11 @@
 
     body{ padding-bottom:50px;}
     .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
-        height:50px; background-color:#AAAAAA; z-index:9999;}
+        height:50px; z-index:9999;}
+
+
+
+
 </style>
 <!--<div class="header"></div>-->
 <!--<div class="main"></div>-->
@@ -116,14 +120,55 @@
 
 
     <div id="editor"style="max-width:800px;margin:50px;" class="editorClass">
+        <div id="contentStr" style="text-align: left">
+
+        </div>
+    </div>
+
+<!--<div id="dropzoneDiv" class="dropzone"style="max-width:800px;margin:50px;">-->
+
+<!--</div>-->
+
+<!--<div id="coverDiv" class="coverPictureDiv" style="width:210px;height:150px;float:left;">-->
+    <!--<img  src="" id="cover">-->
+<!--</div>-->
+
+<div align="center" id="textDiv" class="lastDiv">
+    <button type="button" class="btn btn-success" onclick="commitArticle()"><i class="glyphicon glyphicon-edit"></i>预览</button>
+    <button type="button" class="btn btn-danger" onclick="checkCommit()"><i class="glyphicon glyphicon-refresh"></i> 确认提交</button>
+
+</div>
+
+
+<div>
+    <!--<div class="form-group" style="width:210px;height:150px;float:left;">-->
+        <!--<label >用户头像</label>-->
+        <!--<img  src="" id="icon">-->
+
+    <!--</div>-->
+    <!--<div id="coverDiv" class="coverPictureDiv" style="width:210px;height:150px;float:left;">-->
+        <!--<img  src="" id="cover">-->
+    <!--</div>-->
+
+    <div style="width:100px;height:150px;float:left;">
 
     </div>
 
-<div id="dropzoneDiv" class="dropzone"style="max-width:800px;margin:50px;"></div>
+    <div class="form-group has-success has-feedback" align="left" style="float:left;" >
+        <div id="dropzoneDiv" class="dropzone">
+            <img  src="" id="cover" width="150" height="150">
+        </div>
+        <input type="hidden" id="imgUrl"/>
+    </div>
 
-<div align="center" id="textDiv" class="lastDiv">
-    <button type="button" class="btn btn-success" onclick="commitArticle()"><i class="glyphicon glyphicon-edit"></i> 提交</button>
-    <button type="button" class="btn btn-danger" onclick="getArticleId(content)"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+
+    <div style="width:100px;height:150px;float:left;">
+
+    </div>
+
+    <div id="coverDiv" class="coverPictureDiv" style="width:100px;height:150px;float:left;">
+        <img  src="" id="cover" width="150" height="150">
+    </div>
 
 </div>
 
@@ -135,7 +180,7 @@
     // var userId=str.split("=")[1];
 
     Dropzone.options.dropzoneDiv = {
-        url: "news/upload", // 文件提交地址
+        url: "fileUpAndDown/upload", // 文件提交地址
         method: "post",  // 也可用put
         paramName: "dropzFile", // 默认为file
         maxFiles: 1,// 一次性上传的文件数量上限
@@ -184,14 +229,6 @@
 </script>
 
 
-    <!--<div align="center" id="textDiv" class="lastDiv">-->
-        <!--<button type="button" class="btn btn-success" onclick="commitArticle()"><i class="glyphicon glyphicon-edit"></i> 提交</button>-->
-        <!--<button type="button" class="btn btn-danger" onclick="getArticleId(content)"><i class="glyphicon glyphicon-refresh"></i> 重置</button>-->
-
-    <!--</div>-->
-
-
-
     <script>
 
         var content;
@@ -210,7 +247,7 @@
         // editor.customConfig.uploadImgShowBase64 = true
         // 上传图片到服务器
         editor.customConfig.uploadFileName = 'editorFile'; //设置文件上传的参数名称
-        editor.customConfig.uploadImgServer = 'news/upload1'; //设置上传文件的服务器路径
+        editor.customConfig.uploadImgServer = 'news/wangEditor'; //设置上传文件的服务器路径
         editor.customConfig.uploadImgMaxSize = 3 * 512 * 1024; // 将图片大小限制为 3M
         //自定义上传图片事件
         editor.customConfig.uploadImgHooks = {
@@ -253,9 +290,6 @@
 
     </script>
 
-    <!--<button type="button" class="btn btn-success" onclick="commitArticle()"><i class="glyphicon glyphicon-edit"></i> 提交</button>-->
-    <!--<button type="button" class="btn btn-danger" onclick="getArticleId(content)"><i class="glyphicon glyphicon-refresh"></i> 重置</button>-->
-
 
     <script type="text/javascript">
 
@@ -264,8 +298,48 @@
         //
         // console.log(userName+":"+password);
 
-        //定义articleId
-        var articleId;
+
+        var str=window.location.search;
+        var articleId=str.split("=")[1];
+
+
+        $.ajax({
+            //请求方式
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/getReleaseInfoById?articleId="+articleId,
+            //数据，json字符串
+            //请求成功
+            success : function(result) {
+
+                console.log(result);
+                $("#mainTitle").val(result.mainTitle);
+                $("#subTitle").val(result.subTitle);
+                // var coverSrc=new Image();
+                //
+                // coverSrc.src=result.cover;
+                //
+                // $("#coverImg").append(coverSrc);
+
+                strCon=result.content;
+
+                //整体拼接到div里面去
+                $("#contentStr").append(strCon);
+
+                $("#cover").attr('src',result.cover);
+
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+
 
         function getArticleId(content) {
             $.ajax({
@@ -303,14 +377,6 @@
 
         function commitArticle() {
 
-            //定义articleId
-            // var articleId;
-
-            // var articleName = $("#articleName").val();
-            // if(articleName.length<1){
-            //     alert("新闻类型不能为空");
-            //     return ;
-            // }
 
             var status = $("#status").val();
             var areaId = $("#areaId").val();
@@ -412,6 +478,100 @@
             });
             //window.location.href="个人主页";
         }
+
+
+
+        function updateStatus() {
+            $.ajax({
+                //请求方式
+                type : "GET",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType:"json",
+                //请求地址
+                url : "news/updateStatus?articleId="+articleId,
+                //数据，json字符串
+                //请求成功
+                success : function(result) {
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+
+        }
+
+
+        function checkCommit() {
+
+
+            var status = $("#status").val();
+            var areaId = $("#areaId").val();
+            //获取类型Id
+            var typeId = $("#typeId").val();
+            var mainTitle = $("#mainTitle").val();
+            if(mainTitle.length<1){
+                alert("主标题不能为空");
+                return ;
+            }else if (mainTitle.length>40){
+                alert("标题字数不能超过20个");
+                return ;
+            }
+            var status = $("#status").val();
+            var subTitle = $("#subTitle").val();
+            // console.log(userName+":"+password);
+            if(subTitle.length<1){
+                alert("副标题");
+                return ;
+            }else if(subTitle.length>40){
+                alert("标题字数不能超过20个");
+                return ;
+            }
+
+            $.ajax({
+                //请求方式
+                type : "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType:"json",
+                //请求地址
+                url : "news/secondCommitArticle",
+                //数据，json字符串
+                data : JSON.stringify(
+                    {
+                        "areaId":areaId,
+                        "typeId":typeId,
+                        "cover":img1,
+                        "mainTitle":mainTitle,
+                        "subTitle":subTitle,
+                        "content":editor.txt.html(),
+                        "articleId":articleId
+                    }
+                ),
+                //请求成功
+                success : function(result) {
+                    console.log(result);
+                    if(result){
+                        console.log(result);
+
+                        updateStatus();
+                    }else{
+                        // console.log(e);
+                    }
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+        }
+
+
 
     </script>
 </body>
