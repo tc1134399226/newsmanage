@@ -2,7 +2,9 @@ package com.qf.news.service.impl;
 
 import com.qf.news.dao.NewsArticleInfoMapper;
 import com.qf.news.pojo.ArticleInfo;
+import com.qf.news.pojo.LoveArticle;
 import com.qf.news.service.NewsArticleInfoService;
+import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -44,5 +46,34 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
 
     public boolean uploadCover(ArticleInfo articleInfo) {
         return newsArticleInfoMapper.uploadCover(articleInfo)>0;
+    }
+
+    /**
+     * 获取文章信息和文章热度
+     * @param userId
+     * @param articleId
+     * @return
+     */
+    public ArticleTypeVO getArticleAndLoveNumAndComNum(long userId, long articleId){
+        return newsArticleInfoMapper.getArticleAndLoveNumAndComNum(userId,articleId);
+    }
+    /**
+     * 用户点赞(取消)
+     * @param userId
+     * @param articleId
+     * @return
+     */
+    public boolean loveArticle(long userId, long articleId) {
+       //判断用户是否点赞过这篇文章
+        LoveArticle loveArticleByArticleIdAndUserId = newsArticleInfoMapper.getLoveArticleByArticleIdAndUserId(userId, articleId);
+        System.out.println(111);
+        System.out.println(loveArticleByArticleIdAndUserId);
+        if (loveArticleByArticleIdAndUserId==null){
+            System.out.println(222);
+           return newsArticleInfoMapper.addLoveArticle(userId, articleId)>0;
+        }else {
+            System.out.println(333);
+            return newsArticleInfoMapper.updateLoveArticle(loveArticleByArticleIdAndUserId)>0;
+        }
     }
 }

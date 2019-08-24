@@ -13,7 +13,9 @@ public class MessageVO {
     private int status;
     private Timestamp createTime;
     private String nickName;
-
+    private long repId;
+    private long comId;
+    private String mgeUrl;
     public String getCreateTime() {
         return createTime.toString();
     }

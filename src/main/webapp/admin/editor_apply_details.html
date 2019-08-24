@@ -17,11 +17,20 @@
     <link href="../wangeditor/wangEditor.min.css"/>
     <script src="../wangeditor/wangEditor.min.js"></script>
     <script src="../jquery/jquery-2.1.1.min.js"></script>
-
+    <style>
+        .cont{
+            float: right;
+            width: 82%;
+            height: 100%;
+        }
+    </style>
 
 </head>
 <body>
-
+<div class="col-sm-3 col-md-2 sidebar">
+    <div class="tree">
+    </div>
+</div>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -70,7 +79,7 @@
 
 
 <script type="text/javascript">
-
+    $(".tree").load("menu.html");
     //定义全局变量
     var str1;
     var str2;

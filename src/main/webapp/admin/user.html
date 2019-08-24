@@ -146,7 +146,6 @@
 				if (result) {
 					$("#dataTable tbody").empty();
 					$(result).each(function(index,item){
-						console.log(item);
 						var trStr = "<tbody>";
 						trStr = "<tr id='tr"+item.userid+"'>";
 						//获取id并拼接
@@ -173,18 +172,14 @@
 	//初始化页面
 	function initPage(){
 		var pageNum=window.location.search.split("=")[1];
-		console.log("111"+pageNum)
 		if (pageNum==undefined){
-			console.log("111")
 			pageNum=1;
 		}
-		console.log(pageNum)
 		var requestURL="sysuser/listAllUserInfo";
 		if(pageNum==null){
 			pageNum=1
 		}
 		requestURL+="?pageNum="+pageNum;
-		console.log(requestURL)
 		//1.从后台的listAllUserInfo接口获取数据
 		$.ajax({
 			//请求方式
@@ -203,7 +198,6 @@
 				$(result.list).each(function(index,item){
 					//  content
 					$(".pagination").html("");
-					console.log(item);
 					var trStr = "<tbody>";
 					trStr = "<tr id='tr"+item.userid+"'>";
 					//获取id并拼接
@@ -227,8 +221,6 @@
 					var	splicPage="<li><a href=\"user.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
 
 				}
-				console.log(111)
-				console.log(result.pages)
 				for(var i=1;i<=result.pages;i++){
 					splicPage +="<li><a href=\"user.html?pageNum="+i+"\">"+i+"</a></li>";
 				}
