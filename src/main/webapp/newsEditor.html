@@ -594,6 +594,7 @@
             //获取类型Id
             var typeId = $("#typeId").val();
             var mainTitle = $("#mainTitle").val();
+            var status = 1;
             if(mainTitle.length<1){
                 alert("主标题不能为空");
                 return ;
@@ -630,7 +631,8 @@
                         "mainTitle":mainTitle,
                         "subTitle":subTitle,
                         "content":editor.txt.html(),
-                        "articleId":articleId
+                        "articleId":articleId,
+                        "status":status
                     }
                 ),
                 //请求成功

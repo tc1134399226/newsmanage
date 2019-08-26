@@ -32,7 +32,15 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
 
     //根据输入的新闻内容查询获取articleId
     public ArticleInfo getArticleInfoIdById(ArticleInfo articleInfo) {
-        return newsArticleInfoMapper.getArticleInfoIdById(articleInfo);
+        try{
+            ArticleInfo articleInfoIdById = newsArticleInfoMapper.getArticleInfoIdById(articleInfo);
+            return articleInfoIdById;
+        }catch (Exception e){
+            articleInfo.setArticleId(0);
+            articleInfo.setContent("该文章已存在");
+            return articleInfo;
+        }
+
     }
 
     //修改新闻状态
