@@ -12,6 +12,8 @@
 	<link rel="stylesheet" type="text/css" href="css/webbase.css" />
 	<link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
 
+
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
 	<script src="jquery/jquery-2.1.1.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 	<script src="script/docs.min.js"></script>
@@ -144,16 +146,19 @@
 
 							<dd ><a href="userhome.html"   >我的收藏</a></dd>
 							<hr>
-							<dd><a href="userhome.html" >我的新闻</a></dd>
+
+							<dd><a id="1" style="display:none" href="userhome.html" >我的新闻</a></dd>
 
 						</dl>
 						<hr>
 						<dl>
-							<dt><i>·</i> 权限申请</dt>
+							<dt><i>·</i> 权限一览</dt>
 
-							<dd><a href="editorapply.html" >申请小编</a></dd>
+							<dd><a id="2" style="display:none" href="editorapply.html" >申请小编</a></dd>
 							<hr>
-							<dd><a href="home-person-footmark.html" >新闻审核</a></dd>
+                            <span v-if="judge">
+							<dd><a id="3" style="display:none" href="home-person-footmark.html" >发布新闻</a></dd>
+                            </span>
 						</dl>
 						<hr>
 						<dl>
@@ -161,7 +166,7 @@
 
 							<dd><a href="home-setting-info.html" class="list-active">信息修改</a></dd>
 							<hr>
-							<dd><a href="home-setting-safe.html" >安全管理</a></dd>
+
 							<hr>
 							<hr>
 							<hr>
@@ -314,7 +319,8 @@
     //获取超链接地址栏上的userId
     var params = window.location.search;
     var id = params.split("=")[1];
-    // alert(id);
+    var status;
+
 	if (id==null) {
 		id=0;
 	}
@@ -322,6 +328,7 @@
     $.ajax({
         //请求方式GET/POST
         type: "GET",
+        async: false,
         //请求的媒体类型
         contentType: "application/json;charset=UTF-8",
         //接受数据类型
@@ -338,7 +345,11 @@
             $("#sex").val(result.sex);
             $("#idCard").val(result.idCard);
             $("#icon").attr('src',result.icon);
-            $("#status").val(result.status);
+            if (result) {
+                 status = result.status;
+                return ;
+            }
+
 //              if(result){
 //                  alert("删除成功");
 //                  initPage();
@@ -387,6 +398,17 @@
         //2.跳转
         window.location.href = "userInfo.html?userId="+id;
     }
+
+
+
+    if(status==2) {
+        $("#1").show()
+        $("#3").show()
+    }else (
+        $("#2").show()
+    )
+
+
 
 </script>
 
