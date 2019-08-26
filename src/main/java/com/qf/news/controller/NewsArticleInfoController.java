@@ -131,7 +131,11 @@ public class NewsArticleInfoController {
     @RequestMapping("secondCommitArticle")
     @ResponseBody
     public boolean secondCommitArticle(@RequestBody ArticleInfo articleInfo){
-        return newsArticleInfoService.secondCommitArticle(articleInfo);
+        if (articleInfo.getArticleId()==0){
+            return newsArticleInfoService.commitArticle(articleInfo);
+        }else {
+            return newsArticleInfoService.secondCommitArticle(articleInfo);
+        }
     }
 
     /**

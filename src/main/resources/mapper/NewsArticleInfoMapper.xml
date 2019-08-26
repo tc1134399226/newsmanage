@@ -4,18 +4,18 @@
 <mapper namespace="com.qf.news.dao.NewsArticleInfoMapper">
 
 <select id="getArticleAndLoveNumAndComNum" parameterType="long" resultType="com.qf.news.vo.ArticleTypeVO">
-SELECT tb1.*,b.articleLoveNum ,c.timeArticleLoveNum,d.timeComNum from (
-(SELECT a.*,
- IFNULL(la.status,0) articleLoveStatus,COUNT(c.comId) comNum
-from article a LEFT JOIN love_article la on la.articleId=a.articleId
-LEFT JOIN comment c on c.articleId=a.articleId
-where a.articleId=#{param2}  and la.userId=#{param1} ) tb1,
-(SELECT COUNT(la.articleId) articleLoveNum from article a LEFT JOIN love_article la on la.articleId= a.articleId
-where a.articleId=#{param2} and la.status=1 ) b,
-(SELECT COUNT(la.articleId) timeArticleLoveNum from article a LEFT JOIN love_article la on la.articleId= a.articleId
-where a.articleId=#{param2} and la.status=1 and la.updateTime >= now()-interval 15 day )c,
-(select COUNT(comId) timeComNum from comment
-where articleId=#{param2} and createTime >= now()-interval 15 day)d
+        SELECT tb1.*,b.articleLoveNum ,c.timeArticleLoveNum,d.timeComNum from (
+        (SELECT a.*,
+        IFNULL(la.status,0) articleLoveStatus,COUNT(c.comId) comNum
+        from article a LEFT JOIN love_article la on la.articleId=a.articleId
+        LEFT JOIN comment c on c.articleId=a.articleId
+        where a.articleId=#{param2}  and la.userId=#{param1} ) tb1,
+        (SELECT COUNT(la.articleId) articleLoveNum from article a LEFT JOIN love_article la on la.articleId= a.articleId
+        where a.articleId=#{param2} and la.status=1 ) b,
+        (SELECT COUNT(la.articleId) timeArticleLoveNum from article a LEFT JOIN love_article la on la.articleId= a.articleId
+        where a.articleId=#{param2} and la.status=1 and la.updateTime >= now()-interval 15 day )c,
+        (select COUNT(comId) timeComNum from comment
+        where articleId=#{param2} and createTime >= now()-interval 15 day)d
 )
 </select>
 
