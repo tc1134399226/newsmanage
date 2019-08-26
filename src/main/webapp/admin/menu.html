@@ -63,6 +63,18 @@
                 str+="</li>"
                 $(".list-group").append(str);
             })
+            $(function () {
+                $(".list-group-item").click(function(){
+                    if ( $(this).find("ul") ) {
+                        $(this).toggleClass("tree-closed");
+                        if ( $(this).hasClass("tree-closed") ) {
+                            $("ul", this).hide("slow");
+                        } else {
+                            $("ul", this).show("fast");
+                        }
+                    }
+                });
+            });
         },
 
         //请求失败，包含具体的错误信息
@@ -74,21 +86,5 @@
     });
 
 </script>
-
-<script>
-    $(function () {
-        $(".list-group-item").click(function(){
-            if ( $(this).find("ul") ) {
-                $(this).toggleClass("tree-closed");
-                if ( $(this).hasClass("tree-closed") ) {
-                    $("ul", this).hide("fast");
-                } else {
-                    $("ul", this).show("fast");
-                }
-            }
-        });
-    });
-</script>
-<!--
 </body>
 </html>
