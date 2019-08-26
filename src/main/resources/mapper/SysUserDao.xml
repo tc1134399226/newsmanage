@@ -29,7 +29,7 @@
 
     <update id="updateUser">
         update sysuser set account=#{account},
-         email = #{email},mobile=#{mobile},areaCode=#{areaCode},status=#{status}
+         email = #{email},mobile=#{mobile},areaCode=#{areaCode},status=#{status},icon=#{icon}
          where userid = #{userid}
     </update>
 
@@ -88,5 +88,6 @@
     <select id="sysUserLogin" parameterType="com.qf.sysuser.pojo.User" resultType="com.qf.sysuser.pojo.User">
         select * from sysuser where username=#{username} and password=#{password}
     </select>
+
 
 </mapper>
