@@ -114,7 +114,9 @@
             //展示封面图
             if (result.cover!=null&&result.cover!="") {
                 var i=new Image();
-                i.src=result.cover;
+                i.height =260;
+                i.width = 400;
+                i.src="http://localhost:8080/newsmanage/"+result.cover;
                 $("#cover").append(i);
             }else{
                 var j="<p>您还没有上传图片!</p>";

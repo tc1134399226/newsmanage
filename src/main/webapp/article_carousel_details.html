@@ -75,7 +75,7 @@
         //接受数据类型
         dataType:"json",
         //请求地址
-        url : "admin/sysuser/getArticleCarouselById?articleId="+articleId,
+        url : "sysuser/getArticleCarouselById?articleId="+articleId,
         //数据，json字符串
         //请求成功
         success : function(result) {
@@ -84,7 +84,9 @@
             //展示封面图
             if (result.cover!=null&&result.cover!="") {
                 var i=new Image();
-                i.src=result.cover;
+                i.height =260;
+                i.width = 400;
+                i.src="http://localhost:8080/newsmanage/"+result.cover;
                 $("#cover").append(i);
             }else{
                 $("#cover").empty();

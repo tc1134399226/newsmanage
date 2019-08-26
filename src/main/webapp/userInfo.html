@@ -144,20 +144,20 @@
                     <dl>
                         <dt><i>·</i> 个人空间</dt>
 
-                        <dd ><a href="userhome.html"   >我的收藏</a></dd>
+                        <dd ><a href="userhome.html"  >我的收藏</a></dd>
                         <hr>
 
-                        <dd><a id="1" style="display:none" href="userhome.html" >我的新闻</a></dd>
+                        <dd><a id="1" style="display:none" href="userhome.html">我的新闻</a></dd>
 
                     </dl>
                     <hr>
                     <dl>
                         <dt><i>·</i> 权限一览</dt>
 
-                        <dd><a id="2" style="display:none" href="editorapply.html" >申请小编</a></dd>
+                        <dd><a id="2" style="display:none" href="">申请小编</a></dd>
                         <hr>
                         <span v-if="judge">
-							<dd><a id="3" style="display:none" href="home-person-footmark.html" >发布新闻</a></dd>
+							<dd><a id="3" style="display:none" href="">发布新闻</a></dd>
                             </span>
                     </dl>
                     <hr>
@@ -320,7 +320,6 @@
     var params = window.location.search;
     var id = params.split("=")[1];
     var status;
-
     if (id==null) {
         id=0;
     }
@@ -338,7 +337,7 @@
         //数据，json字符串
         //请求成功
         success: function (result) {
-            console.log(result);
+            console.log(result.icon);
             $("#userId").val(result.userId);
             $("#nickName").val(result.nickName);
             $("#mobile").val(result.mobile);
@@ -347,7 +346,7 @@
             $("#icon").attr('src',result.icon);
             if (result) {
                 status = result.status;
-                return ;
+
             }
 
 //              if(result){
@@ -394,7 +393,7 @@
             error: function (e) {
                 console.error(e);
             }
-        })
+        });
         //2.跳转
         window.location.href = "userInfo.html?userId="+id;
     }
@@ -402,13 +401,19 @@
         // 根据状态展示左侧功能栏位
 
     if(status==2) {
-        $("#1").show()
+        $("#1").show();
         $("#3").show()
-    }else (
+    }else {
         $("#2").show()
-    )
+    }
 
+    $("#2").click(function(){
+        $(this).attr("href","editorapply.html?userId="+id);//用jquery的方法改变href属性值
+    });
 
+    $("#3").click(function(){
+        $(this).attr("href","newsEditor.html?userId="+id);//用jquery的方法改变href属性值
+    });
 
 </script>
 
@@ -560,7 +565,7 @@
             error: function (e) {
                 console.error(e);
             }
-        })
+        });
         //2.跳转
         window.location.href = "userInfo.html?userId="+id;
     }

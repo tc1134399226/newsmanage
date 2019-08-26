@@ -56,6 +56,7 @@
       var img2;
       var str=window.location.search;
       var userId=str.split("=")[1];
+      console.log(userId);
 
         Dropzone.options.dropzoneDiv1 = {
             url: "fileUpAndDown/upload", // 文件提交地址
@@ -86,7 +87,7 @@
                     var status = data.status;
                     if(status==200){
                         var filePath = data.filePath;
-                        $("#imgUrl").val(filePath);
+                        $("#dropzoneDiv1").val(filePath);
                     }
 
                     console.log(file);
@@ -132,7 +133,7 @@
                     img2= data.filePath;
                     if(status==200){
                         var filePath = data.filePath;
-                        $("#imgUrl").val(filePath);
+                        $("#dropzoneDiv2").val(filePath);
                     }
 
                     console.log(file);
@@ -162,10 +163,11 @@
             //数据，json字符串
             //请求成功
             success : function(result) {
-              if(result!=null){
+              console.log(result);
+              if(result!=false){
                 alert("已有一个申请,请勿重复提交!");
 
-                window.location.href="userhome.html";
+                window.location.href="userInfo.html?userId="+userId;
               }else{
 
                 $.ajax({
@@ -188,25 +190,25 @@
                   ),
                   //请求成功
                   success : function(result) {
-                    alert("已提交,正在审核中,请稍后...")
+                    alert("已提交,正在审核中,请稍后...");
                     console.log(result);
 
                   },
                   //请求失败，包含具体的错误信息
                   error : function(e){
-                    alert("申请失败!")
+                    alert("申请失败!");
                     console.log(e.status);
                     console.log(e.responseText);
                   }
                 });
 
-                  window.location.href="userhome.html";
+                  window.location.href="userInfo.html?userId="+userId;
               }
 
             },
             //请求失败，包含具体的错误信息
             error : function(e){
-
+              console.error(e);
               console.log(e.status);
               console.log(e.responseText);
             }
