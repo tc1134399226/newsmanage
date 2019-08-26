@@ -139,16 +139,16 @@
                         <dl>
 							<dt><i>·</i> 个人空间</dt>
 
-							<dd ><a href="home-index.html"   >我的收藏</a></dd>
+							<dd ><a href="userhome.html"   >我的收藏</a></dd>
 							<hr>
-							<dd><a href="home-order-pay.html" >我的新闻</a></dd>
+							<dd><a href="userhome.html" >我的新闻</a></dd>
 
 						</dl>
 						<hr>
 						<dl>
 							<dt><i>·</i> 权限申请</dt>
 
-							<dd><a href="home-person-collect.html" >申请小编</a></dd>
+							<dd><a href="editorapply.html" >申请小编</a></dd>
 							<hr>
 							<dd><a href="home-person-footmark.html" >新闻审核</a></dd>
 						</dl>
@@ -175,10 +175,9 @@
 							</div>
 
                             <div>
-								<div class="form-group" style="width:210px;height:150px;float:left;">
-									<label >用户头像</label>
-									<img  src="" id="icon">
-
+									<div class="form-group" style="width:210px;height:150px;float:left;">
+										<label >用户头像</label>
+										<img  src="" id="icon">
 								</div>
 
 								<div class="form-group has-success has-feedback" align="left" style="float:left;" >
@@ -313,7 +312,9 @@
     var params = window.location.search;
     var id = params.split("=")[1];
     // alert(id);
-
+	if (id==null) {
+		id=0;
+	}
     //通过ajax从后台获取。
     $.ajax({
         //请求方式GET/POST
@@ -343,8 +344,8 @@
 //              }
         },
         error: function (e) {
-            console.error(e);
-//              console.log(e);
+            // console.error(e);
+             console.log(e);
         }
     });
 
