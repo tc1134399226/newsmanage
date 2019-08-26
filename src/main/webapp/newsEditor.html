@@ -151,7 +151,8 @@
     </div>
 
     <div class="form-group has-success has-feedback" align="left" style="float:left;" >
-        <div id="dropzoneDiv" class="dropzone">
+        <div id="bottom-text" class="text-info">点击上传封面图</div>
+        <div id="dropzoneDiv" class="dropzone" style="display: none">
 <!--            <img  src="" id="cover" width="150" height="150">-->
         </div>
         <input type="hidden" id="imgUrl"/>
@@ -165,10 +166,18 @@
     <div id="coverDiv" class="coverPictureDiv" style="width:100px;height:150px;float:left;">
 <!--        <img  src="" id="cover" width="150" height="150">-->
     </div>
+    <div></div>
 
 </div>
 
 <script>
+
+
+    $(function(){
+        $("#bottom-text").click(function(){//按钮绑定点击事件
+            $("#dropzoneDiv").show();//文本框显示出来  注：之前设置display:none的样式
+        });
+    });
 
 
    var img1;
