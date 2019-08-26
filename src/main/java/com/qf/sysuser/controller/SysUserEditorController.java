@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-@RequestMapping("sysuser")
+@RequestMapping("admin/sysuser")
 @RestController
 public class SysUserEditorController {
     @Autowired

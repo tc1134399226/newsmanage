@@ -37,7 +37,7 @@ public class SysUserArticleInfoController {
      */
     @RequestMapping("getAllArticleInfo")
     public Object getAllArticleInfo(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum){
-        int pageSize=2;//每页显示记录数
+        int pageSize=10;//每页显示记录数
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, pageSize);
         //获取所有申请的文章信息
@@ -45,7 +45,7 @@ public class SysUserArticleInfoController {
         //将获取的ArticleInfo信息封装到PageInfo中
         PageInfo<ArticleInfoVO> ArticleInfoPageInfo = new PageInfo<ArticleInfoVO>(allArticleInfoVO);
         return ArticleInfoPageInfo;
-    };
+    }
 
     /**
      * 根据文章id获取需要审核的文章详细信息
@@ -64,8 +64,7 @@ public class SysUserArticleInfoController {
      */
     @RequestMapping("getArticleInfo")
     public Object getArticleInfo(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum,@RequestBody ArticleInfo articleInfo){
-        int pageSize=2;//每页显示记录数
-        System.out.println(articleInfo);
+        int pageSize=5;//每页显示记录数
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, pageSize);
         //获取所有申请的文章信息
@@ -73,7 +72,7 @@ public class SysUserArticleInfoController {
         //将获取的ArticleInfo信息封装到PageInfo中
         PageInfo<ArticleInfoVO> ArticleInfoPageInfo = new PageInfo<ArticleInfoVO>(allArticleInfoVO);
         return ArticleInfoPageInfo;
-    };
+    }
 
     /**
      * 根据文章id获取已通过审核的文章详细信息
