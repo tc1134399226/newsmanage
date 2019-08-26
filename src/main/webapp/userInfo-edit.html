@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/login.css">
-    <!--<link rel="stylesheet" href="dropzone/dropzone.min.css" />-->
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
 
 
 </head>
@@ -188,10 +188,23 @@
                             <img  src="" id="icon">
                         </div>
 
-                        <div class="form-group has-success has-feedback" align="left" style="float:left;" >
-                            <div id="dropzoneDiv" class="dropzone"></div>
-                            <input type="hidden" id="imgUrl"/>
+                        <div class="container">
+
+                            <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">点此上传头像</button>
+                            <div id="demo" class="collapse">
+                                <div id="dropzoneDiv" class="dropzone"></div>
+                                <input type="hidden" id="imgUrl"/>
+                            </div>
+
+                            <!--<div class="form-group has-success has-feedback" align="left" style="float:left;" >-->
+                                <!--<div id="dropzoneDiv" class="dropzone"></div>-->
+                                <!--<input type="hidden" id="imgUrl"/>-->
+                            </div>
                         </div>
+                        <!--<div class="form-group has-success has-feedback" align="left" style="float:left;" >-->
+                            <!--<div id="dropzoneDiv" class="dropzone"></div>-->
+                            <!--<input type="hidden" id="imgUrl"/>-->
+                        <!--</div>-->
 
                     </div>
 
@@ -408,12 +421,6 @@
         $("#2").show()
     )
 
-    $("#2").click(function(){
-        $(this).attr("href","editorapply.html?userId="+id);//用jquery的方法改变href属性值
-    });
-    function jump(){
-        window.location.href = "userInfo-edit.html?userId="+id;
-    }
 
 
 </script>
