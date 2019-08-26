@@ -191,18 +191,18 @@
                   //请求成功
                   success : function(result) {
                     alert("已提交,正在审核中,请稍后...");
+                    window.location.href="userInfo.html?userId="+userId;
                     console.log(result);
 
                   },
                   //请求失败，包含具体的错误信息
                   error : function(e){
-                    alert("申请失败!");
+                    alert("申请失败!请刷新页面后重试");
                     console.log(e.status);
                     console.log(e.responseText);
                   }
                 });
 
-                  window.location.href="userInfo.html?userId="+userId;
               }
 
             },
