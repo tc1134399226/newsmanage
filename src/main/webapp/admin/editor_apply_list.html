@@ -19,10 +19,19 @@
         .pagecss{
             text-align: center;
         }
+        .cont{
+            float: right;
+            width: 82%;
+            height: 100%;
+        }
     </style>
 </head>
 <body>
-
+<div class="col-sm-3 col-md-2 sidebar">
+    <div class="tree">
+    </div>
+</div>
+<div class="cont">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -59,12 +68,12 @@
         </tr>
     </table>
 </div>
-
+</div>
 <script src="../jquery/jquery-2.1.1.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../script/docs.min.js"></script>
 <script>
-
+    $(".tree").load("menu.html");
     function initPage(){
 
         var pageNum=window.location.search.split("=")[1];

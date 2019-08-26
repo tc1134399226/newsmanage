@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>新闻详情页</title>
+    <title>新闻详情页面</title>
 
     <meta charset="GB18030">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,26 +10,22 @@
     <meta name="description" content="">
     <meta name="keys" content="">
     <meta name="author" content="">
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <link rel="stylesheet" href="../css/login.css">
-    <link rel="stylesheet" href="../dropzone/basic.min.css" />
-    <link rel="stylesheet" href="../dropzone/dropzone.min.css" />
-    <link href="../wangeditor/wangEditor.min.css"/>
-    <script src="../wangeditor/wangEditor.min.js"></script>
-    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="dropzone/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+    <link href="wangeditor/wangEditor.min.css"/>
+    <script src="wangeditor/wangEditor.min.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
 
 </head>
 <body>
-<div class="col-sm-3 col-md-2 sidebar">
-    <div class="tree">
-    </div>
-</div>
-<div>
+
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <div><a class="navbar-brand"  style="font-size:32px;">你懂得-创意产品</a></div>
+            <div><a href="index.html" class="navbar-brand"  style="font-size:32px;">新闻首页</a></div>
         </div>
     </div>
 </nav>
@@ -61,12 +57,9 @@
 </div>
 
 <hr>
-</div>
-<div  style="text-align:center;">
-    <button type="button" class='btn btn-danger btn-xs' onclick='refuse()'><i class=' glyphicon glyphicon-remove' ></i>下架</button>&nbsp;
-</div>
+
 <script type="text/javascript">
-    $(".tree").load("menu.html");
+
     var strCon1;
     var strCon2;
     var strCon3;
@@ -82,7 +75,7 @@
         //接受数据类型
         dataType:"json",
         //请求地址
-        url : "sysuser/getArticleInfoBy?articleId="+articleId,
+        url : "admin/sysuser/getArticleInfoBy?articleId="+articleId,
         //数据，json字符串
         //请求成功
         success : function(result) {
@@ -94,8 +87,7 @@
                 i.src=result.cover;
                 $("#cover").append(i);
             }else{
-                var j="<p>您还没有上传图片!</p>";
-                $("#cover").append(j);
+                $("#cover").empty();
             }
 
             strCon1=result.mainTitle;
@@ -118,44 +110,6 @@
         }
     });
 
-
-    //下架
-    function refuse() {
-        $.ajax({
-            //请求方式
-            type : "POST",
-            //请求的媒体类型
-            contentType: "application/json;charset=UTF-8",
-            //接受数据类型
-            dataType:"json",
-            //请求地址
-            url : "sysuser/updateArticleStatus",
-            //数据，json字符串
-            data : JSON.stringify(
-                {
-                    "articleId":articleId,
-                    "status":"4"
-                }
-            ),
-            //请求成功
-            success : function(result) {
-                console.log(result);
-                if(result){
-                    alert("已成功下架");
-                    window.location.href="article.html"
-                }else{
-                    alert("修改失败");
-                }
-            },
-            //请求失败，包含具体的错误信息
-            error : function(e){
-                console.error(e);
-            }
-        });
-    }
-
-
 </script>
-
 </body>
 </html>

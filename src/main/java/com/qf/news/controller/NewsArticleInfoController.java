@@ -2,6 +2,8 @@ package com.qf.news.controller;
 
 
 import com.qf.news.pojo.ArticleInfo;
+import com.qf.news.pojo.LoveArticle;
+import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.NewsArticleInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -26,11 +30,12 @@ public class NewsArticleInfoController {
     @Autowired
     NewsArticleInfoService newsArticleInfoService;
 
+
     //设置富文本编辑器(编辑文章和上传图片)
     static String UPLOAD_PATH = "/static/upload/";
     @ResponseBody
-    @RequestMapping(value = "upload1", method = RequestMethod.POST)
-    public Map<String, Object> upload1(MultipartFile editorFile, HttpServletRequest request) {
+    @RequestMapping(value = "wangEditor", method = RequestMethod.POST)
+    public Map<String, Object> wangEditor(MultipartFile editorFile, HttpServletRequest request) {
         Map<String, Object> result = new HashMap<String, Object>();
         //{属性:"值"}
         //"值"
@@ -72,19 +77,40 @@ public class NewsArticleInfoController {
         result.put("data", new String[]{serverPath + file.getName()});
         return result;
     }
+
+
+
     //根据articleId查询编辑的新闻显示到预览页面
     @RequestMapping("getReleaseInfoById")
     @ResponseBody
-    public ArticleInfo getReleaseInfoById(@RequestParam int articleId){
+    public ArticleInfo getReleaseInfoById(@RequestParam int articleId,
+                                          HttpSession session){
+//        long articleId1 = (Long)session.getAttribute("articleId");
         return newsArticleInfoService.getReleaseInfoById(articleId);
     }
+
+    @RequestMapping("getArticleAndLoveNumAndComNum")
+    @ResponseBody
+    public Object getArticleAndLoveNumAndComNum( HttpSession session){
+//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//        long articleId = (Long)session.getAttribute("articleId");
+//        if (userInfo.getUserId()==0||articleId==0){
+//          return false;
+//      }
+//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(userInfo.getUserId(),articleId);
+        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1,1);
+    }
+
 
     //用户在前台输入新闻添加到数据库
     @RequestMapping("commitArticle")
     @ResponseBody
     public boolean commitArticle(@RequestBody ArticleInfo articleInfo){
-        return newsArticleInfoService.commitArticle(articleInfo);
-
+        if (articleInfo.getArticleId()!=0){
+            return newsArticleInfoService.uploadArticle(articleInfo);
+        }else {
+            return newsArticleInfoService.commitArticle(articleInfo);
+        }
     }
 
     //根据输入的新闻内容查询获取articleId
@@ -170,7 +196,7 @@ public class NewsArticleInfoController {
         dropzFile.transferTo(destFile);
         result.put("status",200);
         //http://localhost:8080/xxxxx/xxxx.jpg
-        result.put("filePath","http://localhost:8080/static/upload/"+destFileName);
+        result.put("filePath","static/upload/"+destFileName);
         return result;
     }
 
@@ -186,4 +212,28 @@ public class NewsArticleInfoController {
         return newsArticleInfoService.uploadCover(articleInfo);
     }
 
+    @RequestMapping("loveArticle")
+    @ResponseBody
+    public boolean loveArticle(HttpSession session){
+        //        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//        long articleId = (Long)session.getAttribute("articleId");
+//        if (userInfo.getUserId()==0||articleId==0){
+//          return false;
+//      }
+//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(userInfo.getUserId(),articleId);
+        return newsArticleInfoService.loveArticle(1,1);
+    }
+
+    //显示新闻
+    @RequestMapping("fileshow")
+    @ResponseBody
+    public void showload(String filename,HttpServletResponse response) throws Exception{
+        File file = new File("static/upload",filename);
+        byte[] bs = null;
+        FileInputStream is = new FileInputStream(file);
+        bs = new byte[is.available()];
+        int read = is.read(bs);
+        response.getOutputStream().write(bs,0,read);
+        is.close();
+    }
 }

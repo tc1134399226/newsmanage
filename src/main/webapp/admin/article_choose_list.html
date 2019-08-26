@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>文章列表</title>
+    <title>文章轮播选择</title>
     <meta charset="GB18030">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,20 +17,17 @@
     <link href="../wangeditor/wangEditor.min.css"/>
     <script src="../wangeditor/wangEditor.min.js"></script>
     <script src="../jquery/jquery-2.1.1.min.js"></script>
+
     <style>
         .cont{
             float: right;
             width: 82%;
             height: 100%;
         }
-        #pageSplic{
-            /*text-align: center;*/
-            margin-left: 30%;
-        }
-
     </style>
 </head>
 <body>
+<div>
 <div class="col-sm-3 col-md-2 sidebar">
     <div class="tree">
     </div>
@@ -43,6 +40,7 @@
         </div>
     </div>
 </nav>
+
 <br>
 <form class="form-inline" role="form" style="float:left;">
     <div class="form-group has-feedback">
@@ -54,12 +52,12 @@
     <button type="button" class="btn btn-warning" onclick="initPage()"><i class="glyphicon glyphicon-search" ></i> 查询</button>
 </form>
 <hr/>
+
 <div class="table-responsive">
     <table class="table  table-bordered" id = "dataTable">
         <thead>
         <tr >
             <th>序号</th>
-            <th>类型</th>
             <th>主标题</th>
             <th>上架时间</th>
             <th width="100">操作</th>
@@ -80,6 +78,7 @@
     </table>
 </div>
 </div>
+</div>
 <script src="../jquery/jquery-2.1.1.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../script/docs.min.js"></script>
@@ -89,7 +88,7 @@
     function initPage(){
         var pageNum=window.location.search.split("=")[1];
         console.log(pageNum);
-        var requestURL="sysuser/getArticleInfo";
+        var requestURL="sysuser/getArticleByCover";
 
         if(pageNum==null){
             pageNum=1;
@@ -108,10 +107,10 @@
             url : requestURL,
             //数据，json字符串
             data : JSON.stringify(
-                            {
-                                "mainTitle":$("#mainTitle").val(),
-                                "status":"2"
-                            }),
+                {
+                    "mainTitle":$("#mainTitle").val(),
+                    "status":"2"
+                }),
             //请求成功
             success : function(result) {
                 console.log(result);
@@ -124,7 +123,6 @@
                     count++;
                     //获取id并拼接
                     trStr+="<td>"+count+"</td>";
-                    trStr+="<td>"+item.typeName+"</td>";
                     trStr+="<td>"+item.mainTitle+"</td>";
                     trStr+="<td>"+new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+"</td>";
                     trStr+="<td>";
@@ -137,17 +135,17 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"article.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+                    var	splicPage="<li><a href=\"article_choose_list.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
 
                 }
                 console.log(result.pages);
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"article.html?pageNum="+i+"\">"+i+"</a></li>";
+                    splicPage +="<li><a href=\"article_choose_list.html?pageNum="+i+"\">"+i+"</a></li>";
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"article.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a href=\"article_choose_list.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -165,7 +163,7 @@
 
     //跳转详情页
     function checkArticle(articleId){
-        window.location.href="article_details.html?articleId="+articleId;
+        window.location.href="article_choose_details.html?articleId="+articleId;
     }
 
 

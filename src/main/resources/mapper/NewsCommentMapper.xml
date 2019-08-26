@@ -11,14 +11,39 @@
         <result property="status" column="status"/>
         <result property="createTime" column="createTime"/>
         <result property="icon" column="icon"/>
+        <result property="loveStatus" column="loveStatus"/>
     </resultMap>
-    <select id="allComment" resultMap="commentList">
-        select c.*,u.icon icon from comment c left join userinfo u on c.userId=u.userId where c.status=1
+    <select id="allComment" resultMap="commentList" parameterType="Long">
+         select c.*,u.icon icon, IfNULL(lc.status,0) loveStatus
+from comment c left join userinfo u on c.userId=u.userId
+ LEFT JOIN love_comment lc on lc.comId=c.comId
+        where c.status=1 and articleId=#{articleId}
+    </select>
+    <select id="getNum" resultType="long" parameterType="Long" >
+        SELECT count(lc.status=1 or null) comLoveNum from  love_comment lc where comId=#{comId}
     </select>
     <insert id="addComment" parameterType="com.qf.news.pojo.CommentInfo">
         insert into comment (userId,nickName,content,status,createTime) values (#{userId},#{nickName}
         ,#{content},1,CURRENT_TIMESTAMP)
     </insert>
+    <select id="checkLoveComment" parameterType="com.qf.news.pojo.CommentInfo" resultType="com.qf.news.pojo.LoveComment">
+        select * from love_comment where userId=#{userId} and comId=#{comId} and status=1
+    </select>
+    <select id="checkLoveCommentExist" parameterType="com.qf.news.pojo.CommentInfo" resultType="com.qf.news.pojo.LoveComment">
+        select * from love_comment where userId=#{userId} and comId=#{comId}
+    </select>
+    <insert id="addLoveComment" parameterType="com.qf.news.pojo.CommentInfo">
+         insert into love_comment (userId,comId,status,createTime,updateTime)
+         values (#{userId},#{comId},1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+    </insert>
+    <update id="addLoveCommentStatus" parameterType="com.qf.news.pojo.CommentInfo">
+        update love_comment set status=1,updateTime=CURRENT_TIMESTAMP
+         where userId=#{userId} and comId=#{comId}
+    </update>
+    <update id="deleteLoveComment" parameterType="com.qf.news.pojo.CommentInfo">
+        update love_comment set status=0,updateTime=CURRENT_TIMESTAMP
+         where userId=#{userId} and comId=#{comId}
+    </update>
     <update id="deleteCommentByComId" parameterType="long">
         update comment set status =0  where comId=#{comId};
     </update>

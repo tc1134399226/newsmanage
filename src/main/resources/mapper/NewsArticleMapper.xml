@@ -12,4 +12,11 @@
     <delete id="deleteMyDraftByArticleId" parameterType="Long" >
         delete from article  where articleId=#{articleId}
     </delete>
+    <select id="getcomNumAndLoveNum" parameterType="long" resultType="com.qf.news.vo.ArticleTypeVO">
+         select comNum,articleLoveNum,tb1.* from
+(SELECT COUNT(c.comId) comNum,a.* from article a LEFT JOIN
+comment c on c.articleId=a.articleId  where a.articleId=#{articleId}) tb1
+,(SELECT COUNT(la.articleId =#{articleId} ) articleLoveNum,la.articleId from love_article la ) tb2
+    </select>
+
 </mapper>

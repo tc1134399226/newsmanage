@@ -5,6 +5,7 @@ import com.qf.news.dao.NewsArticleMapper;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.NewsArticleService;
+import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,9 @@ public class NewsArticleServiceImpl implements NewsArticleService {
      */
     public boolean deleteMyDraftByArticleId(Long articleId) {
         return articleMapper.deleteMyDraftByArticleId(articleId)>0;
+    }
+
+    public ArticleTypeVO getcomNumAndLoveNum(Long articleId) {
+        return articleMapper.getcomNumAndLoveNum(articleId);
     }
 }

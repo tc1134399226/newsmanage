@@ -2,6 +2,8 @@ package com.qf.news.dao;
 
 
 import com.qf.news.pojo.ArticleInfo;
+import com.qf.news.pojo.LoveArticle;
+import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.stereotype.Repository;
 
 
@@ -27,6 +29,43 @@ public interface NewsArticleInfoMapper {
 
     //得到封面图
     public int uploadCover(ArticleInfo articleInfo);
+
+    /**
+     * 获取文章信息和文章热度
+     * @param userId
+     * @param articleId
+     * @return
+     */
+    public ArticleTypeVO getArticleAndLoveNumAndComNum(long userId, long articleId);
+    /**
+     * 获取该用户对本文章是否点赞
+     * @param userId
+     * @param articleId
+     * @return
+     */
+    public LoveArticle getLoveArticleByArticleIdAndUserId(long userId, long articleId);
+
+    /**
+     * 添加文章点赞记录
+     * @param userId
+     * @param articleId
+     * @return
+     */
+    public Integer addLoveArticle (long userId, long articleId);
+
+    /**
+     * 更新文章点赞状态
+     * @param loveArticle
+     * @return
+     */
+    public Integer updateLoveArticle (LoveArticle loveArticle);
+
+    /**
+     * 通过文章id更新文章
+     * @param articleInfo
+     * @return
+     */
+    public int uploadArticle(ArticleInfo articleInfo);
 }
 
 

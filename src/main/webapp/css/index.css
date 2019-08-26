@@ -3,7 +3,7 @@
 /* CSS Document */
 
 .wrapper {
-    width: 1020px;
+    width: 1200px;
     margin: 0 auto;
 }
 
@@ -11,12 +11,13 @@
 /*header部分**************/
 
 header {
-    background: #ccc;
+    background: #fff;
 }
 
 header .header {
     display: flex;
-    width: 1020px;
+    width: 1200px;
+	height: 70px;
     justify-content: space-between;
 }
 
@@ -26,8 +27,8 @@ header .header>a {
 }
 
 header .header>a img {
-    width: 100px;
-    height: 50px;
+    width: 175px;
+    height: 68px;
     display: block;
 }
 
@@ -37,7 +38,6 @@ header .header ul {
 
 header .header ul li {
     display: flex;
-    background: greenyellow;
 }
 
 
@@ -46,9 +46,17 @@ header .header ul li {
 
 /* header .header ul li a img {} */
 
-header .header ul li input {
-    width: 50px;
-    height: 50px;
+.login_btn{
+	padding-top: 20px
+}
+.login_btn ul li input {
+    width: 60px;
+	height: 35px;
+	line-height: 35px;
+	border: 1px solid #d4d4d4;
+	border-radius: 15px;
+	color: #baac7b;
+	background: #fff;
 }
 
 
@@ -76,7 +84,7 @@ nav .nav ul li {
     flex: 1;
 }
 
-nav .nav ul li:nth-last-of-type(1) a {
+nav .nav ul li:nth-last-of-type(5) a {
     color: rebeccapurple;
 }
 
@@ -95,14 +103,16 @@ section .section {}
 /* section .section .main1 开始了******************************************** */
 
 section .section .main1 {
+	width: 1200px;
     display: flex;
     justify-content: space-between;
-    margin: 20px 0;
+    margin: 30px 0;
+	overflow: hidden;
+	height: 405px;
 }
 
 section .section .main1 .banner {
     position: relative;
-    background: green;
     overflow: hidden;
     width: 720px;
 }
@@ -124,7 +134,7 @@ section .section .main1 .banner ul li img {
 }
 
 section .section .main1 .banner .ctrl_box {
-    width: 571px;
+    width: 720px;
     position: absolute;
     top: 179px;
     display: flex;
@@ -133,19 +143,18 @@ section .section .main1 .banner .ctrl_box {
 
 section .section .main1 .banner .ctrl_box span {
     float: left;
-    color: red;
-    width: 20px;
-    height: 20px;
+    color: #fff;
+    width: 25px;
+    height: 50px;
+	border-radius: 5px;
     background: rgba(188, 143, 143, 0.664);
     text-align: center;
-    font: 20px/20px "";
+    font-size: 40px;
     cursor: pointer;
 }
-
-section .section .main1 dl {
-    width: 500px;
-    /* background: pink; */
-    padding-left: 50px;
+section .section .main1 .dl-box{
+    width: 440px; 
+	float: right;
 }
 
 section .section .main1 dl dt {
@@ -155,7 +164,7 @@ section .section .main1 dl dt {
 
 section .section .main1 dl dd {
     color: #595855;
-    font: 16px/16px "楷体";
+    font: 16px/30px "楷体";
 }
 
 
@@ -194,24 +203,19 @@ section .section .main2>ul>li>ol li {} */
 /* section .section .main3 开始了******************************************** */
 
 section .section .main3 {
+    margin-bottom: 40px;
     display: flex;
     justify-content: space-between;
-
-    flex-flow: row wrap;
-    /* align-items: center; */
-}
-
-section .section .contentdiv{
     width: 1200px;
-    height: 537px;
-    float: left;
-    display: block;
+    flex-flow: row wrap;
+	overflow: hidden;
+    /* align-items: center; */
 }
 
 section .section .main3 .minnav {
     display: flex;
     /* background: #ccc; */
-    width: 800px;
+    width: 1200px;
 }
 
 section .section .main3 .minnav li {
@@ -229,66 +233,114 @@ section .section .main3 .minnav li:nth-of-type(1) a {
     color: red;
     font-size: 30px;
 }
-
-section .section .main3 .leftphoto{
-    padding-top: 18px;
-    height: 264px;
+section .section .main3 .photo .obt{
+    width: 340px;
+	height: 260px;
+    overflow: hidden;
+    position: relative;
 }
-
-section .section .main3 .leftphoto img{
-    border: 0;
+.obt .imgTitle{
+	font-size: 16px;
+}
+section .section .main3 .photo .obt ul{
+     display: flex;
+     height: 260px;
+     width: 1500px;
+     
+}
+section .section .main3 .photo .obt ul li img{
     width: 340px;
     height: 227px;
-    overflow: hidden;
-    border-radius: 2px;
+    float: left;
+	border-radius: 2px;
 }
-
+section .section .main3 .photo .tpt{
+    overflow: hidden;
+}
+.tpt .tPic{
+    padding-top: 12px;
+    margin-left: -4px;
+}
+.tpt .tPic li{
+    width: 168px;
+    float: left;
+    margin-left: 4px;
+    display: inline;
+}
+.tpt .tPic img{
+    width: 168px;
+	height: 112px;
+	border-radius: 2px;
+}
+.tpt .tPic p{
+	padding: 6px 10px 0 0;
+    height: 40px;
+    line-height: 20px;
+    font-size: 14px;
+    overflow: hidden;
+}
+section .section .main3 .photo .obt .ctrl_box {
+    width: 300px;
+    position: absolute;
+    top: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+section .section .main3 .photo .obt .ctrl_box span {
+    float: left;
+    color: #555;
+    width: 20px;
+    height: 50px;
+    background: rgba(188, 143, 143, 0.664);
+    text-align: center;
+    font: 20px/50px "";
+    cursor: pointer;
+}
 section .section .main3 .photo {
     /* background: chartreuse; */
 }
 
-section .section .main3 .photo li {}
+section .section .main3 .photo li {
+	
+}
 
-section .section .main3 .news {
+section .section .main3 .centerNews {
     margin: 0 20px;
-    width: 426px;
+    width: 340px;
     padding-left: 40px;
-    float: left;
-    /* background: #999; */
+	word-wrap: break-word;
+	word-break: break-all;
+	overflow: hidden;
 }
 
+section .section .main3 .rightNews {
+    margin: 0 20px;
+    width: 340px;
+    padding-left: 40px;
+	word-wrap: break-word;
+	word-break: break-all;
+	overflow: hidden;
+}
 
+/* section .section .main3 .centerNews .new1 {} */
 
-
-/* section .section .main3 .news .new1 {} */
-
-section .section .main3 .news .new1 dd {
-    font: 18px/18px "";
+.centerNews .new1 dd,.rightNews .new2 dd {
     height: 38px;
     line-height: 38px;
     font-size: 16px;
-    width: 426px;
+    overflow: hidden;
+    padding-left: 15px;
+    background-repeat: no-repeat;
+    background-position: 0 -99px;
 }
 
-section .section .main3 .news h2 {
-    font-size: 22px;
-    color: #cd0001;
+section .section .main3 .centerNews h2,.rightNews h2 {
+    font-size: 24px;
+    color: red;
     font-weight: normal;
+	padding-bottom: 20px;
 }
 
-
-/* section .section .main3 .news .new1 dd {}
-
-section .section .main3 .news .new2 {} */
-
-section .section .main3 .news .new2 dd {
-    font: 18px/18px "";
-    height: 38px;
-    line-height: 38px;
-    font-size: 16px;
-}
-
-section .section .main3 .news .new2 dd {}
 
 section .section .main3 .more {}
 

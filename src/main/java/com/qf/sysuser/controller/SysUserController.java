@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -22,20 +23,21 @@ public class SysUserController {
     @Autowired
     private SysUserService sysUserService;
 
-  /*
+
+
     @RequestMapping("/registerUser")
     @ResponseBody
     public Object saveUser(@RequestBody User user){
-        return userService.registerUser(user);
+        return sysUserService.registerUser(user);
     }
-*/
+
     @RequestMapping("/listAllUserInfo")
     @ResponseBody
     public Object listAllUserInfo(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
                                               Integer pageNum) {
         System.out.println(pageNum);
         //一页有多少条数据
-        int defaultPageSize = 2;
+        int defaultPageSize = 10;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, defaultPageSize);
         List<User> allUser = sysUserService.getAllUser();
@@ -121,6 +123,7 @@ public class SysUserController {
      */
     @RequestMapping("initMenuList")
     public Object initMenuList(@RequestBody(required = false) User userInfo,HttpSession session){
+//        MenuInfoVO menuInfos = (MenuInfoVO) session.getAttribute("menuInfoList");
         System.out.println(1111);
         User user=new User();
         user.setUsername("王涛");
@@ -148,8 +151,13 @@ public class SysUserController {
      */
     @RequestMapping("sysUserLogin")
     @ResponseBody
-    public User sysUserLogin(@RequestBody User user){
+    public User sysUserLogin(@RequestBody User user, HttpSession session){
+        List<MenuInfoVO> menuInfoList = sysUserService.userLoginInit(user);
+        if (menuInfoList!=null){
+            session.setAttribute("menuInfoList",menuInfoList);
+        }
         return sysUserService.sysUserLogin(user);
     }
+
 
 }

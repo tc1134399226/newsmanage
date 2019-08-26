@@ -5,15 +5,14 @@ import com.qf.sysuser.dao.SysUserEditorMapper;
 
 import com.qf.sysuser.dto.EditorApplyDTO;
 import com.qf.sysuser.pojo.UserInfo;
-import com.qf.sysuser.service.EditorService;
+import com.qf.sysuser.service.SysUserEditorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class SysUserEditorServiceImpl implements EditorService {
+public class SysUserEditorServiceImpl implements SysUserEditorService {
     @Autowired
     SysUserEditorMapper sysUserEditorMapper;
 

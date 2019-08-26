@@ -693,9 +693,13 @@
                     }
                     trStr+="<div class='partSev'>"+item.createTime+"</div>";
                     trStr +="<div style='float: right;margin-right: 100px'>"
-                        trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId + ")'></i></button>&nbsp;"
+                        trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'></i></button>&nbsp;"
                     trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='removeUnread(" + item.mgeId + ")'></i></button>&nbsp;"
                     trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
+                    if (item.senderId!=666) {
+                        trStr += "<a class=' glyphicon glyphicon-check' href="+item.mgeUrl+" ></a>;"
+                        // +"#c"+item.comId
+                    }
                     trStr+="</div>";
                     trStr+="</div>";
                     trStr+="<hr>";
@@ -773,9 +777,13 @@
                     }
                     trStr+="<div class='partSev'>"+item.createTime+"</div>";
                     trStr +="<div style='float: right;margin-right: 100px'>"
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'></i></button>&nbsp;"
                     trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='removeUnread(" + item.mgeId + ")'></i></button>&nbsp;"
-                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>&nbsp"
+                   if (item.senderId!=666) {
+                    trStr += "<a class=' glyphicon glyphicon-check'   href="+item.mgeUrl+" ></a>"
+                        // +"#c"+item.comId
+                   }
                     trStr+="</div>";
                     trStr+="</div>";
                     trStr+="<hr>";
@@ -810,7 +818,7 @@
 
     }
     //点击按钮时触发这个方法,目的是为了回到分页第一页
-    //显示用户未读消息第一页
+    //显示用户已读消息第一页
     function myReadMessagePage() {
         var pageNum=1;
         var requestURL="news/getReadMessageByUserId";
@@ -846,7 +854,7 @@
                     }
                     trStr+="<div class='partSev'>"+item.createTime+"</div>";
                     trStr +="<div style='float: right;margin-right: 100px'>"
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'></i></button>&nbsp;"
                     trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
                     trStr+="</div>";
                     trStr+="</div>";
@@ -881,7 +889,7 @@
         });
     }
     //点击分页的页数和上,下页时触发这个方法
-    //显示用户未读信息指定页
+    //显示用户已读信息指定页
     function myReadMessage(){
 
         var pageNum=window.location.search.split("=")[1];
@@ -926,7 +934,7 @@
                     }
                     trStr+="<div class='partSev'>"+item.createTime+"</div>";
                     trStr +="<div style='float: right;margin-right: 100px'>"
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'></i></button>&nbsp;"
                     trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
                     trStr+="</div>";
                     trStr+="</div>";
@@ -1010,7 +1018,30 @@ function removeUnread(mgeId) {
             }
         })
     }
-    
+
+    function readArt(mgeId,content) {
+        // console.log(mgeId)
+        // console.log(content)
+
+        if (confirm(content)) {
+            removeUnread(mgeId)
+        } else {
+
+        }
+    }
+    // function unreadArt(mgeId,content){
+    //     // console.log(mgeId)
+    //     // console.log(content)
+    //     if (confirm("查询具体信息?")) {
+    //     // <a href="锚链接.html#shuiguo">水果</a>
+    //     }else {
+    //         if (confirm(content)) {
+    //             removeUnread(mgeId)
+    //         } else {
+    //
+    //         }
+    //     }
+    // }
     
 
     //给文章区域命名
@@ -1066,7 +1097,6 @@ function removeUnread(mgeId) {
         } else if (status == 3) {
             return "审核不通过"
         }
-
-}
+    }
 </script>
 </html>

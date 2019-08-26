@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>新闻详情页</title>
+    <title>新闻选择轮播详情页</title>
 
     <meta charset="GB18030">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,14 +18,20 @@
     <link href="../wangeditor/wangEditor.min.css"/>
     <script src="../wangeditor/wangEditor.min.js"></script>
     <script src="../jquery/jquery-2.1.1.min.js"></script>
-
+    <style>
+        .cont{
+            float: right;
+            width: 82%;
+            height: 100%;
+        }
+    </style>
 </head>
 <body>
 <div class="col-sm-3 col-md-2 sidebar">
     <div class="tree">
     </div>
 </div>
-<div>
+<div class="cont">
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -61,15 +67,20 @@
 </div>
 
 <hr>
-</div>
+
 <div  style="text-align:center;">
-    <button type="button" class='btn btn-danger btn-xs' onclick='refuse()'><i class=' glyphicon glyphicon-remove' ></i>下架</button>&nbsp;
+    <button type="button" class='btn btn-danger btn-xs' onclick='add()'><i class=' glyphicon glyphicon-remove' ></i>加入轮播</button>&nbsp;
+</div>
 </div>
 <script type="text/javascript">
     $(".tree").load("menu.html");
-    var strCon1;
-    var strCon2;
-    var strCon3;
+    var mainTitle;
+    var subTitle;
+    var content;
+    var areaId;
+    var userId;
+    var typeId;
+    var cover;
     var str=window.location.search;
     var articleId=str.split("=")[1];
 
@@ -79,6 +90,8 @@
         type : "GET",
         //请求的媒体类型
         contentType: "application/json;charset=UTF-8",
+        //开启同步
+        async: false,
         //接受数据类型
         dataType:"json",
         //请求地址
@@ -88,6 +101,12 @@
         success : function(result) {
 
             console.log(result);
+
+            cover=result.cover;
+            areaId=result.areaId;
+            userId=result.userId;
+            typeId=result.typeId;
+
             //展示封面图
             if (result.cover!=null&&result.cover!="") {
                 var i=new Image();
@@ -98,17 +117,17 @@
                 $("#cover").append(j);
             }
 
-            strCon1=result.mainTitle;
+            mainTitle=result.mainTitle;
             //整体拼接到div里面去
-            $("#mainTitle").append(strCon1);
+            $("#mainTitle").append(mainTitle);
 
-            strCon2=result.subTitle;
+            subTitle=result.subTitle;
             //整体拼接到div里面去
-            $("#subTitle").append(strCon2);
+            $("#subTitle").append(subTitle);
 
-            strCon3=result.content;
+            content=result.content;
             //整体拼接到div里面去
-            $("#contentStr").append(strCon3);
+            $("#contentStr").append(content);
 
         },
         //请求失败，包含具体的错误信息
@@ -119,33 +138,59 @@
     });
 
 
-    //下架
-    function refuse() {
+    //加入轮播
+    function add() {
         $.ajax({
             //请求方式
             type : "POST",
             //请求的媒体类型
             contentType: "application/json;charset=UTF-8",
+            //开启同步
+            async: false,
             //接受数据类型
             dataType:"json",
             //请求地址
-            url : "sysuser/updateArticleStatus",
-            //数据，json字符串
-            data : JSON.stringify(
-                {
-                    "articleId":articleId,
-                    "status":"4"
-                }
-            ),
+            url : "sysuser/addToCarousel",
+                    //数据，json字符串
+                    data : JSON.stringify({
+                    "areaId":areaId,
+                    "userId":userId,
+                    "typeId":typeId,
+                    "cover":cover,
+                    "mainTitle":mainTitle,
+                    "subTitle":subTitle,
+                    "content":content
+                }),
             //请求成功
             success : function(result) {
                 console.log(result);
-                if(result){
-                    alert("已成功下架");
-                    window.location.href="article.html"
-                }else{
-                    alert("修改失败");
-                }
+                $.ajax({
+                    //请求方式
+                    type : "GET",
+                    //请求的媒体类型
+                    contentType: "application/json;charset=UTF-8",
+                    //接受数据类型
+                    dataType:"json",
+                    //请求地址
+                    url : "sysuser/updateArticleState?articleId="+articleId,
+                    //数据，json字符串
+                    //请求成功
+                    success : function(result) {
+
+                        console.log(result);
+                        if(result){
+                            alert("已成功加入轮播");
+                            window.location.href="article_choose_list.html"
+                        }else{
+                            alert("修改失败");
+                        }
+                    },
+                    //请求失败，包含具体的错误信息
+                    error : function(e){
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+                });
             },
             //请求失败，包含具体的错误信息
             error : function(e){
@@ -156,6 +201,5 @@
 
 
 </script>
-
 </body>
 </html>
