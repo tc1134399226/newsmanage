@@ -124,13 +124,8 @@ public class SysUserController {
     @RequestMapping("initMenuList")
     public Object initMenuList(@RequestBody(required = false) User userInfo,HttpSession session){
 //        MenuInfoVO menuInfos = (MenuInfoVO) session.getAttribute("menuInfoList");
-        System.out.println(1111);
-        User user=new User();
-        user.setUsername("王涛");
-        user.setPassword("123456");
-        List<MenuInfoVO> menuInfos = sysUserService.userLoginInit(user);
-        System.out.println(3333);
-        System.out.println(menuInfos);
+        User sysUser = (User) session.getAttribute("sysUser");
+        List<MenuInfoVO> menuInfos = sysUserService.userLoginInit(sysUser);
 //        if(session.getAttribute("menuInfoList")==null){
         if (menuInfos==null) {
             if (userInfo != null) {
@@ -140,7 +135,7 @@ public class SysUserController {
             }
         }else{
 //            return session.getAttribute("menuInfoList");
-         return    menuInfos;
+         return menuInfos;
         }
     }
 
@@ -152,12 +147,18 @@ public class SysUserController {
     @RequestMapping("sysUserLogin")
     @ResponseBody
     public User sysUserLogin(@RequestBody User user, HttpSession session){
-        List<MenuInfoVO> menuInfoList = sysUserService.userLoginInit(user);
-        if (menuInfoList!=null){
-            session.setAttribute("menuInfoList",menuInfoList);
+        User user1 = sysUserService.sysUserLogin(user);
+//        System.out.println(user1);
+        if (user1!=null){
+            session.setAttribute("sysUser",user1);
+            return user1;
         }
-        return sysUserService.sysUserLogin(user);
+        return null;
     }
 
-
+    @RequestMapping("getSession")
+    public Object getSession(HttpSession session){
+        Object user = session.getAttribute("sysUser");
+        return user;
+    }
 }

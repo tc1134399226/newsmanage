@@ -128,7 +128,7 @@
 			//接受数据类型
 			dataType:"json",
 			//请求地址
-			url : "sysuser/sysUserLogin",
+			url : "admin/sysuser/sysUserLogin",
 			//数据，json字符串
 			data : JSON.stringify(
 					{
@@ -140,9 +140,7 @@
 			success : function(result) {
 				console.log(result);
 				if(result != null){
-					window.location.href = "admin/main.html?userId="+result.userId;
-					// window.location.href="userInfo.html?userId="+result.userId;
-					// window.location.href="userInfo.html?userId="+result.userId;
+					window.location.href = "admin/main.html?userid="+result.userid;
 				}else{
 					alert("姓名或密码错误");
 				}
