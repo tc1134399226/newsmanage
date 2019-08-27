@@ -11,7 +11,7 @@
         insert into sysuser values(default,#{username},#{password},#{account},#{email},#{mobile},#{areaCode},#{status},#{icon})
     </insert>
 
-    <select id="getUserById" resultType="com.qf.sysuser.pojo.User">
+    <select id="getUserById" resultType="com.qf.sysuser.pojo.User" parameterType="int">
         select * from sysuser where userid = #{userid}
     </select>
 
@@ -28,8 +28,9 @@
     </delete>
 
     <update id="updateUser">
-        update sysuser set account=#{account},
-         email = #{email},mobile=#{mobile},areaCode=#{areaCode},status=#{status},icon=#{icon}
+        update sysuser set
+         email = #{email},mobile=#{mobile},areaCode=#{areaCode}
+        <if test="icon != null and icon != ''">,icon=#{icon}</if>
          where userid = #{userid}
     </update>
 
@@ -86,7 +87,7 @@
 
     <!--管理员登录-->
     <select id="sysUserLogin" parameterType="com.qf.sysuser.pojo.User" resultType="com.qf.sysuser.pojo.User">
-        select * from sysuser where username=#{username} and password=#{password}
+        select * from sysuser where account=#{username} and password=#{password}
     </select>
 
 

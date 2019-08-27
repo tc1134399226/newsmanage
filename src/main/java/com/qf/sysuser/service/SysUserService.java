@@ -13,6 +13,7 @@ public interface SysUserService {
     public List<User> getAllUser();
 //    public boolean registerUser(User user);
 //    public boolean getUserByuserNameAndPassword(User user);
+    //通过ID获取后台用户信息
     public User getUserById(User user);
     //通过id删除用过
     public boolean deleteUser(Integer userid);

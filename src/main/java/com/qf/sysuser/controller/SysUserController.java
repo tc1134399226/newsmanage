@@ -152,9 +152,11 @@ public class SysUserController {
     @RequestMapping("sysUserLogin")
     @ResponseBody
     public User sysUserLogin(@RequestBody User user, HttpSession session){
-        List<MenuInfoVO> menuInfoList = sysUserService.userLoginInit(user);
-        if (menuInfoList!=null){
-            session.setAttribute("menuInfoList",menuInfoList);
+//        User userInfo = (User)session.getAttribute("userInfo");
+//                user.setUserid(userInfo.getUserid());
+        User user1 = sysUserService.sysUserLogin(user);
+        if (user1!=null){
+            session.setAttribute("user",user1);
         }
         return sysUserService.sysUserLogin(user);
     }
