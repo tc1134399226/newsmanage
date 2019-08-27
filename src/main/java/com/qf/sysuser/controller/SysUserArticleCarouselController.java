@@ -20,7 +20,7 @@ public class SysUserArticleCarouselController {
     SysUserArticleCarouselService sysUserArticleCarouselService;
 
     //根据封面图筛选新闻
-    @RequestMapping("getArticzeByCover")
+    @RequestMapping("getArticleByCover")
     public Object getArticleByCover(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum, @RequestBody ArticleInfo articleInfo){
         int pageSize=3;//每页显示记录
         //初始化pageHelper对象
