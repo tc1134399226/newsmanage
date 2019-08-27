@@ -51,7 +51,7 @@ public class SysUserEditorServiceImpl implements SysUserEditorService {
         return sysUserEditorMapper.getEditorInfoByUserId(userId);
     }
 
-    //根据用户id取消小编的编辑资格
+    //根据用户id取消小编的编辑资 格
     public boolean cancelEditor(int userId) {
         return sysUserEditorMapper.cancelEditor(userId)>0;
     }

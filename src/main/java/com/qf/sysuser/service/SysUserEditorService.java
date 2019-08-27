@@ -24,7 +24,7 @@ public interface SysUserEditorService {
     public UserInfo getEditorApplyById(int userId);
 
 
-    //获取所有小编的信息
+    //获取所有小 编的信息
     public List<UserInfo> getAllEditorInfoBySatus();
 
     //根据用户id获取小编的详细信息

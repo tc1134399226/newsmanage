@@ -32,7 +32,7 @@ public interface SysUserEditorMapper {
     //根据用户id获取小编的详细信息
     public UserInfo getEditorInfoByUserId(int userId);
 
-    //根据用户id取消小编的编辑资格
+    //根据用户id取消小编的编辑 资格
     public int cancelEditor(int userId);
 
 }

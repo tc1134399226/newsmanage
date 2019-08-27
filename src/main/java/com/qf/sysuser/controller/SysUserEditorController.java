@@ -120,7 +120,7 @@ public class SysUserEditorController {
     }
 
     /**
-     * 根据用户id取消小编的编辑资格
+     * 根据用户id取消小编 的编辑资格
      * @param userId
      * @return
      */
