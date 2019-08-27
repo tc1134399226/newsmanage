@@ -29,7 +29,7 @@ public interface NewsArticleInfoService {
     public boolean getIP(ArticleInfo articleInfo);
 
 
-    //得到封面图
+    //得到图片的路径
     public boolean uploadCover(ArticleInfo articleInfo);
     /**
      * 获取文章信息和文章热度
@@ -45,4 +45,11 @@ public interface NewsArticleInfoService {
      * @return
      */
     public boolean loveArticle(long userId, long articleId);
+
+    /**
+     * 通过id更新新闻
+     * @param articleInfo
+     * @return
+     */
+    public boolean uploadArticle(ArticleInfo articleInfo);
 }

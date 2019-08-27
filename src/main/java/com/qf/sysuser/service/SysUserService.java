@@ -34,4 +34,6 @@ public interface SysUserService {
     public User sysUserLogin(User user);
 
     public boolean registerUser(User user) ;
+
+
 }

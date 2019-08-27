@@ -37,7 +37,7 @@ where articleId=#{articleId} and createTime >= now()-interval 15 day)d
     <!--修改处于编辑未提交审核状态的新闻-->
     <update id="secondCommitArticle" parameterType="com.qf.news.pojo.ArticleInfo">
        update article set
-       areaId=#{areaId},userId=#{userId},typeId=#{typeId},
+       areaId=#{areaId},userId=#{userId},typeId=#{typeId},cover=#{cover},
        mainTitle=#{mainTitle},subTitle=#{subTitle},content=#{content},status=#{status},updateTime=CURRENT_TIMESTAMP
        where
        articleId=#{articleId}
@@ -79,5 +79,10 @@ where articleId=#{articleId} and createTime >= now()-interval 15 day)d
             set status=0,updateTime=CURRENT_TIMESTAMP
         </if>
          where userId=#{userId} and articleId=#{userId}
+    </update>
+
+    <update id="uploadArticle">
+        update article set areaId =#{areaId},typeId=#{typeId},mainTitle=#{mainTitle} ,subTitle=#{subTitle},content=#{content}
+        where articleId = #{articleId}
     </update>
 </mapper>

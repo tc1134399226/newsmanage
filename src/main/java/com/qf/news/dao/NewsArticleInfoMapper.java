@@ -60,6 +60,13 @@ public interface NewsArticleInfoMapper {
     public Integer updateLoveArticle (LoveArticle loveArticle);
 
     /**
+     * 通过文章id更新文章
+     * @param articleInfo
+     * @return
+     */
+    public int uploadArticle(ArticleInfo articleInfo);
+
+    /**
      * 根据articleId更新文章热度
      * 要和getArticleAndLoveNumAndComNum方法一起调用获取timeHot
      * @param articleTypeVO

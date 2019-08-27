@@ -59,15 +59,17 @@
 </div>
 <hr>
 
-<div class="form-group" style="text-align:center;" id="idCardBack">
+<div class="form-group" style="text-align:center;">
     <label >身份证头像面:</label>
-<br>
+    <br>
+    <img  src="" id="idCardBack" style="width:400px;height:260px;">
 </div>
 
 <hr>
-<div class="form-group" style="text-align:center;" id="idCardFront">
+<div class="form-group" style="text-align:center;">
     <label >身份证国徽面:</label>
     <br>
+    <img  src="" id="idCardFront" style="width:400px;height:260px;">
 </div>
 
 <hr>
@@ -113,14 +115,12 @@
             str3=result.mobile;
             $("#mobile").append(str3);
 
-            var i=new Image();
-            i.src=result.idCardBack;
-            //str4=result.idCardBack;
-            $("#idCardBack").append(i);
+            $("#idCardBack").attr('src',"http://localhost:8080/newsmanage/"+result.idCardBack);
 
-            var j=new Image();
-            j.src=result.idCardFront;
-            $("#idCardFront").append(j);
+            $("#idCardFront").attr('src',"http://localhost:8080/newsmanage/"+result.idCardFront);
+            // var j=new Image();
+            // j.src="http://localhost:8080/newsmanage/"+result.idCardFront;
+            // $("#idCardFront").append(j);
 
         },
         //请求失败，包含具体的错误信息

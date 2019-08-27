@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-@RequestMapping("sysuser")
+@RequestMapping("admin/sysuser")
 @RestController
 public class SysUserEditorController {
     @Autowired
@@ -58,6 +58,7 @@ public class SysUserEditorController {
      */
     @RequestMapping("addEditor")
     public Object addEditor(@RequestParam int userId){
+        System.out.println(userId);
         return this.sysUserEditorService.addEditor(userId);
     }
 
@@ -69,7 +70,12 @@ public class SysUserEditorController {
      */
     @RequestMapping("getEditorApplyById")
     public Object getEditorApplyById(@RequestParam int userId){
-        return this.sysUserEditorService.getEditorApplyById(userId);
+        UserInfo editorApplyById = this.sysUserEditorService.getEditorApplyById(userId);
+        if (editorApplyById==null){
+            return false;
+        }else {
+            return editorApplyById;
+        }
     }
 
 
