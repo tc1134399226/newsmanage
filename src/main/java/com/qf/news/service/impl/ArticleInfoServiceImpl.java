@@ -50,12 +50,11 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
 
     /**
      * 获取文章信息和文章热度
-     * @param userId
      * @param articleId
      * @return
      */
-    public ArticleTypeVO getArticleAndLoveNumAndComNum(long userId, long articleId){
-        return newsArticleInfoMapper.getArticleAndLoveNumAndComNum(userId,articleId);
+    public ArticleTypeVO getArticleAndLoveNumAndComNum( long articleId){
+        return newsArticleInfoMapper.getArticleAndLoveNumAndComNum(articleId);
     }
     /**
      * 用户点赞(取消)

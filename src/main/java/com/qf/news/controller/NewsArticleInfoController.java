@@ -37,6 +37,11 @@ public class NewsArticleInfoController {
         return newsArticleInfoService.getReleaseInfoById(articleId);
     }
 
+    /**
+     * 获取文章热度
+     * @param session
+     * @return
+     */
     @RequestMapping("getArticleAndLoveNumAndComNum")
     @ResponseBody
     public Object getArticleAndLoveNumAndComNum( HttpSession session){
@@ -45,8 +50,8 @@ public class NewsArticleInfoController {
 //        if (userInfo.getUserId()==0||articleId==0){
 //          return false;
 //      }
-//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(userInfo.getUserId(),articleId);
-        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1,1);
+//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId);
+        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1);
     }
 
 

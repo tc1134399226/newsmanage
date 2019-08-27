@@ -31,6 +31,9 @@ public class ArticleTypeVO {
     private Long timeArticleLoveNum;//新闻点赞数
 
     public long getTimeHot() {
+        if (getTimeComNum()==null&&getTimeArticleLoveNum()==null){
+            return this.timeHot;
+        }
         return getTimeComNum()*10+getTimeArticleLoveNum();
     }
 
@@ -39,6 +42,9 @@ public class ArticleTypeVO {
     }
 
     public Long getHot() {
+        if (getComNum()==null&&getArticleLoveNum()==null){
+            return this.hot;
+        }
         return getComNum()*10+getArticleLoveNum();
     }
 
