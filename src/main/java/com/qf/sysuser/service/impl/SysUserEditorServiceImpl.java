@@ -41,5 +41,10 @@ public class SysUserEditorServiceImpl implements SysUserEditorService {
         return this.sysUserEditorMapper.getEditorApplyById(userId);
     }
 
+    //获取所有小编的信息
+    public List<UserInfo> getAllEditorInfoBySatus() {
+        return sysUserEditorMapper.getAllEditorInfoBySatus();
+    }
+
 
 }

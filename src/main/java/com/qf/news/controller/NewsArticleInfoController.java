@@ -173,7 +173,6 @@ public class NewsArticleInfoController {
 
 
 
-
     /**
      * 上传封面图
      * @param dropzFile
@@ -244,5 +243,40 @@ public class NewsArticleInfoController {
         int read = is.read(bs);
         response.getOutputStream().write(bs,0,read);
         is.close();
+    }
+
+    /**
+     * 上传封面图
+     * @param dropzFile
+     * @param request
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping("upload1")
+    @ResponseBody
+    public Map<String, Object> upload1(MultipartFile dropzFile, HttpServletRequest request) throws IOException {
+        Map<String, Object> result = new HashMap<String, Object>();
+
+        //创建文件需要存储的路径
+        String destPathName = request.getSession().getServletContext().getRealPath("/admin/static/upload");
+        File destPath = new File(destPathName);
+        //如果目标文件夹不存在我就创建它
+        if(!destPath.exists()){
+            destPath.mkdirs();
+        }
+        //获取文件的后缀名
+        String fileSuffix = dropzFile.getOriginalFilename().substring(dropzFile.getOriginalFilename().lastIndexOf("."));
+
+        String destFileName = UUID.randomUUID()+fileSuffix;
+        System.out.println(destFileName);
+        File destFile = new File(destPath,destFileName);
+        if(!destFile.exists()){
+            destFile.createNewFile();
+        }
+        dropzFile.transferTo(destFile);
+        result.put("status",200);
+        //http://localhost:8080/xxxxx/xxxx.jpg
+        result.put("filePath","admin/static/upload/"+destFileName);
+        return result;
     }
 }
