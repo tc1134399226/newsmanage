@@ -16,7 +16,7 @@
     </select>
 
     <select id="getUserByuserName" resultType="com.qf.sysuser.pojo.User">
-        select * from sysuser where username = #{username}
+        select * from sysuser where account = #{account}
     </select>
 
     <select id="getUserByuserNameAndPassword" resultType="com.qf.sysuser.pojo.User">
@@ -28,8 +28,9 @@
     </delete>
 
     <update id="updateUser">
-        update sysuser set account=#{account},
-         email = #{email},mobile=#{mobile},areaCode=#{areaCode},status=#{status},icon=#{icon}
+        update sysuser set
+         email = #{email},mobile=#{mobile},areaCode=#{areaCode}
+        <if test="icon != null and icon != ''">,icon=#{icon}</if>
          where userid = #{userid}
     </update>
 
@@ -75,7 +76,7 @@
     <select id="userLoginInit" resultMap="sysuserMap" parameterType="com.qf.sysuser.pojo.User">
     select m.mid pid,m.menuname pname,m.menuicon picon,m.menu_url purl,tb1.* from menuinfo m RIGHT JOIN
     (select m.* from sysuser su,sys_role sr,roleinfo r,role_menu rm,menuinfo m
-    where su.username =#{username} and su.password =#{password}
+    where su.account =#{account} and su.password =#{password}
     and sr.sysId = su.userid and r.roleid = sr.roleid
     and rm.roleid = r.roleid and m.mid = rm.mid and su.status = 1 and parentid is not null order by mid) tb1
     on m.mid = tb1.parentid
@@ -86,7 +87,7 @@
 
     <!--管理员登录-->
     <select id="sysUserLogin" parameterType="com.qf.sysuser.pojo.User" resultType="com.qf.sysuser.pojo.User">
-        select * from sysuser where username=#{username} and password=#{password}
+        select * from sysuser where account=#{account}  and password=#{password}
     </select>
 
 

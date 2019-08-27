@@ -2,6 +2,7 @@ package com.qf.news.service.impl;
 
 
 import com.qf.news.dao.NewsUserInfoMapper;
+import com.qf.news.pojo.UseDay;
 import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.NewsUserInfoService;
 import com.qf.news.toolkit.MD5;
@@ -40,5 +41,18 @@ public class NewsUserInfoServiceImpl implements NewsUserInfoService {
 
     public boolean editUserInfoById(UserInfo userInfo) {
         return this.userInfoMapper.editUserInfoById(userInfo)>0;
+    }
+
+    public boolean addDay(UseDay useDay) {
+        return userInfoMapper.addDay(useDay)>0;
+    }
+
+    public UseDay selectUseDay(UseDay useDay) {
+
+        return userInfoMapper.selectUseDay(useDay);
+    }
+
+    public boolean updateUseDay(UseDay useDay) {
+        return userInfoMapper.updateUseDay(useDay)>0;
     }
 }
