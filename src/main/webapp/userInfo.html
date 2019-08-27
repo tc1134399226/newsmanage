@@ -367,9 +367,7 @@
         }
     });
 
-    function jump() {
-        window.location.href = "userInfo-edit.html?userId="+id;
-    }
+
 
 //     function updateUser(){
 //         //1.修改
@@ -411,9 +409,11 @@
     if(status==2) {
         $("#1").show()
         $("#3").show()
-    }else (
+    }else {
         $("#2").show()
-    )
+    }
+      
+
 
     $("#2").click(function(){
         $(this).attr("href","editorapply.html?userId="+id);//用jquery的方法改变href属性值
