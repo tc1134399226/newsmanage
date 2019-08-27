@@ -245,15 +245,4 @@ public class NewsArticleInfoController {
         response.getOutputStream().write(bs,0,read);
         is.close();
     }
-    @RequestMapping("toArticleContent")
-    @ResponseBody
-    public Object toArticleContent(@RequestParam long articleId,HttpSession session) {
-       session.setAttribute("articleId",articleId);
-       Long attribute = (Long) session.getAttribute("articleId");
-        System.out.println(attribute);
-       if (attribute==null){
-           return false;
-       }
-       return true;
-    }
 }
