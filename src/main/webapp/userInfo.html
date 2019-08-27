@@ -253,16 +253,7 @@
 
                     </form>
 
-                    <!--<div align="center" id="textDiv" class="lastDiv">-->
-                        <!--<button type="button" class="btn btn-success" onclick="updateUser()"><i class="glyphicon glyphicon-edit"></i> 修改提交</button>-->
-                    <!--</div>-->
 
-
-                    <!--<div class="form-group has-success has-feedback" align="center"  >-->
-                    <!--<div id="dropzoneDiv" class="dropzone" style="max-width:800px;margin:50px;"></div>-->
-                    <!--<input type="hidden" id="imgUrl"/>-->
-                    <!--</div>-->
-                    <!--</form>-->
 
                 </div>
 
@@ -272,60 +263,7 @@
 </div>
 
 
-<!--<div class="form-group has-success has-feedback" align="left"  >-->
-	<!--<div id="dropzoneDiv" class="dropzone" style="max-width:800px;margin:50px;"></div>-->
-	<!--<input type="hidden" id="imgUrl"/>-->
-<!--</div>-->
 
-
-<!--<script>-->
-    <!--Dropzone.options.dropzoneDiv = {-->
-        <!--url: "news/upload", // 文件提交地址-->
-        <!--method: "post",  // 也可用put-->
-        <!--paramName: "dropzFile", // 默认为file-->
-        <!--maxFiles: 1,// 一次性上传的文件数量上限-->
-        <!--maxFilesize: 2, // 文件大小，单位：M-->
-        <!--acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型-->
-        <!--addRemoveLinks: true,-->
-        <!--parallelUploads: 1,// 一次上传的文件数量-->
-        <!--//previewsContainer:"#preview", // 上传图片的预览窗口-->
-        <!--dictDefaultMessage: '点此上传新头像',-->
-        <!--dictMaxFilesExceeded: "您最多只能上传1个文件！",-->
-        <!--dictResponseError: '文件上传失败!',-->
-        <!--dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",-->
-        <!--dictFallbackMessage: "浏览器不受支持",-->
-        <!--dictFileTooBig: "文件过大上传文件最大支持.",-->
-        <!--dictRemoveLinks: "删除",-->
-        <!--dictCancelUpload: "取消",-->
-
-        <!--init: function () {-->
-            <!--this.on("addedfile", function (file) {-->
-                <!--// 上传文件时触发的事件-->
-            <!--});-->
-            <!--this.on("success", function (file, data) {-->
-                <!--// 上传成功触发的事件-->
-                <!--console.log(data);-->
-                <!--var status = data.status;-->
-                <!--if(status==200){-->
-                    <!--var filePath = data.filePath;-->
-                    <!--$("#imgUrl").val(filePath);-->
-                <!--}-->
-
-                <!--console.log(file);-->
-            <!--});-->
-            <!--this.on("error", function (file, data) {-->
-                <!--// 上传失败触发的事件-->
-                <!--console.error(data);-->
-                <!--console.log(file);-->
-            <!--});-->
-            <!--this.on("removedfile", function (file) {-->
-                <!--// 删除文件时触发的方法-->
-            <!--});-->
-        <!--}-->
-
-    <!--}-->
-
-<!--</script>-->
 <script>
     //获取超链接地址栏上的userId
     var params = window.location.search;
@@ -460,53 +398,7 @@
 <!--</div>-->
 
 
-<script>
-    Dropzone.options.dropzoneDiv = {
-        url: "news/upload", // 文件提交地址
-        method: "post",  // 也可用put
-        paramName: "dropzFile", // 默认为file
-        maxFiles: 1,// 一次性上传的文件数量上限
-        maxFilesize: 2, // 文件大小，单位：M
-        acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
-        addRemoveLinks: true,
-        parallelUploads: 1,// 一次上传的文件数量
-        //previewsContainer:"#preview", // 上传图片的预览窗口
-        dictDefaultMessage: '点此上传新头像',
-        dictMaxFilesExceeded: "您最多只能上传1个文件！",
-        dictResponseError: '文件上传失败!',
-        dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
-        dictFallbackMessage: "浏览器不受支持",
-        dictFileTooBig: "文件过大上传文件最大支持.",
-        dictRemoveLinks: "删除",
-        dictCancelUpload: "取消",
-        init: function () {
-            this.on("addedfile", function (file) {
-                // 上传文件时触发的事件
-            });
-            this.on("success", function (file, data) {
-                // 上传成功触发的事件
-                console.log(data);
-                var status = data.status;
-                if(status==200){
-                    var filePath = data.filePath;
-                    $("#imgUrl").val(filePath);
-                }
 
-                console.log(file);
-            });
-            this.on("error", function (file, data) {
-                // 上传失败触发的事件
-                console.error(data);
-                console.log(file);
-            });
-            this.on("removedfile", function (file) {
-                // 删除文件时触发的方法
-            });
-        }
-
-    }
-
-</script>
 <script>
     //获取超链接地址栏上的userId
     var params = window.location.search;
@@ -547,7 +439,7 @@
 			//获取时间差
 			var days = ((myDate.getTime() - createTi))/ (1000*3600*24);
 			day=Math.ceil(days);
-			alert(day);
+			// alert(day);
 			$("#regDay").val(day);
 			selectUseDay();
 
@@ -559,40 +451,7 @@
     });
 
 
-    function updateUser(){
-        //1.修改
-//		  alert("inner updateUser");
-        $.ajax({
-            //请求方式GET/POST
-            type: "POST",
-            //请求的媒体类型
-            contentType: "application/json;charset=UTF-8",
-            //接受数据类型
-            dataType: "json",
-            //请求地址
-            url: "news/editUserInfoById",
-            //传递参数
-            data:JSON.stringify(
-                {
-                    "userId":$("#userId").val(),
-                    "nickName":$("#nickName").val(),
-                    "mobile":$("#mobile").val(),
-                    "idCard":$("#idCard").val(),
-                    "sex":$("#sex").val(),
-                    "icon":$("#imgUrl").val()
 
-                }
-            ),
-            success: function (result) {
-                console.log(result);
-            },
-            error: function (e) {
-                console.error(e);
-            }
-        })
-        //2.跳转
-        window.location.href = "userInfo.html?userId="+id;
-    }
 
 
 	//第一次访问页面时把注册天数添加到数据库中
@@ -616,7 +475,7 @@
 			),
 			success: function (result) {
 				console.log(result);
-				alert("插入天数成功")
+				// alert("插入天数成功")
 			},
 			error: function (e) {
 				// console.error(e);
@@ -645,7 +504,7 @@
 			),
 			success: function (result) {
 				console.log(result);
-				alert("修改成功")
+				// alert("修改成功")
 			},
 			error: function (e) {
 				console.error(e);
