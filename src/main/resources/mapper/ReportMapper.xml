@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.sysuser.dao.SysUserReportDao">
+<mapper namespace="com.qf.sysuser.dao.SysUserReportMapper">
 
     <select id="getAllReport" resultType="com.qf.sysuser.vo.ReportVO">
         select u.nickName,r.context,a.mainTitle,r.createTime ,a.articleId from report r left join

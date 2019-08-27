@@ -151,12 +151,12 @@
                     <dl>
                         <dt><i>·</i> 个人空间</dt>
 
-                        <dd ><a href="userhome.html"   >我的收藏</a></dd>
+                        <dd ><a href="#"  onclick="skip()" >我的收藏</a></dd>
                         <hr>
-                        <dd ><a href="userhome.html"   >我的消息</a></dd>
+                        <dd ><a href="#"  onclick="skip()"  >我的消息</a></dd>
                         <hr>
 
-                        <dd><a id="1" style="display:none" href="userhome.html" >我的新闻</a></dd>
+                        <dd><a id="1" style="display:none" href="#" onclick="skip()"  >我的新闻</a></dd>
 
                     </dl>
                     <hr>
@@ -358,6 +358,11 @@
         $("#2").show()
     }
 
+    function skip(){
+
+        $(".yui3-u-5-6").empty();
+        $(".yui3-u-5-6").load("userhome.html");
+    }
 
 
     $("#2").click(function(){
