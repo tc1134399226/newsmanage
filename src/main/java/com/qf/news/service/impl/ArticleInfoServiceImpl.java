@@ -32,7 +32,15 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
 
     //根据输入的新闻内容查询获取articleId
     public ArticleInfo getArticleInfoIdById(ArticleInfo articleInfo) {
-        return newsArticleInfoMapper.getArticleInfoIdById(articleInfo);
+        try{
+            ArticleInfo articleInfoIdById = newsArticleInfoMapper.getArticleInfoIdById(articleInfo);
+            return articleInfoIdById;
+        }catch (Exception e){
+            articleInfo.setArticleId(0);
+            articleInfo.setContent("该文章已存在");
+            return articleInfo;
+        }
+
     }
 
     //修改新闻状态
@@ -50,12 +58,11 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
 
     /**
      * 获取文章信息和文章热度
-     * @param userId
      * @param articleId
      * @return
      */
-    public ArticleTypeVO getArticleAndLoveNumAndComNum(long userId, long articleId){
-        return newsArticleInfoMapper.getArticleAndLoveNumAndComNum(userId,articleId);
+    public ArticleTypeVO getArticleAndLoveNumAndComNum( long articleId){
+        return newsArticleInfoMapper.getArticleAndLoveNumAndComNum(articleId);
     }
     /**
      * 用户点赞(取消)

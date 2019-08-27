@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+
+/***** ͼƬ�������� *****/
+/*.channelHead { background:url(../../images/news/overseaBgNav.png) repeat-x;}*/
+.newsNav { background: no-repeat top center;}
+.newsNav .newsNavCon .navNews ul li.current span { background: no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, src='http://himg2.huanqiu.com/statics/hq2013/images/news/overseaNavOver.png');_background: none;}
+.newsNav .newsNavCon .navNews ul li.curBig span { background: no-repeat;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled=true, src='http://himg2.huanqiu.com/statics/hq2013/images/news/overseaNavOverBig.png');_background: none;}
+.iconF1 span ,.cur .iconF1 span ,.iconF2 span ,.cur .iconF2 span ,.iconF3 span ,.cur .iconF3 span ,.iconF4 span ,.cur .iconF4 span ,.iconF5 span ,.cur .iconF5 span { background:url(../../images/news/oversea.png) no-repeat;}
+
+/***** ������ *****/
+.partTit { background:#ebf3fc;border-top:#3584a1 2px solid;}
+.leftFloat .cur { background:#edf6fa;}
+.leftFloat .cur a ,.leftFloat .over a ,.leftFloat a:hover { color:#398aa3;}
+/**/
+.clickRank { border-top:#3584a1 2px solid;}
+.tabsList { background:#ebf3fc; border-bottom:#c7dae1 1px solid;}
+.tabsList li { border-right:#c7dae1 1px solid;}
+.ranking .blueBox { background:#3584a0;}
+.ranking .blueBoxMid { background:#65a9c1;}
+.ranking .blueBoxLight { background:#83bfd4;}
+.adFocus {border:none;background-color: #FFFFFF;margin:0px;padding:0px 9px 9px 9px;}
+#adFm_2{margin-bottom:20px;}

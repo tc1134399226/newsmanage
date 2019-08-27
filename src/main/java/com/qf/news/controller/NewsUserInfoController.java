@@ -1,6 +1,7 @@
 package com.qf.news.controller;
 
 
+import com.qf.news.pojo.UseDay;
 import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.AliyunSmsService;
 import com.qf.news.service.NewsUserInfoService;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +97,40 @@ public class NewsUserInfoController {
     public Object getSession(HttpSession session){
         Object user = session.getAttribute("userInfo");
         return user;
+    }
+
+    /**
+     * 第一次访问个人中心页面时把注册天数添加到数据库中
+     * @param useDay
+     * @return
+     */
+
+    @RequestMapping("addDay")
+    public boolean addDay(@RequestBody UseDay useDay){
+        return userInfoService.addDay(useDay);
+    }
+
+    /**
+     * 根据userid查询useday表中数据是否存在
+     * @param useDay
+     * @return
+     */
+    @RequestMapping("selectUseDay")
+    public Object selectUseDay(@RequestBody UseDay useDay){
+        if(userInfoService.selectUseDay(useDay)==null){
+            return false;
+        }
+        return userInfoService.selectUseDay(useDay);
+    }
+
+    /**
+     * 修改注册天数(除第一次访问页面添加外其余都只进行修改注册天数)
+     * @param useDay
+     * @return
+     */
+    @RequestMapping("updateUseDay")
+    public boolean updateUseDay(@RequestBody UseDay useDay){
+        return userInfoService.updateUseDay(useDay);
     }
 
 }

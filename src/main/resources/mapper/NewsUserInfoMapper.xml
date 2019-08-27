@@ -34,9 +34,9 @@
     <insert id="register" parameterType="com.qf.news.pojo.UserInfo">
         insert into userinfo(userId,
         account,nickName,
-        password,idCard,mobile,sex,icon,status,createTime,updateTime)
+        password,idCard,mobile,sex,icon,status,createTime,updateTime,realName,idCardBack,idCardFront)
         values(DEFAULT,#{account},#{nickName},#{password},#{idCard},#{mobile},#{sex},
-        #{icon},0,now(),now())
+        #{icon},0,now(),now(),0,0,0)
     </insert>
 
     <!--用户名重复检测-->
@@ -76,5 +76,16 @@
         where  userId = #{userId}
     </update>
 
+    <insert id="addDay" parameterType="com.qf.news.pojo.UseDay">
+        INSERT into useday (dayId,userId,day) VALUES (DEFAULT,#{userId},#{day})
+    </insert>
+
+    <select id="selectUseDay" parameterType="com.qf.news.pojo.UseDay" resultType="com.qf.news.pojo.UseDay">
+        select * from useday where userId=#{userId}
+    </select>
+
+    <update id="updateUseDay" parameterType="com.qf.news.pojo.UseDay">
+        update useday set day=#{day} where userId=#{userId}
+    </update>
 
 </mapper>

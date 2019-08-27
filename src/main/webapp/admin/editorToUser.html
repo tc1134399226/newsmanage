@@ -31,41 +31,41 @@
     </div>
 </div>
 <div class="cont">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <div><a class="navbar-brand"  style="font-size:32px;">你懂得-创意产品</a></div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <div><a class="navbar-brand"  style="font-size:32px;">你懂得-创意产品</a></div>
+            </div>
         </div>
+    </nav>
+
+    <hr>
+
+    <div class="table-responsive">
+        <table class="table  table-bordered" id = "dataTable" >
+            <thead>
+            <tr >
+                <th>序号</th>
+                <th>用户昵称</th>
+                <th>用户性别</th>
+                <th>创建时间</th>
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+
+        </table>
     </div>
-</nav>
 
-<hr>
-
-<div class="table-responsive">
-    <table class="table  table-bordered" id = "dataTable">
-        <thead>
-        <tr >
-            <th>序号</th>
-            <th>类型</th>
-            <th>主标题</th>
-            <th>申请时间</th>
-            <th width="100">操作</th>
-        </tr>
-        </thead>
-
-    </table>
-</div>
-
-<div id="pageSplic" >
-    <table>
-        <tr>
-            <td colspan="6" align="center">
-                <ul class="pagination" >
-                </ul>
-            </td>
-        </tr>
-    </table>
-</div>
+    <div id="pageSplic" >
+        <table>
+            <tr>
+                <td colspan="6" align="center">
+                    <ul class="pagination" >
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 <script src="../jquery/jquery-2.1.1.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
@@ -76,7 +76,7 @@
     function initPage(){
         var pageNum=window.location.search.split("=")[1];
         console.log(pageNum);
-        var requestURL="sysuser/getAllArticleInfo";
+        var requestURL="sysuser/getAllEditorInfoBySatus";
 
         if(pageNum==null){
             pageNum=1;
@@ -101,16 +101,16 @@
                 $("#dataTable tbody").html("");
                 //js对象和jquery是不一样的，基本不能互相操作，得靠$()转换
                 //2.将数据填充到table中
-                $(result.list).each(function(index,item){
+                $(result).each(function(index,item){
                     var trStr = "<tr>";
                     count++;
                     //获取id并拼接
                     trStr+="<td>"+count+"</td>";
-                    trStr+="<td>"+item.typeName+"</td>";
-                    trStr+="<td>"+item.mainTitle+"</td>";
-                    trStr+="<td>"+new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+"</td>";
+                    trStr+="<td>"+item.nickName+"</td>";
+                    trStr+="<td>"+item.sex+"</td>";
+                    trStr+="<td>"+new Date(parseInt(item.createTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+"</td>";
                     trStr+="<td>";
-                    trStr+="<button type=\"button\"  onclick='checkArticle("+item.articleId+")'>查看详情</button>&nbsp;";
+                    trStr+="<button type=\"button\"  onclick='checkArticle("+item.articleId+")'>查看详情</button>&nbsp;"
                     trStr+="</td>";
                     trStr+="</tr>";
                     $("#dataTable").append(trStr);
@@ -145,7 +145,7 @@
 
     //跳转详情页
     function checkArticle(articleId){
-        window.location.href="article_apply_details.html?articleId="+articleId;
+        window.location.href="article_content.html?articleId="+articleId;
     }
 
 

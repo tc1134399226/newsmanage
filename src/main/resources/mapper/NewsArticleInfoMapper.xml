@@ -9,16 +9,18 @@ SELECT tb1.*,b.articleLoveNum ,c.timeArticleLoveNum,d.timeComNum from (
  IFNULL(la.status,0) articleLoveStatus,COUNT(c.comId) comNum
 from article a LEFT JOIN love_article la on la.articleId=a.articleId
 LEFT JOIN comment c on c.articleId=a.articleId
-where a.articleId=#{param2}  and la.userId=#{param1} ) tb1,
+where a.articleId=#{articleId}  ) tb1,
 (SELECT COUNT(la.articleId) articleLoveNum from article a LEFT JOIN love_article la on la.articleId= a.articleId
-where a.articleId=#{param2} and la.status=1 ) b,
+where a.articleId=#{articleId} and la.status=1 ) b,
 (SELECT COUNT(la.articleId) timeArticleLoveNum from article a LEFT JOIN love_article la on la.articleId= a.articleId
-where a.articleId=#{param2} and la.status=1 and la.updateTime >= now()-interval 15 day )c,
+where a.articleId=#{articleId} and la.status=1 and la.updateTime >= now()-interval 15 day )c,
 (select COUNT(comId) timeComNum from comment
-where articleId=#{param2} and createTime >= now()-interval 15 day)d
+where articleId=#{articleId} and createTime >= now()-interval 15 day)d
 )
 </select>
-
+<update id="updateTimeHotByArticleId" parameterType="com.qf.news.vo.ArticleTypeVO">
+    update article set hot=#{timeHot} where articleId=#{articleId}
+</update>
     <!--根据articleId查询编辑的新闻显示到预览页面-->
     <select id="getReleaseInfoById" parameterType="int" resultType="com.qf.news.pojo.ArticleInfo">
        select * from article where articleId=#{articleId}

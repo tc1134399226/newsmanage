@@ -89,6 +89,11 @@ public class NewsArticleInfoController {
         return newsArticleInfoService.getReleaseInfoById(articleId);
     }
 
+    /**
+     * 获取文章热度
+     * @param session
+     * @return
+     */
     @RequestMapping("getArticleAndLoveNumAndComNum")
     @ResponseBody
     public Object getArticleAndLoveNumAndComNum( HttpSession session){
@@ -97,8 +102,8 @@ public class NewsArticleInfoController {
 //        if (userInfo.getUserId()==0||articleId==0){
 //          return false;
 //      }
-//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(userInfo.getUserId(),articleId);
-        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1,1);
+//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId);
+        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1);
     }
 
 
@@ -131,7 +136,11 @@ public class NewsArticleInfoController {
     @RequestMapping("secondCommitArticle")
     @ResponseBody
     public boolean secondCommitArticle(@RequestBody ArticleInfo articleInfo){
-        return newsArticleInfoService.secondCommitArticle(articleInfo);
+        if (articleInfo.getArticleId()==0){
+            return newsArticleInfoService.commitArticle(articleInfo);
+        }else {
+            return newsArticleInfoService.secondCommitArticle(articleInfo);
+        }
     }
 
     /**
