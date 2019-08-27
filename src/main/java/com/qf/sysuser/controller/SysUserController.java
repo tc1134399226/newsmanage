@@ -128,6 +128,8 @@ public class SysUserController {
 //        MenuInfoVO menuInfos = (MenuInfoVO) session.getAttribute("menuInfoList");
         User sysUser = (User) session.getAttribute("sysUser");
         List<MenuInfoVO> menuInfos = sysUserService.userLoginInit(sysUser);
+        System.out.println("session: "+sysUser);
+        System.out.println("用户菜单栏: "+menuInfos);
 //        if(session.getAttribute("menuInfoList")==null){
         if (menuInfos==null) {
             if (userInfo != null) {
@@ -162,5 +164,11 @@ public class SysUserController {
     public Object getSession(HttpSession session){
         Object user = session.getAttribute("sysUser");
         return user;
+    }
+
+    @RequestMapping("cleanSession")
+    public Object cleanSession(HttpSession session){
+        session.removeAttribute("sysUser");
+        return true;
     }
 }
