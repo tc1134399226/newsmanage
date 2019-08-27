@@ -93,4 +93,13 @@ public class SysUserEditorController {
         return userInfoPageInfo;
     }
 
+    /**
+     * 获取所有小编的信息
+     * @return
+     */
+    @RequestMapping("getAllEditorInfoBySatus")
+    public Object getAllEditorInfoBySatus(){
+        return sysUserEditorService.getAllEditorInfoBySatus();
+    }
+
 }

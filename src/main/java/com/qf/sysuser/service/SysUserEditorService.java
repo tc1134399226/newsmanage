@@ -23,4 +23,8 @@ public interface SysUserEditorService {
     //通过id来找到申请成为编辑的用户的详细信息
     public UserInfo getEditorApplyById(int userId);
 
+
+    //获取所有小编的信息
+    public List<UserInfo> getAllEditorInfoBySatus();
+
 }
