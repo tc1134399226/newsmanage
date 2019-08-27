@@ -76,7 +76,9 @@ public class SysUserController {
     @RequestMapping("getUserById")
     @ResponseBody
     public User getUserById(@RequestBody User user){
+        System.out.println(user);
         User userById = sysUserService.getUserById(user);
+        System.out.println(userById);
         return userById;
     }
 

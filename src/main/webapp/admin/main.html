@@ -20,6 +20,7 @@
 	.tree li {
         list-style-type: none;
 		cursor:pointer;
+		overflow: hidden;
 	}
 	.tree-closed {
 	    height : 40px;
@@ -179,7 +180,6 @@
 					// 删除文件时触发的方法
 				});
 			}
-
 		}
 
 	</script>
@@ -197,7 +197,7 @@
 				//接受数据类型
 				dataType: "json",
 				//请求地址
-				url: "admin/sysuser/getUserById?userid=" + id,
+				url: "sysuser/getUserById?userid=" + id,
 				//数据，json字符串
 				//请求成功
 				success: function (result) {
@@ -206,11 +206,9 @@
 					$("#email").val(result.email);
 					$("#mobile").val(result.mobile);
 					$("#areaCode").attr('src', result.areaCode);
-
 				},
 				error: function (e) {
-					console.log(e.status);
-					console.log(e.responseText);
+					console.log(e)
 				}
 			});
         }
@@ -230,7 +228,7 @@
 				//接受数据类型
 				dataType: "json",
 				//请求地址
-				url: "admin/sysuser/updataUser?userid"+id,
+				url: "sysuser/updataUser?userid"+id,
 				//传递参数
 				data:JSON.stringify(
 						{
