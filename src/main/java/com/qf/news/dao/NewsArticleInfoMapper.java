@@ -32,11 +32,10 @@ public interface NewsArticleInfoMapper {
 
     /**
      * 获取文章信息和文章热度
-     * @param userId
      * @param articleId
      * @return
      */
-    public ArticleTypeVO getArticleAndLoveNumAndComNum(long userId, long articleId);
+    public ArticleTypeVO getArticleAndLoveNumAndComNum( long articleId);
     /**
      * 获取该用户对本文章是否点赞
      * @param userId
@@ -66,6 +65,14 @@ public interface NewsArticleInfoMapper {
      * @return
      */
     public int uploadArticle(ArticleInfo articleInfo);
+
+    /**
+     * 根据articleId更新文章热度
+     * 要和getArticleAndLoveNumAndComNum方法一起调用获取timeHot
+     * @param articleTypeVO
+     * @return
+     */
+    public Integer updateTimeHotByArticleId (ArticleTypeVO articleTypeVO);
 }
 
 

@@ -26,4 +26,26 @@ public interface NewsMapper {
      * @return
      */
     public List<ArticleTypeVO> getMainImg();
+
+    /**
+     * 获取指定类型和地区的文章
+     * @param typeId
+     * @param areaId
+     * @return
+     */
+    public List<ArticleTypeVO> listAllArticleByTypeIdAndAreaId(Integer typeId,Integer areaId);
+    /**
+     * 获取指定类型和地区的文章 按照热度降序
+     * @param typeId
+     * @param areaId
+     * @return
+     */
+    public List<ArticleTypeVO> listAllArticleByStatusAndHotAndTypeIdAndAreaId(Integer typeId,Integer areaId);
+    /**
+     * 获取指定类型和地区的文章 按照创建时间降序
+     * @param typeId
+     * @param areaId
+     * @return
+     */
+    public List<ArticleTypeVO> listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId(Integer typeId,Integer areaId);
 }
