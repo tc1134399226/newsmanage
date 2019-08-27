@@ -34,6 +34,7 @@ public class UserServiceImpl implements SysUserService {
         return sysUserDao.getAllUser();
     }
 
+
     /**
      * 删除用户信息 操作中间表
      * @param userid

@@ -28,8 +28,9 @@
     </delete>
 
     <update id="updateUser">
-        update sysuser set account=#{account},
-         email = #{email},mobile=#{mobile},areaCode=#{areaCode},status=#{status},icon=#{icon}
+        update sysuser set
+         email = #{email},mobile=#{mobile},areaCode=#{areaCode}
+        <if test="icon != null and icon != ''">,icon=#{icon}</if>
          where userid = #{userid}
     </update>
 

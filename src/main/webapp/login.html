@@ -119,6 +119,8 @@
 		//1.获取姓名与密码
 		var account = $("#account").val();
 		var password = $("#password").val();
+		console.log(account+":"+password);
+
 		$.ajax({
 			//请求方式
 			type : "POST",
@@ -146,7 +148,8 @@
 			},
 			//请求失败，包含具体的错误信息
 			error : function(e){
-				alert("姓名或密码错误");
+				console.log(e.status);
+				console.log(e.responseText);
 			}
 		});
 	}
