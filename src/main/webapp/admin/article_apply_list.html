@@ -110,7 +110,7 @@
                     trStr+="<td>"+item.mainTitle+"</td>";
                     trStr+="<td>"+new Date(parseInt(item.updateTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+"</td>";
                     trStr+="<td>";
-                    trStr+="<button type=\"button\"  onclick='checkArticle("+item.articleId+")'>查看详情</button>&nbsp;"
+                    trStr+="<button type=\"button\"  onclick='checkArticle("+item.articleId+")'>查看详情</button>&nbsp;";
                     trStr+="</td>";
                     trStr+="</tr>";
                     $("#dataTable").append(trStr);
@@ -145,7 +145,7 @@
 
     //跳转详情页
     function checkArticle(articleId){
-        window.location.href="article_content.html?articleId="+articleId;
+        window.location.href="article_apply_details.html?articleId="+articleId;
     }
 
 

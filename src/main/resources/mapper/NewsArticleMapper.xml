@@ -18,4 +18,5 @@
 comment c on c.articleId=a.articleId  where a.articleId=#{articleId}) tb1
 ,(SELECT COUNT(la.articleId =#{articleId} ) articleLoveNum,la.articleId from love_article la ) tb2
     </select>
+
 </mapper>

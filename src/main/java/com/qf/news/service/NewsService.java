@@ -13,7 +13,7 @@ public interface NewsService {
 
 
     /**
-     * 通过创建时间查询所有审核已通过的新闻
+     * 所有审核已通过的新闻根据热度降序
      * @return
      */
     public List<ArticleTypeVO> listAllArticleByStatusByHot();
@@ -23,4 +23,20 @@ public interface NewsService {
      * @return
      */
     public List<ArticleTypeVO> getMainImg();
+
+    /**
+     * 获取指定类型和地区的文章 按照热度降序
+     * @param typeId
+     * @param areaId
+     * @return
+     */
+    public List<ArticleTypeVO> listAllArticleByStatusAndHotAndTypeIdAndAreaId(Integer typeId,Integer areaId);
+    /**
+     * 获取指定类型和地区的文章 按照创建时间降序
+     * @param typeId
+     * @param areaId
+     * @return
+     */
+    public List<ArticleTypeVO> listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId(Integer typeId,Integer areaId);
 }
+

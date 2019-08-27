@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -88,6 +89,11 @@ public class NewsArticleInfoController {
         return newsArticleInfoService.getReleaseInfoById(articleId);
     }
 
+    /**
+     * 获取文章热度
+     * @param session
+     * @return
+     */
     @RequestMapping("getArticleAndLoveNumAndComNum")
     @ResponseBody
     public Object getArticleAndLoveNumAndComNum( HttpSession session){
@@ -96,8 +102,8 @@ public class NewsArticleInfoController {
 //        if (userInfo.getUserId()==0||articleId==0){
 //          return false;
 //      }
-//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(userInfo.getUserId(),articleId);
-        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1,1);
+//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId);
+        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1);
     }
 
 
@@ -105,8 +111,11 @@ public class NewsArticleInfoController {
     @RequestMapping("commitArticle")
     @ResponseBody
     public boolean commitArticle(@RequestBody ArticleInfo articleInfo){
-        return newsArticleInfoService.commitArticle(articleInfo);
-
+        if (articleInfo.getArticleId()!=0){
+            return newsArticleInfoService.uploadArticle(articleInfo);
+        }else {
+            return newsArticleInfoService.commitArticle(articleInfo);
+        }
     }
 
     //根据输入的新闻内容查询获取articleId
@@ -127,7 +136,11 @@ public class NewsArticleInfoController {
     @RequestMapping("secondCommitArticle")
     @ResponseBody
     public boolean secondCommitArticle(@RequestBody ArticleInfo articleInfo){
-        return newsArticleInfoService.secondCommitArticle(articleInfo);
+        if (articleInfo.getArticleId()==0){
+            return newsArticleInfoService.commitArticle(articleInfo);
+        }else {
+            return newsArticleInfoService.secondCommitArticle(articleInfo);
+        }
     }
 
     /**
@@ -220,4 +233,16 @@ public class NewsArticleInfoController {
         return newsArticleInfoService.loveArticle(1,1);
     }
 
+    //显示新闻
+    @RequestMapping("fileshow")
+    @ResponseBody
+    public void showload(String filename,HttpServletResponse response) throws Exception{
+        File file = new File("static/upload",filename);
+        byte[] bs = null;
+        FileInputStream is = new FileInputStream(file);
+        bs = new byte[is.available()];
+        int read = is.read(bs);
+        response.getOutputStream().write(bs,0,read);
+        is.close();
+    }
 }

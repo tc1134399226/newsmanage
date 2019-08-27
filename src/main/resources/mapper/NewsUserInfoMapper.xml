@@ -34,9 +34,9 @@
     <insert id="register" parameterType="com.qf.news.pojo.UserInfo">
         insert into userinfo(userId,
         account,nickName,
-        password,idCard,mobile,sex,icon,status,createTime,updateTime)
+        password,idCard,mobile,sex,icon,status,createTime,updateTime,realName,idCardBack,idCardFront)
         values(DEFAULT,#{account},#{nickName},#{password},#{idCard},#{mobile},#{sex},
-        #{icon},0,now(),now())
+        #{icon},0,now(),now(),0,0,0)
     </insert>
 
     <!--用户名重复检测-->

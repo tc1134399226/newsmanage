@@ -10,14 +10,55 @@
         inner join type t on t.typeId = a.typeId
         where a.`status` = 2 ORDER BY a.createTime desc
     </select>
-
     <select id="listAllArticleByStatusByHot" resultType="com.qf.news.vo.ArticleTypeVO">
         select a.*,ar.areaName,t.typeName from article a
         inner join area ar on ar.areaId = a.areaId
         inner join type t on t.typeId = a.typeId
         where a.`status` = 2 ORDER BY a.hot desc
     </select>
+    <resultMap id="ArticleTypeVO" type="com.qf.news.vo.ArticleTypeVO">
+        <result column="articleId" property="articleId"/>
+        <result column="userId" property="userId"/>
+        <result column="areaId" property="areaId"/>
+        <result column="userIp" property="userIp"/>
+        <result column="mainTitle" property="mainTitle"/>
+        <result column="typeId" property="typeId"/>
+        <result column="subTitle" property="subTitle"/>
+        <result column="content" property="content"/>
+        <result column="timeComNum" property="timeComNum"/>
+        <result column="timeArticleLoveNum" property="timeArticleLoveNum"/>
+        <result column="timeHot" property="timeHot"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+    </resultMap>
+<select id="listAllArticleByStatusAndHotAndTypeIdAndAreaId" parameterType="Integer" resultMap="ArticleTypeVO">
+      select tb1.*,COUNT(comId) timeComNum ,COUNT(la.articleId) timeArticleLoveNum
+,COUNT(la.articleId)+COUNT(comId)*10 timeHot from
+(select a.* from article a
+        where `status` = 2 and typeId=#{param1} and areaId=#{param2}) tb1
+left JOIN love_article la on la.articleId=tb1.articleId
+and la.updateTime>=now()-interval 15 day
+LEFT JOIN comment c
+on tb1.articleId =c.articleId
+and c.createTime >= now()-interval 15 day   GROUP BY tb1.articleId
+ order by COUNT(la.articleId)+COUNT(comId)*10 desc
+</select>
+    <select id="listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId" parameterType="Integer" resultMap="ArticleTypeVO">
+      select tb1.*,COUNT(comId) timeComNum ,COUNT(la.articleId) timeArticleLoveNum
+,COUNT(la.articleId)+COUNT(comId)*10 timeHot from
+(select a.* from article a
+        where `status` = 2 and typeId=#{param1} and areaId=#{param2}) tb1
+left JOIN love_article la on la.articleId=tb1.articleId
+and la.updateTime>=now()-interval 15 day
+LEFT JOIN comment c
+on tb1.articleId =c.articleId
+and c.createTime >= now()-interval 15 day   GROUP BY tb1.articleId
+ order by tb1.createTime desc
+</select>
 
+<select id="listAllArticleByTypeIdAndAreaId" parameterType="Integer" resultType="com.qf.news.vo.ArticleTypeVO">
+    select * from articleId where typeId=#{param1} and areaId=#{param2} and status = 2
+</select>
     <select id="getMainImg" resultType="com.qf.news.vo.ArticleTypeVO">
         select * from article_carousel
     </select>
