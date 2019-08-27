@@ -14,6 +14,9 @@ public class UserInfo {
     private  Integer status;
     private Timestamp createTime;
     private Timestamp updateTime;
+    private String realName;
+    private String idCardBack;
+    private String idCardFront;
 
     public String getAccount() {
         return account;
@@ -103,9 +106,33 @@ public class UserInfo {
         this.userId = userId;
     }
 
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getIdCardBack() {
+        return idCardBack;
+    }
+
+    public void setIdCardBack(String idCardBack) {
+        this.idCardBack = idCardBack;
+    }
+
+    public String getIdCardFront() {
+        return idCardFront;
+    }
+
+    public void setIdCardFront(String idCardFront) {
+        this.idCardFront = idCardFront;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
+        return "UserInfo{" +
                 "userId=" + userId +
                 ", account='" + account + '\'' +
                 ", nickName='" + nickName + '\'' +
@@ -117,6 +144,9 @@ public class UserInfo {
                 ", status=" + status +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", realName='" + realName + '\'' +
+                ", idCardBack='" + idCardBack + '\'' +
+                ", idCardFront='" + idCardFront + '\'' +
                 '}';
     }
 }
