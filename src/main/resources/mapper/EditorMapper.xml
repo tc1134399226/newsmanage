@@ -34,5 +34,12 @@
         select * from userinfo where status=2
     </select>
 
+    <select id="getEditorInfoByUserId" parameterType="int" resultType="com.qf.sysuser.pojo.UserInfo">
+        select * from userinfo where userId=#{userId}
+    </select>
+
+    <update id="cancelEditor" parameterType="int">
+        update userinfo set status=0 where userId=#{userId}
+    </update>
 
 </mapper>
