@@ -30,4 +30,9 @@
 
 
 
+    <select id="getAllEditorInfoBySatus" resultType="com.qf.sysuser.pojo.UserInfo" >
+        select * from userinfo where status=2
+    </select>
+
+
 </mapper>
