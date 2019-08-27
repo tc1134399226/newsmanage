@@ -1,16 +1,20 @@
-<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"-->
-<!--        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
-<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta http-equiv="X-UA-Compatible" content="IE=7"/>
-        <meta name="filetype" content="1">
-        <meta name="publishedtype" content="1">
-        <meta name="pagetype" content="2">
-        <meta name="catalogs" content="n_486">
-        <meta name="baidu-site-verification" content="Hc0t30TOtT6W1iYr"/>
+<!--    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>-->
+<!--        <meta http-equiv="X-UA-Compatible" content="IE=7"/>-->
+<!--        <meta name="filetype" content="1">-->
+<!--        <meta name="publishedtype" content="1">-->
+<!--        <meta name="pagetype" content="2">-->
+<!--        <meta name="catalogs" content="n_486">-->
+<!--        <meta name="baidu-site-verification" content="Hc0t30TOtT6W1iYr"/>-->
+    <meta charset="UTF-8">
+    <meta charset="GB18030">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+<!--    <meta http-equiv="refresh" content="10">-->
     <title>更多内容</title>
 <!--        <meta name="keywords"-->
 <!--              content="海外看中国,重磅言论,时政要闻,经济社会,军事纵横,文化娱乐,编辑推荐,封面中国,中国影像,印媒,日媒,美媒,韩媒,外媒,外媒涉华报道,涉我新闻,世界媒体眼中的中国,外交杂志,印度时报,联合早报,路透社,共同社,美联社,独立报,卫报,南海,东海,钓鱼岛,俄罗斯,美国,日本,印度,韩国,瓦良格,航母,珍珠链">-->
@@ -27,8 +31,7 @@
 
     <link rel="stylesheet" href="dropzone/basic.min.css" />
     <link rel="stylesheet" href="dropzone/dropzone.min.css" />
-    <base target="_blank"></base>
-    <!--    <base target="_blank"></base>-->
+<!--    <base target="_blank"></base>//跳转新页面-->
     <style type="text/css">
         .newsNav .newsNavCon .newsLogo-oversea {
             width: 218px;
@@ -127,6 +130,7 @@
 
             <!-- 内容第二部分 begin-->
             <!-- 头条 begin -->
+
             <div class="newsFir">
                 <h2 class="partTit">热榜</h2>
                 <ul id="newsFirContent">
@@ -137,8 +141,11 @@
                         <h5>当前，美中贸易战打得难解难分，这本该是越南等国大放异彩的时候。但想取代中国却需要数年时间……</h5>
                     </li>
                 </ul>
+<!--                <div  class="hotPage">1111</div>-->
             </div>
+
             <!--        <div class="conSec">-->
+
             <div class="conSec">
                 <!-- 左侧列表 begin-->
                 <h2 class="partTit">新榜</h2>
@@ -158,15 +165,17 @@
                 </div>
                 <!-- 左侧列表 begin-->
                 <!-- 右侧 begin-->
+
             </div>
 
         </div>
-        <div  class="pagination">1111</div>
+
     </div>
+    <div style="margin: 5px 500px;font-size: 30px" class="timePage">1111</div>
 </div>
 
 <!-- 尾巴 begin -->
-<div class="footOutNew m_hide">
+<div style="margin-top: 30px " class="footOutNew m_hide">
     <!-- 其他 begin -->
     <div class="fotherNew">
         <ul>
@@ -205,24 +214,54 @@
 <script type="text/javascript" >
 
     function initpage() {
-        var  select=window.location.search.split("type=")[1]
-        console.log(select)
-        if (select=="myArticle") {
-            myArticle()
-        }else if (select=="myDraft"){
-            myDraft()
+        var  select=window.location.search
+        if (select.search("type=")!=-1){
+            select=select.split("type=")[1]
+            // var defaultPage=1
+            console.log(select)
+            if (select=="initHotContent") {
+                // initHotContent()
+                initTimeContent()
+                initHotContent()
+            }else if (select=="initTimeContent"){
+                // initTimeContent()
+                initTimeContent()
+                initHotContent()
+            }else {
+                initTimeContent()
+                initHotContent()
+            }
         }else {
-            myCollection();
+            initTimeContent()
+            initHotContent()
         }
+
         console.log(select)
     }
     initpage()
     function initHotContent() {
-        var typeId = window.location.search.split("?typeId=")[1]
+        var typeId = window.location.search.split("&typeId=")[1]
+        var url=window.location.search
+        // alert(url)
+        // alert(url.search("pageNum") == -1 )
+        if (url.search("pageNum")!=-1){
+            var pageNum=url.split("?pageNum=")[1]
+            pageNum=pageNum.split("&typeId=")[0]
+            console.log("有pageNum"+pageNum)
+        }else {
+            // alert("没有pageNum")
+            var pageNum=1
+            console.log("pageNum为初始值1")
+        }
+        console.log("pageNum"+pageNum)
         var areaId = typeId.split("&areaId=")[1]
+        if (areaId.search("&type=") != -1 ) {
+            areaId=areaId.split("&type=")[0]
+        }
         typeId = typeId.split("&areaId=")[0]
-        console.log(areaId)
-        console.log(typeId)
+
+        console.log("areaId"+areaId)
+        console.log("typeId"+typeId)
         //1.从后台的接口获取数据
         $.ajax({
             //请求方式GET/POST
@@ -232,7 +271,7 @@
             //接受数据类型
             dataType: "json",
             //请求地址
-            url: "news/listAllArticleByStatusAndHotAndTypeIdAndAreaId?typeId=" + typeId + "&areaId=" + areaId,
+            url: "news/listAllArticleByStatusAndHotAndTypeIdAndAreaId?pageNum="+pageNum+"&typeId=" + typeId + "&areaId=" + areaId,
             //数据，json字符串
             // data : JSON.stringify(
             //     {
@@ -244,11 +283,11 @@
                 $("#newsFirContent").html("");
                 //js对象和jquery是不一样的，基本不能互相操作，得靠$()转换
                 //2.将数据填充到table中
-                $(result).each(function (index, item) {
+                $(result.list).each(function (index, item) {
                     // console.log(item)
                     var trStr = "";
                     trStr += " <li class=\"dotLineBot\" >"
-                    trStr += " <h3><a href=\"\" style='text-decoration: none' "
+                    trStr += " <h3><a onclick='articleContent("+item.articleId+")' style='text-decoration: none' "
                     trStr += " title=" + item.mainTitle + " target=\"_blank\" >" + item.mainTitle + "</a>"
                     trStr += "</h3>"
                     trStr += "<h5>" + item.subTitle + "</h5>"
@@ -262,23 +301,25 @@
                     $("#newsFirContent").append(trStr);
                 });
                 if (pageNum<=1){
-                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                    var  splicPage="<li style='float: left;margin-right: 10px'>上一页</li>";
                 } else {
-                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=myCollection"+"\" id='start'>上一页</a></li>"
+                    var	splicPage="<li style='float: left;margin-right: 10px'><a href=\"moveContent.html?pageNum="+(parseInt(pageNum,10)-1 )+"&typeId="+typeId+"&areaId="+areaId+"&type=initHotContent"+"\" id='start'>上一页</a></li>"
 
                 }
-                console.log(111)
-                console.log(result.pages)
+                console.log()
+                console.log("页数"+result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=myCollection"+"\">"+i+"</a></li>";
+                    splicPage +="<li style='float: left;margin-right: 10px'><a href=\"moveContent.html?pageNum="+i+"&typeId="+typeId+"&areaId="+areaId+"&type=initHotContent"+"\">"+i+"</a></li>";
                 }
+                // alert("pageNum"+pageNum)
+                console.log(pageNum>=result.pages)
                 if (pageNum>=result.pages) {
-                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                    splicPage+="<li style='float: left;margin-right: 10px'>下一页</li>";
                 }else {
-                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=myCollection"+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li style='float: left;margin-right: 10px'><a href=\"moveContent.html?pageNum="+(parseInt(pageNum,10)+1 )+"&typeId="+typeId+"&areaId="+areaId+"&type=initHotContent"+"\" id='end'>下一页</a></li>";
                 }
-                $(".pagination").html("");
-                $(".pagination").append(splicPage);
+                $(".hotPage").html("");
+                $(".hotPage").append(splicPage);
             },
             //请求失败，包含具体的错误信息
             error: function (e) {
@@ -288,14 +329,31 @@
 
     }
 
-    initHotContent();
+
 
     function initTimeContent() {
-        var typeId = window.location.search.split("?typeId=")[1]
+        var typeId = window.location.search.split("&typeId=")[1]
+        var url=window.location.search
+        // alert(url)
+        // alert(url.search("pageNum") == -1 )
+        if (url.search("pageNum")!=-1){
+            var pageNum=url.split("?pageNum=")[1]
+            pageNum=pageNum.split("&typeId=")[0]
+            console.log("有pageNum"+pageNum)
+        }else {
+            // alert("没有pageNum")
+            var pageNum=1
+            console.log("pageNum为初始值1")
+        }
+        console.log("pageNum"+pageNum)
         var areaId = typeId.split("&areaId=")[1]
+        if (areaId.search("&type=") != -1 ) {
+            areaId=areaId.split("&type=")[0]
+        }
         typeId = typeId.split("&areaId=")[0]
-        console.log(areaId)
-        console.log(typeId)
+
+        console.log("areaId"+areaId)
+        console.log("typeId"+typeId)
         //1.从后台的接口获取数据
         $.ajax({
             //请求方式GET/POST
@@ -305,26 +363,20 @@
             //接受数据类型
             dataType: "json",
             //请求地址
-            url: "news/listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId?typeId=" + typeId + "&areaId=" + areaId,
-            // url:"news/listAllArticleByStatusByCreateTime",
-            //数据，json字符串
-            // data : JSON.stringify(
-            //     {
-            //     }),
-            //请求成功
+            url: "news/listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId?pageNum="+pageNum+"&typeId=" + typeId + "&areaId=" + areaId,
             success: function (result) {
                 // console.log(result);
                 var count = 0;
                 // $("[name='contentList']").html("");
                 $(".listContent").html("");
                 //2.将数据填充到table中
-                $(result).each(function (index, item) {
+                $(result.list).each(function (index, item) {
                     console.log(item)
                     var trStr = "";
                     trStr += " </a>"
                     trStr += " </li>"
                     trStr += " <li >"
-                    trStr += " <h3><a href=\"\" style='text-decoration: none'"
+                    trStr += " <h3><a onclick='articleContent("+item.articleId+")' style='text-decoration: none'"
                     trStr += " title=" + item.mainTitle + " target=\"_blank\" >" + item.mainTitle + "</a>"
                     trStr += "</h3>"
 
@@ -338,6 +390,29 @@
                         //获取id并拼接
                     $(".listContent").append(trStr);
                 });
+
+                if (pageNum<=1){
+                    console.log("触发pageNum<=1")
+                    var  splicPage="<li style='float: left;margin-right: 10px'>上一页</li>";
+                } else {
+                    console.log("不触发pageNum<=1")
+                    var	splicPage="<li style='float: left;margin-right: 10px'><a href=\"moveContent.html?pageNum="+(parseInt(pageNum,10)-1 )+"&typeId="+typeId+"&areaId="+areaId+"&type=initTimeContent"+"\" id='start'>上一页</a></li>"
+
+                }
+                console.log(111)
+                console.log(result.pages)
+                for(var i=1;i<=result.pages;i++){
+                    splicPage +="<li style='float: left;margin-right: 10px'><a href=\"moveContent.html?pageNum="+i+"&typeId="+typeId+"&areaId="+areaId+"&type=initTimeContent"+"\">"+i+"</a></li>";
+                }
+                if (pageNum>=result.pages) {
+                    console.log("触发pageNum>=max")
+                    splicPage+="<li  style='float: left ;margin-right: 10px' >下一页</li>";
+                }else {
+                    console.log("不触发pageNum>=max")
+                    splicPage+="<li style='float: left;margin-right: 10px'><a href=\"moveContent.html?pageNum="+(parseInt(pageNum,10)+1 )+"&typeId="+typeId+"&areaId="+areaId+"&type=initTimeContent"+"\" id='end'>下一页</a></li>";
+                }
+                $(".timePage").html("");
+                $(".timePage").append(splicPage);
             },
             //请求失败，包含具体的错误信息
             error: function (e) {
@@ -345,8 +420,32 @@
             }
         });
     }
+function articleContent(articleId) {
+    $.ajax({
+        //请求方式
+        type : "GET",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/toArticleContent?articleId="+articleId,
+        //数据，json字符串
+        //请求成功
+        success : function(result) {
+           if (result) {
+               window.location.href="articleContentShow.html?articleId="+articleId
+           }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log("报错");
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
+}
 
-    initTimeContent();
 
 </script>
 

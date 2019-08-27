@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("news")
 public class NewsArticleInfoController {
 
@@ -244,5 +244,16 @@ public class NewsArticleInfoController {
         int read = is.read(bs);
         response.getOutputStream().write(bs,0,read);
         is.close();
+    }
+    @RequestMapping("toArticleContent")
+    @ResponseBody
+    public Object toArticleContent(@RequestParam long articleId,HttpSession session) {
+       session.setAttribute("articleId",articleId);
+       Long attribute = (Long) session.getAttribute("articleId");
+        System.out.println(attribute);
+       if (attribute==null){
+           return false;
+       }
+       return true;
     }
 }
