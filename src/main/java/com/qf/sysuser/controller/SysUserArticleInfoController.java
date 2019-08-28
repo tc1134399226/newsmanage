@@ -37,7 +37,7 @@ public class SysUserArticleInfoController {
      */
     @RequestMapping("getAllArticleInfo")
     public Object getAllArticleInfo(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum){
-        int pageSize=10;//每页显示记录数
+        int pageSize=15;//每页显示记录数
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, pageSize);
         //获取所有申请的文章信息
@@ -64,7 +64,7 @@ public class SysUserArticleInfoController {
      */
     @RequestMapping("getArticleInfo")
     public Object getArticleInfo(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum,@RequestBody ArticleInfo articleInfo){
-        int pageSize=5;//每页显示记录数
+        int pageSize=10;//每页显示记录数
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, pageSize);
         //获取所有申请的文章信息
