@@ -205,4 +205,10 @@ public class SysUserController {
         System.out.println(userInfo);
         return this.sysUserService.editUserInfoById(userInfo);
     }
+
+    @RequestMapping("selectUser")
+    @ResponseBody
+    public List<UserInfo> selectUser(@RequestBody UserInfo userInfo){
+        return sysUserService.selectUser(userInfo);
+    }
 }

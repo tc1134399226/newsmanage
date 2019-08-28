@@ -99,4 +99,6 @@ public interface SysUserDao {
 
     public int editUserInfoById(UserInfo userInfo);
 
+    public List<UserInfo> selectUser(UserInfo userInfo);
+
 }

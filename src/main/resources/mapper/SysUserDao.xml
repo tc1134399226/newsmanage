@@ -103,6 +103,7 @@
         select * from userinfo where  userid = #{userid}
     </select>
 
+    <!--用户信息修改-->
     <update id="editUserInfoById" parameterType="com.qf.sysuser.pojo.UserInfo">
         update  userinfo set
         <trim suffixOverrides=",">
@@ -126,5 +127,18 @@
         </trim>
         where  userId = #{userId}
     </update>
+
+        <!--用户模糊查询-->
+    <select id="selectUser" resultType="com.qf.sysuser.pojo.UserInfo">
+        select * from userInfo
+        <where>
+            <if test="nickName != null and nickName != ''">
+                and nickName like '%${nickName}%'
+            </if>
+            <if test="account != null and account != ''">
+                and account like '%${account}%'
+            </if>
+        </where>
+    </select>
 
 </mapper>
