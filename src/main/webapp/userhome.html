@@ -148,15 +148,16 @@
         }
         console.log(select)
         if (select=="myArticle") {
-            myArticle()
+            myArticle(1)
         }else if (select=="myDraft"){
-            myDraft()
+            myDraft(1)
         }else if (select=="unreadMessage"){
-            myUnreadMessage()
+            myUnreadMessage(1)
         }else  if (select=="readMessage"){
-            myReadMessage()
+            myReadMessage(1
+            )
         }else {
-            myCollection();
+            myCollection(1);
         }
         console.log(select)
     }
@@ -207,18 +208,20 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=myCollection"+"\" id='start'>上一页</a></li>"
-
+                    var  splicPage="<li><a onclick='myCollection("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
                 }
-                console.log(111)
-                console.log(result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=myCollection"+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myCollection(" + i + ")'>" + i + "</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=myCollection"+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a onclick='myCollection("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -233,15 +236,15 @@
     }
     //点击分页的页数和上,下页时触发这个方法
     //显示用户收藏文章指定页
-    function myCollection(){
-               var pageNum=window.location.search.split("=")[1];
-               console.log("111"+pageNum)
-        if (pageNum==undefined){
-            console.log("111")
-            pageNum=1;
-        }else if (pageNum.indexOf("&type") != -1){
-                   pageNum=pageNum.split("&type")[0]
-               }
+    function myCollection(pageNum){
+        //        var pageNum=window.location.search.split("=")[1];
+        //        console.log("111"+pageNum)
+        // if (pageNum==undefined){
+        //     console.log("111")
+        //     pageNum=1;
+        // }else if (pageNum.indexOf("&type") != -1){
+        //            pageNum=pageNum.split("&type")[0]
+        //        }
 
         console.log(pageNum)
         var requestURL="news/getCollectionByUserId";
@@ -289,18 +292,22 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=myCollection"+"\" id='start'>上一页</a></li>"
-
+                    var  splicPage="<li><a onclick='myCollection("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
                 }
                 console.log(111)
                 console.log(result.pages)
-                for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=myCollection"+"\">"+i+"</a></li>";
+                for(var i=1;i<=result.pages;i++) {
+                    if (pageNum == 1) {
+                        pageNum == 2
+                    }
+                    if (i > parseInt(pageNum) - 3 && i < parseInt(pageNum) + 3) {
+                        splicPage += "<li><a onclick='myCollection(" + i + ")'>" + i + "</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=myCollection"+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a onclick='myCollection("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>";
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -391,18 +398,20 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=myArticle"+"\" id='start'>上一页</a></li>"
-
+                    var  splicPage="<li><a onclick='myArticle("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
                 }
-                console.log(111)
-                console.log(result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=myArticle"+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myArticle(" + i + ")'>" + i + "</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=myArticle"+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a onclick='myArticle("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -418,11 +427,11 @@
     }
     //点击分页时触发这个方法
     //显示用户文章指定页
-    function myArticle() {
-        var pageNum=window.location.search.split("=")[1];
-        if (pageNum.search("&type")!= -1){
-            pageNum=pageNum.split("&type")[0]
-        }
+    function myArticle(pageNum) {
+        // var pageNum=window.location.search.split("=")[1];
+        // if (pageNum.search("&type")!= -1){
+        //     pageNum=pageNum.split("&type")[0]
+        // }
 
         console.log(pageNum)
         var requestURL="news/getMyArtByUserId";
@@ -478,18 +487,20 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=myArticle"+"\" id='start'>上一页</a></li>"
-
+                    var  splicPage="<li><a onclick='myArticle("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
                 }
-                console.log(111)
-                console.log(result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=myArticle"+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myArticle(" + i + ")'>" + i + "</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=myArticle"+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a onclick='myArticle("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -550,18 +561,20 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=myDraft"+"\" id='start'>上一页</a></li>"
-
+                    var  splicPage="<li><a onclick='myDraft("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
                 }
-                console.log(111)
-                console.log(result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=myDraft"+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myDraft(" + i + ")'>" + i + "</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=myDraft"+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a onclick='myDraft("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -576,12 +589,12 @@
     }
     //点击分页的页数和上,下页时触发这个方法
     //显示用户的草稿指定页
-    function myDraft(){
+    function myDraft(pageNum){
 
-        var pageNum=window.location.search.split("=")[1];
-        if (pageNum.indexOf("&type") != -1){
-            pageNum=pageNum.split("&type")[0]
-        }
+        // var pageNum=window.location.search.split("=")[1];
+        // if (pageNum.indexOf("&type") != -1){
+        //     pageNum=pageNum.split("&type")[0]
+        // }
 
         console.log(pageNum)
         var requestURL="news/getMyDraftByUserId";
@@ -626,21 +639,24 @@
                     trStr+="<hr>";
                     $(".content").append(trStr);
                 });
-                    if (pageNum <= 1) {
-                        var splicPage = "<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
-                    } else {
-                        var splicPage = "<li><a href=\"userhome.html?pageNum=" + (parseInt(pageNum, 10) - 1) + "&type=myDraft" + "\" id='start'>上一页</a></li>"
-
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var  splicPage="<li><a onclick='myDraft("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
+                }
+                for(var i=1;i<=result.pages;i++){
+                    if (pageNum==1){
+                        pageNum==2
                     }
-                    console.log(result.pages)
-                    for (var i = 1; i <= result.pages; i++) {
-                        splicPage += "<li><a href=\"userhome.html?pageNum=" + i + "&type=myDraft" + "\">" + i + "</a></li>";
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myDraft(" + i + ")'>" + i + "</a></li>";
                     }
-                    if (pageNum >= result.pages) {
-                        splicPage += "<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
-                    } else {
-                        splicPage += "<li><a href=\"userhome.html?pageNum=" + (parseInt(pageNum, 10) + 1) + "&type=myDraft" + "\" id='end'>下一页</a></li>";
-                    }
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a onclick='myDraft("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
+                }
                     $(".pagination").html("");
                     $(".pagination").append(splicPage);
 
@@ -731,18 +747,20 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=unreadMessage"+"\" id='start'>上一页</a></li>"
-
+                    var  splicPage="<li><a onclick='myUnreadMessage("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
                 }
-                console.log(111)
-                console.log(result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=unreadMessage"+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myUnreadMessage(" + i + ")'>" + i + "</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=unreadMessage"+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a onclick='myUnreadMessage("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -757,12 +775,12 @@
     }
     //点击分页的页数和上,下页时触发这个方法
     //显示用户未读信息指定页
-    function myUnreadMessage(){
+    function myUnreadMessage(pageNum){
 
-        var pageNum=window.location.search.split("=")[1];
-        if (pageNum.indexOf("&type") != -1){
-            pageNum=pageNum.split("&type")[0]
-        }
+        // var pageNum=window.location.search.split("=")[1];
+        // if (pageNum.indexOf("&type") != -1){
+        //     pageNum=pageNum.split("&type")[0]
+        // }
 
         console.log(pageNum)
         var requestURL="news/getUnreadMessageByUserId";
@@ -815,18 +833,20 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=unreadMessage"+"\" id='start'>上一页</a></li>"
-
+                    var  splicPage="<li><a onclick='myUnreadMessage("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
                 }
-                console.log(111)
-                console.log(result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=unreadMessage"+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myUnreadMessage(" + i + ")'>" + i + "</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=unreadMessage"+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a onclick='myUnreadMessage("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -887,18 +907,20 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=readMessage"+"\" id='start'>上一页</a></li>"
-
+                    var  splicPage="<li><a onclick='myReadMessage("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
                 }
-                console.log(111)
-                console.log(result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=readMessage"+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myReadMessage(" + i + ")'>" + i + "</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=readMessage"+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a onclick='myReadMessage("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -913,12 +935,12 @@
     }
     //点击分页的页数和上,下页时触发这个方法
     //显示用户已读信息指定页
-    function myReadMessage(){
+    function myReadMessage(pageNum){
 
-        var pageNum=window.location.search.split("=")[1];
-        if (pageNum.indexOf("&type") != -1){
-            pageNum=pageNum.split("&type")[0]
-        }
+        // var pageNum=window.location.search.split("=")[1];
+        // if (pageNum.indexOf("&type") != -1){
+        //     pageNum=pageNum.split("&type")[0]
+        // }
 
         console.log(pageNum)
         var requestURL="news/getReadMessageByUserId";
@@ -967,18 +989,20 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)-1 )+"&type=readMessage"+"\" id='start'>上一页</a></li>"
-
+                    var  splicPage="<li><a onclick='myReadMessage("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
                 }
-                console.log(111)
-                console.log(result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"userhome.html?pageNum="+i+"&type=readMessage"+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myReadMessage(" + i + ")'>" + i + "</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"userhome.html?pageNum="+(parseInt(pageNum,10)+1 )+"&type=readMessage"+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a onclick='myReadMessage("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
