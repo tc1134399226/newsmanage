@@ -5,6 +5,7 @@ import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.LoveArticle;
 import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.NewsArticleInfoService;
+import com.qf.news.vo.ArticleInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -83,8 +84,8 @@ public class NewsArticleInfoController {
     //根据articleId查询编辑的新闻显示到预览页面
     @RequestMapping("getReleaseInfoById")
     @ResponseBody
-    public ArticleInfo getReleaseInfoById(@RequestParam int articleId,
-                                          HttpSession session){
+    public ArticleInfoVO getReleaseInfoById(@RequestParam int articleId,
+                                            HttpSession session){
 //        long articleId1 = (Long)session.getAttribute("articleId");
         return newsArticleInfoService.getReleaseInfoById(articleId);
     }

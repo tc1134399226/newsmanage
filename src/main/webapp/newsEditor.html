@@ -358,11 +358,18 @@
         // myDropzone.emit("thumbnail", mockFile, "http://localhost:8080/newsmanage/static/upload/icon.jpg");
 
 
-        var str=window.location.search;
-        var articleId=str.split("=")[1];
-        if (typeof(articleId)==undefined){
-            articleId=0;
+        var str=window.location.search.split("?")[1];
+        var str2=str.split("=")[0];
+        var articleId;
+        if(str2=="articleId"){
+            articleId=str.split("=")[1];
+            if (typeof(articleId)==undefined){
+                articleId=0;
+            }
         }
+        // if (typeof(articleId)==undefined){
+        //     articleId=0;
+        // }
         var userId;
         $.ajax({
             //请求方式GET/POST

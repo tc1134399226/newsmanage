@@ -27,8 +27,8 @@ where articleId=#{articleId} and createTime >= now()-interval 15 day)f
     update article set hot=#{timeHot} where articleId=#{articleId}
 </update>
     <!--根据articleId查询编辑的新闻显示到预览页面-->
-    <select id="getReleaseInfoById" parameterType="int" resultType="com.qf.news.pojo.ArticleInfo">
-       select * from article where articleId=#{articleId}
+    <select id="getReleaseInfoById" parameterType="int" resultType="com.qf.news.vo.ArticleInfoVO">
+       select a.*,u.nickName from article a left join userinfo u on u.userId=a.userId  where articleId=#{articleId}
     </select>
 
     <!--用户在前台输入新闻添加到数据库-->

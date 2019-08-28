@@ -33,7 +33,7 @@ public class NewsCollectionController {
      */
     @RequestMapping(value="getCollectionByUserId")
     public Object getCollectionByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
-                                                    Integer pageNum , HttpSession session, HttpServletResponse httpServletResponse) throws IOException {
+                                                    Integer pageNum , HttpSession session){
         //,produces = "text/html;charset=UTF-8"
       UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
 
