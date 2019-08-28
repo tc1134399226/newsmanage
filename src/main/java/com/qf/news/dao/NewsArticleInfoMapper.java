@@ -3,6 +3,7 @@ package com.qf.news.dao;
 
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.LoveArticle;
+import com.qf.news.vo.ArticleInfoVO;
 import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Repository;
 //@Repository("newsArticleInfoMapper")
 public interface NewsArticleInfoMapper {
     //根据articleId查询编辑的新闻显示到预览页面
-    public ArticleInfo getReleaseInfoById(int releaseId);
+    public ArticleInfoVO getReleaseInfoById(int releaseId);
 
     //用户在前台输入新闻添加到数据库
     public int commitArticle(ArticleInfo articleInfo);

@@ -118,17 +118,17 @@
                         <!--内容-->
                         <div class="blog_post_style2_content wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
                             <!--标题-->
-                            <h3><input style="border:none;" id="mainTitle"></h3>
-                            <h4><input style="border:none;" id="subTitle"></h4>
+                            <h3><input style="border:none;" id="mainTitle" readonly="readonly"></h3>
+                            <h4><input style="border:none;" id="subTitle" readonly="readonly"></h4>
                             <!--作者-->
                             <div class="blog_author_data">
                                 <a href="#">
                                     <img src="./author_img.jpg" class="img-fluid" alt="" width="34" height="34">
-                                    <input style="border:none;" id="userName" value=赵志国 >
+                                    <input style="border:none;" id="userName"   readonly="readonly">
                                 </a>
                             </div>
                             <!--浏览量和评论数-->
-                            <ul class="blog_meta_tags">
+                            <ul class="blog_meta_tags" style="float:right; margin-right: 300px">
                                 <!--浏览量-->
                                 <li>
                                     <span class="blog_bg_blue">
@@ -270,6 +270,7 @@
             console.log(result);
             $("#mainTitle").val(result.mainTitle);
             $("#subTitle").val(result.subTitle);
+            $("#userName").val(result.nickName);
             // var coverSrc=new Image();
             //
             // coverSrc.src=result.cover;
@@ -307,7 +308,7 @@
                 // private Long articleLoveNum;//新闻点赞数
                 // private Integer articleLoveStatus;
                 console.log(result);
-                $("#hot").html("");
+                $(".blog_meta_tags").html("");
                 var   trStr="<span class='glyphicon glyphicon-fire' > "+result.timeHot+"</span>"
                 if (result.articleLoveStatus==1){
                      trStr+="<button id='loveArticleId' type=\"button\" style='color:red ' onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart'  ></button>"
@@ -317,7 +318,7 @@
                 trStr+=result.articleLoveNum+"<br>"
                 trStr+="<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
                 trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
-               $("#hot").append(trStr);
+               $(".blog_meta_tags").append(trStr);
 
             },
             //请求失败，包含具体的错误信息
