@@ -25,6 +25,13 @@
     <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
+
+<div  style="margin-top:0px;float:right;">
+    <label >注册天数</label>
+    <input type="text" readonly="readonly" id="regDay" align="right" style="width:45px;overflow-x:visible;overflow-y:visible;"/>
+    <!--<label >天</label>-->
+</div>
+
 <div class="yui3-g NavList">
     <div class="yui3-u Left all-sort">
         <h4>地区分类</h4>
@@ -41,6 +48,42 @@
 </div>
 
 <script>
+    var createTi;
+    //定义注册天数
+    var day;
+
+    var userId;
+    $.ajax({
+        //请求方式GET/POST
+        type : "GET",
+        //同步
+        async: false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "sysuser/getSession",
+        //请求成功
+        success : function(result) {
+            userId = result.userId;
+            createTi=result.createTime;
+            //获取当前时间
+            var myDate = new Date();
+            //获取时间差
+            var days = ((myDate.getTime() - createTi))/ (1000*3600*24);
+            day=Math.ceil(days);
+            // alert(day);
+            $("#regDay").val(day);
+            selectUseDay();
+
+        },
+        //请求失败，包含具体的错误信 息
+        error : function(e){
+            console.error(e);
+        }
+    });
+
     //第一次访问页面时把注册天数添加到数据库中
     function addUseDay() {
         $.ajax({
@@ -55,7 +98,7 @@
             //传递参数
             data:JSON.stringify(
                 {
-                    "userId":id,
+                    "userId":userId,
                     "day":day
 
                 }
@@ -85,7 +128,7 @@
             //传递参数
             data:JSON.stringify(
                 {
-                    "userId":id,
+                    "userId":userId,
                     "day":day
 
                 }
@@ -114,7 +157,7 @@
             //传递参数
             data:JSON.stringify(
                 {
-                    "userId":id
+                    "userId":userId
 
                 }
             ),
