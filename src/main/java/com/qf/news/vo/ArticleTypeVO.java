@@ -24,6 +24,8 @@ public class ArticleTypeVO {
     private Timestamp updateTime;
     private String userIp;
     private String cover;
+    private Long visNum;
+    private Long timeVisNum;
     private Integer state = 0; //后台轮播图状态  新加
 //用于计算实时热度
     private long timeHot;    //三天内热度
@@ -31,10 +33,10 @@ public class ArticleTypeVO {
     private Long timeArticleLoveNum;//新闻点赞数
 
     public long getTimeHot() {
-        if (getTimeComNum()==null&&getTimeArticleLoveNum()==null){
+        if (getTimeComNum()==null&&getTimeArticleLoveNum()==null&&getTimeVisNum()==null){
             return this.timeHot;
         }
-        return getTimeComNum()*10+getTimeArticleLoveNum();
+        return getTimeComNum()*20+getTimeArticleLoveNum()*10+getTimeVisNum();
     }
 
     public void setTimeHot(long timeHot) {
@@ -42,10 +44,10 @@ public class ArticleTypeVO {
     }
 
     public Long getHot() {
-        if (getComNum()==null&&getArticleLoveNum()==null){
+        if (getComNum()==null&&getArticleLoveNum()==null&&getVisNum()==null){
             return this.hot;
         }
-        return getComNum()*10+getArticleLoveNum();
+        return getComNum()*20+getArticleLoveNum()*10+getVisNum();
     }
 
     public void setHot(long hot) {

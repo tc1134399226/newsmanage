@@ -73,7 +73,7 @@ public class NewsController {
         PageHelper.startPage(pageNum,defaultPageSize);
         List<ArticleTypeVO> articleTypeVOS =
                 newsService.listAllArticleByStatusAndHotAndTypeIdAndAreaId(typeId, areaId);
-        System.out.println(articleTypeVOS);
+        System.out.println("111"+articleTypeVOS);
         PageInfo<ArticleTypeVO> articleTypeVoPageInfo = new PageInfo<ArticleTypeVO>(articleTypeVOS);
         return articleTypeVoPageInfo;
     }

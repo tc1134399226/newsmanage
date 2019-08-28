@@ -27,6 +27,13 @@ public interface NewsArticleInfoMapper {
     //得到用户IP
     public int getIP(ArticleInfo articleInfo);
 
+    /**
+     * 插入浏览记录
+     * @param articleInfo
+     * @return
+     */
+    public int insertIP(ArticleInfo articleInfo);
+
     //得到封面图
     public int uploadCover(ArticleInfo articleInfo);
 
