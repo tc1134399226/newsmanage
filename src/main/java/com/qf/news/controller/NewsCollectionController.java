@@ -6,7 +6,6 @@ import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.NewsCollectionService;
 import com.qf.news.vo.ArticleTypeVO;
 import com.qf.news.vo.CollectionVO;
-import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,17 +32,13 @@ public class NewsCollectionController {
      */
     @RequestMapping(value="getCollectionByUserId")
     public Object getCollectionByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
-                                                    Integer pageNum , HttpSession session){
+                                                    Integer pageNum , HttpSession session) throws IOException {
         //,produces = "text/html;charset=UTF-8"
       UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
 
-
+//        System.out.println(userInfo);
         //测试
 //        UserInfo userInfo=new UserInfo();
-        if (userInfo==null){
-            httpServletResponse.sendRedirect("http://localhost:8080/newsmanage/login.html");
-            return false;
-        }
         //一页有多少条数据
         int defaultPageSize=2;
         //初始化pageHelper对象
