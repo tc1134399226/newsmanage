@@ -80,6 +80,9 @@
         //数据，json字符串
         //请求成功
         success: function (result) {
+            if (result==null){
+                window.location.href = "login.html";
+            }
             user = result;
         }
     });
@@ -135,7 +138,7 @@
                     window.location.href = "editorapply.html?userId="+user.userId
                 }
                 if (object==7){
-                    window.location.href = "editorapply.html?userId="+user.userId
+                    window.location.href = "newsEditor.html?userId="+user.userId
                 }
                 if (object==8){
                     window.location.href = "userInfo-edit.html?userId="+user.userId
