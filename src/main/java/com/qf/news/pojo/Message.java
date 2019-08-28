@@ -15,6 +15,15 @@ public class Message {
     private long repId;
     private long comId;
     private String mgeUrl;
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getCreateTime() {
         return createTime.toString();
