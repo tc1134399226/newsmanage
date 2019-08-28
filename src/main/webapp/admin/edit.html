@@ -105,7 +105,7 @@
 
 						<div class="form-group">
 							<label for="exampleInputPassword1">用户名称</label>
-							<input type="text" class="form-control" id="account" value="测试用户">
+							<input type="text" class="form-control" id="username" value="测试用户">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">邮箱地址</label>
@@ -128,7 +128,7 @@
 							<p class="help-block label label-warning">请输入用户状态, 格式为： 1/0</p>
 						</div>
 						<button type="button" class="btn btn-success" onclick="sub()"><i class="glyphicon glyphicon-edit"></i> 修改</button>
-						<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
+						<button type="button" class="btn btn-danger" onclick="initPage()"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
 					</form>
 				</div>
 			</div>
@@ -196,7 +196,7 @@
 			}),
 			//请求成功
 			success : function(result) {
-				$("#account").val(result.account);
+				$("#username").val(result.username);
 				$("#email").val(result.email);
 				$("#status").val(result.status);
 				$("#mobile").val(result.mobile);
@@ -212,7 +212,7 @@
 
 
 	function sub() {
-		var account = $("#account").val();
+		var username = $("#username").val();
 		var email = $("#email").val();
 		var mobile = $("#mobile").val();
 		var areaCode = $("#areaCode").val();
@@ -230,7 +230,7 @@
 			//数据，json字符串
 			data: JSON.stringify({
 				"userid":value,
-				"account": account,
+				"username": username,
 				"email": email,
 				"mobile": mobile,
 				"areaCode": areaCode,
@@ -241,7 +241,7 @@
 				var text = result.toString();
 				if (result) {
 					alert("修改成功");
-					initPage();
+					window.location.href = "user.html";
 				} else {
 					alert("修改失败");
 				}
@@ -252,8 +252,8 @@
 			}
 		});
 	}
-	$(".tree").load("menu.html")
-	$("#headbanner").load("head.html")
+	$(".tree").load("menu.html");
+	$("#headbanner").load("head.html");
 </script>
 </body>
 </html>
