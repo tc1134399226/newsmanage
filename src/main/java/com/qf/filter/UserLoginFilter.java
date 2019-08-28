@@ -1,7 +1,6 @@
 package com.qf.filter;
 
-import com.qf.sysuser.pojo.User;
-import com.qf.sysuser.pojo.UserInfo;
+import com.qf.news.pojo.UserInfo;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
