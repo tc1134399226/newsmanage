@@ -26,11 +26,6 @@
     <link rel="stylesheet" href="css/login.css">
     <!--<link rel="stylesheet" href="dropzone/dropzone.min.css" />-->
 
-
-</head>
-
-<body>
-
 <style>
     body{ padding-bottom:50px;}
     .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
@@ -38,6 +33,11 @@
 
     .div-inline{ display:inline}
 </style>
+
+</head>
+
+<body>
+
 
 
 <div  style="margin-top:0px;float:right;">
@@ -136,52 +136,9 @@
     <div class="py-container">
         <div class="yui3-g home">
             <!--左侧列表-->
-            <div class="yui3-u-1-6 list" style="background-color:#a83c3a;">
+            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#a83c3a;">
 
-                <div class="person-info">
 
-                    <!--<div class="person-account">-->
-                    <!--<span class="name">Michelle</span>-->
-
-                    <!--</div>-->
-                    <!--<div class="clearfix"></div>-->
-                </div>
-
-                <div class="list-items">
-                    <dl>
-                        <dt><i>·</i> 个人空间</dt>
-
-                        <dd ><a href="#"  onclick="skip()" >我的收藏</a></dd>
-                        <hr>
-                        <dd ><a onclick=jumpmesg() >我的消息</a></dd>
-
-                        <hr>
-
-                        <dd><a id="1" style="display:none" href="#" onclick="skip()"  >我的新闻</a></dd>
-
-                    </dl>
-                    <hr>
-                    <dl>
-                        <dt><i>·</i> 权限一览</dt>
-
-                        <dd><a id="2" style="display:none" href="" >申请小编</a></dd>
-                        <hr>
-                        <span v-if="judge">
-							<dd><a id="3" style="display:none" href="" >发布新闻</a></dd>
-                            </span>
-                    </dl>
-                    <hr>
-                    <dl>
-                        <dt><i>·</i> 设置</dt>
-
-                        <dd><a onclick=jump(); class="list-active">信息修改</a></dd>
-                        <hr>
-
-                        <hr>
-                        <hr>
-                        <hr>
-                    </dl>
-                </div>
             </div>
             <!--右侧主内容-->
             <div class="yui3-u-5-6">
@@ -560,9 +517,7 @@
 			}
 		})
 	}
-
-
-
+    $("#leftmenu").load("leftmenu.html");
 
 </script>
 
