@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+	<title>新闻首页</title>
     <meta charset="UTF-8">
     <!--网站描述保持在50字左右-->
     <meta name="Description" content="环球网 - 最大环球网站" />
@@ -774,7 +775,7 @@
 							if (item.typeName==type[i]){
 								str += "<dd>";
 								str += "<a href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
-								str += "</dd>";
+								str += "</a></dd>";
 								count +=1;
 								if (count>=10){
 									return false;
@@ -783,7 +784,9 @@
 						}
 					});
 					$("#dataHot"+i).append(str);
+
 				}
+
 			}
 		})
 	}
@@ -828,6 +831,20 @@
 				fiveImg +="<a href='articleContentShow.html?articleId="+item.articleId+"'><li><img src='"+item.cover+"'></li></a>"
 			})
 			$("#dataImg").append(fiveImg)
+
+			var strtop = "";
+			$(result).each(function(index,item) {
+				console.log(item);
+				strtop += '<dl class="right_new">';
+				strtop += '<dt>';
+				strtop += "<h2><a href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"</a></h2>";
+				strtop += "<dd><p>"+item.subTitle+"</p></dd></dt></dl>";
+				if (index>2){
+					return false;
+				}
+			})
+			$(".dl-box").empty();
+			$(".dl-box").append(strtop);
 		}
 		});
 
@@ -849,6 +866,6 @@
 
 	}
 
-	$
+
 </script>
 </html>
