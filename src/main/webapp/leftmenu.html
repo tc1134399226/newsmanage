@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/login.css">
-    <!--<link rel="stylesheet" href="dropzone/dropzone.min.css" />-->
 
     <style>
         body{ padding-bottom:50px;}
@@ -38,36 +37,29 @@
 </head>
 <body>
 <div class="person-info">
-
-    <!--<div class="person-account">-->
-    <!--<span class="name">Michelle</span>-->
-
-    <!--</div>-->
-    <!--<div class="clearfix"></div>-->
 </div>
 
-<div class="list-items">
+<div class="list-items" style="height: 554px;">
     <dl>
         <dt><i>·</i> 个人空间</dt>
 
-        <dd ><a href="#"  onclick="skip()" >我的收藏</a></dd>
+        <dd ><a onclick="skip()" >我的收藏</a></dd>
         <hr>
         <dd ><a onclick=jumpmesg() >我的消息</a></dd>
-
         <hr>
-
-        <dd><a id="1" style="display:none" href="#" onclick="skip()"  >我的新闻</a></dd>
-
+        <dd><a id="1" style="display:none" onclick="skip()">我的新闻</a></dd>
+        <hr>
+        <dd><a id="4" style="display:none" onclick="skip()">草稿</a></dd>
+        <hr>
     </dl>
     <hr>
     <dl>
         <dt><i>·</i> 权限一览</dt>
-
         <dd><a id="2" style="display:none" href="" >申请小编</a></dd>
         <hr>
         <span v-if="judge">
-							<dd><a id="3" style="display:none" href="" >发布新闻</a></dd>
-                            </span>
+        <dd><a id="3" style="display:none" href="" >发布新闻</a></dd>
+        </span>
     </dl>
     <hr>
     <dl>
