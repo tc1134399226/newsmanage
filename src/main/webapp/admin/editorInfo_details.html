@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>详情页</title>
+    <title>小编信息详情页</title>
     <meta charset="GB18030">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,12 +27,13 @@
 
 </head>
 <body>
-<nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-</nav>
 <div class="col-sm-3 col-md-2 sidebar">
     <div class="tree">
     </div>
 </div>
+
+<nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+</nav>
 
 <hr>
 
@@ -41,8 +42,18 @@
     <br>
 </div>
 <hr>
+<div class="form-group" style="text-align:center;" id="nickName">
+    <label >用户昵称:</label>
+    <br>
+</div>
+<hr>
 <div class="form-group" style="text-align:center;" id="idCard">
     <label >身份证号:</label>
+    <br>
+</div>
+<hr>
+<div class="form-group" style="text-align:center;" id="sex">
+    <label >性别:</label>
     <br>
 </div>
 
@@ -55,67 +66,55 @@
 <hr>
 
 <div class="form-group" style="text-align:center;">
-    <label >身份证头像面:</label>
+    <label >用户头像:</label>
     <br>
-    <img  src="" id="idCardBack" style="width:400px;height:260px;">
+    <img  src="" id="icon" style="width:200px;height:200px;">
 </div>
 
-<hr>
-<div class="form-group" style="text-align:center;">
-    <label >身份证国徽面:</label>
-    <br>
-    <img  src="" id="idCardFront" style="width:400px;height:260px;">
-</div>
+<!--<hr>-->
+<!--<div class="form-group" style="text-align:center;">-->
+    <!--<label >身份证国徽面:</label>-->
+    <!--<br>-->
+    <!--<img  src="" id="idCardFront" style="width:400px;height:260px;">-->
+<!--</div>-->
 
 <hr>
 
 <div  style="text-align:center;">
-    <button type="button" class='btn btn-success btn-xs' onclick='agree()'><i class=' glyphicon glyphicon-check' ></i>通过</button>&nbsp;
-    <button type="button" class='btn btn-danger btn-xs' onclick='refuse()'><i class=' glyphicon glyphicon-remove' ></i>驳回</button>&nbsp;
+    <button type="button" class='btn btn-success btn-xs' onclick='cancelEditor()'><i class=' glyphicon glyphicon-check' ></i>取消编辑资格</button>&nbsp;
+    <button type="button" class='btn btn-danger btn-xs' onclick='returnListPage()'><i class=' glyphicon glyphicon-remove' ></i>返回</button>&nbsp;
 </div>
 
 
 <script type="text/javascript">
     $(".tree").load("menu.html");
     //定义全局变量
-    var str1;
-    var str2;
-    var str3;
+
     var params=window.location.search;
     var userId=params.split("=")[1];
 
     $.ajax({
         //请求方式
         type : "GET",
-        //请求的媒体类型
+        //请求的媒体 类型
         contentType: "application/json;charset=UTF-8",
         //接受数据类型
         dataType:"json",
         //请求地址
-        url : "sysuser/getEditorApplyById?userId="+userId,
+        url : "sysuser/getEditorInfoByUserId?userId="+userId,
         //数据，json字符串
         //请求成功
         success : function(result) {
 
             console.log(result);
-
-            str1=result.realName;
             //整体拼接到div里面去
-            $("#realName").append(str1);
-
-            str2=result.idCard;
+            $("#realName").append(result.realName);
             //整体拼接到div里面去
-            $("#idCard").append(str2);
-
-            str3=result.mobile;
-            $("#mobile").append(str3);
-
-            $("#idCardBack").attr('src',"http://localhost:8080/newsmanage/"+result.idCardBack);
-
-            $("#idCardFront").attr('src',"http://localhost:8080/newsmanage/"+result.idCardFront);
-            // var j=new Image();
-            // j.src="http://localhost:8080/newsmanage/"+result.idCardFront;
-            // $("#idCardFront").append(j);
+            $("#idCard").append(result.idCard);
+            $("#nickName").append(result.nickName);
+            $("#sex").append(result.sex);
+            $("#icon").attr('src',"http://localhost:8080/newsmanage/"+result.icon);
+            $("#mobile").append(result.mobile);
 
         },
         //请求失败，包含具体的错误信息
@@ -125,7 +124,7 @@
         }
     });
 
-    function agree() {
+    function cancelEditor() {
         $.ajax({
             //请求方式
             type : "GET",
@@ -134,16 +133,16 @@
             //接受数据类型
             dataType:"json",
             //请求地址
-            url : "sysuser/addEditor?userId="+userId,
+            url : "sysuser/cancelEditor?userId="+userId,
 
             //请求成功
             success : function(result) {
                 console.log(result);
                 if(result){
-                    alert("已通过审核");
-                    window.location.href="editor_apply_list.html";
+                    alert("取消用户资格成功");
+                    window.location.href="editorToUser.html";
                 }else{
-                    alert("修改失败");
+                    alert("取消用户资格失败");
                 }
             },
             //请求失败，包含具体的错误信息
@@ -153,39 +152,10 @@
         });
     }
 
-    function refuse() {
-        $.ajax({
-            //请求方式
-            type : "GET",
-            //请求的媒体类型
-            contentType: "application/json;charset=UTF-8",
-            //接受数据类型
-            dataType:"json",
-            //请求地址
-            url : "sysuser/deleteApply?userId="+userId,
-            //数据，json字符串
-            // data : JSON.stringify(
-            //     {
-            //         "userId":userId
-            //
-            //     }
-            // ),
-            //请求成功
-            success : function(result) {
-                console.log(result);
-                if(result){
-                    alert("已驳回请求");
-                    window.location.href="editor_apply_list.html";
-                }else{
-                    alert("修改失败");
-                }
-            },
-            //请求失败，包含具体的错误信息
-            error : function(e){
-                console.error(e);
-            }
-        });
+    function returnListPage() {
+        window.location.href="editorToUser.html";
     }
+
 
     $("#headbanner").load("head.html");
 </script>
