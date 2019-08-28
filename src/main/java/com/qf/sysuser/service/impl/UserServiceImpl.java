@@ -2,6 +2,7 @@ package com.qf.sysuser.service.impl;
 
 import com.qf.sysuser.dao.SysUserDao;
 import com.qf.sysuser.dto.UserIdsDTO;
+import com.qf.sysuser.pojo.MenuInfo;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
 import com.qf.sysuser.vo.MenuInfoVO;
@@ -127,4 +128,8 @@ public class UserServiceImpl implements SysUserService {
         return sysUserDao.userLoginInit(user);
     }
 
+
+    public List<MenuInfo> listAllMenuInfo(){
+        return sysUserDao.listAllMenuInfo();
+    }
 }

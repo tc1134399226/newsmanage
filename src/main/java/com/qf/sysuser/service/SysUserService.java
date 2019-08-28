@@ -36,5 +36,6 @@ public interface SysUserService {
 
     public boolean registerUser(User user) ;
 
+    public List<MenuInfo> listAllMenuInfo();
 
 }

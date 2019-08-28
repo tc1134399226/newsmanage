@@ -4,6 +4,7 @@ package com.qf.sysuser.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.sysuser.dto.UserIdsDTO;
+import com.qf.sysuser.pojo.MenuInfo;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
 import com.qf.sysuser.vo.MenuInfoVO;
@@ -174,5 +175,17 @@ public class SysUserController {
     public Object cleanSession(HttpSession session){
         session.removeAttribute("sysUser");
         return true;
+    }
+
+    @RequestMapping("listAllMenuInfo")
+    @ResponseBody
+    public Object listAllMenuInfo(Integer pageNo){
+        Integer pageSize=4;//每页显示记录数
+        //分页查询
+        System.out.println(pageNo);
+        PageHelper.startPage(pageNo, pageSize);
+        List<MenuInfo> menuList = sysUserService.listAllMenuInfo();;//获取所有用户信息
+        PageInfo<MenuInfo> pageInfo=new PageInfo<MenuInfo>(menuList);
+        return pageInfo;
     }
 }
