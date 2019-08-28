@@ -38,93 +38,11 @@
 
 <body>
 
-
-
-<div  style="margin-top:0px;float:right;">
-	<label >注册天数</label>
-	<input type="text" readonly="readonly" id="regDay" align="right" style="width:45px;overflow-x:visible;overflow-y:visible;"/>
-	<!--<label >天</label>-->
-</div>
-
     <!-- 头部栏位 -->
     <!--页面顶部-->
 <div id="nav-bottom">
-    <!--&lt;!&ndash;顶部&ndash;&gt;-->
-    <!--<div class="nav-top">-->
-    <!--<div class="top">-->
-    <!--<div class="py-container">-->
-    <!--<div class="shortcut">-->
-    <!--<ul class="fl">-->
-    <!--<li class="f-item">您好！</li>-->
-    <!--<li class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>-->
-    <!--</ul>-->
-    <!--<ul class="fr">-->
-    <!--<li class="f-item">我的空间</li>-->
-    <!--<li class="f-item space"></li>-->
-    <!--<li class="f-item"><a href="main.html" target="_blank">新闻首页</a></li>-->
-    <!--<li class="f-item space"></li>-->
-
-    <!--<li class="f-item">热点新闻</li>-->
-    <!--<li class="f-item space"></li>-->
-    <!--<li class="f-item" id="service">-->
-    <!--<span>客户服务</span>-->
-    <!--<ul class="service">-->
-    <!--<li><a href="cooperation.html" target="_blank">合作招商</a></li>-->
-    <!--<li><a href="shoplogin.html" target="_blank">商家后台</a></li>-->
-    <!--<li><a href="cooperation.html" target="_blank">合作招商</a></li>-->
-    <!--<li><a href="#">商家后台</a></li>-->
-    <!--</ul>-->
-    <!--</li>-->
-    <!--<li class="f-item space"></li>-->
-    <!--<li class="f-item">网站导航</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--头部-->
     <div class="header">
-        <!--<div class="py-container">-->
-        <!--<div class="yui3-g Logo">-->
-        <!--<div class="yui3-u Left logoArea">-->
-        <!--<a class="logo-bd" title="gold_experience" href="main.html" target="_blank"></a>-->
-        <!--</div>-->
-        <!--<div class="yui3-u Center searchArea">-->
-        <!--<div class="search">-->
-        <!--<form action="" class="sui-form form-inline">-->
-        <!--&lt;!&ndash;searchAutoComplete&ndash;&gt;-->
-
-        <!--</form>-->
-        <!--</div>-->
-
-        <!--</div>-->
-        <!--<div class="yui3-u Right shopArea">-->
-        <!--<div class="fr shopcar">-->
-        <!--<div class="show-shopcar" id="shopcar">-->
-        <!--<span class="car"></span>-->
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <div class="yui3-g NavList">
-            <div class="yui3-u Left all-sort">
-                <h4>地区分类</h4>
-            </div>
-            <div class="yui3-u Center navArea">
-                <ul class="nav">
-                    <a href="index.html?area=国际"><li class="f-item">国际</li></a>
-                    <a href="index.html?area=内地"><li class="f-item">内地</li></a>
-                    <a href="index.html?area=港澳"><li class="f-item">港澳</li></a>
-                    <a href="index.html?area=台海"><li class="f-item">台海</li></a>
-                    <!--<li class="f-item"><a href="seckill-index.html" target="_blank">娱乐</a></li>-->
-                </ul>
-            </div>
-            <div class="yui3-u Right"></div>
-        </div>
     </div>
-</div>
-</div>
 </div>
 
 <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
@@ -136,7 +54,7 @@
     <div class="py-container">
         <div class="yui3-g home">
             <!--左侧列表-->
-            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#a83c3a;">
+            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#707070;height: 200px;">
             </div>
             <!--右侧主内容-->
             <div class="yui3-u-5-6">
@@ -422,101 +340,8 @@
     });
 
 
-
-
-
-	//第一次访问页面时把注册天数添加到数据库中
-    function addUseDay() {
-		$.ajax({
-			//请求方式GET/POST
-			type: "POST",
-			//请求的媒体类型
-			contentType: "application/json;charset=UTF-8",
-			//接受数据类型
-			dataType: "json",
-			//请求地址
-			url: "news/addDay",
-			//传递参数
-			data:JSON.stringify(
-					{
-						"userId":id,
-						"day":day
-
-					}
-			),
-			success: function (result) {
-				console.log(result);
-				// alert("插入天数成功")
-			},
-			error: function (e) {
-				// console.error(e);
-			}
-		})
-	}
-
-	//除第一次访问页面添加外其余都只进行修改注册天数
-	function updateUseDay() {
-		$.ajax({
-			//请求方式GET/POST
-			type: "POST",
-			//请求的媒体类型
-			contentType: "application/json;charset=UTF-8",
-			//接受数据类型
-			dataType: "json",
-			//请求地址
-			url: "news/updateUseDay",
-			//传递参数
-			data:JSON.stringify(
-					{
-						"userId":id,
-						"day":day
-
-					}
-			),
-			success: function (result) {
-				console.log(result);
-				// alert("修改成功")
-			},
-			error: function (e) {
-				console.error(e);
-			}
-		})
-	}
-
-	//判断是第一次进行添加注册天数还是进行修改操作
-	function selectUseDay() {
-		$.ajax({
-			//请求方式GET/POST
-			type: "POST",
-			//请求的媒体类型
-			contentType: "application/json;charset=UTF-8",
-			//接受数据类型
-			dataType: "json",
-			//请求地址
-			url: "news/selectUseDay",
-			//传递参数
-			data:JSON.stringify(
-					{
-						"userId":id
-
-					}
-			),
-			success: function (result) {
-				console.log(result);
-				if(result==false){
-					addUseDay();
-				}else {
-					updateUseDay();
-				}
-			},
-			error: function (e) {
-				console.log(e.status);
-				console.log(e.responseText);
-			}
-		})
-	}
     $("#leftmenu").load("leftmenu.html");
-
+    $(".header").load("head.html");
 </script>
 
     <!-- 底部栏位 -->

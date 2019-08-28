@@ -44,22 +44,6 @@
 <div id="nav-bottom">
 
     <div class="header">
-
-        <div class="yui3-g NavList">
-            <div class="yui3-u Left all-sort">
-                <h4>地区分类</h4>
-            </div>
-            <div class="yui3-u Center navArea">
-                <ul class="nav">
-                    <a href="index.html?area=国际"><li class="f-item">国际</li></a>
-                    <a href="index.html?area=内地"><li class="f-item">内地</li></a>
-                    <a href="index.html?area=港澳"><li class="f-item">港澳</li></a>
-                    <a href="index.html?area=台海"><li class="f-item">台海</li></a>
-                    <!--<li class="f-item"><a href="seckill-index.html" target="_blank">娱乐</a></li>-->
-                </ul>
-            </div>
-            <div class="yui3-u Right"></div>
-        </div>
     </div>
 </div>
 </div>
@@ -74,7 +58,7 @@
     <div class="py-container">
         <div class="yui3-g home">
             <!--左侧列表-->
-            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#a83c3a;">
+            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#707070;">
             </div>
             <!--右侧主内容-->
             <div class="yui3-u-5-6">
@@ -481,6 +465,7 @@
         window.location.href = "userInfo.html?userId="+id;
     }
     $("#leftmenu").load("leftmenu.html");
+    $(".header").load("head.html");
 </script>
 
     <!-- 底部栏位 -->

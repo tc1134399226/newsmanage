@@ -19,7 +19,7 @@
 
     <!--登录查询语句-->
     <select id="loginCheck" resultType="com.qf.news.pojo.UserInfo" parameterType="com.qf.news.pojo.UserInfo">
-        SELECT * FROM userinfo where account = #{account} and password = #{password}
+        SELECT * FROM userinfo where account = #{account} and password = #{password} and status != 3
     </select>
 <!--    二级菜单-->
 <!--    <select id="userLoginInit" resultMap="userInfoMapTwo" parameterType="com.qf.news.pojo.UserInfo">-->

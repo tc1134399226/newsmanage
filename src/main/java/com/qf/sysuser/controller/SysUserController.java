@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.MenuInfo;
+import com.qf.sysuser.pojo.UserInfo;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
 import com.qf.sysuser.vo.MenuInfoVO;
@@ -187,5 +188,27 @@ public class SysUserController {
         List<MenuInfo> menuList = sysUserService.listAllMenuInfo();;//获取所有用户信息
         PageInfo<MenuInfo> pageInfo=new PageInfo<MenuInfo>(menuList);
         return pageInfo;
+    }
+
+    @RequestMapping("listNewsUserInfo")
+    public  Object listNewsUserInfo(){
+        return sysUserService.listNewsUserInfo();
+    }
+
+    @RequestMapping("getUserInfoById")
+    public Object getUserInfoById(@RequestParam int userId){
+        return  sysUserService.getUserInfoById(userId);
+    }
+
+    @RequestMapping("editUserInfoById")
+    public boolean editUserInfoById(@RequestBody UserInfo userInfo) {
+        System.out.println(userInfo);
+        return this.sysUserService.editUserInfoById(userInfo);
+    }
+
+    @RequestMapping("selectUser")
+    @ResponseBody
+    public List<UserInfo> selectUser(@RequestBody UserInfo userInfo){
+        return sysUserService.selectUser(userInfo);
     }
 }

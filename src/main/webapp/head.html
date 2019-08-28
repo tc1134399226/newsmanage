@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>设置-个人信息</title>
+    <link rel="stylesheet" href="dropzone/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+    <script src="dropzone/dropzone.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
+
+
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/docs.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+
+
+<div  style="margin-top:0px;float:right;">
+    <label >欢迎: </label>
+    <label id="nickName"></label>
+    &nbsp;&nbsp;&nbsp;
+    <label >注册天数</label>
+    <input type="text" readonly="readonly" id="regDay" align="right" style="width:45px;overflow-x:visible;overflow-y:visible;"/>
+    <!--<label >天</label>-->
+</div>
+
+    <!--<label >天</label>-->
+
+<div class="yui3-g NavList">
+    <div class="yui3-u Left all-sort">
+        <h4>地区分类</h4>
+    </div>
+    <div class="yui3-u Center navArea">
+        <ul class="nav">
+            <a href="index.html?area=国际"><li class="f-item">国际</li></a>
+            <a href="index.html?area=内地"><li class="f-item">内地</li></a>
+            <a href="index.html?area=港澳"><li class="f-item">港澳</li></a>
+            <a href="index.html?area=台海"><li class="f-item">台海</li></a>
+        </ul>
+    </div>
+    <div class="yui3-u Right"></div>
+</div>
+
+<script>
+    var createTi;
+    //定义注册天数
+    var day;
+
+    var userId;
+    $.ajax({
+        //请求方式GET/POST
+        type : "GET",
+        //同步
+        async: false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/getSession",
+        //请求成功
+        success : function(result) {
+            userId = result.userId;
+            createTi=result.createTime;
+            //获取当前时间
+            var myDate = new Date();
+            //获取时间差
+            var days = ((myDate.getTime() - createTi))/ (1000*3600*24);
+            day=Math.ceil(days);
+            // alert(day);
+            $("#regDay").val(day);
+            $("#nickName").empty();
+            $("#nickName").text(result.nickName);
+            selectUseDay();
+
+        },
+        //请求失败，包含具体的错误信 息
+        error : function(e){
+            console.error(e);
+        }
+    });
+
+    //第一次访问页面时把注册天数添加到数据库中
+    function addUseDay() {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/addDay",
+            //传递参数
+            data:JSON.stringify(
+                {
+                    "userId":userId,
+                    "day":day
+
+                }
+            ),
+            success: function (result) {
+                console.log(result);
+                // alert("插入天数成功")
+            },
+            error: function (e) {
+                // console.error(e);
+            }
+        })
+    }
+
+
+    //除第一次访问页面添加外其余都只进行修改注册天数
+    function updateUseDay() {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/updateUseDay",
+            //传递参数
+            data:JSON.stringify(
+                {
+                    "userId":userId,
+                    "day":day
+
+                }
+            ),
+            success: function (result) {
+                console.log(result);
+                // alert("修改成功")
+            },
+            error: function (e) {
+                console.error(e);
+            }
+        })
+    }
+
+    //判断是第一次进行添加注册天数还是进行修改操作
+    function selectUseDay() {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/selectUseDay",
+            //传递参数
+            data:JSON.stringify(
+                {
+                    "userId":userId
+
+                }
+            ),
+            success: function (result) {
+                console.log(result);
+                if(result==false){
+                    addUseDay();
+                }else {
+                    updateUseDay();
+                }
+            },
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+</script>
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.qf.sysuser.dao;
 
 import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.MenuInfo;
+import com.qf.sysuser.pojo.UserInfo;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.vo.MenuInfoVO;
 import org.springframework.stereotype.Repository;
@@ -89,5 +90,15 @@ public interface SysUserDao {
     public User sysUserLogin(User user);
 
     public List<MenuInfo> listAllMenuInfo();
+
+    //前台所有用户信息
+    public  List<UserInfo> listNewsUserInfo();
+
+    //根据id调取前台用户信息
+    public UserInfo getUserInfoById(int id);
+
+    public int editUserInfoById(UserInfo userInfo);
+
+    public List<UserInfo> selectUser(UserInfo userInfo);
 
 }

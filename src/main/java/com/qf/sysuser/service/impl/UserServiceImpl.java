@@ -4,6 +4,7 @@ import com.qf.sysuser.dao.SysUserDao;
 import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.MenuInfo;
 import com.qf.sysuser.pojo.User;
+import com.qf.sysuser.pojo.UserInfo;
 import com.qf.sysuser.service.SysUserService;
 import com.qf.sysuser.vo.MenuInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,20 @@ public class UserServiceImpl implements SysUserService {
             return i > 0;
         }
     }
+
+    public List<UserInfo> listNewsUserInfo() {
+        return sysUserDao.listNewsUserInfo();
+    }
+
+    public UserInfo getUserInfoById(int id) {
+        return this.sysUserDao.getUserInfoById(id);
+    }
+
+    public boolean editUserInfoById(UserInfo userInfo) {
+        return this.sysUserDao.editUserInfoById(userInfo)>0;
+    }
+
+
 
     /**
      * 通过用户id获取用户信息
@@ -131,5 +146,8 @@ public class UserServiceImpl implements SysUserService {
 
     public List<MenuInfo> listAllMenuInfo(){
         return sysUserDao.listAllMenuInfo();
+    }
+    public List<UserInfo> selectUser(UserInfo userInfo) {
+        return sysUserDao.selectUser(userInfo);
     }
 }

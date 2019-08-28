@@ -56,5 +56,9 @@ public class SysUserEditorServiceImpl implements SysUserEditorService {
         return sysUserEditorMapper.cancelEditor(userId)>0;
     }
 
+    public List<UserInfo> selectUserInfoByNickNameAnd(UserInfo userInfo) {
+        return sysUserEditorMapper.selectUserInfoByNickNameAnd(userInfo);
+    }
+
 
 }
