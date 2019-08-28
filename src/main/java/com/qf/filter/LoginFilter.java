@@ -12,19 +12,12 @@ import javax.servlet.http.HttpSession;
 public class LoginFilter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        String uri = httpServletRequest.getRequestURI();
-        System.out.println(uri);
-        if ("/newsmanage/login.html".equals(uri)||"/newsmanage/reg.html".equals(uri)){
-            return true;
-        }
         HttpSession session = httpServletRequest.getSession();
-        User user = (User) session.getAttribute("userInfo");
-        UserInfo userInfo = (UserInfo) session.getAttribute("sysUser");
-        System.out.println(user+""+userInfo);
-        if (user!=null||userInfo!=null){
+        User userInfo = (User) session.getAttribute("sysUser");
+        if (userInfo!=null){
             return true;
         }
-        httpServletRequest.getRequestDispatcher("login.html").forward(httpServletRequest,httpServletResponse);
+        httpServletResponse.sendRedirect("http://localhost:8080/newsmanage/login.html");
         return false;
     }
 
