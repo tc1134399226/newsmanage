@@ -101,8 +101,8 @@
 
             <div class="main3">
                 <ul class="minnav">
-                    <li><a href="#">军事</a></li>
-					<li><a href="#">更多</a></li>
+                    <li>军事</li>
+					<li><a onclick="jumpmore()">更多</a></li>
                 </ul>
 
                 <div class="photo">
@@ -713,7 +713,7 @@
 <script>
 	var s = decodeURI(decodeURI(location.search));
 	var area = s.split("=")[1];
-	if (area==null){
+	if (area==null||typeof (area)=="undefined"){
 		area = "内地";
 	}
 	var type = new Array("军事","财经","科技","娱乐","生活");
@@ -833,5 +833,8 @@
 		}
 		});
 
+    function jumpmore() {
+		area
+	}
 </script>
 </html>

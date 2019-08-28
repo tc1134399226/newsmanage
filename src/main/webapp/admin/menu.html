@@ -28,6 +28,7 @@
 <script>
     var account;
     var password;
+    var user;
     $.ajax({
         //请求方式GET/POST
         type : "GET",
@@ -41,6 +42,7 @@
         url : "sysuser/getSession",
         //请求成功
         success : function(result) {
+            user = result;
             account = result.account;
             password = result.password;
             console.log(account+"..."+password)
