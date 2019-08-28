@@ -4,6 +4,7 @@ import com.qf.news.dao.NewsArticleInfoMapper;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.LoveArticle;
 import com.qf.news.service.NewsArticleInfoService;
+import com.qf.news.vo.ArticleInfoVO;
 import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +18,7 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
     NewsArticleInfoMapper newsArticleInfoMapper;
 
     //根据articleId查询编辑的新闻显示到预览页面
-    public ArticleInfo getReleaseInfoById(int articleId) {
+    public ArticleInfoVO getReleaseInfoById(int articleId) {
         return newsArticleInfoMapper.getReleaseInfoById(articleId);
     }
 

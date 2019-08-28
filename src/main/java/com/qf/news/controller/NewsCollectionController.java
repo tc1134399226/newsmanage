@@ -32,13 +32,13 @@ public class NewsCollectionController {
     public Object getCollectionByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
                                                     Integer pageNum , HttpSession session){
         //,produces = "text/html;charset=UTF-8"
-      UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-
+//      UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
         //测试
-//        UserInfo userInfo=new UserInfo();
-        if (userInfo==null){
-            return "login";
-        }
+        UserInfo userInfo=new UserInfo();
+        userInfo.setUserId(1);
+//        if (userInfo==null){
+//            return "login";
+//        }
         System.out.println(userInfo);
         //一页有多少条数据
         int defaultPageSize=2;
