@@ -65,6 +65,10 @@ public class UserServiceImpl implements SysUserService {
         return sysUserDao.listNewsUserInfo();
     }
 
+    public UserInfo getUserInfoById(int id) {
+        return this.sysUserDao.getUserInfoById(id);
+    }
+
     /**
      * 通过用户id获取用户信息
     * @param user

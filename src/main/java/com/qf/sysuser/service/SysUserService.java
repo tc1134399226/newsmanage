@@ -41,5 +41,7 @@ public interface SysUserService {
     //获取前台用户信息
     public  List<UserInfo> listNewsUserInfo();
 
+    public UserInfo getUserInfoById(int id);
+
 
 }

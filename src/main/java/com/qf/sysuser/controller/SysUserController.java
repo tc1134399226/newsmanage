@@ -193,4 +193,9 @@ public class SysUserController {
     public  Object listNewsUserInfo(){
         return sysUserService.listNewsUserInfo();
     }
+
+    @RequestMapping("getUserInfoById")
+    public Object getUserInfoById(@RequestParam int userId){
+        return  sysUserService.getUserInfoById(userId);
+    }
 }

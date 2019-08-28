@@ -91,6 +91,10 @@ public interface SysUserDao {
 
     public List<MenuInfo> listAllMenuInfo();
 
+    //前台所有用户信息
     public  List<UserInfo> listNewsUserInfo();
+
+    //根据id调取前台用户信息
+    public UserInfo getUserInfoById(int id);
 
 }

@@ -99,4 +99,8 @@
 
     </select>
 
+    <select id="getUserInfoById" parameterType="int" resultType="com.qf.sysuser.pojo.UserInfo">
+        select * from userinfo where  userid = #{userid}
+    </select>
+
 </mapper>
