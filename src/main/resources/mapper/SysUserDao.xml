@@ -103,6 +103,7 @@
         select * from userinfo where  userid = #{userid}
     </select>
 
+    <!--用户信息修改-->
     <update id="editUserInfoById" parameterType="com.qf.sysuser.pojo.UserInfo">
         update  userinfo set
         <trim suffixOverrides=",">
@@ -127,7 +128,7 @@
         where  userId = #{userId}
     </update>
 
-
+        <!--用户模糊查询-->
     <select id="selectUser" resultType="com.qf.sysuser.pojo.UserInfo">
         select * from userInfo
         <where>
