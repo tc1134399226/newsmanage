@@ -11,6 +11,7 @@
     <script src="script/docs.min.js"></script>
 
 
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -66,7 +67,8 @@
 
         <div class="form-group" style="text-align:center;margin-bottom:1px;" >
             <label >主标题</label>
-            <input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center " >
+            <input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center;font-size:24px;font-weight:bold" >
+            <input type="hidden" class="form-control" id="uId" readonly="readonly"style="text-align:center ">
         </div>
         <div id="hot">
                 123123
@@ -74,23 +76,51 @@
 <hr>
         <div class="form-group" style="text-align:center;margin-top:2px;">
             <label >副标题</label>
-            <input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center ">
+            <input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center;font-size:18px;font-weight:bold">
         </div>
 <hr>
         <div class="form-group" id="contentStr"
              style="text-align:center;width:800px; height:300px;color:black" align="center">
+            <input type="hidden" class="form-control" id="articleId" readonly="readonly"style="text-align:center ">
             <label >新闻内容:</label>
         </div>
 
-<!--<hr>-->
 
-        <!--<div class="form-group" style="text-align:center;" id="coverImg"-->
-             <!--style="text-align:center;width:100px; height:100px;color:#0000FF" align="center">-->
-            <!--<label >封面图</label>-->
-            <!--<br>-->
-        <!--</div>-->
+
+<button data-toggle="modal" data-target="#myModal" style="margin-left: 515px">
+    举报该新闻
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    网络并非法外之地
+                </h4>
+            </div>
+            <div class="modal-body" id="toReport">
+                <input type="text" style="height:30px;width:500px;outline:none" id="context" placeholder="请简要阐述举报理由" required>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" onclick="report()">
+                    提交
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+           <!--<div id="toReport"style="margin-left: 395px">-->
+                  <!--<input type="text"  id="context" placeholder="请简要阐述举报理由">-->
+                  <!--<button type="button" onclick="report()">举报</button>-->
+           <!--</div>-->
         <div class="footer"></div>
-<hr>
 
 <!--        <div align="center" id="textDiv" class="lastDiv">-->
 <!--            <button type="button" class="btn btn-success" onclick="returnCheck()" ><i class="glyphicon glyphicon-edit"></i>返回修改</button>-->
@@ -101,12 +131,13 @@
 
 
 <script type="text/javascript">
+
+
     $(".footer").load("comment.html");
     var strCon;
     // var strCover;
     var str=window.location.search;
     var articleId=str.split("=")[1];
-
 
     $.ajax({
         //请求方式
@@ -120,10 +151,11 @@
         //数据，json字符串
         //请求成功
         success : function(result) {
-
             console.log(result);
             $("#mainTitle").val(result.mainTitle);
+            $("#uId").val(result.userId);
             $("#subTitle").val(result.subTitle);
+            $("#articleId").val(result.articleId);
             // var coverSrc=new Image();
             //
             // coverSrc.src=result.cover;
@@ -143,6 +175,37 @@
             console.log(e.responseText);
         }
     });
+
+    function report(){
+
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/toReport",
+            //传递参数
+            data: JSON.stringify(
+                {
+                    "artile":$("#articleId").val(),
+                    "mainTitle":$("#mainTitle").val(),
+                    "ruserId":$("#uId").val(),
+                    "context":$("#context").val()
+                }
+            ),
+            //请求成功
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (e) {
+                console.error(e);
+                alert("操作失败！");
+            }
+        });
+    }
 
     function hot() {
         $.ajax({
@@ -193,7 +256,7 @@ function getIp(strCon){
         //接受数据类型
         dataType:"json",
         //请求地址
-        url : "news/getIP",
+        url : "news/insertIP",
         //数据，json字符串
         //请求成功
         data : JSON.stringify(
@@ -256,8 +319,42 @@ function clickLoveArticleId() {
             console.log(e.responseText);
         }
     });
-
 }
+
+    function toReport(){
+        //1.修改
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "sysuser/updateUser",
+            //传递参数
+            data: JSON.stringify(
+                {
+                    "ruserId":$("#userid").val(),
+                    "username":$("#username").val(),
+                    "mobile":$("#subTitle").val(),
+                    "email":$("#email").val(),
+                    "areaCode":$("#areaCode").val(),
+                    "icon":$("#imgUrl").val()
+                }
+            ),
+            //请求成功
+            success: function (result) {
+                console.log(result);
+                alert("操作成功！");
+                window.location.href = "main.html?userid="+id
+            },
+            error: function (e) {
+                console.error(e);
+                alert("操作失败！");
+            }
+        });
+    }
 
 </script>
 

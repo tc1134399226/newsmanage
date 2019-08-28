@@ -1,6 +1,7 @@
 package com.qf.news.service;
 
 
+import com.qf.news.dto.ReportDTO;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.LoveArticle;
 import com.qf.news.vo.ArticleTypeVO;
@@ -52,4 +53,11 @@ public interface NewsArticleInfoService {
      * @return
      */
     public boolean uploadArticle(ArticleInfo articleInfo);
+
+    /**
+     * 举报文章
+     * @param reportDTO
+     * @return
+     */
+    public boolean toReport(ReportDTO reportDTO);
 }
