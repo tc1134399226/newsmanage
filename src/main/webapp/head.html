@@ -72,9 +72,6 @@
         url : "news/getSession",
         //请求成功
         success : function(result) {
-            if (result==null){
-                window.location.href = "login.html";
-            }
             userId = result.userId;
             createTi=result.createTime;
             //获取当前时间

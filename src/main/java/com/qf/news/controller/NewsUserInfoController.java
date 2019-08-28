@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
@@ -70,8 +71,11 @@ public class NewsUserInfoController {
 
 
     @RequestMapping("getUserInfoById")
-    public Object getUserInfoById(@RequestParam int userId){
+    public Object getUserInfoById(@RequestParam int userId,HttpServletResponse response) throws IOException{
         System.out.println("id="+userId);
+        if (userId==0){
+            response.sendRedirect("http://localhost:8080/newsmanage/login.html");
+        }
         return this.userInfoService.getUserInfoById(userId);
     }
 
@@ -94,7 +98,7 @@ public class NewsUserInfoController {
     }
 
     @RequestMapping("getSession")
-    public Object getSession(HttpSession session){
+    public Object getSession(HttpSession session, HttpServletResponse response) throws IOException {
         Object user = session.getAttribute("userInfo");
         return user;
     }

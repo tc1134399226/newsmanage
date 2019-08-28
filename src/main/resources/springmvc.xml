@@ -38,6 +38,10 @@
             <mvc:mapping path="/admin/*.html"/>
             <bean class="com.qf.filter.LoginFilter"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/*.html"/>
+            <bean class="com.qf.filter.UserLoginFilter"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 <!--    4、配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
