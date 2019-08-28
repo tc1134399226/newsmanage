@@ -124,7 +124,7 @@
 
             //整体拼接到div里面去
             $("#contentStr").append(strCon);
-            getIp(strCon);
+            getIp();
 
         },
         //请求失败，包含具体的错误信息
@@ -168,7 +168,7 @@
     }
 
 
-function getIp(strCon){
+function getIp(){
     $.ajax({
         //请求方式
         type : "POST",

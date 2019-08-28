@@ -1,11 +1,11 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.qf.sysuser.dao.SysUserArticleCarouselDao">
+<mapper namespace="com.qf.sysuser.dao.SysUserArticleCarouselMapper">
 
     <!--通过封面图筛选新闻-->
     <select id="getArticleByCover" parameterType="com.qf.sysuser.pojo.ArticleInfo" resultType="com.qf.sysuser.pojo.ArticleInfo">
-        select * from article  where status = 2 and cover is not null and state &lt;&gt;1
+        select * from article  where status = 2 and cover is not null and state =0
         <if test="mainTitle != null and mainTitle != ''">
             and mainTitle like "%${mainTitle}%"
         </if>

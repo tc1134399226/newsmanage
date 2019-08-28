@@ -26,4 +26,8 @@
         insert into message (userId,senderId,mainTitle,content,createTime,status)
         values (#{userId},#{senderId},#{mainTitle},#{content},CURRENT_TIMESTAMP,0)
     </insert>
+
+    <select id="getMessageByUserId" parameterType="int" resultType="com.qf.news.pojo.Message">
+        SELECT m.* ,u.nickName as username FROM message m,userinfo u WHERE m.userId = #{userId} and m.senderId = u.userId
+    </select>
 </mapper>

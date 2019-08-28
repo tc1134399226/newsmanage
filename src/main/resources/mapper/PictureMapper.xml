@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.sysuser.dao.SysUserArticleChooseMapper">
+
+
+    <!--添加筛选新闻到area_type_img表中-->
+    <insert id="addToImg" parameterType="com.qf.sysuser.pojo.ArticleInfo">
+       INSERT into area_type_img
+       (articleId,areaId,userId,typeId,cover,mainTitle,subTitle,content,createTime,updateTime)
+       VALUES
+       (DEFAULT,#{areaId},#{userId},#{typeId},#{cover},#{mainTitle},#{subTitle},#{content},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+    </insert>
+
+    <!--已加入area_type_img表中的新闻将设置状态为2-->
+    <update id="updateState" parameterType="int">
+        update article set state=2  where articleId = #{articleId}
+    </update>
+
+
+    <!--根据类型查询所有area_type_img表中该类型新闻信息-->
+    <select id="getAllArticleByTypeId"  parameterType="int" resultType="com.qf.sysuser.pojo.ArticleCarousel">
+        select * from area_type_img a,type t where  a.typeId=t.typeId and a.typeId=#{typeId}
+    </select>
+
+    <!--根据类型查询最早添加的新闻id-->
+    <select id="selectArticleByTypeId" parameterType="int" resultType="com.qf.sysuser.pojo.ArticleCarousel">
+        select articleId from area_type_img where typeId=#{typeId} having min(createTime)
+    </select>
+
+    <!--根据这个id删除掉这条新闻信息-->
+    <delete id="removeArticleUseId" parameterType="int">
+        delete from area_type_img where  articleId=#{articleId}
+    </delete>
+
+    <!--根据id查询area_type_img表中新闻详情信息-->
+    <select id="getArticleImgById" parameterType="int" resultType="com.qf.sysuser.pojo.ArticleCarousel">
+        select * from area_type_img  where   articleId=#{articleId}
+    </select>
+
+
+</mapper>

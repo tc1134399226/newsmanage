@@ -45,4 +45,7 @@ public interface NewsMessageService {
      * @return
      */
     public boolean sendSystemMessage(Message message);
+
+
+    public List<Message> getMessageByUserId(int userId);
 }

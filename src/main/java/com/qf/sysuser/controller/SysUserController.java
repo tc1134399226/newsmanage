@@ -83,14 +83,18 @@ public class SysUserController {
     }
 
     /**
-     * 根据用户id  更新用户
+     * 根据用户id  更新用户并且更新session
      * @param user
      * @return
      */
     @RequestMapping("updateUser")
     @ResponseBody
-    public boolean updateUser(@RequestBody User user){
+    public boolean updateUser(@RequestBody User user,HttpSession session){
         boolean flg = sysUserService.updateUser(user);
+        if (flg){
+            User userById = sysUserService.getUserById(user);
+            session.setAttribute("sysuser",userById);
+        }
         return flg;
     }
 
@@ -128,6 +132,8 @@ public class SysUserController {
 //        MenuInfoVO menuInfos = (MenuInfoVO) session.getAttribute("menuInfoList");
         User sysUser = (User) session.getAttribute("sysUser");
         List<MenuInfoVO> menuInfos = sysUserService.userLoginInit(sysUser);
+        System.out.println("session: "+sysUser);
+        System.out.println("用户菜单栏: "+menuInfos);
 //        if(session.getAttribute("menuInfoList")==null){
         if (menuInfos==null) {
             if (userInfo != null) {
@@ -162,5 +168,11 @@ public class SysUserController {
     public Object getSession(HttpSession session){
         Object user = session.getAttribute("sysUser");
         return user;
+    }
+
+    @RequestMapping("cleanSession")
+    public Object cleanSession(HttpSession session){
+        session.removeAttribute("sysUser");
+        return true;
     }
 }

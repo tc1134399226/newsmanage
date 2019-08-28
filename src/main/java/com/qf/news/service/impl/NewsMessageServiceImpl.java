@@ -88,4 +88,8 @@ public class NewsMessageServiceImpl implements NewsMessageService {
         return newsMessageMapper.sendSystemMessage(message)>0;
     }
 
+    public List<Message> getMessageByUserId(int userId) {
+        return this.newsMessageMapper.getMessageByUserId(userId);
+    }
+
 }

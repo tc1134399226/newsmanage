@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>新闻选择轮播详情页</title>
+    <title>新闻选择详情页</title>
 
     <meta charset="GB18030">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,8 +32,13 @@
     </div>
 </div>
 <div class="cont">
-    <nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    </nav>
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <div><a class="navbar-brand"  style="font-size:32px;">你懂得-创意产品</a></div>
+        </div>
+    </div>
+</nav>
 
 <hr>
 <div class="form-group" style="text-align:center;" id="cover">
@@ -64,7 +69,7 @@
 <hr>
 
 <div  class="form-group" style="text-align:center;">
-    <button type="button" class='btn btn-danger btn-xs' onclick='add()'><i class=' glyphicon glyphicon-remove' ></i>加入轮播</button>&nbsp;
+    <button type="button" class='btn btn-danger btn-xs' onclick="add()"><i class=' glyphicon glyphicon-remove' ></i>加入图片展示</button>&nbsp;
 </div>
 </div>
 <script type="text/javascript">
@@ -135,7 +140,7 @@
     });
 
 
-    //加入轮播
+    //加入area_type_img表中
     function add() {
         $.ajax({
             //请求方式
@@ -147,7 +152,7 @@
             //接受数据类型
             dataType:"json",
             //请求地址
-            url : "sysuser/addToCarousel",
+            url : "sysuser/addToImg",
                     //数据，json字符串
                     data : JSON.stringify({
                     "areaId":areaId,
@@ -169,15 +174,15 @@
                     //接受数据类型
                     dataType:"json",
                     //请求地址
-                    url : "sysuser/updateArticleState?articleId="+articleId,
+                    url : "sysuser/updateState?articleId="+articleId,
                     //数据，json字符串
                     //请求成功
                     success : function(result) {
 
                         console.log(result);
                         if(result){
-                            alert("已成功加入轮播");
-                            window.location.href="article_choose_list.html"
+                            alert("已成功加入展示");
+                            window.location.href="picture_choose_list.html"
                         }else{
                             alert("修改失败");
                         }
@@ -192,11 +197,12 @@
             //请求失败，包含具体的错误信息
             error : function(e){
                 console.error(e);
+                alert("加入失败,请刷新后重试!")
             }
         });
     }
 
-    $("#headbanner").load("head.html");
+
 </script>
 </body>
 </html>

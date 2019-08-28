@@ -173,12 +173,6 @@
 <script>
 
 
-    $(function(){
-        $("#bottom-text").click(function(){//按钮绑定点击事件
-            $("#dropzoneDiv").show();//文本框显示出来  注：之前设置display:none的样式
-        });
-    });
-
 
    var img1;
    // var str=window.location.search;
@@ -369,6 +363,29 @@
         if (typeof(articleId)==undefined){
             articleId=0;
         }
+        var userId;
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+            //同步
+            async: false,
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "sysuser/getSession",
+            //请求成功
+            success : function(result) {
+                userId = result.userId;
+
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+            }
+        });
+
         function initpage(){
             if (articleId==null){
                 return;
@@ -588,7 +605,6 @@
         //最终提交
         function checkCommit() {
 
-
             var status = $("#status").val();
             var areaId = $("#areaId").val();
             //获取类型Id
@@ -612,7 +628,7 @@
                 alert("标题字数不能超过20个");
                 return ;
             }
-
+            getIp();
             $.ajax({
                 //请求方式
                 type : "POST",
@@ -625,6 +641,7 @@
                 //数据，json字符串
                 data : JSON.stringify(
                     {
+                        "userId":userId,
                         "areaId":areaId,
                         "typeId":typeId,
                         "cover":img1,
@@ -653,7 +670,39 @@
             });
         }
 
+        function getIp(){
+            $.ajax({
+                //请求方式
+                type : "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType:"json",
+                //请求地址
+                url : "news/getIP",
+                //数据，json字符串
+                //请求成功
+                data : JSON.stringify(
+                    {
+                        "articleId":articleId
+                    }
+                ),
+                success : function(result) {
+                    console.log(result);
+                    if(result){
+                        console.log(result);
+                    }else{
+                        console.log(e);
+                    }
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
 
+        }
 
     </script>
 </body>
