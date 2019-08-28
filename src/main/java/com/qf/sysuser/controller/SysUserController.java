@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.MenuInfo;
+import com.qf.sysuser.pojo.UserInfo;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
 import com.qf.sysuser.vo.MenuInfoVO;
@@ -197,5 +198,11 @@ public class SysUserController {
     @RequestMapping("getUserInfoById")
     public Object getUserInfoById(@RequestParam int userId){
         return  sysUserService.getUserInfoById(userId);
+    }
+
+    @RequestMapping("editUserInfoById")
+    public boolean editUserInfoById(@RequestBody UserInfo userInfo) {
+        System.out.println(userInfo);
+        return this.sysUserService.editUserInfoById(userInfo);
     }
 }

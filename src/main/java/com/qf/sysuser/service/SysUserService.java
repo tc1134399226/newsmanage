@@ -43,5 +43,7 @@ public interface SysUserService {
 
     public UserInfo getUserInfoById(int id);
 
+    public boolean editUserInfoById(UserInfo userInfo);
+
 
 }

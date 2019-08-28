@@ -69,6 +69,10 @@ public class UserServiceImpl implements SysUserService {
         return this.sysUserDao.getUserInfoById(id);
     }
 
+    public boolean editUserInfoById(UserInfo userInfo) {
+        return this.sysUserDao.editUserInfoById(userInfo)>0;
+    }
+
     /**
      * 通过用户id获取用户信息
     * @param user

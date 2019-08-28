@@ -107,33 +107,6 @@
 
 <script>
 
-    $.ajax({
-        //请求方式GET/POST
-        type: "GET",
-        async: false,
-        //请求的媒体类型
-        contentType: "application/json;charset=UTF-8",
-        //接受数据类型
-        dataType: "json",
-        //请求地址
-        url: "sysuser/listNewsUserInfo",
-        //数据，json字符串
-        //请求成功
-        success: function (result) {
-            console.log(result);
-
-            if (result) {
-                status = result.status;
-                return ;
-            }
-
-
-        },
-        error: function (e) {
-            // console.error(e);
-            console.log(e);
-        }
-    });
 
 
     function initPage(){
@@ -184,6 +157,37 @@
     function updateUser(userId){
         location.href = "admin-userInfo-edit.html?userId="+userId;
     }
+
+    function removeUser(userId){
+        //1.修改
+//		  alert("inner updateUser");
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "sysuser/editUserInfoById",
+            //传递参数
+            data:JSON.stringify(
+                {
+                    "userId":userId,
+                    "status":3,
+
+                }
+            ),
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (e) {
+                console.error(e);
+            }
+        })
+        alert("删除成功！");
+    }
+    initPage();
 </script>
 <script>
 	$("#headbanner").load("head.html");

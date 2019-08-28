@@ -97,4 +97,6 @@ public interface SysUserDao {
     //根据id调取前台用户信息
     public UserInfo getUserInfoById(int id);
 
+    public int editUserInfoById(UserInfo userInfo);
+
 }

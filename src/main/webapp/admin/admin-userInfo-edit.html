@@ -102,6 +102,11 @@
 				<div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
 				<div class="panel-body">
 					<form role="form">
+                        <label >用户ID</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="userId" value="test" disabled>
+
+                        </div>
 						<div class="form-group">
 							<label >用户账号</label>
 							<input type="text" class="form-control" id="account" value="测试用户">
@@ -127,7 +132,7 @@
 							<input type="email" class="form-control" id="status" value="xxxx@xxxx.com">
 							<p class="help-block label label-warning">请输入用户状态, 格式为： 1/0</p>
 						</div>
-						<button type="button" class="btn btn-success" onclick="sub()"><i class="glyphicon glyphicon-edit"></i> 修改</button>
+						<button type="button" class="btn btn-success" onclick="update()"><i class="glyphicon glyphicon-edit"></i> 修改</button>
 						<button type="button" class="btn btn-danger" onclick="initPage()"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
 					</form>
 				</div>
@@ -195,6 +200,7 @@
 
 			//请求成功
 			success : function(result) {
+                $("#userId").val(result.userId);
 				$("#account").val(result.account);
 				$("#nickName").val(result.nickName);
 				$("#idCard").val(result.idCard);
@@ -211,47 +217,42 @@
 	initPage();
 
 
-	function sub() {
-		var username = $("#username").val();
-		var email = $("#email").val();
-		var mobile = $("#mobile").val();
-		var areaCode = $("#areaCode").val();
-		var status = $("#status").val();
+    function update(){
+        //1.修改
+//		  alert("inner updateUser");
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "sysuser/editUserInfoById",
+            //传递参数
+            data:JSON.stringify(
+                {
+                    "userId":$("#userId").val(),
+                    "nickName":$("#nickName").val(),
+                    "mobile":$("#mobile").val(),
+                    "idCard":$("#idCard").val(),
+                    "sex":$("#sex").val(),
+                    "icon":$("#imgUrl").val()
 
-		// alert(email +":" +mobile);
+                }
+            ),
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (e) {
+                console.error(e);
+            }
+        })
+     alert("修改成功！");
+    }
+    // 刷新
+    initPage();
 
-		$.ajax({
-			//请求方式
-			type: "POST",
-			//请求的媒体类型
-			contentType: "application/json;charset=UTF-8",
-			//请求地址
-			url: "sysuser/updateUser",
-			//数据，json字符串
-			data: JSON.stringify({
-				"userid":value,
-				"username": username,
-				"email": email,
-				"mobile": mobile,
-				"areaCode": areaCode,
-				"status": status
-			}),
-			//请求成功
-			success: function (result) {
-				var text = result.toString();
-				if (result) {
-					alert("修改成功");
-					window.location.href = "user.html";
-				} else {
-					alert("修改失败");
-				}
-			},
-			//请求失败，包含具体的错误信息
-			error: function (e) {
-				console.log("错误");
-			}
-		});
-	}
 	$(".tree").load("menu.html");
 	$("#headbanner").load("head.html");
 </script>
