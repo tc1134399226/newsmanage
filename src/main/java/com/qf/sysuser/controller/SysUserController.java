@@ -83,14 +83,18 @@ public class SysUserController {
     }
 
     /**
-     * 根据用户id  更新用户
+     * 根据用户id  更新用户并且更新session
      * @param user
      * @return
      */
     @RequestMapping("updateUser")
     @ResponseBody
-    public boolean updateUser(@RequestBody User user){
+    public boolean updateUser(@RequestBody User user,HttpSession session){
         boolean flg = sysUserService.updateUser(user);
+        if (flg){
+            User userById = sysUserService.getUserById(user);
+            session.setAttribute("sysuser",userById);
+        }
         return flg;
     }
 

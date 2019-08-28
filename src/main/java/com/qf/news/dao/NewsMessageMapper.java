@@ -43,4 +43,6 @@ public interface NewsMessageMapper {
      public Integer sendMessageByReplyVO(ReplyVO replyVO);
 
      public Integer sendSystemMessage(Message message);
+
+     public List<Message> getMessageByUserId(int userId);
 }

@@ -15,12 +15,11 @@
     <script src="../jquery/jquery-2.1.1.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../script/docs.min.js"></script>
-    <title>banner</title>
 </head>
 <body>
 <div class="container-fluid">
     <div class="navbar-header">
-        <div><a class="navbar-brand" style="font-size:32px;" href="#">首页</a></div>
+        <div><a class="navbar-brand" style="font-size:32px;" href="main.html">首页</a></div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -46,6 +45,7 @@
     $.ajax({
         //请求方式GET/POST
         type: "GET",
+        async:false,
         //请求的媒体类型
         contentType: "application/json;charset=UTF-8",
         //接受数据类型

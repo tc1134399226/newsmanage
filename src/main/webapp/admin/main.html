@@ -47,14 +47,14 @@
 				<div class="form-group">
 					<input type="hidden" class="form-control" id="userid" value="test">
 				</div>
-				<div class="form-group" >
+				<div class="form-group" style="float: left">
 					<label >用户头像</label>
 					<img  src="" id="icon" style="width:100px;height:100px;">
 				</div>
 
-				<div class="form-group has-success has-feedback" align="left" style="width:210px;height:150px;float:left;" >
-                    <div id="bottom-text">点击更换头像</div>
-					<div id="dropzoneDiv" class="dropzone" style="display: none"></div>
+				<div class="form-group has-success has-feedback" align="left" style="width:210px;height:210px;float:left;margin-left: 30px" >
+                    <div id="bottom-text" style="float: left">点击更换头像</div>
+					<div id="dropzoneDiv" class="dropzone" style="display: none;float: left"></div>
 					<input type="hidden" id="imgUrl"/>
 				</div>
 
@@ -113,59 +113,29 @@
       </div>
     </div>
 
-
-	<script>
-		Dropzone.options.dropzoneDiv = {
-			url: "http://localhost:8080/newsmanage/news/upload", // 文件提交地址
-			method: "post",  // 也可用put
-			paramName: "dropzFile", // 默认为file
-			maxFiles: 1,// 一次性上传的文件数量上限
-			maxFilesize: 2, // 文件大小，单位：M
-			acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
-			addRemoveLinks: true,
-			parallelUploads: 1,// 一次上传的文件数量
-			//previewsContainer:"#preview", // 上传图片的预览窗口
-			dictDefaultMessage: '点此上传新头像',
-			dictMaxFilesExceeded: "您最多只能上传1个文件！",
-			dictResponseError: '文件上传失败!',
-			dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
-			dictFallbackMessage: "浏览器不受支持",
-			dictFileTooBig: "文件过大上传文件最大支持.",
-			dictRemoveLinks: "删除",
-			dictCancelUpload: "取消",
-			init: function () {
-				this.on("addedfile", function (file) {
-					// 上传文件时触发的事件
-				});
-				this.on("success", function (file, data) {
-					// 上传成功触发的事件
-					console.log(data);
-					var status = data.status;
-					if(status==200){
-						var filePath = data.filePath;
-						$("#imgUrl").val(filePath);
-					}
-
-					console.log(file);
-				});
-				this.on("error", function (file, data) {
-					// 上传失败触发的事件
-					console.error(data);
-					console.log(file);
-				});
-				this.on("removedfile", function (file) {
-					// 删除文件时触发的方法
-				});
-			}
-
-		}
-
-	</script>
 	<script>
 		//获取超链接地址栏上的sysId
-        var id = window.location.search.split("=")[1];
-		console.log(id);
-
+       var id;
+		$.ajax({
+			//请求方式GET/POST
+			type : "GET",
+			//同步
+			async: false,
+			//请求的媒体类型
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType:"json",
+			//请求地址
+			url : "sysuser/getSession",
+			//请求成功
+			success : function(result) {
+				id = result.userid;
+			},
+			//请求失败，包含具体的错误信息
+			error : function(e){
+				console.error(e);
+			}
+		});
 		//通过ajax从后台获取。
 			$.ajax({
 				//请求方式GET/POST
@@ -178,9 +148,9 @@
 				url: "sysuser/getUserById",
 				//数据，json字符串
 				data: JSON.stringify(
-						{
-							"userid": id,
-						}
+					{
+						"userid": id,
+					}
 				),
 				//请求成功
 				success: function (result) {
@@ -245,11 +215,59 @@
         $(function(){
             $("#bottom-text").click(function(){//按钮绑定点击事件
                 $("#dropzoneDiv").show();//文本框显示出来  注：之前设置display:none的样式
-                $("#bottom-text").hidden();
+                $("#bottom-text").hide();
             });
         });
 		$(".tree").load("menu.html");
 		$("#headbanner").load("head.html");
+	</script>
+
+	<script>
+		Dropzone.options.dropzoneDiv = {
+			url: "http://localhost:8080/newsmanage/news/upload", // 文件提交地址
+			method: "post",  // 也可用put
+			paramName: "dropzFile", // 默认为file
+			maxFiles: 1,// 一次性上传的文件数量上限
+			maxFilesize: 2, // 文件大小，单位：M
+			acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+			addRemoveLinks: true,
+			parallelUploads: 1,// 一次上传的文件数量
+			//previewsContainer:"#preview", // 上传图片的预览窗口
+			dictDefaultMessage: '点此上传新头像',
+			dictMaxFilesExceeded: "您最多只能上传1个文件！",
+			dictResponseError: '文件上传失败!',
+			dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+			dictFallbackMessage: "浏览器不受支持",
+			dictFileTooBig: "文件过大上传文件最大支持.",
+			dictRemoveLinks: "删除",
+			dictCancelUpload: "取消",
+			init: function () {
+				this.on("addedfile", function (file) {
+					// 上传文件时触发的事件
+				});
+				this.on("success", function (file, data) {
+					// 上传成功触发的事件
+					console.log(data);
+					var status = data.status;
+					if(status==200){
+						var filePath = data.filePath;
+						$("#imgUrl").val(filePath);
+					}
+
+					console.log(file);
+				});
+				this.on("error", function (file, data) {
+					// 上传失败触发的事件
+					console.error(data);
+					console.log(file);
+				});
+				this.on("removedfile", function (file) {
+					// 删除文件时触发的方法
+				});
+			}
+
+		}
+
 	</script>
   </body>
 </html>
