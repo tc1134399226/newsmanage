@@ -39,72 +39,113 @@
 <div class="person-info">
 </div>
 
-<div class="list-items" style="height: 554px;">
+<div class="list-items" style="height: 600px;">
     <dl>
         <dt><i>·</i> 个人空间</dt>
-
-        <dd ><a onclick="skip()" >我的收藏</a></dd>
-        <hr>
-        <dd ><a onclick=jumpmesg() >我的消息</a></dd>
-        <hr>
-        <dd><a id="1" style="display:none" onclick="skip()">我的新闻</a></dd>
-        <hr>
-        <dd><a id="4" style="display:none" onclick="skip()">草稿</a></dd>
+        <dd><a id="menu1" onclick="jumpright(1)" >个人空间</a></dd>
         <hr>
     </dl>
     <hr>
     <dl>
         <dt><i>·</i> 权限一览</dt>
-        <dd><a id="2" style="display:none" href="" >申请小编</a></dd>
+        <dd><a id="menu6" style="display:none" onclick="jumpright(6)" >申请小编</a></dd>
         <hr>
         <span v-if="judge">
-        <dd><a id="3" style="display:none" href="" >发布新闻</a></dd>
+        <dd><a id="menu7" style="display:none" onclick="jumpright(7)">发布新闻</a></dd>
         </span>
     </dl>
     <hr>
     <dl>
         <dt><i>·</i> 设置</dt>
 
-        <dd><a onclick=jump(); class="list-active">信息修改</a></dd>
+        <dd><a id="menu8" onclick="jumpright(8)" class="list-active">信息修改</a></dd>
         <hr>
-
         <hr>
         <hr>
         <hr>
     </dl>
 </div>
 <script>
+    var user;
+    $.ajax({
+        //请求方式GET/POST
+        type: "GET",
+        async:false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType: "json",
+        //请求地址
+        url: "news/getSession",
+        //数据，json字符串
+        //请求成功
+        success: function (result) {
+            user = result;
+        }
+    });
 
-    if(status==2) {
-        $("#1").show();
-        $("#3").show()
+    if(user.status==2) {
+        $("#menu7").show();
     }else {
-        $("#2").show()
+        $("#menu6").show();
+    }
+    //
+    // function jumpskip(){
+    //     $(".yui3-u-5-6").empty();
+    //     $(".yui3-u-5-6").load("userhome.html");
+    // }
+
+
+    // $("#2").click(function(){
+    //     $(this).attr("href","editorapply.html?userId="+id);//用jquery的方法改变href属性值
+    // });
+    //
+    // $("#3").click(function(){
+    //     $(this).attr("href","newsEditor.html?userId="+id);//用jquery的方法改变href属性值
+    // });
+    //
+    //
+    // function jump(){
+    //     window.location.href = "userInfo-edit.html?userId="+id;
+    // }
+    //
+    // function jumpmesg(){
+    //     window.location.href = "userInfo-mesg.html?userId="+id;
+    // }
+
+    function jumpright(object){
+        var text = $("#menu"+object).text();
+        $.ajax({
+            //请求方式GET/POST
+            type: "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/setSessionMenu?menu="+text,
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (object==1) {
+                    $(".yui3-u-5-6").load("userhome.html");
+                    // window.location.href = "userhome.html?userId="+user.userId
+                }
+                if (object==6){
+                    window.location.href = "editorapply.html?userId="+user.userId
+                }
+                if (object==7){
+                    window.location.href = "editorapply.html?userId="+user.userId
+                }
+                if (object==8){
+                    window.location.href = "userInfo-edit.html?userId="+user.userId
+                }
+            }
+        });
     }
 
-    function skip(){
-
-        $(".yui3-u-5-6").empty();
-        $(".yui3-u-5-6").load("userhome.html");
-    }
 
 
-    $("#2").click(function(){
-        $(this).attr("href","editorapply.html?userId="+id);//用jquery的方法改变href属性值
-    });
-
-    $("#3").click(function(){
-        $(this).attr("href","newsEditor.html?userId="+id);//用jquery的方法改变href属性值
-    });
-
-
-    function jump(){
-        window.location.href = "userInfo-edit.html?userId="+id;
-    }
-
-    function jumpmesg(){
-        window.location.href = "userInfo-mesg.html?userId="+id;
-    }
 </script>
 </body>
 </html>
