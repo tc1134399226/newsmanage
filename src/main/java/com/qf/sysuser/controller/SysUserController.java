@@ -175,4 +175,9 @@ public class SysUserController {
         session.removeAttribute("sysUser");
         return true;
     }
+
+    @RequestMapping("listNewsUserInfo")
+    public  Object listNewsUserInfo(){
+        return sysUserService.listNewsUserInfo();
+    }
 }

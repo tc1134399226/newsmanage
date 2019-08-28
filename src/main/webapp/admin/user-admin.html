@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="GB18030">
+<head>
+	<meta charset="GB18030">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/font-awesome.min.css">
+	<link rel="stylesheet" href="../css/main.css">
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../script/docs.min.js"></script>
+
+    <style>
+		.tree li {
+			list-style-type: none;
+			cursor:pointer;
+		}
+		table tbody tr:nth-child(odd){background:#F4F4F4;}
+		table tbody td:nth-child(even){color:#C00;}
+	</style>
+</head>
+
+<body>
+
+<nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+</nav>
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-3 col-md-2 sidebar">
+			<div class="tree">
+			</div>
+		</div>
+		<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"><i class="glyphicon glyphicon-th"></i> 数据列表</h3>
+				</div>
+				<div class="panel-body">
+					<form class="form-inline" role="form" style="float:left;">
+						<div class="form-group has-feedback">
+							<div class="input-group">
+								<div class="input-group-addon">名称</div>
+								<input class="form-control has-success" type="text" id="username" placeholder="请输入查询条件">
+							</div>
+						</div>
+						<div class="form-group has-feedback">
+							<div class="input-group">
+								<div class="input-group-addon">账号</div>
+								<input class="form-control has-success" type="text" id="account" placeholder="请输入查询条件">
+							</div>
+						</div>
+						<button type="button" class="btn btn-warning" onclick="selectData()"><i class="glyphicon glyphicon-search"></i> 查询</button>
+					</form>
+
+					<br>
+					<hr style="clear:both;">
+					<div class="table-responsive">
+						<table class="table  table-bordered" id = "dataTable">
+							<thead>
+							<tr >
+
+								<th>昵称</th>
+								<th>账号</th>
+								<th>手机号</th>
+								<th width="100">操作</th>
+							</tr>
+							</thead>
+                            <tbody>
+                            <tr>
+                                <td>giogio</td>
+                                <td>我有一个梦想</td>
+                                <td>成为秧歌star</td>
+                                <td>17岁</td>
+                            </tr>
+
+                            </tbody>
+							<tfoot>
+							<tr >
+								<td colspan="6" align="center">
+									<ul class="pagination">
+										<li class="disabled"><a href="#">上一页</a></li>
+										<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+										<li><a href="#">2</a></li>
+										<li><a href="#">3</a></li>
+										<li><a href="#">4</a></li>
+										<li><a href="#">5</a></li>
+										<li><a href="#">下一页</a></li>
+									</ul>
+								</td>
+							</tr>
+
+							</tfoot>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+
+    $.ajax({
+        //请求方式GET/POST
+        type: "GET",
+        async: false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType: "json",
+        //请求地址
+        url: "sysuser/listNewsUserInfo",
+        //数据，json字符串
+        //请求成功
+        success: function (result) {
+            console.log(result);
+
+            if (result) {
+                status = result.status;
+                return ;
+            }
+
+
+        },
+        error: function (e) {
+            // console.error(e);
+            console.log(e);
+        }
+    });
+
+
+    function initPage(){
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "sysuser/listNewsUserInfo",
+            //数据，json字符串
+
+            //请求成功
+            success : function(result) {
+                $("#dataTable tbody").html("");
+
+                $(result).each(function(index,item){
+                    console.log(item);
+                    var trStr = "<tr>";
+                    //获取id并拼接
+                    trStr+="<td>"+item.nickName+"</td>";
+                    trStr+="<td>"+item.account+"</td>";
+                    trStr+="<td>"+item.mobile+"</td>";
+                    trStr+="<td>";
+                    trStr+="<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-pencil' onclick='updateUser("+item.userId+")'></i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs'><i class=' glyphicon glyphicon-remove' onclick='removeUser("+item.userId+")'></i></button>"
+
+                    trStr+="</td>";
+                    trStr+="</tr>";
+                    $("#dataTable").append(trStr);
+                });
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                // console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    initPage();
+
+
+    function updateUser(userId){
+        location.href = "useInfo-edit.html?userId="+userId;
+    }
+</script>
+<script>
+	$("#headbanner").load("head.html");
+</script>
+</body>
+</html>
