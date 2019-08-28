@@ -93,5 +93,38 @@
     <select id="listAllMenuInfo" resultType="com.qf.sysuser.pojo.MenuInfo">
         select *,menu_url menuUrl from menuinfo
     </select>
+    <!--查询前端用户信息-->
+    <select id="listNewsUserInfo" resultType="com.qf.sysuser.pojo.UserInfo">
+        select * from  userInfo where status != 3
+
+    </select>
+
+    <select id="getUserInfoById" parameterType="int" resultType="com.qf.sysuser.pojo.UserInfo">
+        select * from userinfo where  userid = #{userid}
+    </select>
+
+    <update id="editUserInfoById" parameterType="com.qf.sysuser.pojo.UserInfo">
+        update  userinfo set
+        <trim suffixOverrides=",">
+            <if test="nickName !=null and nickName!=''">
+                nickName = #{nickName},
+            </if>
+            <if test="idCard !=null and idCard !=''">
+                idCard = #{idCard},
+            </if>
+            <if test="mobile !=null and mobile!=''">
+                mobile = #{mobile},
+            </if>
+            <if test="status !=null and status!=''">
+                status = #{status},
+            </if>
+
+            <if test="icon !=null and icon!=''">
+                updateTime = now(),
+            </if>
+
+        </trim>
+        where  userId = #{userId}
+    </update>
 
 </mapper>
