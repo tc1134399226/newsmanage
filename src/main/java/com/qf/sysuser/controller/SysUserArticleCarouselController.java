@@ -41,7 +41,7 @@ public class SysUserArticleCarouselController {
 
         if (allArticleCarousel.size()<5){
             return sysUserArticleCarouselService.addToCarousel(articleInfo);
-        }else{
+        }else if (allArticleCarousel.size()==5){
             ArticleCarousel articleCarousel = sysUserArticleCarouselService.selectArticleId();
             boolean b = sysUserArticleCarouselService.deleteArticleUseId(articleCarousel.getArticleId());
             if (b){
@@ -49,6 +49,10 @@ public class SysUserArticleCarouselController {
             }else{
                 return false;
             }
+        }else{
+            ArticleCarousel articleCarousel = sysUserArticleCarouselService.selectArticleId();
+            boolean b = sysUserArticleCarouselService.deleteArticleUseId(articleCarousel.getArticleId());
+            return false;
         }
     }
 

@@ -19,7 +19,7 @@ public class SysUserAticleChooseController {
     @Autowired
     SysUserAticleChooseService sysUserAticleChooseService;
 
-    //筛选新闻添加到轮播库并删除最早的新闻,同时改变state为2
+    //筛选新闻添加到轮播库并删除最早的新闻
     @RequestMapping("addToImg")
     public Object addToImg(@RequestBody ArticleInfo articleInfo){
         List<ArticleCarousel> allArticleByTypeId = sysUserAticleChooseService.getAllArticleByTypeId(articleInfo.getTypeId());
@@ -27,17 +27,16 @@ public class SysUserAticleChooseController {
         if (allArticleByTypeId.size()<3){
             return sysUserAticleChooseService.addToImg(articleInfo);
 
+        }else if (allArticleByTypeId.size()==3){
+            ArticleCarousel article = sysUserAticleChooseService.selectArticleByTypeId(articleInfo.getTypeId());
+            boolean b = sysUserAticleChooseService.removeArticleUseId(article.getArticleId());
+            return sysUserAticleChooseService.addToImg(articleInfo);
+
         }else{
             ArticleCarousel article = sysUserAticleChooseService.selectArticleByTypeId(articleInfo.getTypeId());
             boolean b = sysUserAticleChooseService.removeArticleUseId(article.getArticleId());
-            System.out.println(b);
-            if (b){
-                return sysUserAticleChooseService.addToImg(articleInfo);
-            }else{
-                return false;
-            }
+            return false;
         }
-
     }
 
     //已加入area_type_img表中的新闻将设置状态为2
