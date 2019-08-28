@@ -39,7 +39,7 @@
             <bean class="com.qf.filter.LoginFilter"/>
         </mvc:interceptor>
     </mvc:interceptors>
-    4、配置视图解析器
+<!--    4、配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"></property>
         <property name="suffix" value=".html"></property>
