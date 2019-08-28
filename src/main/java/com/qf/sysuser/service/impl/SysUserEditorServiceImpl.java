@@ -46,5 +46,19 @@ public class SysUserEditorServiceImpl implements SysUserEditorService {
         return sysUserEditorMapper.getAllEditorInfoBySatus();
     }
 
+    //根据用户id获取小编的详细信息
+    public UserInfo getEditorInfoByUserId(int userId) {
+        return sysUserEditorMapper.getEditorInfoByUserId(userId);
+    }
+
+    //根据用户id取消小编的编辑资 格
+    public boolean cancelEditor(int userId) {
+        return sysUserEditorMapper.cancelEditor(userId)>0;
+    }
+
+    public List<UserInfo> selectUserInfoByNickNameAnd(UserInfo userInfo) {
+        return sysUserEditorMapper.selectUserInfoByNickNameAnd(userInfo);
+    }
+
 
 }

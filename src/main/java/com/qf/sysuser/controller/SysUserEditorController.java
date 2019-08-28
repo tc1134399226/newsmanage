@@ -98,8 +98,46 @@ public class SysUserEditorController {
      * @return
      */
     @RequestMapping("getAllEditorInfoBySatus")
-    public Object getAllEditorInfoBySatus(){
-        return sysUserEditorService.getAllEditorInfoBySatus();
+    public Object getAllEditorInfoBySatus(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum){
+        int pageSize=4;//每页显示记录数
+        //初始化pageHelper对象
+        PageHelper.startPage(pageNum, pageSize);
+        List<UserInfo> allEditorInfo=sysUserEditorService.getAllEditorInfoBySatus();
+
+        PageInfo<UserInfo> userInfoPageInfo=new PageInfo<UserInfo>(allEditorInfo);
+        return userInfoPageInfo;
+    }
+
+
+    /**
+     * 根据用户id获取小编的详细信息
+     * @param userId
+     * @return
+     */
+    @RequestMapping("getEditorInfoByUserId")
+    public Object getEditorInfoByUserId(@RequestParam int userId){
+        return sysUserEditorService.getEditorInfoByUserId(userId);
+    }
+
+    /**
+     * 根据用户id取消小编 的编辑资格
+     * @param userId
+     * @return
+     */
+    @RequestMapping("cancelEditor")
+    public Object cancelEditor(@RequestParam int userId){
+       return sysUserEditorService.cancelEditor(userId);
+    }
+
+    /**
+     * 根据小编的昵称和账号模糊查询小编信息
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping("selectUserInfoByNickNameAnd")
+    public Object selectUserInfoByNickNameAnd(@RequestBody UserInfo userInfo){
+
+        return sysUserEditorService.selectUserInfoByNickNameAnd(userInfo);
     }
 
 }

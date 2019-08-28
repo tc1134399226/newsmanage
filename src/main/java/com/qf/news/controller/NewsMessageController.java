@@ -137,4 +137,11 @@ public Object deleteReadMessageByMgeId(@RequestParam Long mgeId){
         message.setSenderId(666);
         return newsMessageService.sendSystemMessage(message);
     }
+
+    @RequestMapping("getMessageByUserId")
+    public Object getMessageByUserId(@RequestParam int userId){
+        return newsMessageService.getMessageByUserId(userId);
+    }
+
+
 }

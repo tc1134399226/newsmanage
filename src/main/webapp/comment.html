@@ -101,7 +101,7 @@
     //初始化页面
     function initPage(){
         var pageNum=window.location.search.split("=")[1];
-        console.log(pageNum)
+        console.log("pageNum:"+pageNum)
         //通过文章id显示所有评论
         var requestURL="news/allComment"
         if(pageNum==null){

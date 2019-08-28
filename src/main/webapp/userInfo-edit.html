@@ -42,79 +42,8 @@
 <!-- 头部栏位 -->
 <!--页面顶部-->
 <div id="nav-bottom">
-    <!--&lt;!&ndash;顶部&ndash;&gt;-->
-    <!--<div class="nav-top">-->
-    <!--<div class="top">-->
-    <!--<div class="py-container">-->
-    <!--<div class="shortcut">-->
-    <!--<ul class="fl">-->
-    <!--<li class="f-item">您好！</li>-->
-    <!--<li class="f-item">请<a href="login.html" target="_blank">登录</a>　<span><a href="register.html" target="_blank">免费注册</a></span></li>-->
-    <!--</ul>-->
-    <!--<ul class="fr">-->
-    <!--<li class="f-item">我的空间</li>-->
-    <!--<li class="f-item space"></li>-->
-    <!--<li class="f-item"><a href="main.html" target="_blank">新闻首页</a></li>-->
-    <!--<li class="f-item space"></li>-->
 
-    <!--<li class="f-item">热点新闻</li>-->
-    <!--<li class="f-item space"></li>-->
-    <!--<li class="f-item" id="service">-->
-    <!--<span>客户服务</span>-->
-    <!--<ul class="service">-->
-    <!--<li><a href="cooperation.html" target="_blank">合作招商</a></li>-->
-    <!--<li><a href="shoplogin.html" target="_blank">商家后台</a></li>-->
-    <!--<li><a href="cooperation.html" target="_blank">合作招商</a></li>-->
-    <!--<li><a href="#">商家后台</a></li>-->
-    <!--</ul>-->
-    <!--</li>-->
-    <!--<li class="f-item space"></li>-->
-    <!--<li class="f-item">网站导航</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--头部-->
     <div class="header">
-        <!--<div class="py-container">-->
-        <!--<div class="yui3-g Logo">-->
-        <!--<div class="yui3-u Left logoArea">-->
-        <!--<a class="logo-bd" title="gold_experience" href="main.html" target="_blank"></a>-->
-        <!--</div>-->
-        <!--<div class="yui3-u Center searchArea">-->
-        <!--<div class="search">-->
-        <!--<form action="" class="sui-form form-inline">-->
-        <!--&lt;!&ndash;searchAutoComplete&ndash;&gt;-->
-
-        <!--</form>-->
-        <!--</div>-->
-
-        <!--</div>-->
-        <!--<div class="yui3-u Right shopArea">-->
-        <!--<div class="fr shopcar">-->
-        <!--<div class="show-shopcar" id="shopcar">-->
-        <!--<span class="car"></span>-->
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <div class="yui3-g NavList">
-            <div class="yui3-u Left all-sort">
-                <h4>地区分类</h4>
-            </div>
-            <div class="yui3-u Center navArea">
-                <ul class="nav">
-                    <a href="index.html?area=国际"><li class="f-item">国际</li></a>
-                    <a href="index.html?area=内地"><li class="f-item">内地</li></a>
-                    <a href="index.html?area=港澳"><li class="f-item">港澳</li></a>
-                    <a href="index.html?area=台海"><li class="f-item">台海</li></a>
-                    <!--<li class="f-item"><a href="seckill-index.html" target="_blank">娱乐</a></li>-->
-                </ul>
-            </div>
-            <div class="yui3-u Right"></div>
-        </div>
     </div>
 </div>
 </div>
@@ -129,51 +58,7 @@
     <div class="py-container">
         <div class="yui3-g home">
             <!--左侧列表-->
-            <div class="yui3-u-1-6 list" style="background-color:#a83c3a;">
-
-                <div class="person-info">
-
-                    <!--<div class="person-account">-->
-                    <!--<span class="name">Michelle</span>-->
-
-                    <!--</div>-->
-                    <!--<div class="clearfix"></div>-->
-                </div>
-
-                <div class="list-items">
-                    <dl>
-                        <dt><i>·</i> 个人空间</dt>
-
-                        <dd ><a href="userhome.html"   >我的收藏</a></dd>
-                        <hr>
-                        <dd ><a href="userhome.html"   >我的消息</a></dd>
-                        <hr>
-
-                        <dd><a id="1" style="display:none" href="userhome.html" >我的新闻</a></dd>
-
-                    </dl>
-                    <hr>
-                    <dl>
-                        <dt><i>·</i> 权限一览</dt>
-
-                        <dd><a id="2" style="display:none" href="editorapply.html" >申请小编</a></dd>
-                        <hr>
-                        <span v-if="judge">
-							<dd><a id="3" style="display:none" href="home-person-footmark.html" >发布新闻</a></dd>
-                            </span>
-                    </dl>
-                    <hr>
-                    <dl>
-                        <dt><i>·</i> 设置</dt>
-
-                        <dd><a  class="list-active">信息修改</a></dd>
-                        <hr>
-
-                        <hr>
-                        <hr>
-                        <hr>
-                    </dl>
-                </div>
+            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#F1F1F1;">
             </div>
             <!--右侧主内容-->
             <div class="yui3-u-5-6">
@@ -579,7 +464,8 @@
         //2.跳转
         window.location.href = "userInfo.html?userId="+id;
     }
-
+    $("#leftmenu").load("leftmenu.html");
+    $(".header").load("head.html");
 </script>
 
     <!-- 底部栏位 -->

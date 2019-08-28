@@ -28,7 +28,12 @@ public interface NewsArticleInfoService {
 
     //得到用户IP
     public boolean getIP(ArticleInfo articleInfo);
-
+    /**
+     * 插入浏览记录
+     * @param articleInfo
+     * @return
+     */
+    public boolean insertIP(ArticleInfo articleInfo);
 
     //得到图片的路径
     public boolean uploadCover(ArticleInfo articleInfo);

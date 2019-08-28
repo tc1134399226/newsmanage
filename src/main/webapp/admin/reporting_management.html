@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>举报详情列表</title>
+    <meta charset="GB18030">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../dropzone/basic.min.css" />
+    <link rel="stylesheet" href="../dropzone/dropzone.min.css" />
+    <script src="../dropzone/dropzone.min.js"></script>
+    <style>
+        .pagecss{
+            text-align: center;
+        }
+        .cont{
+            float: right;
+            width: 82%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="col-sm-3 col-md-2 sidebar">
+    <div class="tree">
+    </div>
+</div>
+<div class="cont">
+    <nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    </nav>
+    <hr>
+
+    <div class="table-responsive">
+        <table class="table  table-bordered" id = "dataTable">
+            <thead>
+            <tr >
+                <th width="100px">举报者</th>
+                <th>举报内容</th>
+                <th>被举报文章</th>
+                <th>举报时间</th>
+
+                <th width="100">操作</th>
+            </tr>
+            </thead>
+
+        </table>
+    </div>
+
+    <div id="pageSplic" class="pagecss">
+        <table style="margin: auto">
+            <tr>
+                <td colspan="6" align="center">
+                    <ul class="pagination" >
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script src="../jquery/jquery-2.1.1.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
+<script src="../script/docs.min.js"></script>
+<script>
+    $(".tree").load("menu.html");
+    function initPage(){
+
+        var pageNum=window.location.search.split("=")[1];
+        console.log(pageNum);
+        var requestURL="sysuser/getAllReport";
+
+        if(pageNum==null){
+            pageNum=1;
+        }
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL);
+        //1.从后台的接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+            //数据，json字符串
+            //请求成功
+            success : function(result) {
+                $("#dataTable tbody").html("");
+                //js对象和jquery是不一样的，基本不能互相操作，得靠$()转换
+                //2.将数据填充到table中
+                $(result.list).each(function(index,item){
+                    var trStr = "<tr>";
+                    //获取id并拼接
+                    trStr+="<td>"+item.nickName+"</td>";
+                    trStr+="<td>"+item.context+"</td>";
+                    trStr+="<td>"+item.mainTitle+"</td>";
+                    trStr+="<td>"+new Date(parseInt(item.createTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+"</td>";
+                    trStr+="<td>";
+                    trStr+="<button type=\"button\"  onclick='checkArticle("+item.articleId+")'>文章详情</button>&nbsp;";
+                    trStr+="</td>";
+                    trStr+="</tr>";
+                    $("#dataTable").append(trStr);
+                });
+
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var	splicPage="<li><a href=\"reporting_management.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+
+                }
+                console.log(result.pages);
+                for(var i=1;i<=result.pages;i++){
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3){
+                        splicPage +="<li><a href=\"article.html?pageNum="+i+"\">"+i+"</a></li>";
+                    }
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a href=\"reporting_management.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+            }
+        });
+    }
+    initPage();
+
+    function checkArticle(articleId){
+        window.location.href="reporting_details.html?articleId="+articleId;
+    }
+
+    $("#headbanner").load("head.html");
+</script>
+</body>
+</html>

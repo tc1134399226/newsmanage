@@ -4,6 +4,8 @@ package com.qf.sysuser.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.sysuser.dto.UserIdsDTO;
+import com.qf.sysuser.pojo.MenuInfo;
+import com.qf.sysuser.pojo.UserInfo;
 import com.qf.sysuser.pojo.User;
 import com.qf.sysuser.service.SysUserService;
 import com.qf.sysuser.vo.MenuInfoVO;
@@ -76,19 +78,25 @@ public class SysUserController {
     @RequestMapping("getUserById")
     @ResponseBody
     public User getUserById(@RequestBody User user){
+        System.out.println(user);
         User userById = sysUserService.getUserById(user);
+        System.out.println(userById);
         return userById;
     }
 
     /**
-     * 根据用户id  更新用户
+     * 根据用户id  更新用户并且更新session
      * @param user
      * @return
      */
     @RequestMapping("updateUser")
     @ResponseBody
-    public boolean updateUser(@RequestBody User user){
+    public boolean updateUser(@RequestBody User user,HttpSession session){
         boolean flg = sysUserService.updateUser(user);
+        if (flg){
+            User userById = sysUserService.getUserById(user);
+            session.setAttribute("sysuser",userById);
+        }
         return flg;
     }
 
@@ -124,13 +132,10 @@ public class SysUserController {
     @RequestMapping("initMenuList")
     public Object initMenuList(@RequestBody(required = false) User userInfo,HttpSession session){
 //        MenuInfoVO menuInfos = (MenuInfoVO) session.getAttribute("menuInfoList");
-        System.out.println(1111);
-        User user=new User();
-        user.setUsername("王涛");
-        user.setPassword("123456");
-        List<MenuInfoVO> menuInfos = sysUserService.userLoginInit(user);
-        System.out.println(3333);
-        System.out.println(menuInfos);
+        User sysUser = (User) session.getAttribute("sysUser");
+        List<MenuInfoVO> menuInfos = sysUserService.userLoginInit(sysUser);
+        System.out.println("session: "+sysUser);
+        System.out.println("用户菜单栏: "+menuInfos);
 //        if(session.getAttribute("menuInfoList")==null){
         if (menuInfos==null) {
             if (userInfo != null) {
@@ -140,7 +145,7 @@ public class SysUserController {
             }
         }else{
 //            return session.getAttribute("menuInfoList");
-         return    menuInfos;
+         return menuInfos;
         }
     }
 
@@ -152,14 +157,58 @@ public class SysUserController {
     @RequestMapping("sysUserLogin")
     @ResponseBody
     public User sysUserLogin(@RequestBody User user, HttpSession session){
-//        User userInfo = (User)session.getAttribute("userInfo");
-//                user.setUserid(userInfo.getUserid());
         User user1 = sysUserService.sysUserLogin(user);
+//        System.out.println(user1);
         if (user1!=null){
-            session.setAttribute("user",user1);
+            session.setAttribute("sysUser",user1);
+            return user1;
         }
-        return sysUserService.sysUserLogin(user);
+        return null;
     }
 
+    @RequestMapping("getSession")
+    public Object getSession(HttpSession session){
+        Object user = session.getAttribute("sysUser");
+        return user;
+    }
 
+    @RequestMapping("cleanSession")
+    public Object cleanSession(HttpSession session){
+        session.removeAttribute("sysUser");
+        return true;
+    }
+
+    @RequestMapping("listAllMenuInfo")
+    @ResponseBody
+    public Object listAllMenuInfo(Integer pageNo){
+        Integer pageSize=4;//每页显示记录数
+        //分页查询
+        System.out.println(pageNo);
+        PageHelper.startPage(pageNo, pageSize);
+        List<MenuInfo> menuList = sysUserService.listAllMenuInfo();;//获取所有用户信息
+        PageInfo<MenuInfo> pageInfo=new PageInfo<MenuInfo>(menuList);
+        return pageInfo;
+    }
+
+    @RequestMapping("listNewsUserInfo")
+    public  Object listNewsUserInfo(){
+        return sysUserService.listNewsUserInfo();
+    }
+
+    @RequestMapping("getUserInfoById")
+    public Object getUserInfoById(@RequestParam int userId){
+        return  sysUserService.getUserInfoById(userId);
+    }
+
+    @RequestMapping("editUserInfoById")
+    public boolean editUserInfoById(@RequestBody UserInfo userInfo) {
+        System.out.println(userInfo);
+        return this.sysUserService.editUserInfoById(userInfo);
+    }
+
+    @RequestMapping("selectUser")
+    @ResponseBody
+    public List<UserInfo> selectUser(@RequestBody UserInfo userInfo){
+        return sysUserService.selectUser(userInfo);
+    }
 }

@@ -29,4 +29,13 @@ public interface SysUserEditorMapper {
     //获取所有小编的信息
     public List<UserInfo> getAllEditorInfoBySatus();
 
+    //根据用户id获取小编的详细信息
+    public UserInfo getEditorInfoByUserId(int userId);
+
+    //根据用户id取消小编的编辑 资格
+    public int cancelEditor(int userId);
+
+
+    public List<UserInfo> selectUserInfoByNickNameAnd(UserInfo userInfo);
+
 }

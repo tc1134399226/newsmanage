@@ -60,17 +60,22 @@ public class NewsController {
      */
     @RequestMapping("listAllArticleByStatusAndHotAndTypeIdAndAreaId")
     @ResponseBody
-    public Object listAllArticleByStatusAndHotAndTypeIdAndAreaId(@RequestParam Integer typeId,
-                                                                 Integer areaId){
+    public Object listAllArticleByStatusAndHotAndTypeIdAndAreaId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
+                          Integer pageNum , Integer typeId, Integer areaId){
         System.out.println(typeId);
         System.out.println(areaId);
         if (typeId==0||areaId==0){
             return false;
         }
+        //一页有多少条数据
+        int defaultPageSize=5;
+        //初始化pageHelper对象
+        PageHelper.startPage(pageNum,defaultPageSize);
         List<ArticleTypeVO> articleTypeVOS =
                 newsService.listAllArticleByStatusAndHotAndTypeIdAndAreaId(typeId, areaId);
-        System.out.println(articleTypeVOS);
-        return articleTypeVOS;
+        System.out.println("111"+articleTypeVOS);
+        PageInfo<ArticleTypeVO> articleTypeVoPageInfo = new PageInfo<ArticleTypeVO>(articleTypeVOS);
+        return articleTypeVoPageInfo;
     }
 
 

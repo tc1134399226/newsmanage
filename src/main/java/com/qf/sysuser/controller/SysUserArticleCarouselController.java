@@ -22,7 +22,7 @@ public class SysUserArticleCarouselController {
     //根据封面图筛选新闻
     @RequestMapping("getArticleByCover")
     public Object getArticleByCover(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum, @RequestBody ArticleInfo articleInfo){
-        int pageSize=3;//每页显示记录
+        int pageSize=10;//每页显示记录
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, pageSize);
         //获取所有申请的文章信息
@@ -41,7 +41,7 @@ public class SysUserArticleCarouselController {
 
         if (allArticleCarousel.size()<5){
             return sysUserArticleCarouselService.addToCarousel(articleInfo);
-        }else{
+        }else if (allArticleCarousel.size()==5){
             ArticleCarousel articleCarousel = sysUserArticleCarouselService.selectArticleId();
             boolean b = sysUserArticleCarouselService.deleteArticleUseId(articleCarousel.getArticleId());
             if (b){
@@ -49,6 +49,10 @@ public class SysUserArticleCarouselController {
             }else{
                 return false;
             }
+        }else{
+            ArticleCarousel articleCarousel = sysUserArticleCarouselService.selectArticleId();
+            boolean b = sysUserArticleCarouselService.deleteArticleUseId(articleCarousel.getArticleId());
+            return false;
         }
     }
 

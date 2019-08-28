@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>文章审核</title>
+    <title>管理小编</title>
     <meta charset="GB18030">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,18 +26,39 @@
     </style>
 </head>
 <body>
+
+<style>
+
+    body{ padding-bottom:50px;}
+    .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
+        height:50px; z-index:9999;}
+</style>
+
+<hr>
 <div class="col-sm-3 col-md-2 sidebar">
     <div class="tree">
     </div>
 </div>
 <div class="cont">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <div><a class="navbar-brand"  style="font-size:32px;">你懂得-创意产品</a></div>
+
+    <nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    </nav>
+
+    <form class="form-inline" role="form" style="float:left;">
+        <div class="form-group has-feedback">
+            <div class="input-group">
+                <div class="input-group-addon">昵称</div>
+                <input class="form-control has-success" type="text" id="nickName" placeholder="请输入查询条件">
             </div>
         </div>
-    </nav>
+        <div class="form-group has-feedback">
+            <div class="input-group">
+                <div class="input-group-addon">账号</div>
+                <input class="form-control has-success" type="text" id="account" placeholder="请输入查询条件">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="selectUserInfoByNickNameAnd()"><i class="glyphicon glyphicon-search"></i> 查询</button>
+    </form>
 
     <hr>
 
@@ -47,7 +68,7 @@
             <tr >
                 <th>序号</th>
                 <th>用户昵称</th>
-                <th>用户性别</th>
+                <th>用户账号</th>
                 <th>创建时间</th>
                 <th width="100">操作</th>
             </tr>
@@ -57,7 +78,7 @@
     </div>
 
     <div id="pageSplic" >
-        <table>
+        <table style="margin: auto">
             <tr>
                 <td colspan="6" align="center">
                     <ul class="pagination" >
@@ -65,14 +86,20 @@
                 </td>
             </tr>
         </table>
+
+        <div align="center" id="textDiv" class="lastDiv">
+            <button type="button" class="btn btn-success" onclick="returnList()" ><i class="glyphicon glyphicon-edit"></i>返回</button>
+
+        </div>
     </div>
 </div>
+
 <script src="../jquery/jquery-2.1.1.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script src="../script/docs.min.js"></script>
 <script>
     $(".tree").load("menu.html");
-    //定义方法获取后台数据
+    //定义方法获取后台 数据
     function initPage(){
         var pageNum=window.location.search.split("=")[1];
         console.log(pageNum);
@@ -101,16 +128,18 @@
                 $("#dataTable tbody").html("");
                 //js对象和jquery是不一样的，基本不能互相操作，得靠$()转换
                 //2.将数据填充到table中
-                $(result).each(function(index,item){
+                $(result.list).each(function(index,item){
+
+
                     var trStr = "<tr>";
                     count++;
                     //获取id并拼接
                     trStr+="<td>"+count+"</td>";
                     trStr+="<td>"+item.nickName+"</td>";
-                    trStr+="<td>"+item.sex+"</td>";
+                    trStr+="<td>"+item.account+"</td>";
                     trStr+="<td>"+new Date(parseInt(item.createTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+"</td>";
                     trStr+="<td>";
-                    trStr+="<button type=\"button\"  onclick='checkArticle("+item.articleId+")'>查看详情</button>&nbsp;"
+                    trStr+="<button type=\"button\"  onclick='checkEditor("+item.userId+")'>查看详情</button>&nbsp;"
                     trStr+="</td>";
                     trStr+="</tr>";
                     $("#dataTable").append(trStr);
@@ -119,17 +148,22 @@
                 if (pageNum<=1){
                     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var	splicPage="<li><a href=\"article_apply_list.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+                    var	splicPage="<li><a href=\"editorToUser.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
 
                 }
                 console.log(result.pages);
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"article_apply_list.html?pageNum="+i+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3){
+                        splicPage +="<li><a href=\"editorToUser.html?pageNum="+i+"\">"+i+"</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"article_apply_list.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+                    splicPage+="<li><a href=\"editorToUser.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -144,11 +178,66 @@
     initPage();
 
     //跳转详情页
-    function checkArticle(articleId){
-        window.location.href="article_content.html?articleId="+articleId;
+    function checkEditor(userId){
+        window.location.href="editorInfo_details.html?userId="+userId;
     }
 
 
+    //返回管理页面
+    function returnList() {
+        // window.location.href="";
+    }
+
+
+    function selectUserInfoByNickNameAnd(){
+
+        var requestURL="sysuser/selectUserInfoByNickNameAnd";
+        $.ajax({
+            type:"POST",
+            url:requestURL,
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            data:JSON.stringify({
+                "nickName":$("#nickName").val(),
+                "account":$("#account").val()
+            }),
+            success:function (result) {
+                console.log(result);
+                var count=0;
+                $("#dataTable tbody").html("");
+                //js对象和jquery是不一样的，基本不能互相操作，得靠$()转换
+                //2.将数据填充到table中
+                $(result).each(function(index,item){
+
+
+                    var trStr = "<tr>";
+                    count++;
+                    //获取id并拼接
+                    trStr+="<td>"+count+"</td>";
+                    trStr+="<td>"+item.nickName+"</td>";
+                    trStr+="<td>"+item.account+"</td>";
+                    trStr+="<td>"+new Date(parseInt(item.createTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+"</td>";
+                    trStr+="<td>";
+                    trStr+="<button type=\"button\"  onclick='checkEditor("+item.userId+")'>查看详情</button>&nbsp;"
+                    trStr+="</td>";
+                    trStr+="</tr>";
+                    $("#dataTable").append(trStr);
+                });
+
+
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+
+
+
+    $("#headbanner").load("head.html");
 </script>
 
 </body>

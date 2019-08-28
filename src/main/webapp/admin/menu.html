@@ -26,9 +26,38 @@
 
 
 <script>
+    var account;
+    var password;
+    var user;
+    $.ajax({
+        //请求方式GET/POST
+        type : "GET",
+        //同步
+        async: false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "sysuser/getSession",
+        //请求成功
+        success : function(result) {
+            user = result;
+            account = result.account;
+            password = result.password;
+            console.log(account+"..."+password)
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.error(e);
+        }
+    });
+
+
     $.ajax({
         //请求方式GET/POST
         type : "POST",
+        async: false,
         //请求的媒体类型
         contentType: "application/json;charset=UTF-8",
         //接受数据类型
@@ -36,11 +65,12 @@
         //请求地址
         url : "sysuser/initMenuList",
         data:JSON.stringify({
-            "username":"小明",
-            "password":"123"
+            "accouunt":account,
+            "password":password
         }),
         //请求成功
         success : function(result) {
+            console.log(account+"..."+password)
             // console.log("2222")
              $(".list-group").html("");
             $(result).each(function(index,item){

@@ -42,7 +42,7 @@
 			<span class="glyphicon glyphicon-user form-control-feedback"></span>
 		</div>
 		<div class="form-group has-success has-feedback">
-			<input type="text" class="form-control" id="password" placeholder="请输入登录密码" style="margin-top:10px;">
+			<input type="password" class="form-control" id="password" placeholder="请输入登录密码" style="margin-top:10px;">
 			<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 		</div>
 
@@ -73,6 +73,7 @@
 <script>
 	// var account = $("#account").val();
 	// var password = $("#password").val();
+	//用户登录
 	function dologin() {
 
 		//1.获取用户名与密码
@@ -107,13 +108,12 @@
 			},
 			//请求失败，包含具体的错误信息
 			error : function(e){
-				console.log(e.status);
-				console.log(e.responseText);
+				alert("用户名或密码错误")
 			}
 		});
 	}
 
-
+	//管理员登录
 	function sysUserLogin() {
 		//1.获取姓名与密码
 		var account = $("#account").val();
@@ -141,16 +141,13 @@
 				console.log(result);
 				if(result != null){
 					window.location.href = "admin/main.html?userid="+result.userid;
-					// window.location.href="userInfo.html?userId="+result.userId;
-					// window.location.href="userInfo.html?userId="+result.userId;
 				}else{
-					alert("姓名或密码错误");
+					alert("用户名或密码错误	");
 				}
 			},
 			//请求失败，包含具体的错误信息
 			error : function(e){
-				console.log(e.status);
-				console.log(e.responseText);
+				alert("用户名或密码错误")
 			}
 		});
 	}

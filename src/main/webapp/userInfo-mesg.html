@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>我的消息</title>
+    <link rel="stylesheet" href="dropzone/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+    <script src="dropzone/dropzone.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
+
+
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/docs.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <!--<link rel="stylesheet" href="dropzone/dropzone.min.css" />-->
+
+
+</head>
+
+<body>
+
+<style>
+    body{ padding-bottom:50px;}
+    .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
+        height:50px; background-color:gainsboro; z-index:9999;}
+
+    .div-inline{ display:inline}
+</style>
+
+
+<div  style="margin-top:0px;float:right;">
+	<label >注册天数</label>
+	<input type="text" readonly="readonly" id="regDay" align="right" style="width:45px;overflow-x:visible;overflow-y:visible;"/>
+	<!--<label >天</label>-->
+</div>
+
+    <!-- 头部栏位 -->
+    <!--页面顶部-->
+<div id="nav-bottom">
+
+    <div class="header">
+    </div>
+</div>
+</div>
+</div>
+
+<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+
+
+</body>
+<!--header-->
+<div id="account">
+    <div class="py-container">
+        <div class="yui3-g home">
+            <!--左侧列表-->
+            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#F1F1F1;">
+            </div>
+            <!--右侧主内容-->
+            <div class="yui3-u-5-6">
+                <div class="panel-body">
+                    <!--<form role="form">-->
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="userId" value="test">
+                        <table class="table table-hover" id="message">
+                            <caption>我的消息</caption>
+                            <thead>
+                            <tr>
+                                <th>发送者</th>
+                                <th>标题</th>
+                                <th>内容</th>
+                                <th>发送时间</th>
+                                <th>回复</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>giogio</td>
+                                <td>我有一个梦想</td>
+                                <td>成为秧歌star</td>
+                                <td>17岁</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                        </div>
+                        <hr>
+
+                    </form>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    //获取超链接地址栏上的userId
+    var params = window.location.search;
+    var id = params.split("=")[1];
+    var status;
+
+    if (id==null) {
+        id=0;
+    }
+    //通过ajax从后台获取。
+    $.ajax({
+        //请求方式GET/POST
+        type: "GET",
+        async: false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType: "json",
+        //请求地址
+        url: "news/getUserInfoById?userId="+id,
+        //数据，json字符串
+        //请求成功
+        success: function (result) {
+            console.log(result);
+
+            if (result) {
+                status = result.status;
+                return ;
+            }
+
+
+        },
+        error: function (e) {
+            // console.error(e);
+            console.log(e);
+        }
+    });
+
+
+    function initPage(){
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/getMessageByUserId?userId="+id,
+            //数据，json字符串
+
+            //请求成功
+            success : function(result) {
+                $("#message tbody").html("");
+
+                $(result).each(function(index,item){
+                    console.log(item);
+                    var trStr = "<tr>";
+                    //获取id并拼接
+                    trStr+="<td>"+item.username+"</td>";
+                    trStr+="<td>"+item.mainTitle+"</td>";
+                    trStr+="<td>"+item.content+"</td>";
+                    trStr+="<td>"+item.createTime+"</td>";
+                    trStr+="<td>";
+                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='replay("+item.userid+")'></i></button>&nbsp;"
+
+                    trStr+="</td>";
+                    trStr+="</tr>";
+                    $("#message").append(trStr);
+                });
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                // console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    initPage();
+        // 根据状态展示左侧功能栏位
+    if(status==2) {
+        $("#1").show()
+        $("#3").show()
+    }else {
+        $("#2").show()
+    }
+
+
+
+    $("#2").click(function(){
+        $(this).attr("href","editorapply.html?userId="+id);//用jquery的方法改变href属性值
+    });
+    function jump(){
+        window.location.href = "userInfo-edit.html?userId="+id;
+    }
+
+
+</script>
+
+<!-- 底部栏位 -->
+<!--页面底部-->
+<div class="clearfix footer">
+    <div class="py-container">
+        <div class="footlink">
+
+
+        </div>
+    </div>
+</div>
+<!--页面底部END-->				<!--<input type="hidden" id="imgUrl"/>-->
+							<!--</div>-->
+						<!--</form>-->
+
+					</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!--<div class="form-group has-success has-feedback" align="left"  >-->
+	<!--<div id="dropzoneDiv" class="dropzone" style="max-width:800px;margin:50px;"></div>-->
+	<!--<input type="hidden" id="imgUrl"/>-->
+<!--</div>-->
+
+
+
+<script>
+    //获取超链接地址栏上的userId
+    var params = window.location.search;
+    var id = params.split("=")[1];
+    var createTi;
+	var date = new Date();
+	//定义注册天数
+	var day;
+    // alert(id);
+	if (id==null) {
+		id=0;
+	}
+    //通过ajax从后台获取。
+    $.ajax({
+        //请求方式GET/POST
+        type: "GET",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType: "json",
+        //请求地址
+        url: "news/getUserInfoById?userId="+id,
+        //数据，json字符串
+        //请求成功
+        success: function (result) {
+            console.log(result);
+            $("#userId").val(result.userId);
+            $("#nickName").val(result.nickName);
+            $("#mobile").val(result.mobile);
+            $("#sex").val(result.sex);
+            $("#idCard").val(result.idCard);
+            $("#icon").attr('src',result.icon);
+            $("#status").val(result.status);
+            //获取用户创建时间
+			createTi=result.createTime;
+			//获取当前时间
+			var myDate = new Date();
+			//获取时间差
+			var days = ((myDate.getTime() - createTi))/ (1000*3600*24);
+			day=Math.ceil(days);
+			// alert(day);
+			$("#regDay").val(day);
+			selectUseDay();
+
+        },
+        error: function (e) {
+            console.error(e);
+//              console.log(e);
+        }
+    });
+
+
+	//第一次访问页面时把注册天数添加到数据库中
+    function addUseDay() {
+		$.ajax({
+			//请求方式GET/POST
+			type: "POST",
+			//请求的媒体类型
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType: "json",
+			//请求地址
+			url: "news/addDay",
+			//传递参数
+			data:JSON.stringify(
+					{
+						"userId":id,
+						"day":day
+
+					}
+			),
+			success: function (result) {
+				console.log(result);
+				// alert("插入天数成功")
+			},
+			error: function (e) {
+				// console.error(e);
+			}
+		})
+	}
+
+	//除第一次访问页面添加外其余都只进行修改注册天数
+	function updateUseDay() {
+		$.ajax({
+			//请求方式GET/POST
+			type: "POST",
+			//请求的媒体类型
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType: "json",
+			//请求地址
+			url: "news/updateUseDay",
+			//传递参数
+			data:JSON.stringify(
+					{
+						"userId":id,
+						"day":day
+
+					}
+			),
+			success: function (result) {
+				console.log(result);
+				// alert("修改成功")
+			},
+			error: function (e) {
+				console.error(e);
+			}
+		})
+	}
+
+	//判断是第一次进行添加注册天数还是进行修改操作
+	function selectUseDay() {
+		$.ajax({
+			//请求方式GET/POST
+			type: "POST",
+			//请求的媒体类型
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType: "json",
+			//请求地址
+			url: "news/selectUseDay",
+			//传递参数
+			data:JSON.stringify(
+					{
+						"userId":id
+
+					}
+			),
+			success: function (result) {
+				console.log(result);
+				if(result==false){
+					addUseDay();
+				}else {
+					updateUseDay();
+				}
+			},
+			error: function (e) {
+				console.log(e.status);
+				console.log(e.responseText);
+			}
+		})
+	}
+
+
+    $("#leftmenu").load("leftmenu.html");
+    $(".header").load("head.html");
+
+</script>
+
+    <!-- 底部栏位 -->
+    <!--页面底部-->
+<div class="clearfix footer">
+	<div class="py-container">
+		<div class="footlink">
+
+
+		</div>
+	</div>
+</div>
+<!--页面底部END-->
+
+
+
+</html>

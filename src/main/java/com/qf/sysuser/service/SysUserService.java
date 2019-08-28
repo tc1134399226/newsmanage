@@ -4,6 +4,7 @@ package com.qf.sysuser.service;
 import com.qf.sysuser.dto.UserIdsDTO;
 import com.qf.sysuser.pojo.MenuInfo;
 import com.qf.sysuser.pojo.User;
+import com.qf.sysuser.pojo.UserInfo;
 import com.qf.sysuser.vo.MenuInfoVO;
 
 import java.util.List;
@@ -35,6 +36,16 @@ public interface SysUserService {
     public User sysUserLogin(User user);
 
     public boolean registerUser(User user) ;
+
+    public List<MenuInfo> listAllMenuInfo();
+    //获取前台用户信息
+    public  List<UserInfo> listNewsUserInfo();
+
+    public UserInfo getUserInfoById(int id);
+
+    public boolean editUserInfoById(UserInfo userInfo);
+
+    public List<UserInfo> selectUser(UserInfo userInfo);
 
 
 }

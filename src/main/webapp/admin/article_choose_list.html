@@ -33,13 +33,8 @@
     </div>
 </div>
 <div class="cont">
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <div><a class="navbar-brand"  style="font-size:32px;">你懂得-创意产品</a></div>
-        </div>
-    </div>
-</nav>
+    <nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    </nav>
 
 <br>
 <form class="form-inline" role="form" style="float:left;">
@@ -68,7 +63,7 @@
 </div>
 
 <div id="pageSplic" >
-    <table>
+    <table style="margin: auto">
         <tr>
             <td colspan="6" align="center">
                 <ul class="pagination" >
@@ -140,7 +135,12 @@
                 }
                 console.log(result.pages);
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"article_choose_list.html?pageNum="+i+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3){
+                        splicPage +="<li><a href=\"article_choose_list.html?pageNum="+i+"\">"+i+"</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
@@ -166,7 +166,7 @@
         window.location.href="article_choose_details.html?articleId="+articleId;
     }
 
-
+    $("#headbanner").load("head.html");
 </script>
 
 </body>

@@ -1,6 +1,9 @@
 @charset "utf-8";
 
 /* CSS Document */
+body{
+    font-family: "microsoft yahei", "微软雅黑E\8F6F\96C5\9ED1", Tahoma, Arial, Helvetica, STHeiti;
+}
 
 .wrapper {
     width: 1200px;
@@ -332,6 +335,13 @@ section .section .main3 .rightNews {
     padding-left: 15px;
     background-repeat: no-repeat;
     background-position: 0 -99px;
+}
+
+.centerNews .new1 dd a,.rightNews .new2 dd a{
+    color: black;
+    text-decoration: none;
+    list-style: none;
+
 }
 
 section .section .main3 .centerNews h2,.rightNews h2 {

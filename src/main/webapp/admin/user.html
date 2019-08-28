@@ -26,37 +26,7 @@
 
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-header">
-			<div><a class="navbar-brand" style="font-size:32px;" href="#">新闻发布系统</a></div>
-		</div>
-		<div id="navbar" class="navbar-collapse collapse">
-			<ul class="nav navbar-nav navbar-right">
-				<li style="padding-top:8px;">
-					<div class="btn-group">
-						<button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
-							<i class="glyphicon glyphicon-user"></i> 张三 <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
-							<li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
-							<li class="divider"></li>
-							<li><a href="index.html"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
-						</ul>
-					</div>
-				</li>
-				<li style="margin-left:10px;padding-top:8px;">
-					<button type="button" class="btn btn-default btn-danger">
-						<span class="glyphicon glyphicon-question-sign"></span> 帮助
-					</button>
-				</li>
-			</ul>
-			<form class="navbar-form navbar-right">
-				<input type="text" class="form-control" placeholder="Search...">
-			</form>
-		</div>
-	</div>
+<nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 </nav>
 
 <div class="container-fluid">
@@ -74,13 +44,13 @@
 					<form class="form-inline" role="form" style="float:left;">
 						<div class="form-group has-feedback">
 							<div class="input-group">
-								<div class="input-group-addon">账号</div>
+								<div class="input-group-addon">名称</div>
 								<input class="form-control has-success" type="text" id="username" placeholder="请输入查询条件">
 							</div>
 						</div>
 						<div class="form-group has-feedback">
 							<div class="input-group">
-								<div class="input-group-addon">名称</div>
+								<div class="input-group-addon">账号</div>
 								<input class="form-control has-success" type="text" id="account" placeholder="请输入查询条件">
 							</div>
 						</div>
@@ -96,8 +66,8 @@
 							<tr >
 								<th width="30">#</th>
 								<th width="30"><input type="checkbox" id="checkAll" onclick="selectAllCheckBox(this)"></th>
-								<th>账号</th>
 								<th>名称</th>
+								<th>账号</th>
 								<th>邮箱地址</th>
 								<th width="100">操作</th>
 							</tr>
@@ -222,7 +192,12 @@
 
 				}
 				for(var i=1;i<=result.pages;i++){
-					splicPage +="<li><a href=\"user.html?pageNum="+i+"\">"+i+"</a></li>";
+					if (pageNum==1){
+						pageNum==2
+					}
+					if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3){
+						splicPage +="<li><a href=\"article.html?pageNum="+i+"\">"+i+"</a></li>";
+					}
 				}
 				if (pageNum>=result.pages) {
 					splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
@@ -327,7 +302,7 @@
 
 </script>
 <script>
-
+	$("#headbanner").load("head.html");
 </script>
 </body>
 </html>

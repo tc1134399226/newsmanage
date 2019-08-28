@@ -48,8 +48,21 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
         return newsArticleInfoMapper.updateStatus(articleId)>0;
     }
 
+    /**
+     * 更新文章ip
+     * @param articleInfo
+     * @return
+     */
     public boolean getIP(ArticleInfo articleInfo) {
         return newsArticleInfoMapper.getIP(articleInfo)>0;
+    }
+    /**
+     * 插入浏览记录
+     * @param articleInfo
+     * @return
+     */
+    public boolean insertIP(ArticleInfo articleInfo) {
+        return newsArticleInfoMapper.insertIP(articleInfo)>0;
     }
 
     public boolean uploadCover(ArticleInfo articleInfo) {

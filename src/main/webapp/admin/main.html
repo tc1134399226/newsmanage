@@ -20,6 +20,7 @@
 	.tree li {
         list-style-type: none;
 		cursor:pointer;
+		overflow: hidden;
 	}
 	.tree-closed {
 	    height : 40px;
@@ -32,37 +33,7 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <div><a class="navbar-brand" style="font-size:32px;" href="#">后台管理</a></div>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li style="padding-top:8px;">
-				<div class="btn-group">
-				  <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
-					<i class="glyphicon glyphicon-user"></i> 张三 <span class="glyphicon glyphicon-user"></span>
-				  </button>
-					  <ul class="dropdown-menu" role="menu">
-						<li><a href="#"><i class="glyphicon glyphicon-cog"></i> 个人设置</a></li>
-						<li><a href="#"><i class="glyphicon glyphicon-comment"></i> 消息</a></li>
-						<li class="divider"></li>
-						<li><a href="index.html"><i class="glyphicon glyphicon-off"></i> 退出系统</a></li>
-					  </ul>
-			    </div>
-			</li>
-            <li style="margin-left:10px;padding-top:8px;">
-				<button type="button" class="btn btn-default btn-danger">
-				  <span class="glyphicon glyphicon-question-sign"></span> 帮助
-				</button>
-			</li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="查询">
-          </form>
-        </div>
-      </div>
+    <nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     </nav>
     <div class="container-fluid">
       <div class="row">
@@ -181,9 +152,27 @@
 	</script>
 	<script>
 		//获取超链接地址栏上的sysId
-        var id = window.location.search.split("=")[1];
-		console.log(id);
-
+       var id;
+		$.ajax({
+			//请求方式GET/POST
+			type : "GET",
+			//同步
+			async: false,
+			//请求的媒体类型
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType:"json",
+			//请求地址
+			url : "sysuser/getSession",
+			//请求成功
+			success : function(result) {
+				id = result.userid;
+			},
+			//请求失败，包含具体的错误信息
+			error : function(e){
+				console.error(e);
+			}
+		});
 		//通过ajax从后台获取。
 			$.ajax({
 				//请求方式GET/POST
@@ -196,14 +185,13 @@
 				url: "sysuser/getUserById",
 				//数据，json字符串
 				data: JSON.stringify(
-						{
-							"userid": id,
-						}
+					{
+						"userid": id,
+					}
 				),
 				//请求成功
 				success: function (result) {
 					console.log(result);
-					// http://localhost:8080/newsmanage/admin/static/upload
 					var icons = "http://localhost:8080/newsmanage/"+result.icon;
 					$("#userid").val(result.userid);
 					$("#username").val(result.username);
@@ -260,7 +248,63 @@
 
 
 			}
+
+        $(function(){
+            $("#bottom-text").click(function(){//按钮绑定点击事件
+                $("#dropzoneDiv").show();//文本框显示出来  注：之前设置display:none的样式
+                $("#bottom-text").hide();
+            });
+        });
 		$(".tree").load("menu.html");
+		$("#headbanner").load("head.html");
+	</script>
+
+	<script>
+		Dropzone.options.dropzoneDiv = {
+			url: "http://localhost:8080/newsmanage/news/upload", // 文件提交地址
+			method: "post",  // 也可用put
+			paramName: "dropzFile", // 默认为file
+			maxFiles: 1,// 一次性上传的文件数量上限
+			maxFilesize: 2, // 文件大小，单位：M
+			acceptedFiles: ".jpg,.gif,.png,.jpeg,.txt,.doc,.docx", // 上传的类型
+			addRemoveLinks: true,
+			parallelUploads: 1,// 一次上传的文件数量
+			//previewsContainer:"#preview", // 上传图片的预览窗口
+			dictDefaultMessage: '点此上传新头像',
+			dictMaxFilesExceeded: "您最多只能上传1个文件！",
+			dictResponseError: '文件上传失败!',
+			dictInvalidFileType: "文件类型只能是*.jpg,*.gif,*.png,*.jpeg,.txt,.doc,.docx。",
+			dictFallbackMessage: "浏览器不受支持",
+			dictFileTooBig: "文件过大上传文件最大支持.",
+			dictRemoveLinks: "删除",
+			dictCancelUpload: "取消",
+			init: function () {
+				this.on("addedfile", function (file) {
+					// 上传文件时触发的事件
+				});
+				this.on("success", function (file, data) {
+					// 上传成功触发的事件
+					console.log(data);
+					var status = data.status;
+					if(status==200){
+						var filePath = data.filePath;
+						$("#imgUrl").val(filePath);
+					}
+
+					console.log(file);
+				});
+				this.on("error", function (file, data) {
+					// 上传失败触发的事件
+					console.error(data);
+					console.log(file);
+				});
+				this.on("removedfile", function (file) {
+					// 删除文件时触发的方法
+				});
+			}
+
+		}
+
 	</script>
   </body>
 </html>

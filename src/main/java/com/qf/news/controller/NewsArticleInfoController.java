@@ -24,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Controller
+@RestController
 @RequestMapping("news")
 public class NewsArticleInfoController {
 
@@ -148,16 +148,17 @@ public class NewsArticleInfoController {
      * 获取ip值
      * @param articleInfo
      * @param request
-     * @param response
      * @throws ServletException
      * @throws IOException
      */
     @RequestMapping("getIP")
     @ResponseBody
-    public void doGet(@RequestBody ArticleInfo articleInfo, HttpServletRequest request, HttpServletResponse response)
+    public boolean doGet(@RequestBody ArticleInfo articleInfo, HttpServletRequest request,
+                      HttpSession session)
             throws ServletException, IOException
 
     {
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
         String uri = request.getRequestURI();//返回请求行中的资源名称
         String url = request.getRequestURL().toString();//获得客户端发送请求的完整url
         String ip = request.getRemoteAddr();//返回发出请求的IP地址
@@ -167,9 +168,31 @@ public class NewsArticleInfoController {
         String IP=request.getRemoteHost();
 //
         articleInfo.setUserIp(ip); //赋值
-//
+//        articleInfo.setUserId(userInfo.getUserId());
         //存储ip地址值到数据库
-        newsArticleInfoService.getIP(articleInfo);
+       return   newsArticleInfoService.getIP(articleInfo);
+    }
+    @RequestMapping("insertIP")
+    @ResponseBody
+    public boolean insertIP(@RequestBody ArticleInfo articleInfo, HttpServletRequest request,
+                         HttpSession session)
+            throws ServletException, IOException
+
+    {
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        String uri = request.getRequestURI();//返回请求行中的资源名称
+        String url = request.getRequestURL().toString();//获得客户端发送请求的完整url
+        String ip = request.getRemoteAddr();//返回发出请求的IP地址
+        String params = request.getQueryString();//返回请求行中的参数部分
+        String host=request.getRemoteHost();//返回发出请求的客户机的主机名
+        int port =request.getRemotePort();//返回发出请求的客户机的端口号。
+        String IP=request.getRemoteHost();
+//
+        articleInfo.setUserIp(ip); //赋值
+//        articleInfo.setUserId(userInfo.getUserId());
+        articleInfo.setUserId(1);
+        //存储ip地址值到数据库
+        return   newsArticleInfoService.insertIP(articleInfo);
     }
 
 
@@ -244,6 +267,18 @@ public class NewsArticleInfoController {
         int read = is.read(bs);
         response.getOutputStream().write(bs,0,read);
         is.close();
+    }
+    @RequestMapping("toArticleContent")
+    @ResponseBody
+    public Object toArticleContent(@RequestParam long articleId,HttpSession session) {
+        session.setAttribute("articleId", articleId);
+        Long attribute = (Long) session.getAttribute("articleId");
+        System.out.println(attribute);
+        if (attribute == null) {
+            return false;
+        }
+        return true;
+
     }
 
     /**

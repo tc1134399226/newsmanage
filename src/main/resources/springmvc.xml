@@ -31,7 +31,15 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
-    <!--4、配置视图解析器-->
+    <!--    配置拦截器集合-->
+    <mvc:interceptors>
+        <!--配置登录拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/*.html"/>
+            <bean class="com.qf.filter.LoginFilter"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+<!--    4、配置视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"></property>
         <property name="suffix" value=".html"></property>
@@ -45,14 +53,7 @@
         <property name="defaultEncoding" value="UTF-8"></property>
     </bean>
 
-    <!--配置拦截器集合-->
-    <!--<mvc:interceptors>-->
-        <!--&lt;!&ndash;配置登录拦截器&ndash;&gt;-->
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/*.html"/>-->
-            <!--<bean class="com.qf.filter.LoginFilter"/>-->
-        <!--</mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+
 
 
 </beans>
