@@ -34,7 +34,7 @@
         height:50px; z-index:9999;}
 </style>
 
-
+<hr>
 <div class="col-sm-3 col-md-2 sidebar">
     <div class="tree">
     </div>
@@ -44,6 +44,22 @@
     <nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     </nav>
 
+    <form class="form-inline" role="form" style="float:left;">
+        <div class="form-group has-feedback">
+            <div class="input-group">
+                <div class="input-group-addon">昵称</div>
+                <input class="form-control has-success" type="text" id="nickName" placeholder="请输入查询条件">
+            </div>
+        </div>
+        <div class="form-group has-feedback">
+            <div class="input-group">
+                <div class="input-group-addon">账号</div>
+                <input class="form-control has-success" type="text" id="account" placeholder="请输入查询条件">
+            </div>
+        </div>
+        <button type="button" class="btn btn-warning" onclick="selectUserInfoByNickNameAnd()"><i class="glyphicon glyphicon-search"></i> 查询</button>
+    </form>
+
     <hr>
 
     <div class="table-responsive">
@@ -52,7 +68,7 @@
             <tr >
                 <th>序号</th>
                 <th>用户昵称</th>
-                <th>用户性别</th>
+                <th>用户账号</th>
                 <th>创建时间</th>
                 <th width="100">操作</th>
             </tr>
@@ -120,7 +136,7 @@
                     //获取id并拼接
                     trStr+="<td>"+count+"</td>";
                     trStr+="<td>"+item.nickName+"</td>";
-                    trStr+="<td>"+item.sex+"</td>";
+                    trStr+="<td>"+item.account+"</td>";
                     trStr+="<td>"+new Date(parseInt(item.createTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+"</td>";
                     trStr+="<td>";
                     trStr+="<button type=\"button\"  onclick='checkEditor("+item.userId+")'>查看详情</button>&nbsp;"
@@ -166,6 +182,55 @@
     function returnList() {
         // window.location.href="";
     }
+
+
+    function selectUserInfoByNickNameAnd(){
+
+        var requestURL="sysuser/selectUserInfoByNickNameAnd";
+        $.ajax({
+            type:"POST",
+            url:requestURL,
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            data:JSON.stringify({
+                "nickName":$("#nickName").val(),
+                "account":$("#account").val()
+            }),
+            success:function (result) {
+                console.log(result);
+                var count=0;
+                $("#dataTable tbody").html("");
+                //js对象和jquery是不一样的，基本不能互相操作，得靠$()转换
+                //2.将数据填充到table中
+                $(result).each(function(index,item){
+
+
+                    var trStr = "<tr>";
+                    count++;
+                    //获取id并拼接
+                    trStr+="<td>"+count+"</td>";
+                    trStr+="<td>"+item.nickName+"</td>";
+                    trStr+="<td>"+item.account+"</td>";
+                    trStr+="<td>"+new Date(parseInt(item.createTime)).toLocaleString().replace(/:\d{1,2}$/,' ')+"</td>";
+                    trStr+="<td>";
+                    trStr+="<button type=\"button\"  onclick='checkEditor("+item.userId+")'>查看详情</button>&nbsp;"
+                    trStr+="</td>";
+                    trStr+="</tr>";
+                    $("#dataTable").append(trStr);
+                });
+
+
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+
+
 
     $("#headbanner").load("head.html");
 </script>

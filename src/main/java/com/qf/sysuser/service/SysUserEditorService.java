@@ -33,4 +33,7 @@ public interface SysUserEditorService {
     //根据用户id取消小编的编辑资格
     public boolean cancelEditor(int userId);
 
+
+    public List<UserInfo> selectUserInfoByNickNameAnd(UserInfo userInfo);
+
 }

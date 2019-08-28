@@ -129,4 +129,15 @@ public class SysUserEditorController {
        return sysUserEditorService.cancelEditor(userId);
     }
 
+    /**
+     * 根据小编的昵称和账号模糊查询小编信息
+     * @param userInfo
+     * @return
+     */
+    @RequestMapping("selectUserInfoByNickNameAnd")
+    public Object selectUserInfoByNickNameAnd(@RequestBody UserInfo userInfo){
+
+        return sysUserEditorService.selectUserInfoByNickNameAnd(userInfo);
+    }
+
 }
