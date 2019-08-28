@@ -127,4 +127,17 @@
         where  userId = #{userId}
     </update>
 
+
+    <select id="selectUser" resultType="com.qf.sysuser.pojo.UserInfo">
+        select * from userInfo
+        <where>
+            <if test="nickName != null and nickName != ''">
+                and nickName like '%${nickName}%'
+            </if>
+            <if test="account != null and account != ''">
+                and account like '%${account}%'
+            </if>
+        </where>
+    </select>
+
 </mapper>

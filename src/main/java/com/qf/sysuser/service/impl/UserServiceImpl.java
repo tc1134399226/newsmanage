@@ -73,6 +73,8 @@ public class UserServiceImpl implements SysUserService {
         return this.sysUserDao.editUserInfoById(userInfo)>0;
     }
 
+
+
     /**
      * 通过用户id获取用户信息
     * @param user
@@ -144,5 +146,8 @@ public class UserServiceImpl implements SysUserService {
 
     public List<MenuInfo> listAllMenuInfo(){
         return sysUserDao.listAllMenuInfo();
+    }
+    public List<UserInfo> selectUser(UserInfo userInfo) {
+        return sysUserDao.selectUser(userInfo);
     }
 }

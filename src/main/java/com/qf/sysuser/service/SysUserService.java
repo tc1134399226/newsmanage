@@ -45,5 +45,7 @@ public interface SysUserService {
 
     public boolean editUserInfoById(UserInfo userInfo);
 
+    public List<UserInfo> selectUser(UserInfo userInfo);
+
 
 }
