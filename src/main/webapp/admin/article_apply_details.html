@@ -69,6 +69,7 @@
     var strCon1;
     var strCon2;
     var strCon3;
+    var userId;
     var str=window.location.search;
     var articleId=str.split("=")[1];
 
@@ -88,6 +89,7 @@
 
             console.log(result);
             //展示封面图
+            userId=result.userId;
             if (result.cover!=null&&result.cover!="") {
                 var i=new Image();
                 i.height =260;
@@ -141,8 +143,29 @@
             success : function(result) {
                 console.log(result);
                 if(result){
-                    alert("已通过审核");
-                    window.location.href="article_apply_list.html"
+                    $.ajax({
+                        //请求方式
+                        type: "POST",
+                        //请求的媒体类型
+                        contentType: "application/json;charset=UTF-8",
+                        //请求地址
+                        url: "sysuser/sendSystemMessage",
+                        //数据，json字符串
+                        data: JSON.stringify({
+                            "userId":userId,
+                            "content": "您发布的<"+strCon1+">已通过审核"
+                        }),
+                        //请求成功
+                        success: function (result) {
+                            alert("已通过审核");
+                            window.location.href="article_apply_list.html"
+                        },
+                        //请求失败，包含具体的错误信息
+                        error: function (e) {
+                            console.log("错误");
+                        }
+                    });
+
                 }else{
                     alert("修改失败");
                 }
@@ -175,9 +198,30 @@
             //请求成功
             success : function(result) {
                 console.log(result);
-                if(result){
-                    alert("已驳回请求");
-                    window.location.href="article_apply_list.html"
+                    if(result){
+
+                        $.ajax({
+                            //请求方式
+                            type: "POST",
+                            //请求的媒体类型
+                            contentType: "application/json;charset=UTF-8",
+                            //请求地址
+                            url: "sysuser/sendSystemMessage",
+                            //数据，json字符串
+                            data: JSON.stringify({
+                                "userId":userId,
+                                "content": "很遗憾,您发布的<"+strCon1+">没有通过审核.请继续努力哦!"
+                            }),
+                            //请求成功
+                            success: function (result) {
+                                alert("已驳回请求");
+                                window.location.href="article_apply_list.html";
+                            },
+                            //请求失败，包含具体的错误信息
+                            error: function (e) {
+                                console.log("错误");
+                            }
+                        });
                 }else{
                     alert("修改失败");
                 }
