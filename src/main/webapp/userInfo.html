@@ -292,10 +292,7 @@
     //获取超链接地址栏上的userId
     var params = window.location.search;
     var id = params.split("=")[1];
-    var createTi;
-	var date = new Date();
-	//定义注册天数
-	var day;
+
     // alert(id);
 	if (id==null) {
 		id=0;
@@ -321,16 +318,6 @@
             $("#idCard").val(result.idCard);
             $("#icon").attr('src',result.icon);
             $("#status").val(result.status);
-            //获取用户创建时间
-			createTi=result.createTime;
-			//获取当前时间
-			var myDate = new Date();
-			//获取时间差
-			var days = ((myDate.getTime() - createTi))/ (1000*3600*24);
-			day=Math.ceil(days);
-			// alert(day);
-			$("#regDay").val(day);
-			selectUseDay();
 
         },
         error: function (e) {

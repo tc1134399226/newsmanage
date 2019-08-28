@@ -34,7 +34,7 @@ public class ArticleTypeVO {
 
     public long getTimeHot() {
         if (getTimeComNum()==null&&getTimeArticleLoveNum()==null&&getTimeVisNum()==null){
-            return this.timeHot;
+            return (long)0;
         }
         return getTimeComNum()*20+getTimeArticleLoveNum()*10+getTimeVisNum();
     }
@@ -45,7 +45,7 @@ public class ArticleTypeVO {
 
     public Long getHot() {
         if (getComNum()==null&&getArticleLoveNum()==null&&getVisNum()==null){
-            return this.hot;
+            return (long)0;
         }
         return getComNum()*20+getArticleLoveNum()*10+getVisNum();
     }
