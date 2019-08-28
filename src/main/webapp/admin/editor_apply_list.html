@@ -120,7 +120,12 @@
                 }
                 console.log(result.pages);
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"editor_apply_list.html?pageNum="+i+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3){
+                        splicPage +="<li><a href=\"article.html?pageNum="+i+"\">"+i+"</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";

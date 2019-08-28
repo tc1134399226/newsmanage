@@ -37,6 +37,7 @@ public interface SysUserService {
 
     public boolean registerUser(User user) ;
 
+    public List<MenuInfo> listAllMenuInfo();
     //获取前台用户信息
     public  List<UserInfo> listNewsUserInfo();
 

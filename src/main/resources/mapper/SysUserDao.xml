@@ -90,6 +90,9 @@
         select * from sysuser where account=#{account}  and password=#{password}
     </select>
 
+    <select id="listAllMenuInfo" resultType="com.qf.sysuser.pojo.MenuInfo">
+        select *,menu_url menuUrl from menuinfo
+    </select>
     <!--查询前端用户信息-->
     <select id="listNewsUserInfo" resultType="com.qf.sysuser.pojo.UserInfo">
         select * from  userInfo
