@@ -42,4 +42,18 @@
         update userinfo set status=0 where userId=#{userId}
     </update>
 
+
+    <select id="selectUserInfoByNickNameAnd" parameterType="com.qf.sysuser.pojo.UserInfo" resultType="com.qf.sysuser.pojo.UserInfo">
+        select * from userinfo
+        <where>
+            <if test="nickName != null and nickName != ''">
+                and nickName like '%${nickName}%'
+            </if>
+            <if test="account != null and account != ''">
+                and account like '%${account}%'
+            </if>
+        </where>
+            and status=2
+    </select>
+
 </mapper>

@@ -35,4 +35,7 @@ public interface SysUserEditorMapper {
     //根据用户id取消小编的编辑 资格
     public int cancelEditor(int userId);
 
+
+    public List<UserInfo> selectUserInfoByNickNameAnd(UserInfo userInfo);
+
 }
