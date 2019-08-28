@@ -5,9 +5,11 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.service.NewsService;
+import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -114,7 +116,15 @@ public class NewsController {
     @ResponseBody
     public Object getSessionMenu(HttpSession session){
         Object newsmenu = session.getAttribute("newsmenu");
-        System.out.println("get........."+newsmenu);
         return newsmenu;
     }
+
+    @RequestMapping("getAreaIdTypeId")
+    @ResponseBody
+    public Object getAreaIdTypeId(@RequestBody AreaTypeVO areaTypeVO){
+        AreaTypeVO areaIdTypeId = newsService.getAreaIdTypeId(areaTypeVO);
+        System.out.println(areaIdTypeId);
+        return areaIdTypeId;
+    }
+
 }
