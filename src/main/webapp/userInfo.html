@@ -54,7 +54,7 @@
     <div class="py-container">
         <div class="yui3-g home">
             <!--左侧列表-->
-            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#707070;height: 200px;">
+            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#707070;height: ;">
             </div>
             <!--右侧主内容-->
             <div class="yui3-u-5-6">
@@ -169,8 +169,8 @@
             $("#idCard").val(result.idCard);
             $("#icon").attr('src',result.icon);
             if (result) {
+                console.log(result)
                 status = result.status;
-
             }
 
 //              if(result){
@@ -321,7 +321,7 @@
 
         },
         error: function (e) {
-            console.error(e);
+            console.log(e);
 //              console.log(e);
         }
     });

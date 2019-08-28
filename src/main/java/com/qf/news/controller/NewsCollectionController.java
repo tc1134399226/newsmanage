@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -30,16 +32,13 @@ public class NewsCollectionController {
      */
     @RequestMapping(value="getCollectionByUserId")
     public Object getCollectionByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
-                                                    Integer pageNum , HttpSession session){
+                                                    Integer pageNum , HttpSession session) throws IOException {
         //,produces = "text/html;charset=UTF-8"
-//      UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+      UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+
+//        System.out.println(userInfo);
         //测试
-        UserInfo userInfo=new UserInfo();
-        userInfo.setUserId(1);
-//        if (userInfo==null){
-//            return "login";
-//        }
-        System.out.println(userInfo);
+//        UserInfo userInfo=new UserInfo();
         //一页有多少条数据
         int defaultPageSize=2;
         //初始化pageHelper对象

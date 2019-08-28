@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequestMapping("news")
@@ -99,5 +100,21 @@ public class NewsController {
         PageInfo<ArticleTypeVO> articleTypeVoPageInfo = new PageInfo<ArticleTypeVO>(articleTypeVOS);
         System.out.println(articleTypeVOS);
         return articleTypeVoPageInfo;
+    }
+
+    @RequestMapping("setSessionMenu")
+    @ResponseBody
+    public Object setSessionMenu(String menu,HttpSession session){
+        session.setAttribute("newsmenu",menu);
+        System.out.println("set............"+session.getAttribute("newsmenu"));
+        return true;
+    }
+
+    @RequestMapping("getSessionMenu")
+    @ResponseBody
+    public Object getSessionMenu(HttpSession session){
+        Object newsmenu = session.getAttribute("newsmenu");
+        System.out.println("get........."+newsmenu);
+        return newsmenu;
     }
 }

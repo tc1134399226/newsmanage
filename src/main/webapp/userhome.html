@@ -75,10 +75,12 @@
 <body>
 <div id="type">
     <input type="button" value="我的收藏" onclick="myCollectionPage()">
-    <input type="button" value="我的文章" onclick="myArticlePage()">
     <input type="button" value="草稿" onclick="myDraftPage()">
     <input type="button" value="未读消息" onclick="myUnreadMessagePage()">
     <input type="button" value="已读消息" onclick="myReadMessagePage()">
+    <input type="button" id="myNews" style="display:none;" value="我的新闻" onclick="myArticlePage()">
+    <!--    <input type="button" value="选择" onclick="AllCollection()">-->
+<!--    <input type="button" value="删除" onclick="deleteAllArticle()">-->
 </div>
 <br>
 <hr>
@@ -118,10 +120,32 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script src="script/docs.min.js"></script>
 <script>
+    function getSession() {
+        $.ajax({
+            //请求方式GET/POST
+            type: "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/getSession",
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result.status==2){
+                    $("#myNews").show();
+                }
+            }
+        })
+    }
     //初始化页面,判断显示什么页面
     //初始化默认显示收藏页面
     function initpage() {
         var  select=window.location.search.split("type=")[1]
+        if (typeof (select)=="undefined"){
+            select = "myCollection";
+        }
         console.log(select)
         if (select=="myArticle") {
             myArticle()
