@@ -22,7 +22,7 @@ public class SysUserArticleCarouselController {
     //根据封面图筛选新闻
     @RequestMapping("getArticleByCover")
     public Object getArticleByCover(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum, @RequestBody ArticleInfo articleInfo){
-        int pageSize=3;//每页显示记录
+        int pageSize=10;//每页显示记录
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, pageSize);
         //获取所有申请的文章信息

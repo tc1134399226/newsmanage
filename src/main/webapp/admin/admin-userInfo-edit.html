@@ -102,32 +102,37 @@
 				<div class="panel-heading">表单数据<div style="float:right;cursor:pointer;" data-toggle="modal" data-target="#myModal"><i class="glyphicon glyphicon-question-sign"></i></div></div>
 				<div class="panel-body">
 					<form role="form">
+                        <label >用户ID</label>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="userId" value="test" disabled>
+
+                        </div>
+						<div class="form-group">
+							<label >用户账号</label>
+							<input type="text" class="form-control" id="account" value="测试用户">
+						</div>
 
 						<div class="form-group">
-							<label for="exampleInputPassword1">用户名称</label>
-							<input type="text" class="form-control" id="username" value="测试用户">
+							<label >用户昵称</label>
+							<input type="text" class="form-control" id="nickName" value="测试用户">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">邮箱地址</label>
-							<input type="email" class="form-control" id="email" value="xxxx@xxxx.com">
-							<p class="help-block label label-warning">请输入合法的邮箱地址, 格式为： xxxx@xxxx.com</p>
+							<label >身份证号</label>
+							<input type="email" class="form-control" id="idCard" value="xxxx@xxxx.com">
+
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">手机号</label>
+							<label >手机号</label>
 							<input type="email" class="form-control" id="mobile" value="xxxx@xxxx.com">
-							<p class="help-block label label-warning">请输入合法的 mobile</p>
+
 						</div>
+
 						<div class="form-group">
-							<label for="exampleInputEmail1">区域号</label>
-							<input type="email" class="form-control" id="areaCode" value="xxxx@xxxx.com">
-							<p class="help-block label label-warning">请输入区域号, 格式为： +xx</p>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">状态码</label>
+							<label >状态码</label>
 							<input type="email" class="form-control" id="status" value="xxxx@xxxx.com">
 							<p class="help-block label label-warning">请输入用户状态, 格式为： 1/0</p>
 						</div>
-						<button type="button" class="btn btn-success" onclick="sub()"><i class="glyphicon glyphicon-edit"></i> 修改</button>
+						<button type="button" class="btn btn-success" onclick="update()"><i class="glyphicon glyphicon-edit"></i> 修改</button>
 						<button type="button" class="btn btn-danger" onclick="initPage()"><i class="glyphicon glyphicon-refresh"></i> 重置</button>
 					</form>
 				</div>
@@ -179,27 +184,29 @@
 	});
 </script>
 <script>
-	var value = localStorage["name"];
-	// alert(value);
+	//获取超链接地址栏上的userId
+	var params = window.location.search;
+	var id = params.split("=")[1];
 	function initPage(){
 		//1.从后台的listAllUserInfo接口获取数据
 		$.ajax({
-			//请求方式GET/POST
-			type: "GET",
+
+			//请求方式
+			type : "POST",
 			//请求的媒体类型
 			contentType: "application/json;charset=UTF-8",
-			//接受数据类型
-			dataType: "json",
 			//请求地址
-			url: "news/getUserInfoById?userId="+id,
-			//数据，json字符串
+			url : "sysuser/getUserInfoById?userId="+id,
+
 			//请求成功
 			success : function(result) {
-				$("#username").val(result.username);
-				$("#email").val(result.email);
+                $("#userId").val(result.userId);
+				$("#account").val(result.account);
+				$("#nickName").val(result.nickName);
+				$("#idCard").val(result.idCard);
 				$("#status").val(result.status);
 				$("#mobile").val(result.mobile);
-				$("#areaCode").val(result.areaCode);
+
 			},
 			error : function(e){
 				console.log(e.status);
@@ -210,47 +217,42 @@
 	initPage();
 
 
-	function sub() {
-		var username = $("#username").val();
-		var email = $("#email").val();
-		var mobile = $("#mobile").val();
-		var areaCode = $("#areaCode").val();
-		var status = $("#status").val();
+    function update(){
+        //1.修改
+//		  alert("inner updateUser");
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "sysuser/editUserInfoById",
+            //传递参数
+            data:JSON.stringify(
+                {
+                    "userId":$("#userId").val(),
+                    "nickName":$("#nickName").val(),
+                    "mobile":$("#mobile").val(),
+                    "idCard":$("#idCard").val(),
+                    "sex":$("#sex").val(),
+                    "icon":$("#imgUrl").val()
 
-		// alert(email +":" +mobile);
+                }
+            ),
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (e) {
+                console.error(e);
+            }
+        })
+     alert("修改成功！");
+    }
+    // 刷新
+    initPage();
 
-		$.ajax({
-			//请求方式
-			type: "POST",
-			//请求的媒体类型
-			contentType: "application/json;charset=UTF-8",
-			//请求地址
-			url: "sysuser/updateUser",
-			//数据，json字符串
-			data: JSON.stringify({
-				"userid":value,
-				"username": username,
-				"email": email,
-				"mobile": mobile,
-				"areaCode": areaCode,
-				"status": status
-			}),
-			//请求成功
-			success: function (result) {
-				var text = result.toString();
-				if (result) {
-					alert("修改成功");
-					window.location.href = "user.html";
-				} else {
-					alert("修改失败");
-				}
-			},
-			//请求失败，包含具体的错误信息
-			error: function (e) {
-				console.log("错误");
-			}
-		});
-	}
 	$(".tree").load("menu.html");
 	$("#headbanner").load("head.html");
 </script>
