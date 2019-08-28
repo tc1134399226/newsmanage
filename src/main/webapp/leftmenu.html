@@ -81,5 +81,38 @@
         <hr>
     </dl>
 </div>
+<script>
+
+    if(status==2) {
+        $("#1").show();
+        $("#3").show()
+    }else {
+        $("#2").show()
+    }
+
+    function skip(){
+
+        $(".yui3-u-5-6").empty();
+        $(".yui3-u-5-6").load("userhome.html");
+    }
+
+
+    $("#2").click(function(){
+        $(this).attr("href","editorapply.html?userId="+id);//用jquery的方法改变href属性值
+    });
+
+    $("#3").click(function(){
+        $(this).attr("href","newsEditor.html?userId="+id);//用jquery的方法改变href属性值
+    });
+
+
+    function jump(){
+        window.location.href = "userInfo-edit.html?userId="+id;
+    }
+
+    function jumpmesg(){
+        window.location.href = "userInfo-mesg.html?userId="+id;
+    }
+</script>
 </body>
 </html>
