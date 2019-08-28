@@ -13,7 +13,7 @@ public class LoginFilter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         HttpSession session = httpServletRequest.getSession();
-        UserInfo userInfo = (UserInfo) session.getAttribute("sysUser");
+        User userInfo = (User) session.getAttribute("sysUser");
         if (userInfo!=null){
             return true;
         }
