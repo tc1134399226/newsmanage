@@ -1,5 +1,6 @@
 package com.qf.news.dao;
 
+import com.qf.news.dto.FollowUser;
 import com.qf.news.pojo.Follow;
 import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
@@ -63,4 +64,8 @@ public interface NewsMapper {
     public int insertFollow(Follow follow);
 
     public int deleteFollow(Follow follow);
+
+    public List<Follow>  getMyFollow(Follow follow);
+
+    public List<Follow>  getMyFance(Follow follow);
 }

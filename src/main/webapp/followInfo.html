@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <title>设置-个人信息</title>
+    <link rel="stylesheet" href="dropzone/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+    <script src="dropzone/dropzone.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
+
+
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/docs.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/login.css">
+    <!--<link rel="stylesheet" href="dropzone/dropzone.min.css" />-->
+    <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+<style>
+    body{ padding-bottom:50px;}
+    .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
+        height:50px; background-color:gainsboro; z-index:9999;}
+
+    .div-inline{ display:inline}
+    .mainTitle{
+      width:22%;/*要显示文字的宽度*/
+      overflow:hidden; /*超出的部分隐藏起来。*/
+      white-space:nowrap;/*不显示的地方用省略号...代替*/
+      text-overflow:ellipsis;/* 支持 IE */
+      font-size: 30px;
+    }
+    .content{
+        /*position: absolute; */
+        width: 100%;
+    }
+    .data{
+        margin:  0px 20px;
+        height: 80px;
+    }
+    .partOne{
+        width: 5%;
+        float:left;
+    }
+    .partTwo{
+        width: 12%;
+        float:left;
+    }
+    .partThree{
+        width: 15%;
+        margin-left: 21px;
+        float: left;
+        font-size: 15px;
+    }
+    .partFour{
+        width: 12%;
+        float:left;
+        margin:  0px 10px;
+    }
+    .partFive{
+        width: 12%;
+        float:left;
+        margin:  0px 10px;
+    }
+    .partSix{
+        width: 10%;
+        float:left;
+        margin:  0px 10px;
+    }
+    .partSev{
+        width: 36%;
+        float:left;
+        margin:  0px 10px;
+    }
+    .button{
+        width: 10%;
+        float:right;
+        margin:  0px 10px;
+    }
+    .tree li {
+        list-style-type: none;
+        cursor:pointer;
+    }
+    .mainTitle img {
+        border-radius: 50%;
+        width: 80px;
+        height: 80px;
+    }
+</style>
+
+</head>
+
+<body>
+
+    <!-- 头部栏位 -->
+    <!--页面顶部-->
+<div id="nav-bottom">
+    <div class="header">
+    </div>
+</div>
+
+
+<!--header-->
+<div id="account">
+    <div class="py-container">
+        <div class="yui3-g home">
+            <!--左侧列表-->
+            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#707070;;">
+            </div>
+            <!--右侧主内容-->
+            <div class="yui3-u-5-6">
+                <div class="table-responsive">
+                    <table class="table  table-bordered" id = "dataTable" style="width: 97%;">
+                        <tbody>
+                        <tr>
+                            <div class="content">
+                                <div class="data">
+                                <div class="mainTitle">1231222222222223</div>
+                                <br>
+                                <div class="partTwo">1231231</div>
+                                <div class="partThree">1231231</div>
+                                <div class="button">
+                                    <button type="button" class="btn btn-success btn-xs"><i class="glyphicon glyphicon-check"></i></button>
+                                </div>
+                            </div>
+                            </div>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr >
+                            <td colspan="6" align="center">
+                                <ul class="pagination">
+                                    <li class="disabled"><a href="#">上一页</a></li>
+                                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">下一页</a></li>
+                                </ul>
+                            </td>
+                        </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+<script>
+    $("#leftmenu").load("leftmenu.html");
+    $(".header").load("head.html");
+
+    var id;
+    $.ajax({
+        //请求方式GET/POST
+        type : "GET",
+        //同步
+        async: false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/getSession",
+        //请求成功
+        success : function(result) {
+            id = result.userId;
+        }
+    });
+
+
+    $.ajax({
+        //请求方式
+        type : "POST",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/getMyFollow",
+        //数据，json字符串
+        data : JSON.stringify({
+            "userId":id
+        }),
+        //请求成功
+        success : function(result) {
+            $(".content").html("");
+            $(result).each(function(index,item1){
+                $(item1.myFollows).each(function(index,item) {
+                    // alert(item.myFollows[index].nickName);
+                        var trStr = "<div class='data' id='follow"+item.repUserId+"'>";
+                        trStr+="<div class='mainTitle'><img src='"+item.icon+"'></div>";
+                        trStr+="<br>";
+                        trStr+="<div class='partThree'>"+item.nickName+"</div>";
+                        trStr+="<div class='button'>";
+                        trStr+="<button type=\"button\"  class='btn btn-success btn-xs' onclick='readArt("+item.repUserId+")'><i class=' glyphicon glyphicon-check' >他的主页</i></button>&nbsp;"
+                        trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='removeCol("+item.repUserId+")'><i class=' glyphicon glyphicon-remove' >取消关注</i></button>"
+                        trStr+="</div>";
+                        trStr+="<br>";
+                        trStr+="</div>";
+                        trStr+="<hr>";
+                        trStr+="<hr>";
+                        $(".content").append(trStr);
+                });
+                });
+            // if (pageNum<=1){
+            //     var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+            // } else {
+            //     var  splicPage="<li><a onclick='myCollection("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
+            // }
+            // for(var i=1;i<=result.pages;i++){
+            //     if (pageNum==1){
+            //         pageNum==2
+            //     }
+            //     if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+            //         splicPage += "<li><a onclick='myCollection(" + i + ")'>" + i + "</a></li>";
+            //     }
+            // }
+            // if (pageNum>=result.pages) {
+            //     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+            // }else {
+            //     splicPage+="<li><a onclick='myCollection("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
+            // }
+            // $(".pagination").html("");
+            // $(".pagination").append(splicPage);
+            }
+
+
+    });
+
+    function readArt(userid) {
+        window.location.href = "editorHome.html?userId="+userid
+    }
+
+    function removeCol(repId) {
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/deleteFollow",
+            //数据，json字符串
+            data: JSON.stringify({
+                "userId": id,
+                "repUserId": repId
+            }),
+            success: function (result) {
+                if (result){
+                    $("#follow"+repId).remove();
+                }
+            }
+        });
+    }
+</script>
+</html>

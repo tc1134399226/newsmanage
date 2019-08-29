@@ -89,4 +89,12 @@ public class NewsServiceImpl implements NewsService {
     public int deleteFollow(Follow follow){
         return newsMapper.deleteFollow(follow);
     }
+
+    public List<Follow>  getMyFollow(Follow follow){
+        return newsMapper.getMyFollow(follow);
+    }
+
+    public List<Follow>  getMyFance(Follow follow){
+        return newsMapper.getMyFance(follow);
+    }
 }
