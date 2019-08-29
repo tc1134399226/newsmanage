@@ -4,6 +4,7 @@ package com.qf.news.controller;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.news.pojo.ArticleInfo;
+import com.qf.news.pojo.Follow;
 import com.qf.news.service.NewsService;
 import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
@@ -132,5 +133,31 @@ public class NewsController {
     @ResponseBody
     public Object getArticleCarousel(){
         return newsService.getArticleCarousel();
+    }
+
+
+    @RequestMapping("getisFollow")
+    @ResponseBody
+    public boolean getisFollow(@RequestBody Follow follow){
+        Follow follow1 = newsService.getisFollow(follow);
+        if (follow1==null){
+            return false;
+        }
+        return true;
+    }
+
+
+    //取消关注
+    @RequestMapping("deleteFollow")
+    @ResponseBody
+    public boolean deleteFollow(@RequestBody Follow follow){
+        return newsService.deleteFollow(follow)>0;
+    }
+
+    //添加关注
+    @RequestMapping("insertFollow")
+    @ResponseBody
+    public boolean insertFollow(@RequestBody Follow follow){
+        return newsService.insertFollow(follow)>0;
     }
 }

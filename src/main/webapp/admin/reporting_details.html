@@ -25,6 +25,33 @@
             margin-left: 15%;
         }
     </style>
+
+
+
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Blog">
+    <meta name="keywords" content="">
+    <meta name="author" content="kamleshyadav">
+    <meta name="MobileOptimized" content="320"><!--Start Style -->
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="css/theia-sticky-sidebar.js"></script>
+    <script src="css/swiper.min.js"></script>
+    <script src="css/jquery.magnific-popup.min.js"></script>
+    <script src="css/wow.min.js"></script>
+    <script src="css/custom.js"></script><!--Main js file Style-->
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.css">
+    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css"><!-- Favicon Link -->
+    <link rel="shortcut icon" type="image/png" href="http://v.bootstrapmb.com/2018/12/ok2re3231/images/favicon.png">
+    <style id="theia-sticky-sidebar-stylesheet-TSS">.theiaStickySidebar:after {
+        content: "";
+        display: table;
+        clear: both;
+    }</style>
 </head>
 <body>
 <div class="col-sm-3 col-md-2 sidebar">
@@ -35,32 +62,97 @@
 
     <nav id="headbanner" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     </nav>
-
     <hr>
+
+    <style type="text/css">
+        li {
+            list-style-type: none;
+            cursor:pointer;
+        }
+        table tbody tr:nth-child(odd){background:#F4F4F4;}
+        table tbody td:nth-child(even){color:#C00;}
+        .content{
+            font-size: 20px;
+        }
+        .button-group{
+            margin: 0px auto;
+            width: 600px;
+            text-align: left;
+        }
+        .leaveMsgArea{
+            margin: 0px auto;
+            width: 600px;
+            height: 200px;
+            border: 1px solid gray;
+        }
+        #comment{
+            margin: 0px 200px;
+        }
+        /*img{*/
+        /*border-radius: 30px;*/
+        /*width:60px;*/
+        /*height:60px;*/
+        /*float: left;*/
+        /*}*/
+        .user{
+            /*float: left;*/
+            font-size: 15px;
+        }
+        button{
+            border: none;
+            outline: none;
+        }
+
+        /*#splicPage{*/
+        /*    text-align:center*/
+        /*}*/
+    </style>
+
+
+
+
+    <div class="blog_main_wrapper">
+
+
+        <!--内文主体-->
+        <div class="blog_main_wrapper blog_toppadder60 blog_bottompadder60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                        <!--内文-->
+                        <div class="blog_post_style2 blog_single_div">
+
+                            <div class="blog_post_style2_content wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;float:right; margin-right: 40px">
+                                <!--标题-->
+                                <div id="mark"></div>
+
+                                <h2 id="mainTitle" style="margin-left: 80px"></h2>
+                                <h4 id="subTitle" style="margin-left: 80px"></h4>
+
+                                <div id="editor"style="max-width:800px;margin:113px;float:right; margin-right: 40px" class="editorClass" >
+                                    <div id="contentStr" style="text-align: left">
+
+                                    </div>
+                                </div>
+                            </div>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div><!--Main js file Style-->
+
+
     <div class="form-group" style="text-align:center;" id="cover">
         <label >封面图:</label>
         <br>
     </div>
     <hr>
-
-
-    <div class="form-group" style="text-align:center;" id="mainTitle">
-        <label >主标题:</label>
-        <br>
-    </div>
-    <hr>
-
-
-    <div class="form-group" style="text-align:center;" id="subTitle">
-        <label >副标题:</label><br>
-    </div>
-
-    <hr>
-
-    <div class="form-group" id="contentStr" style="text-align:center;">
-        <label >新闻内容:</label>
-        <br>
-    </div>
 
     <hr>
 </div>

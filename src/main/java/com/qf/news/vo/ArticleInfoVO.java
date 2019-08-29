@@ -19,4 +19,5 @@ public class ArticleInfoVO {
     private String cover;
     private Integer state = 0; //后台轮播图状态  新加
     private String nickName;
+    private String icon;
 }
