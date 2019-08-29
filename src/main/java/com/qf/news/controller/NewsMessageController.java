@@ -31,9 +31,9 @@ public class NewsMessageController {
     @RequestMapping("getReadMessageByUserId")
     public Object getReadMessageByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
                                                      Integer pageNum , HttpSession session){
-//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-        UserInfo userInfo=new UserInfo();
-        userInfo.setUserId(1);
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//        UserInfo userInfo=new UserInfo();
+//        userInfo.setUserId(1);
         if (userInfo.getUserId()==0){
             return "login";
         }
@@ -69,9 +69,9 @@ public Object deleteReadMessageByMgeId(@RequestParam Long mgeId){
     @RequestMapping("getUnreadMessageByUserId")
     public Object getUnreadMessageByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
                                                  Integer pageNum , HttpSession session){
-//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-        UserInfo userInfo=new UserInfo();
-        userInfo.setUserId(1);
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//        UserInfo userInfo=new UserInfo();
+//        userInfo.setUserId(1);
         if (userInfo.getUserId()==0){
             return "login";
         }
@@ -106,10 +106,11 @@ public Object deleteReadMessageByMgeId(@RequestParam Long mgeId){
      */
     @RequestMapping("sendMessageByReplyVO")
     public Object sendMessageByReplyVO(@RequestBody ReplyVO replyVO,HttpSession session){
-//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-        UserInfo userInfo=new UserInfo();
-        userInfo.setUserId(1);
-        userInfo.setNickName("cg");
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+//        UserInfo userInfo=new UserInfo();
+//        userInfo.setUserId(1);
+//        userInfo.setNickName("cg");
+        System.out.println(userInfo);
       if (userInfo==null){
           return "login";
       }
@@ -122,21 +123,21 @@ public Object deleteReadMessageByMgeId(@RequestParam Long mgeId){
         return newsMessageService.sendMessageByReplyVO(replyVO);
     }
 
-    @RequestMapping("sendSystemMessage")
-    public Object sendSystemMessage(@RequestBody Message message,HttpSession session){
+//    @RequestMapping("sendSystemMessage")
+//    public Object sendSystemMessage(@RequestBody Message message,HttpSession session){
 //        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-        UserInfo userInfo=new UserInfo();
-        userInfo.setUserId(1);
-        if (userInfo==null){
-            return "login";
-        }
-        if (message==null){
-            return false;
-        }
-        message.setUserId(userInfo.getUserId());
-        message.setSenderId(666);
-        return newsMessageService.sendSystemMessage(message);
-    }
+//        UserInfo userInfo=new UserInfo();
+//        userInfo.setUserId(1);
+//        if (userInfo==null){
+//            return "login";
+//        }
+//        if (message==null){
+//            return false;
+//        }
+//        message.setUserId(userInfo.getUserId());
+//        message.setSenderId(666);
+//        return newsMessageService.sendSystemMessage(message);
+//    }
 
     @RequestMapping("getMessageByUserId")
     public Object getMessageByUserId(@RequestParam int userId){

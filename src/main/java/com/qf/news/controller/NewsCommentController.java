@@ -34,7 +34,8 @@ public class NewsCommentController {
                                          Integer pageNum,HttpSession session){
         Long articleId = (Long)session.getAttribute("articleId");
        //测试
-        articleId=(long)1;
+        System.out.println(articleId);
+//        articleId=(long)1;
         //一页有多少条数据
         int defaultPageSize=2;
         //初始化pageHelper对象
@@ -64,6 +65,10 @@ public class NewsCommentController {
         //添加到CommentInfo对象中
         commentInfo.setUserId(user.getUserId());
         commentInfo.setNickName(user.getNickName());
+        Long attribute = (Long) session.getAttribute("articleId");
+        System.out.print("文章id为");
+        System.out.println(attribute);
+        commentInfo.setArticleId(attribute);
 //        commentInfo.setUserId(3);
 //        commentInfo.setNickName("zzg");
         System.out.println(commentInfo);
@@ -113,7 +118,7 @@ public class NewsCommentController {
 //           return "login";
 //       }
 
-        commentInfo.setUserId(1);
+        commentInfo.setUserId(user.getUserId());
         System.out.println(commentInfo);
         if (commentInfo==null){
             return false;
@@ -128,7 +133,7 @@ public class NewsCommentController {
 //       if (user==null){
 //           return "login";
 //       }
-        commentInfo.setUserId(1);
+        commentInfo.setUserId(user.getUserId());
         System.out.println(commentInfo);
         if (commentInfo==null){
             return false;
