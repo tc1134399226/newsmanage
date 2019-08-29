@@ -68,8 +68,9 @@ public class NewsCollectionController {
      * @return
      */
     @RequestMapping("addCollectByArticleIdAndUserId")
-    public boolean addCollectByArticleIdAndUserId(@RequestBody ArticleTypeVO articleTypeVO){
-
+    public boolean addCollectByArticleIdAndUserId(@RequestBody ArticleTypeVO articleTypeVO,HttpSession session){
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        articleTypeVO.setUserId(userInfo.getUserId());
         if (articleTypeVO==null){
             return false;
         }

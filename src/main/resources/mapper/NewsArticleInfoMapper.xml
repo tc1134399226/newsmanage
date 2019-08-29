@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.news.dao.NewsArticleInfoMapper">
 
-<select id="getArticleAndLoveNumAndComNum" parameterType="long" resultType="com.qf.news.vo.ArticleTypeVO">
+<select id="getArticleAndLoveNumAndComNum" parameterType="Long" resultType="com.qf.news.vo.ArticleTypeVO">
 SELECT tb1.*,b.articleLoveNum ,c.timeArticleLoveNum,d.timeComNum
  ,e.timeVisNum,f.visNum from (
 (SELECT a.*,
