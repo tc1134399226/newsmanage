@@ -738,7 +738,7 @@
 						if (item.areaName==area){
 							if (item.typeName==type[i]){
 								str += "<dd>";
-								str += "<a href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
+								str += "<a onclick='articleContent("+item.articleId+")'  href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
 								str += "</dd>";
 								count +=1;
 								if (count>=10){
@@ -774,8 +774,8 @@
 						if (item.areaName==area){
 							if (item.typeName==type[i]){
 								str += "<dd>";
-								str += "<a href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
-								str += "</a></dd>";
+								str += "<a   onclick='articleContent("+item.articleId+")' href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
+								str += "</dd>";
 								count +=1;
 								if (count>=10){
 									return false;
@@ -784,9 +784,7 @@
 						}
 					});
 					$("#dataHot"+i).append(str);
-
 				}
-
 			}
 		})
 	}
@@ -828,23 +826,9 @@
 			$("#dataImg").empty();
 			var fiveImg = "";
 			$(result).each(function(index,item) {
-				fiveImg +="<a href='articleContentShow.html?articleId="+item.articleId+"'><li><img src='"+item.cover+"'></li></a>"
+				fiveImg +="<a onclick='articleContent("+item.articleId+")' href='articleContentShow.html?articleId="+item.articleId+"'><li><img src='"+item.cover+"'></li></a>"
 			})
 			$("#dataImg").append(fiveImg)
-
-			var strtop = "";
-			$(result).each(function(index,item) {
-				console.log(item);
-				strtop += '<dl class="right_new">';
-				strtop += '<dt>';
-				strtop += "<h2><a href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"</a></h2>";
-				strtop += "<dd><p>"+item.subTitle+"</p></dd></dt></dl>";
-				if (index>2){
-					return false;
-				}
-			})
-			$(".dl-box").empty();
-			$(".dl-box").append(strtop);
 		}
 		});
 
@@ -866,6 +850,32 @@
 
 	}
 
+	function articleContent(articleId) {
+		// alert(articleId)
+		$.ajax({
+			//请求方式
+			type : "GET",
+			//请求的媒体类型
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType:"json",
+			//请求地址
+			url : "news/toArticleContent?articleId="+articleId,
+			//数据，json字符串
+			//请求成功
+			success : function(result) {
+				if (result) {
+					window.location.href="articleContentShow.html?articleId="+articleId
+				}
+			},
+			//请求失败，包含具体的错误信息
+			error : function(e){
+				console.log("报错");
+				console.log(e.status);
+				console.log(e.responseText);
+			}
+		});
+	}
 
 </script>
 </html>
