@@ -738,7 +738,7 @@
                     trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='removeUnread(" + item.mgeId + ")'>标记已读</i></button>&nbsp;"
                     trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' >删除</i></button>"
                     if (item.senderId!=666) {
-                        trStr += "<a class=' glyphicon glyphicon-check' href="+item.mgeUrl+" ></a>;"
+                        trStr += "<button><a class=' glyphicon glyphicon-check' href="+item.mgeUrl+" ><i>查看回复</i></a></button>;"
                         // +"#c"+item.comId
                     }
                     trStr+="</div>";
