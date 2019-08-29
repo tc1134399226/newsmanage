@@ -1,5 +1,6 @@
 package com.qf.news.dao;
 
+import com.qf.news.pojo.Follow;
 import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
 import com.qf.sysuser.pojo.ArticleCarousel;
@@ -56,4 +57,10 @@ public interface NewsMapper {
 
     //根据id查询轮播新闻详情信息
     public List<ArticleTypeVO> getArticleCarousel();
+
+    public Follow getisFollow(Follow follow);
+
+    public int insertFollow(Follow follow);
+
+    public int deleteFollow(Follow follow);
 }

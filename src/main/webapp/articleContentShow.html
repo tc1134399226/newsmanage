@@ -122,9 +122,10 @@
                             <h3 id="mainTitle"></h3>
                             <h4 id="subTitle"></h4>
                             <!--作者-->
-                            <div class="blog_author_data">
+                            <div class="blog_author_data" style="display: block">
                                 <a href="#">
-                                    <img src="" id="icon" class="img-fluid" alt="" width="34" height="34">
+                                    <img src="" id="icon" class="img-fluid" alt="" width="80" height="80">
+                                    <div id="followimg" onclick="userfollow()" style="display: inline"><img src="img/follow.png" width="34px" height="34px"></div>
                                     <input style="border:none;" id="userName"   readonly="readonly">
                                 </a>
                             </div>
@@ -146,7 +147,7 @@
                                 </li>
                             </ul>
                             <!--进入内文-->
-                            <div id="editor"style="max-width:800px;margin:50px;" class="editorClass">
+                            <div id="editor"style="max-width:800px;margin:113px;" class="editorClass">
                                 <div id="contentStr" style="text-align: left">
 
                                 </div>
@@ -253,11 +254,12 @@
     // var strCover;
     var str=window.location.search;
     var articleId=str.split("=")[1];
-
+    var repUserId; //新闻作者id
 
     $.ajax({
         //请求方式
         type : "GET",
+        async:false,
         //请求的媒体类型
         contentType: "application/json;charset=UTF-8",
         //接受数据类型
@@ -268,6 +270,7 @@
         //请求成功
         success : function(result) {
             console.log(result);
+            repUserId = result.userId;
             $("#mainTitle").text(result.mainTitle);
             $("#subTitle").text(result.subTitle);
             $("#userName").val(result.nickName);
@@ -443,6 +446,117 @@
             }
         });
     }
+
+
+    /*----------------------------------关注-----------------------------*/
+    <!--关注-->
+    var user;
+
+    //查看是否登录
+    $.ajax({
+        //请求方式
+        type: "GET",
+        async:false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType: "json",
+        //请求地址
+        url: "news/getSession",
+        //数据，json字符串
+        //请求成功
+        success: function (result) {
+            if (result==null){
+                $("#followimg").hide()
+            } else {
+              user = result;
+            }
+        }
+    });
+
+    // alert(user.userId);  //能够获取
+    // alert(repUserId);
+    if (user!=null){
+        //判断是否已关注
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/getisFollow",
+            //数据，json字符串
+            //请求成功
+            data : JSON.stringify({
+                "userId":user.userId,
+                "repUserId":repUserId
+            }),
+            success : function(result) {
+                if (result){
+                    $("#followimg").empty();
+                    $("#followimg").append('<img src="img/follow2.png" width="34px" height="34px">');
+                }else {
+                    alert("false");
+                }
+            }
+        });
+    }
+
+    function userfollow() {
+        var attribute = $("#followimg img").attr("src");
+        if ("img/follow.png"==attribute){
+            //取消关注
+            $.ajax({
+                //请求方式
+                type: "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType: "json",
+                //请求地址
+                url: "news/deleteFollow",
+                //数据，json字符串
+                //请求成功
+                data: JSON.stringify({
+                    "userId": user.userId,
+                    "repUserId": repUserId
+                }),
+                success : function(result) {
+                    if (result){
+                    $("#followimg").empty();
+                    $("#followimg").append('<img src="img/follow2.png" width="34px" height="34px">');
+                }
+                }
+            })
+        }else {
+            //添加关注
+            $.ajax({
+                //请求方式
+                type: "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType: "json",
+                //请求地址
+                url: "news/insertFollow",
+                //数据，json字符串
+                //请求成功
+                data: JSON.stringify({
+                    "userId": user.userId,
+                    "repUserId": repUserId
+                }),
+                success : function(result) {
+                    if (result) {
+                    $("#followimg").empty();
+                    $("#followimg").append('<img src="img/follow.png" width="34px" height="34px">');
+                }
+                }
+            })
+        }
+    }
+
 </script>
 
 
@@ -828,8 +942,9 @@
         })
     }
 
-
 </script>
+
+
 
 </body>
 </html>

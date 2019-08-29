@@ -84,4 +84,16 @@ on tb1.articleId =v.articleId and v.createTime >= now()-interval 15 day
         inner join type t on t.typeId = a.typeId
         ORDER BY a.createTime desc
     </select>
+
+    <select id="getisFollow" resultType="com.qf.news.pojo.Follow">
+        select * from follow where userId = #{userId} and repUserId = #{repUserId}
+    </select>
+
+    <delete id="deleteFollow">
+        delete from follow where userId = #{userId} and repUserId = #{repUserId}
+    </delete>
+
+    <insert id="insertFollow">
+        insert into follow(userId,repUserId,createTime) values (#{userId},#{repUserId},CURRENT_TIMESTAMP)
+    </insert>
 </mapper>
