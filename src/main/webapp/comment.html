@@ -269,7 +269,9 @@
                 if (result) {
                     initPage();
                 }else {
-                    alert("提交评论失败")
+
+                    alert("11提交评论失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
 
             },
@@ -305,6 +307,7 @@
                     initPage();
                 }else {
                     alert("操作失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
             },
             error: function (e) {
