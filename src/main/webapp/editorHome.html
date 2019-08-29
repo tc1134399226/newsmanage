@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="GB18030">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/main.css">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <link rel="stylesheet" href="dropzone/basic.min.css" />
+    <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+    <script src="dropzone/dropzone.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/webbase.css" />
+    <link rel="stylesheet" type="text/css" href="css/pages-seckillOrder.css" />
+    <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="script/docs.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keys" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="css/login.css">
+    <style type="text/css">
+        .mainTitle{
+            width:22%;/*要显示文字的宽度*/
+            overflow:hidden; /*超出的部分隐藏起来。*/
+            white-space:nowrap;/*不显示的地方用省略号...代替*/
+            text-overflow:ellipsis;/* 支持 IE */
+            font-size: 18px;
+
+        }
+        .content{
+            /*position: absolute; */
+            width: 100%;
+        }
+        .data{
+            margin:  0px 5px;
+            height: 80px;
+        }
+        .partOne{
+            width: 5%;
+            float:left;
+        }
+        .partTwo{
+            width: 12%;
+            float:left;
+        }
+        .partThree{
+            width: 16%;
+            float:left;
+        }
+        .partFour{
+            width: 12%;
+            float:left;
+            margin:  0px 0px;
+        }
+        .partFive{
+            width: 12%;
+            float:left;
+            margin:  0px 0px;
+        }
+        .partSix{
+            width: 10%;
+            float:left;
+            margin:  0px 0px;
+        }
+        .partSev{
+            width: 12%;
+            float:left;
+            margin:  0px 0px;
+        }
+        .button{
+            width: 10%;
+            float:right;
+            margin:  0px 0px;
+        }
+        .tree li {
+            list-style-type: none;
+            cursor:pointer;
+        }
+        body{ padding-bottom:50px;}
+        .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
+            height:50px; background-color:gainsboro; z-index:9999;}
+
+        .div-inline{ display:inline}
+    </style>
+    <title>个人空间</title>
+
+</head>
+<body>
+<!-- 头部栏位 -->
+<!--页面顶部-->
+<div id="nav-bottom">
+    <div class="header">
+        <!--<div  style="margin-top:0px;float:right;">-->
+            <!--<label >欢迎: </label>-->
+            <!--<label id="nickName"></label>-->
+            <!--&nbsp;&nbsp;&nbsp;-->
+            <!--<label >注册天数</label>-->
+            <!--<input type="text" readonly="readonly" id="regDay" align="right" style="width:45px;overflow-x:visible;overflow-y:visible;"/>-->
+            <!--&lt;!&ndash;<label >天</label>&ndash;&gt;-->
+        <!--</div>-->
+
+        <!--<label >天</label>-->
+
+        <div class="yui3-g NavList">
+            <div class="yui3-u Left all-sort">
+                <h4>地区分类</h4>
+            </div>
+            <div class="yui3-u Center navArea">
+                <ul class="nav">
+                    <a href="index.html?area=国际"><li class="f-item">国际</li></a>
+                    <a href="index.html?area=内地"><li class="f-item">内地</li></a>
+                    <a href="index.html?area=港澳"><li class="f-item">港澳</li></a>
+                    <a href="index.html?area=台海"><li class="f-item">台海</li></a>
+                </ul>
+            </div>
+            <div class="yui3-u Right"></div>
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+
+
+
+<!--header-->
+<div id="account">
+    <div class="py-container">
+        <div class="yui3-g home">
+            <!--左侧列表-->
+            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#707070;height: ;">
+                <div class="person-info">
+                </div>
+
+                <div class="list-items" style="height: 600px;">
+                    <dl>
+                        <dt><i>·</i> 个人空间</dt>
+                        <dd><input type="button" value="TA的收藏" onclick="myCollectionPage()"></dd>
+                        <hr>
+                    </dl>
+                    <hr>
+                    <dl>
+                        <!--<dt><i>·</i> </dt>-->
+                        <dd><a id="menu6" style="display:none" onclick="jumpright(6)" >申请小编</a></dd>
+                        <hr>
+                        <span v-if="judge">
+        <dd><a id="menu7" style="display:none" onclick="jumpright(7)">发布新闻</a></dd>
+        </span>
+                    </dl>
+                    <hr>
+                    <dl>
+                        <!--<dt><i>·</i> 设置</dt>-->
+                        <!--<dd><a id="menu8" onclick="jumpright(8)" class="list-active">信息修改</a></dd>-->
+                        <dt><i>·</i> </dt>
+                        <dd>  <input type="button"  value="TA的新闻" onclick="myArticlePage()"></dd>
+
+                        <hr>
+                        <hr>
+                        <hr>
+                        <hr>
+                    </dl>
+                </div>
+
+
+            </div>
+            <!--右侧主内容-->
+            <div class="yui3-u-5-6">
+                <div class="panel-body">
+                    <!--<form role="form">-->
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" id="userId" value="test">
+
+                    </div>
+
+                    <div>
+                        <div class="form-group" style="width:210px;height:150px;float:left;">
+                            <label >用户头像</label>
+                            <img  src="" id="icon">
+                        </div>
+                        <hr>
+                    </div>
+
+
+                    <form class="form-horizontal" role="form">
+
+                        <div class="form-group">
+
+                            <div class="col-sm-10">
+                                <input type="hidden" class="form-control"  placeholder="请输入昵称" disabled>
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="nickName" placeholder="请输入昵称"disabled>
+                            </div>
+                            <hr>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</label>
+                            <div class="col-sm-10">
+
+                                <select class="form-control" id="sex"disabled>
+                                    <option>男</option>
+                                    <option>女</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--111111111111111111111111111111111111-->
+<div id="type">
+    <!--<input type="button" value="TA的收藏" onclick="myCollectionPage()">-->
+    <!--<input type="button"  value="TA的新闻" onclick="myArticlePage()">-->
+</div>
+<br>
+<hr>
+
+<div class="table-responsive">
+    <table class="table  table-bordered" id = "dataTable">
+        <tbody>
+        <tr>
+            <div class="content">
+            </div>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr >
+            <td colspan="6" align="center">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#">上一页</a></li>
+                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">下一页</a></li>
+                </ul>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+</body>
+<script src="jquery/jquery-2.1.1.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="script/docs.min.js"></script>
+<script>
+    var userId=window.location.search.split("?userId=")[1]
+
+    //点击按钮时触发这个方法,目的是为了回到分页第一页
+    //显示用户收藏文章第一页
+    function myCollectionPage() {
+        var pageNum=1;
+        var requestURL="news/getEditorCollectionByUserId";
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "POST",
+            async:true,
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+            data:JSON.stringify({
+                "userId":userId,
+            }),
+
+            //请求成功
+            success : function(result) {
+                // $(".content").html("");
+                $(".panel-body").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    console.log(item);
+                    var trStr = "<div class='data'>";
+                    trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
+                    trStr+="<br>";
+                    // trStr+="<div class='partOne'><input type=\"checkbox\"></div>";
+                    trStr+="<div class='partTwo'>"+areaName(item.areaId)+"</div>";
+                    trStr+="<div class='partTwo'>"+typeName(item.typeId)+"</div>";
+                    trStr+="<div class='partThree'>"+item.artTime+"</div>";
+                    trStr+="<div class='partThree'>"+item.colTime+"</div>";
+                    trStr+="<div class='button'>";
+                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt("+item.articleId+")'></i></button>&nbsp;"
+                    trStr+="</div>";
+                    trStr+="<br>";
+                    trStr+="</div>";
+                    trStr+="<hr>";
+                    $(".panel-body").append(trStr);
+                });
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var  splicPage="<li><a onclick='myCollection("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
+                }
+                for(var i=1;i<=result.pages;i++){
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myCollection(" + i + ")'>" + i + "</a></li>";
+                    }
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a onclick='myCollection("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    //点击分页的页数和上,下页时触发这个方法
+    //显示用户收藏文章指定页
+    function myCollection(pageNum){
+
+
+        console.log(pageNum)
+        var requestURL="news/getEditorCollectionByUserId";
+        if(pageNum==null){
+            pageNum=1
+        }
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "POST",
+            async:true,
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+            data:JSON.stringify({
+                "userId":userId,
+            }),
+            //请求成功
+            success : function(result) {
+                // $(".content").html("");
+                $(".panel-body").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    console.log(item);
+                    var trStr = "<div class='data'>";
+                    trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
+                    trStr+="<br>";
+                    // trStr+="<div class='partOne'><input type=\"checkbox\"></div>";
+                    trStr+="<div class='partTwo'>"+areaName(item.areaId)+"</div>";
+                    trStr+="<div class='partTwo'>"+typeName(item.typeId)+"</div>";
+                    trStr+="<div class='partThree'>"+item.artTime+"</div>";
+                    trStr+="<div class='partThree'>"+item.colTime+"</div>";
+                    trStr+="<div class='button'>";
+                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt("+item.articleId+")'></i></button>&nbsp;"
+                    trStr+="</div>";
+                    trStr+="<br>";
+                    trStr+="</div>";
+                    trStr+="<hr>";
+                    $(".panel-body").append(trStr);
+                });
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var  splicPage="<li><a onclick='myCollection("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
+                }
+                console.log(111)
+                console.log(result.pages)
+                for(var i=1;i<=result.pages;i++) {
+                    if (pageNum == 1) {
+                        pageNum == 2
+                    }
+                    if (i > parseInt(pageNum) - 3 && i < parseInt(pageNum) + 3) {
+                        splicPage += "<li><a onclick='myCollection(" + i + ")'>" + i + "</a></li>";
+                    }
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a onclick='myCollection("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>";
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+
+    }
+
+    //点击按钮时触发这个方法,目的是为了回到分页第一页
+    //显示用户文章第一页
+    function myArticlePage() {
+        var requestURL="news/getEditorArtByUserId";
+         var   pageNum=1
+
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+            data:JSON.stringify({
+                "userId":userId,
+            }),
+            //请求成功
+            success : function(result) {
+                // $(".content").html("");
+                $(".panel-body").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    console.log(11111)
+                    console.log(item);
+
+                    //获取id并拼接
+                    var trStr = "<div class='data'>";
+                    //获取id并拼接
+                    trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
+                    // trStr+="<div class='partOne'><input type=\"checkbox\"></div>";
+                    trStr+="<div class='partTwo'>"+areaName(item.areaId)+"</div>";
+                    trStr+="<div class='partTwo'>"+typeName(item.typeId)+"</div>";
+                    trStr+="<div class='partFour'>"+item.createTime+"</div>";
+                    trStr+="<div class='partFour'>"+item.updateTime+"</div>";
+                    trStr+="<div class='partFive'>"+statusName(item.status)+"</div>";
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.articleId + ")'></i></button>&nbsp;"
+                    trStr+="<div class='button'>";
+                    trStr+="</div>";
+                    trStr+="<br>";
+                    trStr+="</div>";
+                    trStr+="<hr>";
+                    $(".panel-body").append(trStr);
+                });
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var  splicPage="<li><a onclick='myArticle("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
+                }
+                for(var i=1;i<=result.pages;i++){
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myArticle(" + i + ")'>" + i + "</a></li>";
+                    }
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a onclick='myArticle("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+
+    }
+    //点击分页时触发这个方法
+    //显示用户文章指定页
+    function myArticle(pageNum) {
+        console.log(pageNum)
+        var requestURL="news/getEditorArtByUserId";
+        if(pageNum==null){
+            pageNum=1
+        }
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+            data:JSON.stringify({
+                "userId":userId,
+            }),
+            //请求成功
+            success : function(result) {
+                $(".panel-body").html("");
+                // $(".content").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    console.log(11111)
+                    console.log(item);
+
+                    //获取id并拼接
+                    var trStr = "<div class='data'>";
+                    //获取id并拼接
+                    trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
+                    // trStr+="<div class='partOne'><input type=\"checkbox\"></div>";
+                    trStr+="<div class='partTwo'>"+areaName(item.areaId)+"</div>";
+                    trStr+="<div class='partTwo'>"+typeName(item.typeId)+"</div>";
+                    trStr+="<div class='partFour'>"+item.createTime+"</div>";
+                    trStr+="<div class='partFour'>"+item.updateTime+"</div>";
+                    trStr+="<div class='partFive'>"+statusName(item.status)+"</div>";
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.articleId + ")'></i></button>&nbsp;"
+                    trStr+="<div class='button'>";
+                    trStr+="</div>";
+                    trStr+="<br>";
+                    trStr+="</div>";
+                    trStr+="<hr>";
+                    $(".panel-body").append(trStr);
+                });
+                if (pageNum<=1){
+                    var  splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var  splicPage="<li><a onclick='myArticle("+(parseInt(pageNum,10)-1 )+")' >上一页</a></li>";
+                }
+                for(var i=1;i<=result.pages;i++){
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage += "<li><a onclick='myArticle(" + i + ")'>" + i + "</a></li>";
+                    }
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a onclick='myArticle("+(parseInt(pageNum,10)+1 )+")' >下一页</a></li>"
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+
+
+
+
+    //给文章区域命名
+    function areaName(areaId) {
+        if (areaId == 1) {
+            return "国际"
+        } else if (areaId == 2) {
+            return "内地"
+        } else if (areaId == 3) {
+            return "港澳"
+        } else {
+            return "台海"
+        }
+    }
+
+    //给文章类型命名
+    function typeName(typeId) {
+        if (typeId == 1) {
+            return "军事"
+        } else if (typeId == 2) {
+            return "财经"
+        } else if (typeId == 2) {
+            return "财经"
+        } else if (typeId == 3) {
+            return "科技"
+        } else if (typeId == 4) {
+            return "娱乐"
+        } else if (typeId == 5) {
+            return "艺术"
+        } else if (typeId == 6) {
+            return "旅游"
+        } else if (typeId == 7) {
+            return "健康"
+        } else if (typeId == 8) {
+            return "体育"
+        } else if (typeId == 9) {
+            return "博览"
+        } else if (typeId == 10) {
+            return "汽车"
+        } else if (typeId == 11) {
+            return "其他"
+        }
+    }
+
+    //给文章状态命名
+    function statusName(status) {
+        if (status == 0) {
+            return "草稿"
+        } else if (status == 1) {
+            return "未审核"
+        } else if (status == 2) {
+            return "已上架"
+        } else if (status == 3) {
+            return "审核不通过"
+        }
+    }
+</script>
+
+<script>
+    var id=window.location.search.split("?userId=")[1]
+
+    var status;
+
+    if (id==null) {
+        id=0;
+    }
+    //通过ajax从后台获取。
+    $.ajax({
+        //请求方式GET/POST
+        type: "GET",
+        async: false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType: "json",
+        //请求地址
+        url: "news/getUserInfoById?userId="+id,
+        //数据，json字符串
+        //请求成功
+        success: function (result) {
+            console.log(result);
+            $("#userId").val(result.userId);
+            $("#nickName").val(result.nickName);
+            $("#mobile").val(result.mobile);
+            $("#sex").val(result.sex);
+            $("#idCard").val(result.idCard);
+            $("#icon").attr('src',result.icon);
+            if (result) {
+                console.log(result);
+                status = result.status;
+            }
+
+        },
+        error: function (e) {
+            // console.error(e);
+            console.log(e);
+        }
+    });
+    // $("#leftmenu").load("leftmenu.html");
+    // $(".header").load("head.html");
+</script>
+<script>
+    var createTi;
+    //定义注册天数
+    var day;
+
+    var userId;
+    $.ajax({
+        //请求方式GET/POST
+        type : "GET",
+        //同步
+        async: false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/getSession",
+        //请求成功
+        success : function(result) {
+            userId = result.userId;
+            createTi=result.createTime;
+            //获取当前时间
+            var myDate = new Date();
+            //获取时间差
+            var days = ((myDate.getTime() - createTi))/ (1000*3600*24);
+            day=Math.ceil(days);
+            // alert(day);
+            $("#regDay").val(day);
+            $("#nickName").empty();
+            $("#nickName").text(result.nickName);
+            selectUseDay();
+
+        },
+        //请求失败，包含具体的错误信 息
+        error : function(e){
+            console.error(e);
+        }
+    });
+
+    //第一次访问页面时把注册天数添加到数据库中
+    function addUseDay() {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/addDay",
+            //传递参数
+            data:JSON.stringify(
+                {
+                    "userId":userId,
+                    "day":day
+
+                }
+            ),
+            success: function (result) {
+                console.log(result);
+                // alert("插入天数成功")
+            },
+            error: function (e) {
+                // console.error(e);
+            }
+        })
+    }
+
+
+    //除第一次访问页面添加外其余都只进行修改注册天数
+    function updateUseDay() {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/updateUseDay",
+            //传递参数
+            data:JSON.stringify(
+                {
+                    "userId":userId,
+                    "day":day
+
+                }
+            ),
+            success: function (result) {
+                console.log(result);
+                // alert("修改成功")
+            },
+            error: function (e) {
+                console.error(e);
+            }
+        })
+    }
+
+    //判断是第一次进行添加注册天数还是进行修改操作
+    function selectUseDay() {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/selectUseDay",
+            //传递参数
+            data:JSON.stringify(
+                {
+                    "userId":userId
+
+                }
+            ),
+            success: function (result) {
+                console.log(result);
+                if(result==false){
+                    addUseDay();
+                }else {
+                    updateUseDay();
+                }
+            },
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        })
+    }
+</script>
+</html>

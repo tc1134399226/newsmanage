@@ -43,14 +43,10 @@ public class NewsReplyController {
     @RequestMapping("addReplyByReplyInfo")
     public Object addReplyByReplyInfo(@RequestBody ReplyInfo replyInfo , HttpSession session){
         UserInfo user = (UserInfo) session.getAttribute("userInfo");
-//        if (userInfo==null){
-//            return "login";
-//        }
+        if (user==null){
+            return false;
+        }
         //保证程序健壮性
-//        UserInfo userInfo = userService.checkName(user);
-//        if (userInfo==null){
-//            return false;
-//        }
 //        replyInfo.setUserId(1);
 //        replyInfo.setNickName("cg");
         replyInfo.setUserId(user.getUserId());

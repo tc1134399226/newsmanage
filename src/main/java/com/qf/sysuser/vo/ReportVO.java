@@ -3,12 +3,20 @@ package com.qf.sysuser.vo;
 import java.sql.Timestamp;
 
 public class ReportVO {
-
+    Integer userId;
     Integer articleId;
     String nickName;
     String mainTitle;
     Timestamp createTime;
     String context;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Integer getArticleId() {
         return articleId;
@@ -50,10 +58,12 @@ public class ReportVO {
         this.context = context;
     }
 
+
     @Override
     public String toString() {
         return "ReportVO{" +
-                "articleId=" + articleId +
+                "userId=" + userId +
+                ", articleId=" + articleId +
                 ", nickName='" + nickName + '\'' +
                 ", mainTitle='" + mainTitle + '\'' +
                 ", createTime=" + createTime +

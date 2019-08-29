@@ -1,5 +1,6 @@
 package com.qf.news.service;
 
+import com.qf.news.pojo.Follow;
 import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
 import com.qf.sysuser.pojo.ArticleCarousel;
@@ -45,5 +46,14 @@ public interface NewsService {
 
     public List<ArticleTypeVO> getArticleCarousel();
 
+    public Follow getisFollow(Follow follow);
+
+    public int insertFollow(Follow follow);
+
+    public int deleteFollow(Follow follow);
+
+    public List<Follow>  getMyFollow(Follow follow);
+
+    public List<Follow> getMyFance(Follow follow);
 }
 

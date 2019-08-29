@@ -56,7 +56,7 @@
             margin:  0px 10px;
         }
         .partSev{
-            width: 12%;
+            width: 36%;
             float:left;
             margin:  0px 10px;
         }
@@ -78,6 +78,7 @@
     <input type="button" value="草稿" onclick="myDraftPage()">
     <input type="button" value="未读消息" onclick="myUnreadMessagePage()">
     <input type="button" value="已读消息" onclick="myReadMessagePage()">
+    <!--<input type="button"  value="我的新闻" onclick="myArticlePage()">-->
     <input type="button" id="myNews" style="display:none;" value="我的新闻" onclick="myArticlePage()">
     <!--    <input type="button" value="选择" onclick="AllCollection()">-->
 <!--    <input type="button" value="删除" onclick="deleteAllArticle()">-->
@@ -86,7 +87,7 @@
 <hr>
 
 <div class="table-responsive">
-    <table class="table  table-bordered" id = "dataTable">
+    <table class="table  table-bordered" id = "dataTable" style="width: 97%;">
         <tbody>
         <tr>
 
@@ -133,15 +134,23 @@
             //数据，json字符串
             //请求成功
             success: function (result) {
+                // alert(result)
                 if (result.status==2){
                     $("#myNews").show();
                 }
+            },
+            error : function(e){
+                alert(1)
+                console.log(e);
             }
-        })
+        });
     }
+
     //初始化页面,判断显示什么页面
     //初始化默认显示收藏页面
     function initpage() {
+        getSession()
+        // $("#myNews").show();
         var  select=window.location.search.split("type=")[1]
         if (typeof (select)=="undefined"){
             select = "myCollection";
@@ -159,7 +168,7 @@
         }else {
             myCollection(1);
         }
-        console.log(select)
+        // console.log(select)
     }
     initpage()
     //点击按钮时触发这个方法,目的是为了回到分页第一页
@@ -237,14 +246,6 @@
     //点击分页的页数和上,下页时触发这个方法
     //显示用户收藏文章指定页
     function myCollection(pageNum){
-        //        var pageNum=window.location.search.split("=")[1];
-        //        console.log("111"+pageNum)
-        // if (pageNum==undefined){
-        //     console.log("111")
-        //     pageNum=1;
-        // }else if (pageNum.indexOf("&type") != -1){
-        //            pageNum=pageNum.split("&type")[0]
-        //        }
 
         console.log(pageNum)
         var requestURL="news/getCollectionByUserId";

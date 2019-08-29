@@ -84,4 +84,49 @@ on tb1.articleId =v.articleId and v.createTime >= now()-interval 15 day
         inner join type t on t.typeId = a.typeId
         ORDER BY a.createTime desc
     </select>
+
+    <select id="getisFollow" resultType="com.qf.news.pojo.Follow">
+        select * from follow where userId = #{userId} and repUserId = #{repUserId}
+    </select>
+
+    <delete id="deleteFollow">
+        delete from follow where userId = #{userId} and repUserId = #{repUserId}
+    </delete>
+
+    <insert id="insertFollow">
+        insert into follow(userId,repUserId,createTime) values (#{userId},#{repUserId},CURRENT_TIMESTAMP)
+    </insert>
+
+    <resultMap id="myFollow" type="com.qf.news.pojo.Follow">
+        <id column="followId" property="followId"></id>
+        <result column="userId" property="userId"></result>
+        <collection property="myFollows" ofType="com.qf.news.dto.FollowUser">
+            <id column="repUserId" property="repUserId"></id>
+            <result column="icon" property="icon"></result>
+            <result column="nickName" property="nickName"></result>
+            <result column="createTime" property="createTime"></result>
+        </collection>
+    </resultMap>
+    <select id="getMyFollow" resultMap="myFollow">
+        select f.*,u.nickName,u.icon from follow f
+        inner join userinfo u on f.repUserId=u.userId
+        where f.userId = #{userId}
+    </select>
+
+    <resultMap id="myFance" type="com.qf.news.pojo.Follow">
+        <id column="followId" property="followId"></id>
+        <result column="repUserId" property="repUserId"></result>
+        <collection property="myFances" ofType="com.qf.news.dto.FollowUser">
+            <id column="userId" property="userId"></id>
+            <result column="icon" property="icon"></result>
+            <result column="nickName" property="nickName"></result>
+            <result column="createTime" property="createTime"></result>
+        </collection>
+    </resultMap>
+    <select id="getMyFance" resultMap="myFance">
+        select f.*,u.nickName,u.icon from follow f
+        inner join userinfo u on f.repUserId=u.userId
+        where f.repUserId = #{userId}
+    </select>
+
 </mapper>

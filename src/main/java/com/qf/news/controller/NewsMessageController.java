@@ -39,7 +39,7 @@ public class NewsMessageController {
         }
         System.out.println(userInfo);
         //一页有多少条数据
-        int defaultPageSize=2;
+        int defaultPageSize=5;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum,defaultPageSize);
         List<MessageVO> readMessageByUserId = newsMessageService.getReadMessageByUserId(userInfo.getUserId());
@@ -73,11 +73,11 @@ public Object deleteReadMessageByMgeId(@RequestParam Long mgeId){
 //        UserInfo userInfo=new UserInfo();
 //        userInfo.setUserId(1);
         if (userInfo.getUserId()==0){
-            return "login";
+            return false;
         }
         System.out.println(userInfo);
         //一页有多少条数据
-        int defaultPageSize=2;
+        int defaultPageSize=5;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum,defaultPageSize);
         List<MessageVO> readMessageByUserId = newsMessageService.getUnreadMessageByUserId(userInfo.getUserId());

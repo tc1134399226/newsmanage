@@ -68,6 +68,7 @@
 <script src="../script/docs.min.js"></script>
 <script>
     $(".tree").load("menu.html");
+    var userId;
     function initPage(){
 
         var pageNum=window.location.search.split("=")[1];
@@ -93,9 +94,11 @@
             //请求成功
             success : function(result) {
                 $("#dataTable tbody").html("");
+                console.log(result);
                 //js对象和jquery是不一样的，基本不能互相操作，得靠$()转换
                 //2.将数据填充到table中
                 $(result.list).each(function(index,item){
+                    userId = item.userId;
                     var trStr = "<tr>";
                     //获取id并拼接
                     trStr+="<td>"+item.nickName+"</td>";
@@ -121,7 +124,7 @@
                         pageNum==2
                     }
                     if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3){
-                        splicPage +="<li><a href=\"article.html?pageNum="+i+"\">"+i+"</a></li>";
+                        splicPage +="<li><a href=\"reporting_management.html?pageNum="+i+"\">"+i+"</a></li>";
                     }
                 }
                 if (pageNum>=result.pages) {
@@ -141,7 +144,7 @@
     initPage();
 
     function checkArticle(articleId){
-        window.location.href="reporting_details.html?articleId="+articleId;
+        window.location.href="reporting_details.html?articleId="+articleId+"&&userId="+userId;
     }
 
     $("#headbanner").load("head.html");

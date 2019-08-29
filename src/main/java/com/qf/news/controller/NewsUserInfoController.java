@@ -100,6 +100,7 @@ public class NewsUserInfoController {
     @RequestMapping("getSession")
     public Object getSession(HttpSession session, HttpServletResponse response) throws IOException {
         Object user = session.getAttribute("userInfo");
+        System.out.println(user);
         return user;
     }
 

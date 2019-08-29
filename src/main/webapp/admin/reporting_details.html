@@ -157,6 +157,7 @@
     <hr>
 </div>
 <div  class="form-group" style="text-align:center;">
+    <button type="button" class='btn btn-success btn-xs' onclick='keep()'><i class=' glyphicon glyphicon-check' ></i>保持原样</button>&nbsp;&nbsp;&nbsp;&nbsp;
     <button type="button" class='btn btn-danger btn-xs' onclick='refuse()'><i class=' glyphicon glyphicon-remove' ></i>下架</button>&nbsp;
 </div>
 <script type="text/javascript">
@@ -164,9 +165,10 @@
     var strCon1;
     var strCon2;
     var strCon3;
-    var userId;
+    var ruserId;
     var str=window.location.search;
-    var articleId=str.split("=")[1];
+    var articleId=str.split("=")[1].split("&&")[0];
+    var userId= str.split("=")[2];
 
 
     $.ajax({
@@ -184,7 +186,10 @@
 
             console.log(result);
             //展示封面图
-            userId = result.userId;
+            ruserId = result.userId;
+
+            console.log(ruserId);
+            console.log(userId);
             if (result.cover!=null&&result.cover!="") {
                 var i=new Image();
                 i.height =260;
@@ -238,37 +243,45 @@
             //请求成功
             success : function(result) {
                 console.log(result);
-                if(result){
-                    $.ajax({
-                        //请求方式
-                        type: "POST",
-                        //请求的媒体类型
-                        contentType: "application/json;charset=UTF-8",
-                        //请求地址
-                        url: "sysuser/sendSystemMessage",
-                        //数据，json字符串
-                        data: JSON.stringify({
-                            "userId":userId,
-                            "content": "您发布的<"+strCon1+">被举报成功,已被下架!"
-                        }),
-                        //请求成功
-                        success: function (result) {
-                            alert("已成功下架");
-                            window.location.href="reporting_management.html"
-                        },
-                        //请求失败，包含具体的错误信息
-                        error: function (e) {
-                            console.log("错误");
-                        }
-                    });
-
-                }else{
-                    alert("修改失败");
-                }
+                feedBack(ruserId,"您发布的<" + strCon1 + ">被举报成功,已被下架!");
+                feedBack(userId,"您举报成功，该新闻已被下架，感谢您的关注和支持！");
+                alert("已成功下架");
+                window.location.href = "reporting_management.html";
             },
             //请求失败，包含具体的错误信息
             error : function(e){
                 console.error(e);
+            }
+        });
+    }
+
+    function keep() {
+        feedBack(userId,"经工作人员核实后，未发现您描述的情况，感谢您的关注和支持！");
+        alert("已发送反馈信息至举报者！");
+        window.location.href = "reporting_management.html";
+    }
+
+    function feedBack(id,strs) {
+
+        $.ajax({
+            //请求方式
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url: "sysuser/sendSystemMessage",
+            //数据，json字符串
+            data: JSON.stringify({
+                "userId": id,
+                "content": strs
+            }),
+            //请求成功
+            success: function (result) {
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log("错误");
             }
         });
     }

@@ -2,6 +2,7 @@ package com.qf.news.service.impl;
 
 import com.qf.news.dao.NewsArticleInfoMapper;
 import com.qf.news.dao.NewsMapper;
+import com.qf.news.pojo.Follow;
 import com.qf.news.service.NewsService;
 import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
@@ -74,5 +75,26 @@ public class NewsServiceImpl implements NewsService {
 
     public  List<ArticleTypeVO>  getArticleCarousel(){
         return newsMapper.getArticleCarousel();
+    }
+
+    public Follow getisFollow(Follow follow){
+        return newsMapper.getisFollow(follow);
+    }
+
+
+    public int insertFollow(Follow follow){
+        return newsMapper.insertFollow(follow);
+    }
+
+    public int deleteFollow(Follow follow){
+        return newsMapper.deleteFollow(follow);
+    }
+
+    public List<Follow>  getMyFollow(Follow follow){
+        return newsMapper.getMyFollow(follow);
+    }
+
+    public List<Follow>  getMyFance(Follow follow){
+        return newsMapper.getMyFance(follow);
     }
 }

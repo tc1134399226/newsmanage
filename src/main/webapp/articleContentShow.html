@@ -122,9 +122,10 @@
                             <h3 id="mainTitle"></h3>
                             <h4 id="subTitle"></h4>
                             <!--作者-->
-                            <div class="blog_author_data">
-                                <a href="#">
-                                    <img src="" class="img-fluid" alt="" width="34" height="34" id="icon">
+                            <div class="blog_author_data" style="display: block">
+                                <a>
+                                    <img src="" id="icon" class="img-fluid" alt="" width="80" height="80">
+                                    <div id="followimg" onclick="userfollow()" style="display: inline"><img src="img/follow.png" width="34px" height="34px"></div>
                                     <input style="border:none;" id="userName"   readonly="readonly">
                                 </a>
                             </div>
@@ -217,11 +218,12 @@
     // var strCover;
     var str=window.location.search;
     var articleId=str.split("=")[1];
-
+    var repUserId; //新闻作者id
 
     $.ajax({
         //请求方式
         type : "GET",
+        async:false,
         //请求的媒体类型
         contentType: "application/json;charset=UTF-8",
         //接受数据类型
@@ -232,6 +234,7 @@
         //请求成功
         success : function(result) {
             console.log(result);
+            repUserId = result.userId;
             $("#mainTitle").text(result.mainTitle);
             $("#subTitle").text(result.subTitle);
             $("#userName").val(result.nickName);
@@ -281,7 +284,7 @@
                 trStr+="&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
                 // trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
                 if (result.articleCommentStatus==1){
-                    alert(result.articleCommentStatus)
+                    console.log(result.articleCommentStatus)
                 } else if (result.articleCommentStatus==0){
                     trStr+="<button id='addCollect'  type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
                 }
@@ -362,6 +365,7 @@
                 }else{
                     alert("点赞失败")
                     console.log(e);
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
             },
             //请求失败，包含具体的错误信息
@@ -393,6 +397,7 @@
                     hot()
                 }else{
                     alert("收藏失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                     console.log(e);
                 }
             },
@@ -403,6 +408,119 @@
             }
         });
     }
+
+
+    /*----------------------------------关注-----------------------------*/
+    <!--关注-->
+    var user;
+
+    //查看是否登录
+    $.ajax({
+        //请求方式
+        type: "GET",
+        async:false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType: "json",
+        //请求地址
+        url: "news/getSession",
+        //数据，json字符串
+        //请求成功
+        success: function (result) {
+            if (result==null){
+                $("#followimg").hide()
+            } else {
+              user = result;
+            }
+        }
+    });
+
+    // alert(user.userId);  //能够获取
+    // alert(repUserId);
+    if (user!=null){
+        //判断是否已关注
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/getisFollow",
+            //数据，json字符串
+            //请求成功
+            data : JSON.stringify({
+                "userId":user.userId,
+                "repUserId":repUserId
+            }),
+            success : function(result) {
+                if (result){
+
+                }else {
+                    $("#followimg").empty();
+                    $("#followimg").append('<img src="img/follow2.png" width="34px" height="34px">')
+                }
+            }
+        });
+    }
+
+    function userfollow() {
+        var attribute = $("#followimg img").attr("src");
+        if ("img/follow.png"==attribute){
+            //取消关注
+            $.ajax({
+                //请求方式
+                type: "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType: "json",
+                //请求地址
+                url: "news/deleteFollow",
+                //数据，json字符串
+                //请求成功
+                data: JSON.stringify({
+                    "userId": user.userId,
+                    "repUserId": repUserId
+                }),
+                success : function(result) {
+                    if (result){
+                        // alert("取消关注")
+                    $("#followimg").empty();
+                    $("#followimg").append('<img src="img/follow2.png" width="34px" height="34px">');
+                }
+                }
+            })
+        }else {
+            //添加关注
+            $.ajax({
+                //请求方式
+                type: "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType: "json",
+                //请求地址
+                url: "news/insertFollow",
+                //数据，json字符串
+                //请求成功
+                data: JSON.stringify({
+                    "userId": user.userId,
+                    "repUserId": repUserId
+                }),
+                success : function(result) {
+                    if (result) {
+                        // alert("关注成功")
+                    $("#followimg").empty();
+                    $("#followimg").append('<img src="img/follow.png" width="34px" height="34px">');
+                }
+                }
+            })
+        }
+    }
+
 </script>
 
 
@@ -594,6 +712,7 @@
                     initPage();
                 }else {
                     alert("提交评论失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
 
             },
@@ -628,7 +747,8 @@
                 if (result) {
                     initPage();
                 }else {
-                    alert("操作失败")
+                    alert("回复失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
             },
             error: function (e) {
@@ -780,6 +900,7 @@
                     // }
                 }else {
                     alert("点赞失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
             },
             error: function (e) {
