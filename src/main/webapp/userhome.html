@@ -146,6 +146,7 @@
         });
     }
 
+
     //初始化页面,判断显示什么页面
     //初始化默认显示收藏页面
     function initpage() {
@@ -206,8 +207,8 @@
                     trStr+="<div class='partThree'>"+item.artTime+"</div>";
                     trStr+="<div class='partThree'>"+item.colTime+"</div>";
                     trStr+="<div class='button'>";
-                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt("+item.articleId+")'></i></button>&nbsp;"
-                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='removeCol("+item.colId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
+                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='articleContent("+item.articleId+")' >查看</i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='removeCol("+item.colId+")'><i class=' glyphicon glyphicon-remove' >删除</i></button>"
                     trStr+="</div>";
                     trStr+="<br>";
                     trStr+="</div>";
@@ -282,7 +283,7 @@
                     trStr+="<div class='partThree'>"+item.artTime+"</div>";
                     trStr+="<div class='partThree'>"+item.colTime+"</div>";
                     trStr+="<div class='button'>";
-                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt("+item.articleId+")'></i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='articleContent("+item.articleId+")' >查看</i></button>&nbsp;"
                     trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='removeCol("+item.colId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
                     trStr+="</div>";
                     trStr+="<br>";
@@ -385,7 +386,7 @@
                     trStr+="<div class='partFour'>"+item.createTime+"</div>";
                     trStr+="<div class='partFour'>"+item.updateTime+"</div>";
                     trStr+="<div class='partFive'>"+statusName(item.status)+"</div>";
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.articleId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='articleContent("+item.articleId+")' >查看</i></button>&nbsp;"
                     trStr+="<div class='button'>";
                    if (item.status==3){
                     trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='removeArticle("+item.articleId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
@@ -471,7 +472,7 @@
                     trStr+="<div class='partFour'>"+item.createTime+"</div>";
                     trStr+="<div class='partFour'>"+item.updateTime+"</div>";
                     trStr+="<div class='partFive'>"+statusName(item.status)+"</div>";
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.articleId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='articleContent("+item.articleId+")' >查看</i></button>&nbsp;"
                     // if (item.status==0) {
                     //     trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='editArt(" + item.articleId + ")'></i></button>&nbsp;"
                     // }
@@ -551,8 +552,8 @@
                     trStr+="<div class='partSev'>"+item.createTime+"</div>";
                     trStr+="<div class='partSev'>"+item.updateTime+"</div>";
                     trStr+="<div class='partOne'>"+statusName(item.status)+"</div>";
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.articleId + ")'></i></button>&nbsp;"
-                    trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='editArt(" + item.articleId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='articleContent("+item.articleId+")' >查看</i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='editArt(" + item.articleId + ")'>编辑</i></button>&nbsp;"
                     trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='removeArticle("+ item.articleId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
                     trStr+="</div>";
                     trStr+="<br>";
@@ -632,8 +633,8 @@
                     trStr+="<div class='partSix'>"+item.createTime+"</div>";
                     trStr+="<div class='partSix'>"+item.updateTime+"</div>";
                     trStr+="<div class='partSix'>"+statusName(item.status)+"</div>";
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.articleId + ")'></i></button>&nbsp;"
-                    trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='editArt(" + item.articleId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='articleContent("+item.articleId+")' >查看</i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='editArt(" + item.articleId + ")'>编辑</i></button>&nbsp;"
                     trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='removeArticle("+ item.articleId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
                     trStr+="</div>";
                     trStr+="<br>";
@@ -733,9 +734,9 @@
                     }
                     trStr+="<div class='partSev'>"+item.createTime+"</div>";
                     trStr +="<div style='float: right;margin-right: 100px'>"
-                        trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'></i></button>&nbsp;"
-                    trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='removeUnread(" + item.mgeId + ")'></i></button>&nbsp;"
-                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
+                        trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'>查看</i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='removeUnread(" + item.mgeId + ")'>标记已读</i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' >删除</i></button>"
                     if (item.senderId!=666) {
                         trStr += "<a class=' glyphicon glyphicon-check' href="+item.mgeUrl+" ></a>;"
                         // +"#c"+item.comId
@@ -819,9 +820,9 @@
                     }
                     trStr+="<div class='partSev'>"+item.createTime+"</div>";
                     trStr +="<div style='float: right;margin-right: 100px'>"
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'></i></button>&nbsp;"
-                    trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='removeUnread(" + item.mgeId + ")'></i></button>&nbsp;"
-                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>&nbsp"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'>查看</i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='removeUnread(" + item.mgeId + ")'>标记已读</i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' >删除</i></button>&nbsp"
                    if (item.senderId!=666) {
                     trStr += "<a class=' glyphicon glyphicon-check'   href="+item.mgeUrl+" ></a>"
                         // +"#c"+item.comId
@@ -898,8 +899,8 @@
                     }
                     trStr+="<div class='partSev'>"+item.createTime+"</div>";
                     trStr +="<div style='float: right;margin-right: 100px'>"
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'></i></button>&nbsp;"
-                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'>查看</i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' >删除</i></button>"
                     trStr+="</div>";
                     trStr+="</div>";
                     trStr+="<hr>";
@@ -980,8 +981,8 @@
                     }
                     trStr+="<div class='partSev'>"+item.createTime+"</div>";
                     trStr +="<div style='float: right;margin-right: 100px'>"
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'></i></button>&nbsp;"
-                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' ></i></button>"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.mgeId +",\""+item.content+"\")'>查看</i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' >删除</i></button>"
                     trStr+="</div>";
                     trStr+="</div>";
                     trStr+="<hr>";
@@ -1145,6 +1146,32 @@ function removeUnread(mgeId) {
         } else if (status == 3) {
             return "审核不通过"
         }
+    }
+    function articleContent(articleId) {
+        console.log(articleId)
+        $.ajax({
+            //请求方式
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/toArticleContent?articleId="+articleId,
+            //数据，json字符串
+            //请求成功
+            success : function(result) {
+                if (result) {
+                    window.location.href="articleContentShow.html?articleId="+articleId
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log("报错");
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
     }
 </script>
 </html>
