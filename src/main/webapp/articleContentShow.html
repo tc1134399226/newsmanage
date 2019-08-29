@@ -320,7 +320,11 @@
                 trStr+="&nbsp&nbsp&nbsp"+result.articleLoveNum
                 trStr+="&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
                 // trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
-                trStr+="<button   type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
+              if (result.articleCommentStatus==1){
+                    alert(result.articleCommentStatus)
+              } else if (result.articleCommentStatus==0){
+                trStr+="<button id='addCollect'  type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
+              }
                $("#mark").append(trStr);
 
             },

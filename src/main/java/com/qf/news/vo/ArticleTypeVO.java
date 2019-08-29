@@ -31,6 +31,7 @@ public class ArticleTypeVO {
     private long timeHot;    //三天内热度
     private Long timeComNum;//评论数
     private Long timeArticleLoveNum;//新闻点赞数
+    private Integer articleCommentStatus;//被收藏状态
 
     public long getTimeHot() {
         if (getTimeComNum()==null&&getTimeArticleLoveNum()==null&&getTimeVisNum()==null){

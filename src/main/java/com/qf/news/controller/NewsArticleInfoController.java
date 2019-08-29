@@ -98,14 +98,15 @@ public class NewsArticleInfoController {
     @RequestMapping("getArticleAndLoveNumAndComNum")
     @ResponseBody
     public Object getArticleAndLoveNumAndComNum( HttpSession session){
-//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
         Long articleId = (Long) session.getAttribute("articleId");
         System.out.print("articleId为");
         System.out.println(articleId);
+        System.out.println(userInfo.getUserId());
 //        if (articleId==0){
 //          return false;
 //      }
-        return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId);
+        return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId,userInfo.getUserId());
 //        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1);
     }
 

@@ -75,8 +75,8 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
      * @param articleId
      * @return
      */
-    public ArticleTypeVO getArticleAndLoveNumAndComNum( Long articleId){
-        return newsArticleInfoMapper.getArticleAndLoveNumAndComNum(articleId);
+    public ArticleTypeVO getArticleAndLoveNumAndComNum( Long articleId,Long userId){
+        return newsArticleInfoMapper.getArticleAndLoveNumAndComNum(articleId,userId);
     }
     /**
      * 用户点赞(取消)
