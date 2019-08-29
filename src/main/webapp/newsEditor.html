@@ -175,6 +175,7 @@
 
 
    var img1;
+   var img2;
    // var str=window.location.search;
    // var userId=str.split("=")[1];
 
@@ -412,6 +413,8 @@
                     console.log(result);
                     $("#mainTitle").val(result.mainTitle);
                     $("#subTitle").val(result.subTitle);
+
+                    img2=result.cover;
                     // var coverSrc=new Image();
                     //
                     // coverSrc.src=result.cover;
@@ -440,6 +443,7 @@
 
         initpage();
 
+        var articleId1;
         //获取文章id
         function getArticleId(content) {
             $.ajax({
@@ -461,10 +465,10 @@
                 //请求成功
                 success: function (result) {
                     console.log(result);
-                    articleId=result.articleId;
+                    articleId1=result.articleId;
                     // alert(articleId);
                     // //发布成功后转发
-                    window.location.href="articleContent.html?articleId="+articleId;
+                    window.location.href="articleContent.html?articleId="+articleId1;
                 },
                 //请求失败，包含具体的错误信息
                 error: function (e) {
@@ -505,6 +509,7 @@
                 return ;
             }
 
+
             $.ajax({
                 //请求方式
                 type : "POST",
@@ -523,7 +528,8 @@
                         "typeId":typeId,
                         "mainTitle":mainTitle,
                         "subTitle":subTitle,
-                        "content":editor.txt.html()
+                        "content":editor.txt.html(),
+                        "userId":userId
                     }
                 ),
                 //请求成功
@@ -635,6 +641,14 @@
                 alert("标题字数不能超过40个");
                 return ;
             }
+
+            var img;
+            if(img1==null){
+                img=img2;
+            }else {
+                img=img1;
+            }
+
             getIp();
             $.ajax({
                 //请求方式
@@ -651,12 +665,12 @@
                         "userId":userId,
                         "areaId":areaId,
                         "typeId":typeId,
-                        "cover":img1,
+                        "cover":img,
                         "mainTitle":mainTitle,
                         "subTitle":subTitle,
                         "content":editor.txt.html(),
                         "articleId":articleId,
-                        "status":status
+                        "status":1
                     }
                 ),
                 //请求成功
