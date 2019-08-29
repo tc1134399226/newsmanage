@@ -1,5 +1,6 @@
 package com.qf.news.service;
 
+import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
 
 import java.util.List;
@@ -38,5 +39,7 @@ public interface NewsService {
      * @return
      */
     public List<ArticleTypeVO> listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId(Integer typeId,Integer areaId);
+
+    public AreaTypeVO getAreaIdTypeId(AreaTypeVO areaTypeVO);
 }
 

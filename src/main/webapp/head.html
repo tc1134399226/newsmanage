@@ -26,11 +26,17 @@
 </head>
 <body>
 
+
 <div  style="margin-top:0px;float:right;">
+    <label >欢迎: </label>
+    <label id="nickName"></label>
+    &nbsp;&nbsp;&nbsp;
     <label >注册天数</label>
     <input type="text" readonly="readonly" id="regDay" align="right" style="width:45px;overflow-x:visible;overflow-y:visible;"/>
     <!--<label >天</label>-->
 </div>
+
+    <!--<label >天</label>-->
 
 <div class="yui3-g NavList">
     <div class="yui3-u Left all-sort">
@@ -63,7 +69,7 @@
         //接受数据类型
         dataType:"json",
         //请求地址
-        url : "sysuser/getSession",
+        url : "news/getSession",
         //请求成功
         success : function(result) {
             userId = result.userId;
@@ -75,6 +81,8 @@
             day=Math.ceil(days);
             // alert(day);
             $("#regDay").val(day);
+            $("#nickName").empty();
+            $("#nickName").text(result.nickName);
             selectUseDay();
 
         },

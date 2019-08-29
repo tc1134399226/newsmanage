@@ -139,9 +139,31 @@
             //请求成功
             success : function(result) {
                 console.log(result);
+
                 if(result){
-                    alert("已通过审核");
-                    window.location.href="editor_apply_list.html";
+                    $.ajax({
+                        //请求方式
+                        type: "POST",
+                        //请求的媒体类型
+                        contentType: "application/json;charset=UTF-8",
+                        //请求地址
+                        url: "sysuser/sendSystemMessage",
+                        //数据，json字符串
+                        data: JSON.stringify({
+                            "userId":userId,
+                            "content": "您已成为一名正式的编辑了,快去发表文章吧!"
+                        }),
+                        //请求成功
+                        success: function (result) {
+                            alert("已通过审核");
+                            window.location.href="editor_apply_list.html";
+                        },
+                        //请求失败，包含具体的错误信息
+                        error: function (e) {
+                            console.log("错误");
+                        }
+                    });
+
                 }else{
                     alert("修改失败");
                 }
@@ -174,8 +196,29 @@
             success : function(result) {
                 console.log(result);
                 if(result){
-                    alert("已驳回请求");
-                    window.location.href="editor_apply_list.html";
+                    $.ajax({
+                        //请求方式
+                        type: "POST",
+                        //请求的媒体类型
+                        contentType: "application/json;charset=UTF-8",
+                        //请求地址
+                        url: "sysuser/sendSystemMessage",
+                        //数据，json字符串
+                        data: JSON.stringify({
+                            "userId":userId,
+                            "content": "很遗憾,您的编辑申请没有通过!"
+                        }),
+                        //请求成功
+                        success: function (result) {
+                            alert("已驳回请求");
+                            window.location.href="editor_apply_list.html";
+                        },
+                        //请求失败，包含具体的错误信息
+                        error: function (e) {
+                            console.log("错误");
+                        }
+                    });
+
                 }else{
                     alert("修改失败");
                 }

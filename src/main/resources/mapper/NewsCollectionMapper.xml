@@ -17,15 +17,16 @@
         <result property="artTime" column="artTime"/>
     </resultMap>
     <select id="getCollectionByUserId" parameterType="com.qf.news.pojo.UserInfo" resultMap="collectlist">
-        select c.colId,c.userId,c.articleId,a.createTime colTime, a.areaId,a.articleName,a.typeId,a.mainTitle,
+        select c.colId,c.userId,c.articleId,a.createTime colTime, a.areaId,a.typeId,a.mainTitle,
         a.subTitle,a.content,a.createTime artTime
         from collection c left join article a on a.userId=c.userId  where c.userId=#{userId}
-        and c.status=1 and a.status=1
+        and c.status=1 and a.status=2
     </select>
     <update id="deleteCollectionByColId" parameterType="Long" >
         update collection set status=0 where colId=#{colId}
     </update>
     <insert id="addCollectByArticleIdAndUserId" parameterType="com.qf.news.vo.ArticleTypeVO" >
-        delete from article  where articleId=#{articleId} and userId=#{userId}
+        insert into collection   (articleId,userId,status,createTime,updateTime)
+        values (#{articleId},#{userId},1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
     </insert>
 </mapper>

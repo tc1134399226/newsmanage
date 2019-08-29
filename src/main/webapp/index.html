@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+	<title>新闻首页</title>
     <meta charset="UTF-8">
     <!--网站描述保持在50字左右-->
     <meta name="Description" content="环球网 - 最大环球网站" />
@@ -79,10 +80,8 @@
                             <h2>一个理念一个理念一个理念一个理念</h2>
                         </dt>
                         <dd>
-                            <p>习近平习近平习近平习近平习近平习<br> 近平习近平习近平习近平习近平</p>
-                        </dd>
-                        <dd>
-                            <p>习近平习近平习近平习近平习近平习<br> 近平习近平习近平习近平习近平</p>
+                            <p>习近平习近平习近平习近平习近平习近平习近平习近平习近平习近平
+                            习近平习近平习近平习近平习近平习近平习近平习近平习近平习近平</p>
                         </dd>
                     </dl>
 					<dl class="right_new">
@@ -101,8 +100,8 @@
 
             <div class="main3">
                 <ul class="minnav">
-                    <li>军事</li>
-					<li><a onclick="jumpmore()">更多</a></li>
+					<li><a>军事</a></li>
+					<li><a onclick="jumpmore('军事')">更多</a></li>
                 </ul>
 
                 <div class="photo">
@@ -212,8 +211,8 @@
 
             <div class="main3">
                 <ul class="minnav">
-                    <li><a href="#">财经</a></li>
-					<li><a href="#">更多</a></li>
+                    <li><a>财经</a></li>
+					<li><a onclick="jumpmore('财经')">更多</a></li>
                 </ul>
 
                 <div class="photo">
@@ -324,8 +323,8 @@
 			
 			<div class="main3">
                 <ul class="minnav">
-                    <li><a href="#">科技</a></li>
-					<li><a href="#">更多</a></li>
+                    <li><a>科技</a></li>
+					<li><a onclick="jumpmore('科技')">更多</a></li>
 
                 </ul>
 
@@ -436,8 +435,8 @@
             </div>
 			<div class="main3">
 				<ul class="minnav">
-					<li><a href="#">娱乐</a></li>
-					<li><a href="#">更多</a></li>
+					<li><a>娱乐</a></li>
+					<li><a onclick="jumpmore('娱乐')">更多</a></li>
 				</ul>
 
 				<div class="photo">
@@ -549,7 +548,7 @@
 			<div class="main3">
 				<ul class="minnav">
 					<li><a href="#">生活</a></li>
-					<li><a href="#">更多</a></li>
+					<li><a onclick="jumpmore('生活')">更多</a></li>
 				</ul>
 
 				<div class="photo">
@@ -739,7 +738,7 @@
 						if (item.areaName==area){
 							if (item.typeName==type[i]){
 								str += "<dd>";
-								str += "<a href='article_carousel_details.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
+								str += "<a onclick='articleContent("+item.articleId+")'  href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
 								str += "</dd>";
 								count +=1;
 								if (count>=10){
@@ -775,7 +774,7 @@
 						if (item.areaName==area){
 							if (item.typeName==type[i]){
 								str += "<dd>";
-								str += "<a href='article_carousel_details.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
+								str += "<a   onclick='articleContent("+item.articleId+")' href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
 								str += "</dd>";
 								count +=1;
 								if (count>=10){
@@ -827,14 +826,56 @@
 			$("#dataImg").empty();
 			var fiveImg = "";
 			$(result).each(function(index,item) {
-				fiveImg +="<a href='article_carousel_details.html?articleId="+item.articleId+"'><li><img src='"+item.cover+"'></li></a>"
+				fiveImg +="<a onclick='articleContent("+item.articleId+")' href='articleContentShow.html?articleId="+item.articleId+"'><li><img src='"+item.cover+"'></li></a>"
 			})
 			$("#dataImg").append(fiveImg)
 		}
 		});
 
-    function jumpmore() {
-		area
+    function jumpmore(object) {
+		$.ajax({
+			type:"post",
+			url:"news/getAreaIdTypeId",
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType:"json",
+			data:JSON.stringify({
+				"typeName":object,
+				"areaName":area
+			}),
+			success: function (result) {
+				window.location.href = "moveContent.html?pageNum=1&typeId="+result.typeId+"&areaId="+result.areaId;
+			}
+		})
+
 	}
+
+	function articleContent(articleId) {
+		// alert(articleId)
+		$.ajax({
+			//请求方式
+			type : "GET",
+			//请求的媒体类型
+			contentType: "application/json;charset=UTF-8",
+			//接受数据类型
+			dataType:"json",
+			//请求地址
+			url : "news/toArticleContent?articleId="+articleId,
+			//数据，json字符串
+			//请求成功
+			success : function(result) {
+				if (result) {
+					window.location.href="articleContentShow.html?articleId="+articleId
+				}
+			},
+			//请求失败，包含具体的错误信息
+			error : function(e){
+				console.log("报错");
+				console.log(e.status);
+				console.log(e.responseText);
+			}
+		});
+	}
+
 </script>
 </html>

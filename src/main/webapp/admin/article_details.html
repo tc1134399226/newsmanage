@@ -69,6 +69,7 @@
     var strCon1;
     var strCon2;
     var strCon3;
+    var userId;
     var str=window.location.search;
     var articleId=str.split("=")[1];
 
@@ -87,6 +88,7 @@
         success : function(result) {
 
             console.log(result);
+            userId=result.userId;
             //展示封面图
             if (result.cover!=null&&result.cover!="") {
                 var i=new Image();
@@ -141,9 +143,31 @@
             //请求成功
             success : function(result) {
                 console.log(result);
+
                 if(result){
-                    alert("已成功下架");
-                    window.location.href="article.html"
+                    $.ajax({
+                        //请求方式
+                        type: "POST",
+                        //请求的媒体类型
+                        contentType: "application/json;charset=UTF-8",
+                        //请求地址
+                        url: "sysuser/sendSystemMessage",
+                        //数据，json字符串
+                        data: JSON.stringify({
+                            "userId":userId,
+                            "content": "因系统维护,您发布的<"+strCon1+">已被下架,请继续努力哦!"
+                        }),
+                        //请求成功
+                        success: function (result) {
+                            alert("已成功下架");
+                            window.location.href="article.html"
+                        },
+                        //请求失败，包含具体的错误信息
+                        error: function (e) {
+                            console.log("错误");
+                        }
+                    });
+
                 }else{
                     alert("修改失败");
                 }

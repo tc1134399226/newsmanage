@@ -38,27 +38,23 @@
 
 <body>
 
-
-
     <!-- 头部栏位 -->
     <!--页面顶部-->
 <div id="nav-bottom">
     <div class="header">
     </div>
 </div>
-</div>
-</div>
 
 <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
 
 
-</body>
+
 <!--header-->
 <div id="account">
     <div class="py-container">
         <div class="yui3-g home">
             <!--左侧列表-->
-            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#F1F1F1;">
+            <div id="leftmenu" class="yui3-u-1-6 list" style="background-color:#707070;height: ;">
             </div>
             <!--右侧主内容-->
             <div class="yui3-u-5-6">
@@ -143,11 +139,24 @@
 
 
 <script>
-    //获取超链接地址栏上的userId
-    var params = window.location.search;
-    var id = params.split("=")[1];
     var status;
-
+    var id;
+    $.ajax({
+        //请求方式GET/POST
+        type : "GET",
+        //同步
+        async: false,
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/getSession",
+        //请求成功
+        success : function(result) {
+            id = result.userId
+        }
+    });
     if (id==null) {
         id=0;
     }
@@ -173,16 +182,10 @@
             $("#idCard").val(result.idCard);
             $("#icon").attr('src',result.icon);
             if (result) {
+                console.log(result);
                 status = result.status;
-
             }
 
-//              if(result){
-//                  alert("删除成功");
-//                  initPage();
-//              }else {
-//                  alert("删除失败")
-//              }
         },
         error: function (e) {
             // console.error(e);
@@ -190,176 +193,8 @@
         }
     });
 
-
-
-//     function updateUser(){
-//         //1.修改
-// //		  alert("inner updateUser");
-//         $.ajax({
-//             //请求方式GET/POST
-//             type: "POST",
-//             //请求的媒体类型
-//             contentType: "application/json;charset=UTF-8",
-//             //接受数据类型
-//             dataType: "json",
-//             //请求地址
-//             url: "news/editUserInfoById",
-//             //传递参数
-//             data:JSON.stringify(
-//                 {
-//                     "userId":$("#userId").val(),
-//                     "nickName":$("#nickName").val(),
-//                     "mobile":$("#mobile").val(),
-//                     "idCard":$("#idCard").val(),
-//                     "sex":$("#sex").val(),
-//                     "icon":$("#imgUrl").val()
-//
-//                 }
-//             ),
-//             success: function (result) {
-//                 console.log(result);
-//             },
-//             error: function (e) {
-//                 console.error(e);
-//             }
-//         })
-//         //2.跳转
-//         window.location.href = "userInfo.html?userId="+id;
-//     }
-
-        // 根据状态展示左侧功能栏位
-
-    if(status==2) {
-        $("#1").show();
-        $("#3").show()
-    }else {
-        $("#2").show()
-    }
-
-    function skip(){
-
-        $(".yui3-u-5-6").empty();
-        $(".yui3-u-5-6").load("userhome.html");
-    }
-
-
-    $("#2").click(function(){
-        $(this).attr("href","editorapply.html?userId="+id);//用jquery的方法改变href属性值
-    });
-
-    $("#3").click(function(){
-        $(this).attr("href","newsEditor.html?userId="+id);//用jquery的方法改变href属性值
-    });
-
-
-    function jump(){
-        window.location.href = "userInfo-edit.html?userId="+id;
-    }
-
-    function jumpmesg(){
-        window.location.href = "userInfo-mesg.html?userId="+id;
-    }
-
-
-</script>
-
-<!-- 底部栏位 -->
-<!--页面底部-->
-<div class="clearfix footer">
-    <div class="py-container">
-        <div class="footlink">
-
-
-        </div>
-    </div>
-</div>
-<!--页面底部END-->				<!--<input type="hidden" id="imgUrl"/>-->
-							<!--</div>-->
-						<!--</form>-->
-
-					</div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-<!--<div class="form-group has-success has-feedback" align="left"  >-->
-	<!--<div id="dropzoneDiv" class="dropzone" style="max-width:800px;margin:50px;"></div>-->
-	<!--<input type="hidden" id="imgUrl"/>-->
-<!--</div>-->
-
-
-
-<script>
-    //获取超链接地址栏上的userId
-    var params = window.location.search;
-    var id = params.split("=")[1];
-    var createTi;
-	var date = new Date();
-	//定义注册天数
-	var day;
-    // alert(id);
-	if (id==null) {
-		id=0;
-	}
-    //通过ajax从后台获取。
-    $.ajax({
-        //请求方式GET/POST
-        type: "GET",
-        //请求的媒体类型
-        contentType: "application/json;charset=UTF-8",
-        //接受数据类型
-        dataType: "json",
-        //请求地址
-        url: "news/getUserInfoById?userId="+id,
-        //数据，json字符串
-        //请求成功
-        success: function (result) {
-            console.log(result);
-            $("#userId").val(result.userId);
-            $("#nickName").val(result.nickName);
-            $("#mobile").val(result.mobile);
-            $("#sex").val(result.sex);
-            $("#idCard").val(result.idCard);
-            $("#icon").attr('src',result.icon);
-            $("#status").val(result.status);
-            //获取用户创建时间
-			createTi=result.createTime;
-			//获取当前时间
-			var myDate = new Date();
-			//获取时间差
-			var days = ((myDate.getTime() - createTi))/ (1000*3600*24);
-			day=Math.ceil(days);
-			// alert(day);
-			$("#regDay").val(day);
-			selectUseDay();
-
-        },
-        error: function (e) {
-            console.error(e);
-//              console.log(e);
-        }
-    });
-
-
     $("#leftmenu").load("leftmenu.html");
     $(".header").load("head.html");
 </script>
-
-    <!-- 底部栏位 -->
-    <!--页面底部-->
-<div class="clearfix footer">
-	<div class="py-container">
-		<div class="footlink">
-
-
-		</div>
-	</div>
-</div>
-<!--页面底部END-->
-
-
-
+</body>
 </html>

@@ -1,7 +1,9 @@
 package com.qf.news.dao;
 
+import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -48,4 +50,6 @@ public interface NewsMapper {
      * @return
      */
     public List<ArticleTypeVO> listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId(Integer typeId,Integer areaId);
+
+    public AreaTypeVO getAreaIdTypeId(AreaTypeVO areaTypeVO);
 }
