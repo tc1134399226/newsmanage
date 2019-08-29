@@ -208,43 +208,7 @@
     </table>
 </div>
 
-<!--</div>-->
 
-        <!--<div class="form-group" style="text-align:center;margin-bottom:1px;" >-->
-            <!--<label >主标题</label>-->
-            <!--<input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center " >-->
-        <!--</div>-->
-        <!--<div id="hot">-->
-                <!--123123-->
-        <!--</div>-->
-<!--<hr>-->
-        <!--<div class="form-group" style="text-align:center;margin-top:2px;">-->
-            <!--<label >副标题</label>-->
-            <!--<input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center ">-->
-        <!--</div>-->
-<!--<hr>-->
-        <!--<div class="form-group" id="contentStr"-->
-             <!--style="text-align:center;width:800px; height:300px;color:black" align="center">-->
-            <!--<label >新闻内容:</label>-->
-        <!--</div>-->
-
-<!--<hr>-->
-
-        <!--<div class="form-group" style="text-align:center;" id="coverImg"-->
-             <!--style="text-align:center;width:100px; height:100px;color:#0000FF" align="center">-->
-            <!--<label >封面图</label>-->
-            <!--<br>-->
-        <!--</div>-->
-
-
-        <!--<div class="footer"></div>-->
-
-
-<!--        <div align="center" id="textDiv" class="lastDiv">-->
-<!--            <button type="button" class="btn btn-success" onclick="returnCheck()" ><i class="glyphicon glyphicon-edit"></i>返回修改</button>-->
-<!--            <button type="button" class="btn btn-danger" onclick="checkCommit()"><i class="glyphicon glyphicon-refresh"></i> 确认提交</button>-->
-
-<!--        </div>-->
 
 
 
@@ -275,11 +239,7 @@
             $("#subTitle").text(result.subTitle);
             $("#userName").val(result.nickName);
             $("#icon").attr('src',result.icon);
-            // var coverSrc=new Image();
-            //
-            // coverSrc.src=result.cover;
-            //
-            // $("#coverImg").append(coverSrc);
+
 
             strCon=result.content;
 
@@ -943,8 +903,6 @@
     }
 
 </script>
-
-
 
 </body>
 </html>
