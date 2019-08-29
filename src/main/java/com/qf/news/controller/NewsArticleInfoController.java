@@ -149,7 +149,9 @@ public class NewsArticleInfoController {
     //修改处于编辑未提交审核状态的新闻 并确认提交
     @RequestMapping("secondCommitArticle")
     @ResponseBody
-    public boolean secondCommitArticle(@RequestBody ArticleInfo articleInfo){
+    public boolean secondCommitArticle(@RequestBody ArticleInfo articleInfo,HttpServletRequest request){
+        String ip = request.getRemoteAddr();
+        articleInfo.setUserIp(ip);
         if (articleInfo.getArticleId()==0){
             return newsArticleInfoService.commitArticle(articleInfo);
         }else {
