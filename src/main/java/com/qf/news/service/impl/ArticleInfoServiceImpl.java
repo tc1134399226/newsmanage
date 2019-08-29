@@ -1,6 +1,7 @@
 package com.qf.news.service.impl;
 
 import com.qf.news.dao.NewsArticleInfoMapper;
+import com.qf.news.dto.ReportDTO;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.LoveArticle;
 import com.qf.news.service.NewsArticleInfoService;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArticleInfoServiceImpl implements NewsArticleInfoService {
 
-    @Qualifier("newsArticleInfoMapper")
     @Autowired
     NewsArticleInfoMapper newsArticleInfoMapper;
 
@@ -100,5 +100,9 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
 
     public boolean uploadArticle(ArticleInfo articleInfo) {
         return newsArticleInfoMapper.uploadArticle(articleInfo)>0;
+    }
+
+    public boolean toReport(ReportDTO reportDTO) {
+        return newsArticleInfoMapper.toReport(reportDTO)>0;
     }
 }

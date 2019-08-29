@@ -16,7 +16,7 @@
        INSERT into article_carousel
        (articleId,areaId,userId,typeId,cover,mainTitle,subTitle,content,createTime,updateTime)
        VALUES
-       (DEFAULT,#{areaId},#{userId},#{typeId},#{cover},#{mainTitle},#{subTitle},#{content},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+       (#{articleId},#{areaId},#{userId},#{typeId},#{cover},#{mainTitle},#{subTitle},#{content},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
     </insert>
 
     <!--已加入轮播的新闻将设置状态为1-->

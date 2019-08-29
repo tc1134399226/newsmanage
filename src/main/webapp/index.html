@@ -97,7 +97,7 @@
                     </dl>
                 </div>
             </div>
-
+			<hr>
             <div class="main3">
                 <ul class="minnav">
 					<li><a>军事</a></li>
@@ -106,7 +106,7 @@
 
                 <div class="photo">
                     <div class="obt">
-                        <ul>
+                        <ul id="topimg0">
 							<li>
 								<a><img src="img/1.jpg" /></a>
 								<div class="imgTitle"><a>图片的标题</a></div>
@@ -124,7 +124,7 @@
                             <span class="ctrl right_ctrl"></span>
                     </div>
                     <div class="tpt">
-						<ul class="tPic">
+						<ul class="tPic" id="footimg0">
 							<li>
 								<a><img src="img/1.jpg" /></a>
 								<p><a>图片的标题</a></p>
@@ -208,7 +208,7 @@
                 </div>
 
             </div>
-
+			<hr>
             <div class="main3">
                 <ul class="minnav">
                     <li><a>财经</a></li>
@@ -217,7 +217,7 @@
 
                 <div class="photo">
                     <div class="obt">
-                        <ul>
+                        <ul id="topimg1">
 							<li>
 								<a><img src="img/1.jpg" /></a>
 								<div class="imgTitle"><a>图片的标题</a></div>
@@ -235,7 +235,7 @@
                             <span class="ctrl right_ctrl"></span>
                     </div>
                     <div class="tpt">
-						<ul class="tPic">
+						<ul class="tPic" id="footimg1">
 							<li>
 								<a><img src="img/1.jpg" /></a>
 								<p><a>图片的标题</a></p>
@@ -320,7 +320,7 @@
                 </div>
 
             </div>
-			
+			<hr>
 			<div class="main3">
                 <ul class="minnav">
                     <li><a>科技</a></li>
@@ -330,7 +330,7 @@
 
                 <div class="photo">
                     <div class="obt">
-                        <ul>
+                        <ul id="topimg2">
 							<li>
 								<a><img src="img/1.jpg" /></a>
 								<div class="imgTitle"><a>图片的标题</a></div>
@@ -348,7 +348,7 @@
                             <span class="ctrl right_ctrl"></span>
                     </div>
                     <div class="tpt">
-						<ul class="tPic">
+						<ul class="tPic" id="footimg2">
 							<li>
 								<a><img src="img/1.jpg" /></a>
 								<p><a>图片的标题</a></p>
@@ -433,6 +433,7 @@
                 </div>
 
             </div>
+			<hr>
 			<div class="main3">
 				<ul class="minnav">
 					<li><a>娱乐</a></li>
@@ -441,7 +442,7 @@
 
 				<div class="photo">
 					<div class="obt">
-						<ul>
+						<ul id="topimg3">
 							<li>
 								<a><img src="img/1.jpg" /></a>
 								<div class="imgTitle"><a>图片的标题</a></div>
@@ -459,7 +460,7 @@
 						<span class="ctrl right_ctrl"></span>
 					</div>
 					<div class="tpt">
-						<ul class="tPic">
+						<ul class="tPic" id="footimg3">
 							<li>
 								<a><img src="img/1.jpg" /></a>
 								<p><a>图片的标题</a></p>
@@ -545,6 +546,7 @@
 				</div>
 
 			</div>
+			<hr>
 			<div class="main3">
 				<ul class="minnav">
 					<li><a href="#">生活</a></li>
@@ -553,7 +555,7 @@
 
 				<div class="photo">
 					<div class="obt">
-						<ul>
+						<ul id="topimg4">
 							<li>
 								<a><img src="img/1.jpg" /></a>
 								<div class="imgTitle"><a>图片的标题</a></div>
@@ -571,7 +573,7 @@
 						<span class="ctrl right_ctrl"></span>
 					</div>
 					<div class="tpt">
-						<ul class="tPic">
+						<ul class="tPic" id="footimg4">
 							<li>
 								<a><img src="img/1.jpg" /></a>
 								<p><a>图片的标题</a></p>
@@ -655,6 +657,7 @@
 				</div>
 
 			</div>
+			<hr>
 		</div>
 	</section>
 </body>
@@ -737,13 +740,13 @@
 					$(result).each(function(index,item) {
 						if (item.areaName==area){
 							if (item.typeName==type[i]){
+								if (count>=10){
+									return false;
+								}
 								str += "<dd>";
 								str += "<a onclick='articleContent("+item.articleId+")'  href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
 								str += "</dd>";
 								count +=1;
-								if (count>=10){
-									return false;
-								}
 							}
 						}
 					});
@@ -773,13 +776,13 @@
 					$(result).each(function(index,item) {
 						if (item.areaName==area){
 							if (item.typeName==type[i]){
+								if (count>=10){
+									return false;
+								}
 								str += "<dd>";
 								str += "<a   onclick='articleContent("+item.articleId+")' href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
 								str += "</dd>";
 								count +=1;
-								if (count>=10){
-									return false;
-								}
 							}
 						}
 					});
@@ -810,7 +813,7 @@
 				$("#loginSuccess").append(str);
 			}
         }
-        })
+        });
 
 	//获取轮播图图片
 	$.ajax({
@@ -828,7 +831,19 @@
 			$(result).each(function(index,item) {
 				fiveImg +="<a onclick='articleContent("+item.articleId+")' href='articleContentShow.html?articleId="+item.articleId+"'><li><img src='"+item.cover+"'></li></a>"
 			})
-			$("#dataImg").append(fiveImg)
+			$("#dataImg").append(fiveImg);
+			var strtop = "";
+			$(result).each(function(index,item) {
+				strtop += '<dl class="right_new">';
+				strtop += '<dt>';
+				strtop += "<h2><a href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"</a></h2>";
+				strtop += "<dd><p>"+item.subTitle+"</p></dd></dt></dl>";
+				if (index>2){
+					return false;
+				}
+			})
+			$(".dl-box").empty();
+			$(".dl-box").append(strtop);
 		}
 		});
 
@@ -876,6 +891,52 @@
 			}
 		});
 	}
+
+	$.ajax({
+		//请求方式
+		type: "GET",
+		//请求的媒体类型
+		contentType: "application/json;charset=UTF-8",
+		//接受数据类型
+		dataType: "json",
+		//请求地址
+		url: "news/getArticleCarousel",
+		success: function (result) {
+			console.log(result)
+			for (var i=0;i<type.length;i++){
+				var topstr = "";
+				var footstr = "";
+				var count = 0;
+				$("#topimg"+i).empty();
+				$("#footimg"+i).empty();
+				$(result).each(function(index,item) {
+					if (item.areaName==area) {
+						if (item.typeName == type[i]) {
+							if (count==0){
+								topstr += "<li><a><img src='"+item.cover+"'></a>";
+								topstr += "<div class='imgTitle'>"+item.mainTitle+"</div>"
+								count +=1;
+								// alert(topstr)
+							}else if (count<3) {
+								footstr += "<li><a><img src='"+item.cover+"'></a>";
+								footstr += "<div class='imgTitle'>"+item.mainTitle+"</div>"
+								count +=1;
+								// alert(footstr)
+							}else {
+								return false;
+							}
+						}
+					}
+				// <li>
+				// 	<a><img src="img/1.jpg" /></a>
+				// 			<div class="imgTitle"><a>图片的标题</a></div>
+				// 	</li>
+				});
+				$("#topimg"+i).append(topstr);
+				$("#footimg"+i).append(footstr);
+			}
+		}
+	})
 
 </script>
 </html>

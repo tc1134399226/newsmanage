@@ -98,4 +98,9 @@ articleCommentStatus)g)
         update article set areaId =#{areaId},typeId=#{typeId},mainTitle=#{mainTitle} ,subTitle=#{subTitle},content=#{content}
         where articleId = #{articleId}
     </update>
+
+    <insert id="toReport" parameterType="com.qf.news.dto.ReportDTO">
+        insert into report (userId,ruserId,artile,context,createTime)
+        values(#{userId},#{ruserId},#{artile},#{context},CURRENT_TIMESTAMP)
+    </insert>
 </mapper>

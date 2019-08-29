@@ -150,14 +150,15 @@
             url : "sysuser/addToCarousel",
                     //数据，json字符串
                     data : JSON.stringify({
-                    "areaId":areaId,
-                    "userId":userId,
-                    "typeId":typeId,
-                    "cover":cover,
-                    "mainTitle":mainTitle,
-                    "subTitle":subTitle,
-                    "content":content
-                }),
+                        "articleId":articleId,
+                        "areaId":areaId,
+                        "userId":userId,
+                        "typeId":typeId,
+                        "cover":cover,
+                        "mainTitle":mainTitle,
+                        "subTitle":subTitle,
+                        "content":content
+                    }),
             //请求成功
             success : function(result) {
                 console.log(result);

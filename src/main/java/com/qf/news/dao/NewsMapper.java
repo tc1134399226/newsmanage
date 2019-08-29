@@ -2,6 +2,7 @@ package com.qf.news.dao;
 
 import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
+import com.qf.sysuser.pojo.ArticleCarousel;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -52,4 +53,7 @@ public interface NewsMapper {
     public List<ArticleTypeVO> listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId(Integer typeId,Integer areaId);
 
     public AreaTypeVO getAreaIdTypeId(AreaTypeVO areaTypeVO);
+
+    //根据id查询轮播新闻详情信息
+    public List<ArticleTypeVO> getArticleCarousel();
 }

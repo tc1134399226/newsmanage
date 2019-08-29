@@ -10,7 +10,7 @@
        INSERT into area_type_img
        (articleId,areaId,userId,typeId,cover,mainTitle,subTitle,content,createTime,updateTime)
        VALUES
-       (DEFAULT,#{areaId},#{userId},#{typeId},#{cover},#{mainTitle},#{subTitle},#{content},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
+       (#{articleId},#{areaId},#{userId},#{typeId},#{cover},#{mainTitle},#{subTitle},#{content},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
     </insert>
 
     <!--已加入area_type_img表中的新闻将设置状态为2-->
