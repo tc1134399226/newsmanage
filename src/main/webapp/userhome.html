@@ -56,7 +56,7 @@
             margin:  0px 10px;
         }
         .partSev{
-            width: 12%;
+            width: 36%;
             float:left;
             margin:  0px 10px;
         }
@@ -86,7 +86,7 @@
 <hr>
 
 <div class="table-responsive">
-    <table class="table  table-bordered" id = "dataTable">
+    <table class="table  table-bordered" id = "dataTable" style="width: 97%;">
         <tbody>
         <tr>
 
@@ -237,14 +237,6 @@
     //点击分页的页数和上,下页时触发这个方法
     //显示用户收藏文章指定页
     function myCollection(pageNum){
-        //        var pageNum=window.location.search.split("=")[1];
-        //        console.log("111"+pageNum)
-        // if (pageNum==undefined){
-        //     console.log("111")
-        //     pageNum=1;
-        // }else if (pageNum.indexOf("&type") != -1){
-        //            pageNum=pageNum.split("&type")[0]
-        //        }
 
         console.log(pageNum)
         var requestURL="news/getCollectionByUserId";

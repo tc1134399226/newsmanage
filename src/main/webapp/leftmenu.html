@@ -43,26 +43,23 @@
     <dl>
         <dt><i>·</i> 个人空间</dt>
         <dd><a id="menu1" onclick="jumpright(1)" >个人空间</a></dd>
-        <hr>
+        <br>
+        <dd><a id="menu9" onclick="jumpright(9)" >我的关注</a></dd>
+        <br>
+        <dd><a id="menu10" style="display:none;" onclick="jumpright(10)" >我的粉丝</a></dd>
     </dl>
-    <hr>
+    <br>
     <dl>
         <dt><i>·</i> 权限一览</dt>
         <dd><a id="menu6" style="display:none" onclick="jumpright(6)" >申请小编</a></dd>
-        <hr>
-        <span v-if="judge">
         <dd><a id="menu7" style="display:none" onclick="jumpright(7)">发布新闻</a></dd>
-        </span>
     </dl>
-    <hr>
+    <br>
     <dl>
         <dt><i>·</i> 设置</dt>
 
         <dd><a id="menu8" onclick="jumpright(8)" class="list-active">信息修改</a></dd>
-        <hr>
-        <hr>
-        <hr>
-        <hr>
+        <br>
     </dl>
 </div>
 <script>
@@ -88,6 +85,7 @@
 
     if(user.status==2) {
         $("#menu7").show();
+        $("#menu10").show();
     }else {
         $("#menu6").show();
     }
@@ -142,6 +140,12 @@
                 if (object==8){
                     window.location.href = "userInfo-edit.html?userId="+user.userId
                 }
+                // if (object==9){
+                //     window.location.href = "userInfo-edit.html?userId="+user.userId
+                // }
+                // if (object==10){
+                //     window.location.href = "userInfo-edit.html?userId="+user.userId
+                // }
             }
         });
     }

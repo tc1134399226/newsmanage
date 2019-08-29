@@ -3,6 +3,7 @@ package com.qf.news.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.qf.news.dto.FollowUser;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.Follow;
 import com.qf.news.service.NewsService;
@@ -159,5 +160,19 @@ public class NewsController {
     @ResponseBody
     public boolean insertFollow(@RequestBody Follow follow){
         return newsService.insertFollow(follow)>0;
+    }
+
+    //获取我的关注
+    @RequestMapping("getMyFollow")
+    @ResponseBody
+    public List<Follow> getMyFollow(@RequestBody Follow follow){
+        return newsService.getMyFollow(follow);
+    }
+
+    //获取我的粉丝
+    @RequestMapping("getMyFance")
+    @ResponseBody
+    public List<Follow> getMyFance(@RequestBody Follow follow){
+        return newsService.getMyFance(follow);
     }
 }
