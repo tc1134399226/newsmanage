@@ -283,6 +283,5 @@ public class NewsArticleInfoController {
 //            return false;
 //        }
         return (Long)session.getAttribute("articleId")>0;
-
     }
 }
