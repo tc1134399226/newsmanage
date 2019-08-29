@@ -5,23 +5,27 @@
 
 <select id="getArticleAndLoveNumAndComNum" parameterType="Long" resultType="com.qf.news.vo.ArticleTypeVO">
 SELECT tb1.*,b.articleLoveNum ,c.timeArticleLoveNum,d.timeComNum
- ,e.timeVisNum,f.visNum from (
+ ,e.timeVisNum,f.visNum,g.articleCommentStatus from (
 (SELECT a.*,
  IFNULL(la.status,0) articleLoveStatus,COUNT(c.comId) comNum
 from article a LEFT JOIN love_article la on la.articleId=a.articleId
 LEFT JOIN comment c on c.articleId=a.articleId
-where a.articleId=#{articleId}  ) tb1,
+where a.articleId=#{param1}   ) tb1,
 (SELECT COUNT(la.articleId) articleLoveNum from article a LEFT JOIN love_article la on la.articleId= a.articleId
-where a.articleId=#{articleId} and la.status=1 ) b,
+where a.articleId=#{param1}  and la.status=1 ) b,
 (SELECT COUNT(la.articleId) timeArticleLoveNum from article a LEFT JOIN love_article la on la.articleId= a.articleId
-where a.articleId=#{articleId} and la.status=1 and la.updateTime >= now()-interval 15 day )c,
+where a.articleId=#{param1}  and la.status=1 and la.updateTime >= now()-interval 15 day )c,
 (select COUNT(comId) timeComNum from comment
-where articleId=#{articleId} and createTime >= now()-interval 15 day)d,
+where articleId=#{param1}  and createTime >= now()-interval 15 day)d,
 (select COUNT(visitorId) timeVisNum from visitor
-where articleId=#{articleId} and createTime >= now()-interval 15 day)e,
+where articleId=#{param1}  and createTime >= now()-interval 15 day)e,
 (select COUNT(visitorId) visNum from visitor
-where articleId=#{articleId} and createTime >= now()-interval 15 day)f
-)
+where articleId=#{param1}  and createTime >= now()-interval 15 day)f,
+(SELECT
+ IFNULL((SELECT IFNULL(c.articleId,0)
+from collection c
+where c.articleId=#{param1}  and c.userId=#{param2}  and c.`status`=1),0)
+articleCommentStatus)g)
 </select>
 <update id="updateTimeHotByArticleId" parameterType="com.qf.news.vo.ArticleTypeVO">
     update article set hot=#{timeHot} where articleId=#{articleId}

@@ -43,7 +43,7 @@ public interface NewsArticleInfoService {
      * @param articleId
      * @return
      */
-    public ArticleTypeVO getArticleAndLoveNumAndComNum( Long articleId);
+    public ArticleTypeVO getArticleAndLoveNumAndComNum( Long articleId,Long userId);
 
     /**
      * 用户点赞(取消)

@@ -79,10 +79,10 @@
         margin: 0px 200px;
     }
     /*img{*/
-    /*border-radius: 30px;*/
-    /*width:60px;*/
-    /*height:60px;*/
-    /*float: left;*/
+        /*border-radius: 30px;*/
+        /*width:60px;*/
+        /*height:60px;*/
+        /*float: left;*/
     /*}*/
     .user{
         /*float: left;*/
@@ -113,7 +113,7 @@
                     <div class="blog_post_style2 blog_single_div">
                         <!--&lt;!&ndash;主图片&ndash;&gt;-->
                         <!--<div class="blog_post_style2_img wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">-->
-                        <!--<img src="./blog_single_big.jpg" class="img-fluid" alt="">-->
+                            <!--<img src="./blog_single_big.jpg" class="img-fluid" alt="">-->
                         <!--</div>-->
                         <!--内容-->
                         <div class="blog_post_style2_content wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
@@ -124,7 +124,7 @@
                             <!--作者-->
                             <div class="blog_author_data">
                                 <a href="#">
-                                    <img src="" class="img-fluid" alt="" width="34" height="34" id="icon">
+                                    <img src="./author_img.jpg" class="img-fluid" alt="" width="34" height="34">
                                     <input style="border:none;" id="userName"   readonly="readonly">
                                 </a>
                             </div>
@@ -133,15 +133,15 @@
                                 <!--浏览量-->
                                 <li>
                                     <!--<span class="blog_bg_blue">-->
-                                    <!--<i class="glyphicon glyphicon-eye-open"></i>-->
-                                    <!--21K-->
+                                        <!--<i class="glyphicon glyphicon-eye-open"></i>-->
+                                        <!--21K-->
                                     <!--</span>-->
                                 </li>
                                 <!--评论数-->
                                 <li>
                                     <!--<span class="blog_bg_pink">-->
-                                    <!--<i class="glyphicon glyphicon-comment"></i>-->
-                                    <!--12-->
+                                        <!--<i class="glyphicon glyphicon-comment"></i>-->
+                                        <!--12-->
                                     <!--</span>-->
                                 </li>
                             </ul>
@@ -152,10 +152,10 @@
                                 </div>
                             </div>
                         </div>
-                        </ol>
-                    </div>
-                </div>
+    </ol>
             </div>
+        </div>
+    </div>
 
 
 
@@ -209,34 +209,34 @@
 
 <!--</div>-->
 
-<!--<div class="form-group" style="text-align:center;margin-bottom:1px;" >-->
-<!--<label >主标题</label>-->
-<!--<input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center " >-->
-<!--</div>-->
-<!--<div id="hot">-->
-<!--123123-->
-<!--</div>-->
+        <!--<div class="form-group" style="text-align:center;margin-bottom:1px;" >-->
+            <!--<label >主标题</label>-->
+            <!--<input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center " >-->
+        <!--</div>-->
+        <!--<div id="hot">-->
+                <!--123123-->
+        <!--</div>-->
 <!--<hr>-->
-<!--<div class="form-group" style="text-align:center;margin-top:2px;">-->
-<!--<label >副标题</label>-->
-<!--<input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center ">-->
-<!--</div>-->
+        <!--<div class="form-group" style="text-align:center;margin-top:2px;">-->
+            <!--<label >副标题</label>-->
+            <!--<input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center ">-->
+        <!--</div>-->
 <!--<hr>-->
-<!--<div class="form-group" id="contentStr"-->
-<!--style="text-align:center;width:800px; height:300px;color:black" align="center">-->
-<!--<label >新闻内容:</label>-->
-<!--</div>-->
+        <!--<div class="form-group" id="contentStr"-->
+             <!--style="text-align:center;width:800px; height:300px;color:black" align="center">-->
+            <!--<label >新闻内容:</label>-->
+        <!--</div>-->
 
 <!--<hr>-->
 
-<!--<div class="form-group" style="text-align:center;" id="coverImg"-->
-<!--style="text-align:center;width:100px; height:100px;color:#0000FF" align="center">-->
-<!--<label >封面图</label>-->
-<!--<br>-->
-<!--</div>-->
+        <!--<div class="form-group" style="text-align:center;" id="coverImg"-->
+             <!--style="text-align:center;width:100px; height:100px;color:#0000FF" align="center">-->
+            <!--<label >封面图</label>-->
+            <!--<br>-->
+        <!--</div>-->
 
 
-<!--<div class="footer"></div>-->
+        <!--<div class="footer"></div>-->
 
 
 <!--        <div align="center" id="textDiv" class="lastDiv">-->
@@ -267,7 +267,6 @@
         //数据，json字符串
         //请求成功
         success : function(result) {
-
             console.log(result);
             $("#mainTitle").text(result.mainTitle);
             $("#subTitle").text(result.subTitle);

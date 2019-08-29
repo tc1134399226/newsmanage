@@ -44,7 +44,7 @@ public interface NewsArticleInfoMapper {
      * @param articleId
      * @return
      */
-    public ArticleTypeVO getArticleAndLoveNumAndComNum( Long articleId);
+    public ArticleTypeVO getArticleAndLoveNumAndComNum( Long articleId,Long userId);
     /**
      * 获取该用户对本文章是否点赞
      * @param userId
