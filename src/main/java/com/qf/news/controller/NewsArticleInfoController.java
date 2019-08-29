@@ -99,12 +99,14 @@ public class NewsArticleInfoController {
     @ResponseBody
     public Object getArticleAndLoveNumAndComNum( HttpSession session){
 //        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-//        long articleId = (Long)session.getAttribute("articleId");
-//        if (userInfo.getUserId()==0||articleId==0){
+        Long articleId = (Long) session.getAttribute("articleId");
+        System.out.print("articleId为");
+        System.out.println(articleId);
+//        if (articleId==0){
 //          return false;
 //      }
-//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId);
-        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1);
+        return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId);
+//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1);
     }
 
 
@@ -270,14 +272,17 @@ public class NewsArticleInfoController {
     }
     @RequestMapping("toArticleContent")
     @ResponseBody
-    public Object toArticleContent(@RequestParam long articleId,HttpSession session) {
+    public Object toArticleContent(@RequestParam Long articleId,HttpSession session) {
+        if (articleId <=0) {
+          return false;
+      }
         session.setAttribute("articleId", articleId);
-        Long attribute = (Long) session.getAttribute("articleId");
-        System.out.println(attribute);
-        if (attribute == null) {
-            return false;
-        }
-        return true;
+//        Long attribute = (Long) session.getAttribute("articleId");
+//        System.out.println(attribute);
+//        if (attribute == null) {
+//            return false;
+//        }
+        return (Long)session.getAttribute("articleId")>0;
 
     }
 }

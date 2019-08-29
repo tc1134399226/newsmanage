@@ -6,9 +6,9 @@ import java.sql.Timestamp;
 
 @Data
 public class ArticleTypeVO {
-    public Integer articleId;
+    public Long articleId;
     public Integer typeId;
-    private Integer userId;
+    private Long userId;
     private String mainTitle;
     private String subTitle;
     private Timestamp createTime;

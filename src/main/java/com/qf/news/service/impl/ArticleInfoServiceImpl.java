@@ -75,7 +75,7 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
      * @param articleId
      * @return
      */
-    public ArticleTypeVO getArticleAndLoveNumAndComNum( long articleId){
+    public ArticleTypeVO getArticleAndLoveNumAndComNum( Long articleId){
         return newsArticleInfoMapper.getArticleAndLoveNumAndComNum(articleId);
     }
     /**
@@ -98,7 +98,6 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
         }
     }
 
-    @Override
     public boolean uploadArticle(ArticleInfo articleInfo) {
         return newsArticleInfoMapper.uploadArticle(articleInfo)>0;
     }

@@ -26,6 +26,7 @@
         update collection set status=0 where colId=#{colId}
     </update>
     <insert id="addCollectByArticleIdAndUserId" parameterType="com.qf.news.vo.ArticleTypeVO" >
-        delete from article  where articleId=#{articleId} and userId=#{userId}
+        insert into collection   (articleId,userId,status,createTime,updateTime)
+        values (#{articleId},#{userId},1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
     </insert>
 </mapper>

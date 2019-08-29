@@ -80,12 +80,11 @@
         //数据，json字符串
         //请求成功
         success: function (result) {
-            if (result==null){
-                window.location.href = "login.html";
-            }
             user = result;
         }
     });
+
+
 
     if(user.status==2) {
         $("#menu7").show();
