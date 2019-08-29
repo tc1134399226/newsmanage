@@ -7,10 +7,7 @@ import com.qf.news.service.NewsCollectionService;
 import com.qf.news.vo.ArticleTypeVO;
 import com.qf.news.vo.CollectionVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -47,6 +44,30 @@ public class NewsCollectionController {
         PageInfo<CollectionVO> collectionVOPageInfo = new PageInfo<CollectionVO>(collectionByUserId);
         return collectionVOPageInfo;
     }
+
+    /**
+     * 通过UserId获取关注着收藏的文章(分页)
+     * @param pageNum
+     * @param userInfo
+     * @return
+     * @throws IOException
+     */
+    @RequestMapping(value="getEditorCollectionByUserId")
+    public Object getEditorCollectionByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
+                                                Integer pageNum
+            , @RequestBody UserInfo userInfo) throws IOException {
+        if (userInfo==null||userInfo.getUserId()==0){
+            return false;
+        }
+        //一页有多少条数据
+        int defaultPageSize=5;
+        //初始化pageHelper对象
+        PageHelper.startPage(pageNum,defaultPageSize);
+        List<CollectionVO> collectionByUserId = newsCollectionService.getCollectionByUserId(userInfo);
+        PageInfo<CollectionVO> collectionVOPageInfo = new PageInfo<CollectionVO>(collectionByUserId);
+        return collectionVOPageInfo;
+    }
+
 
     /**
      * 通过ColId删除我的收藏

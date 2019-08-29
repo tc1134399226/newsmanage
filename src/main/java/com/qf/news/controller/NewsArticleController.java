@@ -39,11 +39,6 @@ public class NewsArticleController {
     public Object getMyArtByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
                                                 Integer pageNum , HttpSession session){
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-
-//        //测试
-//        UserInfo userInfo=new UserInfo();
-//        userInfo.setUserId(1);
-
         if (userInfo==null){
             return false;
         }
@@ -61,54 +56,76 @@ public class NewsArticleController {
     }
 
     /**
-     * 通过UserId获取我的草稿(分页)
+     * 通过UserId获取关注小编的文章(分页)
      * @param pageNum
-     * @param session
+     * @param userInfo
      * @return
      */
-    @RequestMapping("getMyDraftByUserId")
-    public Object getMyDraftByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
-                                           Integer pageNum , HttpSession session){
-//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-
-        //测试
-        UserInfo userInfo=new UserInfo();
-        userInfo.setUserId(1);
-        System.out.println(userInfo);
-        if (userInfo==null){
-            return "login";
-        }
-        System.out.println(pageNum);
-        System.out.println(userInfo);
-        //一页有多少条数据
-        int defaultPageSize=5;
-        //初始化pageHelper对象
-        PageHelper.startPage(pageNum,defaultPageSize);
-        List<ArticleInfo> myArtByUserId = newsArticleService.getMyDraftByUserId(userInfo);
-        System.out.println(myArtByUserId);
-        PageInfo<ArticleInfo> articleInfoPageInfo = new PageInfo<ArticleInfo>(myArtByUserId);
-        return articleInfoPageInfo;
-    }
-
-    /**
-     * 通过ArticleId删除我的草稿
-     * @param articleId
-     * @return
-     */
-    @RequestMapping("deleteMyDraftByArticleId")
-    public Object deleteMyDraftByArticleId(@RequestParam Long articleId){
-        if (articleId==0){
+    @RequestMapping("getEditorArtByUserId")
+    public Object getEditorArtByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
+            Integer pageNum , @RequestBody UserInfo userInfo) {
+        if (userInfo==null||userInfo.getUserId() == 0) {
             return false;
         }
-        return newsArticleService.deleteMyDraftByArticleId(articleId);
-    }
-    @RequestMapping("getcomNumAndLoveNum")
-    public Object getcomNumAndLoveNum(@RequestParam Long articleId){
-        if (articleId==0){
-            return false;
+            System.out.println(pageNum);
+            //一页有多少条数据
+            int defaultPageSize = 5;
+            //初始化pageHelper对象
+            PageHelper.startPage(pageNum, defaultPageSize);
+            List<ArticleInfo> myArtByUserId = newsArticleService.getMyArtByUserId(userInfo);
+            System.out.println(myArtByUserId);
+            PageInfo<ArticleInfo> articleInfoPageInfo = new PageInfo<ArticleInfo>(myArtByUserId);
+            return articleInfoPageInfo;
         }
-        return newsArticleService.getcomNumAndLoveNum(articleId);
-    }
+
+
+        /**
+         * 通过UserId获取我的草稿(分页)
+         * @param pageNum
+         * @param session
+         * @return
+         */
+        @RequestMapping("getMyDraftByUserId")
+        public Object getMyDraftByUserId (@RequestParam(required = true, defaultValue = "1", value = "pageNum")
+                Integer pageNum, HttpSession session){
+            UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+
+            if (userInfo == null) {
+                return false;
+            }
+            System.out.println(userInfo);
+
+            System.out.println(pageNum);
+            System.out.println(userInfo);
+            //一页有多少条数据
+            int defaultPageSize = 5;
+            //初始化pageHelper对象
+            PageHelper.startPage(pageNum, defaultPageSize);
+            List<ArticleInfo> myArtByUserId = newsArticleService.getMyDraftByUserId(userInfo);
+            System.out.println(myArtByUserId);
+            PageInfo<ArticleInfo> articleInfoPageInfo = new PageInfo<ArticleInfo>(myArtByUserId);
+            return articleInfoPageInfo;
+        }
+
+        /**
+         * 通过ArticleId删除我的草稿
+         * @param articleId
+         * @return
+         */
+        @RequestMapping("deleteMyDraftByArticleId")
+        public Object deleteMyDraftByArticleId (@RequestParam Long articleId){
+            if (articleId == 0) {
+                return false;
+            }
+            return newsArticleService.deleteMyDraftByArticleId(articleId);
+        }
+        @RequestMapping("getcomNumAndLoveNum")
+        public Object getcomNumAndLoveNum (@RequestParam Long articleId){
+            if (articleId == 0) {
+                return false;
+            }
+            return newsArticleService.getcomNumAndLoveNum(articleId);
+        }
 
 
 }
