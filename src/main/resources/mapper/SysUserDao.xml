@@ -123,7 +123,7 @@
                 status = #{status},
             </if>
 
-            <if test="icon !=null and icon!=''">
+            <if test="status!=null and status!=''">
                 updateTime = now(),
             </if>
 
