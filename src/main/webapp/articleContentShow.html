@@ -538,17 +538,28 @@
 
 
 <script>
+    function init(pageNum) {
+        // var str=window.location.search
+        if ( typeof pageNum == "undefined"){
+            console.log("pageNum:"+pageNum)
+            initPage(1);
+        }
+        initPage(pageNum)
+    }
+    init()
     // glyphicon glyphicon-heart style='color: red'
     //清空table
     //初始化页面
-    function initPage(){
-        var pageNum=window.location.search.split("=")[1];
-        console.log("pageNum:"+pageNum)
+    function initPage(pageNum){
+        // var pageNum=window.location.search.split("=")[1];
+        // console.log("pageNum:"+pageNum)
         //通过文章id显示所有评论
-        var requestURL="news/allComment"
+        // alert(pageNum)
         if(pageNum==null){
             pageNum=1
         }
+        var requestURL="news/allComment"
+
         requestURL+="?pageNum="+pageNum;
         console.log(requestURL)
         //1.从后台的listAllUserInfo接口获取数据
@@ -570,8 +581,8 @@
                 // var pagename=window.location.pathname
                 // console.log(pagename);
                 $(result.list).each(function(index,item){
-                    // console.log(item);
-                    var   trStr="<img src=\""+item.icon+"\"><br>";
+                    console.log(item);
+                    var   trStr="<img style='width :80px;height :80px;border-radius: 50%' src=\""+item.icon+"\"><br>";
                     // console.log(item.icon)
                     trStr+="<div class='user'>"
                     trStr+="用户名:"+item.nickName+"<br>";
@@ -603,18 +614,26 @@
                 if (pageNum<=1){
                     var   splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
                 } else {
-                    var  	splicPage="<li><a href=\"comment.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+                    // alert("上一页"+pageNum)
+                    var  	splicPage="<li><a onclick='init("+(parseInt(pageNum,10)-1 )+")'  id='start'>上一页</a></li>"
 
                 }
                 console.log(111)
                 console.log(result.pages)
                 for(var i=1;i<=result.pages;i++){
-                    splicPage +="<li><a href=\"comment.html?pageNum="+i+"\">"+i+"</a></li>";
+                    if (pageNum==1){
+                        pageNum==2
+                    }
+                    if (i>parseInt(pageNum)-3&&i<parseInt(pageNum)+3) {
+                        splicPage +="<li><a onclick='init("+i+")'>"+i+"</a></li>";
+                    }
                 }
                 if (pageNum>=result.pages) {
                     splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
                 }else {
-                    splicPage+="<li><a href=\"comment.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+                    // alert("下一页"+pageNum)
+                    splicPage+="<li><a  onclick='init("+(parseInt(pageNum,10)+1 )+")'  id='end'>下一页</a></li>";
+
                 }
                 $(".pagination").html("");
                 $(".pagination").append(splicPage);
@@ -627,7 +646,7 @@
             }
         });
     }
-    initPage();
+
     function reply(userId,comId,comName,repId) {
         console.log(comId)
         $.ajax({

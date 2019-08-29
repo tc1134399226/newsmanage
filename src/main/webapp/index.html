@@ -744,7 +744,7 @@
 									return false;
 								}
 								str += "<dd>";
-								str += "<a onclick='articleContent("+item.articleId+")'  href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
+								str += "<a onclick='articleContent("+item.articleId+")'  >"+item.mainTitle+"";
 								str += "</dd>";
 								count +=1;
 							}
@@ -780,7 +780,7 @@
 									return false;
 								}
 								str += "<dd>";
-								str += "<a   onclick='articleContent("+item.articleId+")' href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"";
+								str += "<a   onclick='articleContent("+item.articleId+")' >"+item.mainTitle+"";
 								str += "</dd>";
 								count +=1;
 							}
@@ -829,14 +829,14 @@
 			$("#dataImg").empty();
 			var fiveImg = "";
 			$(result).each(function(index,item) {
-				fiveImg +="<a onclick='articleContent("+item.articleId+")' href='articleContentShow.html?articleId="+item.articleId+"'><li><img src='"+item.cover+"'></li></a>"
+				fiveImg +="<a onclick='articleContent("+item.articleId+")' ><li><img src='"+item.cover+"'></li></a>"
 			})
 			$("#dataImg").append(fiveImg);
 			var strtop = "";
 			$(result).each(function(index,item) {
 				strtop += '<dl class="right_new">';
 				strtop += '<dt>';
-				strtop += "<h2><a href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"</a></h2>";
+				strtop += "<h2><a  onclick='articleContent("+item.articleId+")' >"+item.mainTitle+"</a></h2>";
 				strtop += "<dd><p>"+item.subTitle+"</p></dd></dt></dl>";
 				if (index>2){
 					return false;
