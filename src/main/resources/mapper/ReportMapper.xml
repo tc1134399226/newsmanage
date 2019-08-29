@@ -5,7 +5,7 @@
 <mapper namespace="com.qf.sysuser.dao.SysUserReportMapper">
 
     <select id="getAllReport" resultType="com.qf.sysuser.vo.ReportVO">
-        select u.nickName,r.context,a.mainTitle,r.createTime ,a.articleId from report r left join
+        select r.userId, u.nickName,r.context,a.mainTitle,r.createTime ,a.articleId from report r left join
         article a on r.artileId = a.articleId left join userinfo u on r.userId=u.userId where a.status=2
     </select>
 

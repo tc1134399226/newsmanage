@@ -51,5 +51,9 @@ public interface NewsService {
     public int insertFollow(Follow follow);
 
     public int deleteFollow(Follow follow);
+
+    public List<Follow>  getMyFollow(Follow follow);
+
+    public List<Follow> getMyFance(Follow follow);
 }
 

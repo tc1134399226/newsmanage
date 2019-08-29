@@ -123,7 +123,7 @@
                             <h4 id="subTitle"></h4>
                             <!--作者-->
                             <div class="blog_author_data" style="display: block">
-                                <a href="#">
+                                <a>
                                     <img src="" id="icon" class="img-fluid" alt="" width="80" height="80">
                                     <div id="followimg" onclick="userfollow()" style="display: inline"><img src="img/follow.png" width="34px" height="34px"></div>
                                     <input style="border:none;" id="userName"   readonly="readonly">
@@ -457,10 +457,10 @@
             }),
             success : function(result) {
                 if (result){
-                    $("#followimg").empty();
-                    $("#followimg").append('<img src="img/follow2.png" width="34px" height="34px">');
+
                 }else {
-                    alert("false");
+                    $("#followimg").empty();
+                    $("#followimg").append('<img src="img/follow2.png" width="34px" height="34px">')
                 }
             }
         });
@@ -487,6 +487,7 @@
                 }),
                 success : function(result) {
                     if (result){
+                        // alert("取消关注")
                     $("#followimg").empty();
                     $("#followimg").append('<img src="img/follow2.png" width="34px" height="34px">');
                 }
@@ -511,6 +512,7 @@
                 }),
                 success : function(result) {
                     if (result) {
+                        // alert("关注成功")
                     $("#followimg").empty();
                     $("#followimg").append('<img src="img/follow.png" width="34px" height="34px">');
                 }
