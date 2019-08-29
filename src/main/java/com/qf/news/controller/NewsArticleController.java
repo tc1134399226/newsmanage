@@ -38,19 +38,20 @@ public class NewsArticleController {
     @RequestMapping("getMyArtByUserId")
     public Object getMyArtByUserId(@RequestParam(required = true,defaultValue = "1",value = "pageNum")
                                                 Integer pageNum , HttpSession session){
-//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
 
 //        //测试
-        UserInfo userInfo=new UserInfo();
-        userInfo.setUserId(1);
-        System.out.println(userInfo);
+//        UserInfo userInfo=new UserInfo();
+//        userInfo.setUserId(1);
+
         if (userInfo==null){
-            return "login";
+            return false;
         }
+        System.out.println(userInfo);
         System.out.println(pageNum);
         System.out.println(userInfo);
         //一页有多少条数据
-        int defaultPageSize=2;
+        int defaultPageSize=5;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum,defaultPageSize);
         List<ArticleInfo> myArtByUserId = newsArticleService.getMyArtByUserId(userInfo);
@@ -80,7 +81,7 @@ public class NewsArticleController {
         System.out.println(pageNum);
         System.out.println(userInfo);
         //一页有多少条数据
-        int defaultPageSize=2;
+        int defaultPageSize=5;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum,defaultPageSize);
         List<ArticleInfo> myArtByUserId = newsArticleService.getMyDraftByUserId(userInfo);

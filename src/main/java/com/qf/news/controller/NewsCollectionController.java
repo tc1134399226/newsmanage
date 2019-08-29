@@ -40,7 +40,7 @@ public class NewsCollectionController {
         //测试
 //        UserInfo userInfo=new UserInfo();
         //一页有多少条数据
-        int defaultPageSize=2;
+        int defaultPageSize=5;
         //初始化pageHelper对象
         PageHelper.startPage(pageNum,defaultPageSize);
         List<CollectionVO> collectionByUserId = newsCollectionService.getCollectionByUserId(userInfo);
@@ -70,10 +70,11 @@ public class NewsCollectionController {
     @RequestMapping("addCollectByArticleIdAndUserId")
     public boolean addCollectByArticleIdAndUserId(@RequestBody ArticleTypeVO articleTypeVO,HttpSession session){
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-        articleTypeVO.setUserId(userInfo.getUserId());
-        if (articleTypeVO==null){
+
+        if (userInfo==null){
             return false;
         }
+        articleTypeVO.setUserId(userInfo.getUserId());
         return newsCollectionService.addCollectByArticleIdAndUserId(articleTypeVO);
     }
 }

@@ -5,9 +5,9 @@ import lombok.Data;
 import java.sql.Timestamp;
 @Data
 public class LoveArticle {
-    private long laId;
-    private long userId;
-    private long articleId;
+    private Long laId;
+    private Long userId;
+    private Long articleId;
     private int status;
     private Timestamp createTime;
     private Timestamp updateTime;

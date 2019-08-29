@@ -24,7 +24,12 @@ where articleId=#{param1}  and createTime >= now()-interval 15 day)f,
 (SELECT
  IFNULL((SELECT IFNULL(c.articleId,0)
 from collection c
-where c.articleId=#{param1}  and c.userId=#{param2}  and c.`status`=1),0)
+where c.articleId=#{param1}
+<if test="param2!=null">
+    and c.userId=#{param2}
+</if>
+   and c.`status`=1),0)
+
 articleCommentStatus)g)
 </select>
 <update id="updateTimeHotByArticleId" parameterType="com.qf.news.vo.ArticleTypeVO">
@@ -76,22 +81,22 @@ articleCommentStatus)g)
     <update id="uploadCover" parameterType="com.qf.news.pojo.ArticleInfo">
         UPDATE article set cover=#{cover} where content=#{content}
     </update>
-    <select id="getLoveArticleByArticleIdAndUserId"  parameterType="long" resultType="com.qf.news.pojo.LoveArticle">
+    <select id="getLoveArticleByArticleIdAndUserId"  parameterType="Long" resultType="com.qf.news.pojo.LoveArticle">
         select * from love_article where userId=#{param1} and articleId=#{param2}
     </select>
-    <insert id="addLoveArticle" parameterType="long">
+    <insert id="addLoveArticle" parameterType="Long">
          insert into love_article (userId,articleId,status,createTime,updateTime)
          values (#{param1},#{param2},1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP)
     </insert>
     <update id="updateLoveArticle" parameterType="com.qf.news.pojo.LoveArticle">
              update love_article
-             <if test="status=='0'.toString()">
+             <if test="status == '0'.toString()">
               set status=1,updateTime=CURRENT_TIMESTAMP
              </if>
-        <if test="status!=null and status!=''and status=='1'.toString()">
+        <if test="status == '1'.toString()">
             set status=0,updateTime=CURRENT_TIMESTAMP
         </if>
-         where userId=#{userId} and articleId=#{userId}
+         where userId=#{userId} and articleId=#{articleId}
     </update>
 
     <update id="uploadArticle">

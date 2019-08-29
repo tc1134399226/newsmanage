@@ -313,15 +313,17 @@
 
                 var   trStr="<span class='glyphicon glyphicon-fire' > "+result.timeHot+"</span>"
                 if (result.articleLoveStatus==1){
+                    console.log(result.articleLoveStatus)
                      trStr+="<button id='loveArticleId' type=\"button\" style='color:red ' onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart'  ></button>"
                 } else if (result.articleLoveStatus==0) {
+                    console.log(result.articleLoveStatus)
                       trStr += "<button id='loveArticleId'  type=\"button\"    onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart' ></button>"
                 }
                 trStr+="&nbsp&nbsp&nbsp"+result.articleLoveNum
                 trStr+="&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
                 // trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
               if (result.articleCommentStatus==1){
-                    alert(result.articleCommentStatus)
+                   console.log(result.articleCommentStatus)
               } else if (result.articleCommentStatus==0){
                 trStr+="<button id='addCollect'  type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
               }
@@ -401,13 +403,14 @@ function clickLoveArticleId() {
                 // }
             }else{
                 alert("点赞失败")
-                console.log(e);
+                window.location.href="http://localhost:8080/newsmanage/login.html"
             }
         },
         //请求失败，包含具体的错误信息
         error : function(e){
+            // window.location.href="http://localhost:8080/newsmanage/login.html"
             console.log(e.status);
-            console.log(e.responseText);
+            console.log(e);
         }
     });
 
@@ -433,6 +436,7 @@ function addCollectByArticleIdAndUserId(articleId) {
                 hot()
             }else{
                 alert("收藏失败")
+                window.location.href="http://localhost:8080/newsmanage/login.html"
                 console.log(e);
             }
         },
@@ -634,6 +638,7 @@ function addCollectByArticleIdAndUserId(articleId) {
                     initPage();
                 }else {
                     alert("提交评论失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
 
             },
@@ -668,7 +673,8 @@ function addCollectByArticleIdAndUserId(articleId) {
                 if (result) {
                     initPage();
                 }else {
-                    alert("操作失败")
+                    alert("回复失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
             },
             error: function (e) {
@@ -820,6 +826,7 @@ function addCollectByArticleIdAndUserId(articleId) {
                     // }
                 }else {
                     alert("点赞失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
             },
             error: function (e) {
