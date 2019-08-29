@@ -122,9 +122,10 @@
                             <h3 id="mainTitle"></h3>
                             <h4 id="subTitle"></h4>
                             <!--作者-->
-                            <div class="blog_author_data">
+                            <div class="blog_author_data" style="display: block">
                                 <a href="#">
-                                    <img src="./author_img.jpg" class="img-fluid" alt="" width="34" height="34">
+                                    <img src="" id="icon" class="img-fluid" alt="" width="80" height="80">
+                                    <div id="followimg" onclick="userfollow()" style="display: inline"><img src="img/follow.png" width="34px" height="34px"></div>
                                     <input style="border:none;" id="userName"   readonly="readonly">
                                 </a>
                             </div>
@@ -146,7 +147,7 @@
                                 </li>
                             </ul>
                             <!--进入内文-->
-                            <div id="editor"style="max-width:800px;margin:50px;" class="editorClass">
+                            <div id="editor"style="max-width:800px;margin:113px;" class="editorClass">
                                 <div id="contentStr" style="text-align: left">
 
                                 </div>
@@ -207,43 +208,7 @@
     </table>
 </div>
 
-<!--</div>-->
 
-        <!--<div class="form-group" style="text-align:center;margin-bottom:1px;" >-->
-            <!--<label >主标题</label>-->
-            <!--<input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center " >-->
-        <!--</div>-->
-        <!--<div id="hot">-->
-                <!--123123-->
-        <!--</div>-->
-<!--<hr>-->
-        <!--<div class="form-group" style="text-align:center;margin-top:2px;">-->
-            <!--<label >副标题</label>-->
-            <!--<input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center ">-->
-        <!--</div>-->
-<!--<hr>-->
-        <!--<div class="form-group" id="contentStr"-->
-             <!--style="text-align:center;width:800px; height:300px;color:black" align="center">-->
-            <!--<label >新闻内容:</label>-->
-        <!--</div>-->
-
-<!--<hr>-->
-
-        <!--<div class="form-group" style="text-align:center;" id="coverImg"-->
-             <!--style="text-align:center;width:100px; height:100px;color:#0000FF" align="center">-->
-            <!--<label >封面图</label>-->
-            <!--<br>-->
-        <!--</div>-->
-
-
-        <!--<div class="footer"></div>-->
-
-
-<!--        <div align="center" id="textDiv" class="lastDiv">-->
-<!--            <button type="button" class="btn btn-success" onclick="returnCheck()" ><i class="glyphicon glyphicon-edit"></i>返回修改</button>-->
-<!--            <button type="button" class="btn btn-danger" onclick="checkCommit()"><i class="glyphicon glyphicon-refresh"></i> 确认提交</button>-->
-
-<!--        </div>-->
 
 
 
@@ -253,11 +218,12 @@
     // var strCover;
     var str=window.location.search;
     var articleId=str.split("=")[1];
-
+    var repUserId; //新闻作者id
 
     $.ajax({
         //请求方式
         type : "GET",
+        async:false,
         //请求的媒体类型
         contentType: "application/json;charset=UTF-8",
         //接受数据类型
@@ -267,16 +233,13 @@
         //数据，json字符串
         //请求成功
         success : function(result) {
-
             console.log(result);
+            repUserId = result.userId;
             $("#mainTitle").text(result.mainTitle);
             $("#subTitle").text(result.subTitle);
             $("#userName").val(result.nickName);
-            // var coverSrc=new Image();
-            //
-            // coverSrc.src=result.cover;
-            //
-            // $("#coverImg").append(coverSrc);
+            $("#icon").attr('src',result.icon);
+
 
             strCon=result.content;
 
@@ -313,19 +276,19 @@
 
                 var   trStr="<span class='glyphicon glyphicon-fire' > "+result.timeHot+"</span>"
                 if (result.articleLoveStatus==1){
-                     trStr+="<button id='loveArticleId' type=\"button\" style='color:red ' onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart'  ></button>"
+                    trStr+="<button id='loveArticleId' type=\"button\" style='color:red ' onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart'  ></button>"
                 } else if (result.articleLoveStatus==0) {
-                      trStr += "<button id='loveArticleId'  type=\"button\"    onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart' ></button>"
+                    trStr += "<button id='loveArticleId'  type=\"button\"    onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart' ></button>"
                 }
                 trStr+="&nbsp&nbsp&nbsp"+result.articleLoveNum
                 trStr+="&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
                 // trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
-              if (result.articleCommentStatus==1){
-                   console.log(result.articleCommentStatus)
-              } else if (result.articleCommentStatus==0){
-                trStr+="<button id='addCollect'  type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
-              }
-               $("#mark").append(trStr);
+                if (result.articleCommentStatus==1){
+                    console.log(result.articleCommentStatus)
+                } else if (result.articleCommentStatus==0){
+                    trStr+="<button id='addCollect'  type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
+                }
+                $("#mark").append(trStr);
 
             },
             //请求失败，包含具体的错误信息
@@ -335,115 +298,227 @@
             }
         });
     }
- hot()
+    hot()
 
 
-function getIp(strCon){
-    $.ajax({
-        //请求方式
-        type : "POST",
-        //请求的媒体类型
-        contentType: "application/json;charset=UTF-8",
-        //接受数据类型
-        dataType:"json",
-        //请求地址
-        url : "news/insertIP",
-        //数据，json字符串
-        //请求成功
-        data : JSON.stringify(
-            {
-                "articleId":articleId
-            }
-        ),
-        success : function(result) {
-            console.log(result);
-            if(result){
+    function getIp(strCon){
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/insertIP",
+            //数据，json字符串
+            //请求成功
+            data : JSON.stringify(
+                {
+                    "articleId":articleId
+                }
+            ),
+            success : function(result) {
                 console.log(result);
-            }else{
-                console.log(e);
+                if(result){
+                    console.log(result);
+                }else{
+                    console.log(e);
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
             }
-        },
-        //请求失败，包含具体的错误信息
-        error : function(e){
-            console.log(e.status);
-            console.log(e.responseText);
-        }
-    });
-}
-function clickLoveArticleId() {
+        });
+    }
+    function clickLoveArticleId() {
 
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/loveArticle",
+            //数据，json字符串
+            //请求成功
+            data : JSON.stringify(
+
+            ),
+            success : function(result) {
+                console.log(result);
+                if(result){
+                    hot()
+                    // var srcElement=window.event.target;
+                    // console.log($(srcElement).css("color"))
+                    // if ($(srcElement).css("color")=="rgb(255, 0, 0)"){
+                    //     console.log(1)
+                    //     $(srcElement).css("color","rgb(51, 51, 51)")
+                    // }else {
+                    //     console.log(2)
+                    //     $(srcElement).css("color","rgb(255, 0, 0)")
+                    // }
+                }else{
+                    alert("点赞失败")
+                    console.log(e);
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+
+    }
+    function addCollectByArticleIdAndUserId(articleId) {
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/addCollectByArticleIdAndUserId",
+            //数据，json字符串
+            //请求成功
+            data : JSON.stringify({
+                "articleId":articleId
+            }),
+            success : function(result) {
+                console.log(result);
+                if(result){
+                    hot()
+                }else{
+                    alert("收藏失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
+                    console.log(e);
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+
+
+    /*----------------------------------关注-----------------------------*/
+    <!--关注-->
+    var user;
+
+    //查看是否登录
     $.ajax({
         //请求方式
-        type : "POST",
+        type: "GET",
+        async:false,
         //请求的媒体类型
         contentType: "application/json;charset=UTF-8",
         //接受数据类型
-        dataType:"json",
+        dataType: "json",
         //请求地址
-        url : "news/loveArticle",
+        url: "news/getSession",
         //数据，json字符串
         //请求成功
-        data : JSON.stringify(
-
-        ),
-        success : function(result) {
-            console.log(result);
-            if(result){
-                hot()
-                // var srcElement=window.event.target;
-                // console.log($(srcElement).css("color"))
-                // if ($(srcElement).css("color")=="rgb(255, 0, 0)"){
-                //     console.log(1)
-                //     $(srcElement).css("color","rgb(51, 51, 51)")
-                // }else {
-                //     console.log(2)
-                //     $(srcElement).css("color","rgb(255, 0, 0)")
-                // }
-            }else{
-                alert("点赞失败")
-                window.location.href="http://localhost:8080/newsmanage/login.html"
-                console.log(e);
+        success: function (result) {
+            if (result==null){
+                $("#followimg").hide()
+            } else {
+              user = result;
             }
-        },
-        //请求失败，包含具体的错误信息
-        error : function(e){
-            console.log(e.status);
-            console.log(e.responseText);
         }
     });
 
-}
-function addCollectByArticleIdAndUserId(articleId) {
-    $.ajax({
-        //请求方式
-        type : "POST",
-        //请求的媒体类型
-        contentType: "application/json;charset=UTF-8",
-        //接受数据类型
-        dataType:"json",
-        //请求地址
-        url : "news/addCollectByArticleIdAndUserId",
-        //数据，json字符串
-        //请求成功
-        data : JSON.stringify({
-            "articleId":articleId
-        }),
-        success : function(result) {
-            console.log(result);
-            if(result){
-                hot()
-            }else{
-                alert("收藏失败")
-                console.log(e);
+    // alert(user.userId);  //能够获取
+    // alert(repUserId);
+    if (user!=null){
+        //判断是否已关注
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/getisFollow",
+            //数据，json字符串
+            //请求成功
+            data : JSON.stringify({
+                "userId":user.userId,
+                "repUserId":repUserId
+            }),
+            success : function(result) {
+                if (result){
+                    $("#followimg").empty();
+                    $("#followimg").append('<img src="img/follow2.png" width="34px" height="34px">');
+                }else {
+                    alert("false");
+                }
             }
-        },
-        //请求失败，包含具体的错误信息
-        error : function(e){
-            console.log(e.status);
-            console.log(e.responseText);
+        });
+    }
+
+    function userfollow() {
+        var attribute = $("#followimg img").attr("src");
+        if ("img/follow.png"==attribute){
+            //取消关注
+            $.ajax({
+                //请求方式
+                type: "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType: "json",
+                //请求地址
+                url: "news/deleteFollow",
+                //数据，json字符串
+                //请求成功
+                data: JSON.stringify({
+                    "userId": user.userId,
+                    "repUserId": repUserId
+                }),
+                success : function(result) {
+                    if (result){
+                    $("#followimg").empty();
+                    $("#followimg").append('<img src="img/follow2.png" width="34px" height="34px">');
+                }
+                }
+            })
+        }else {
+            //添加关注
+            $.ajax({
+                //请求方式
+                type: "POST",
+                //请求的媒体类型
+                contentType: "application/json;charset=UTF-8",
+                //接受数据类型
+                dataType: "json",
+                //请求地址
+                url: "news/insertFollow",
+                //数据，json字符串
+                //请求成功
+                data: JSON.stringify({
+                    "userId": user.userId,
+                    "repUserId": repUserId
+                }),
+                success : function(result) {
+                    if (result) {
+                    $("#followimg").empty();
+                    $("#followimg").append('<img src="img/follow.png" width="34px" height="34px">');
+                }
+                }
+            })
         }
-    });
-}
+    }
+
 </script>
 
 
@@ -831,6 +906,7 @@ function addCollectByArticleIdAndUserId(articleId) {
             }
         })
     }
+
 
 </script>
 
