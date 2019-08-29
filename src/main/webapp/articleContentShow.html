@@ -10,7 +10,6 @@
     <script src="script/docs.min.js"></script>
 
 
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -52,7 +51,7 @@
         clear: both;
     }</style>
 </head>
-<body  class="homepage2">
+<body class="homepage2">
 
 
 <style type="text/css">
@@ -174,62 +173,71 @@
 
 </div><!--Main js file Style-->
 
-        <div class="form-group" style="text-align:center;margin-bottom:1px;" >
-            <label >主标题</label>
-            <input type="text" class="form-control" id="mainTitle1" readonly="readonly" style="text-align:center;font-size:24px;font-weight:bold" >
-            <input type="hidden" class="form-control" id="uId" readonly="readonly"style="text-align:center ">
-        </div>
-        <div id="hot">
-                123123
-        </div>
-<hr>
-        <div class="form-group" style="text-align:center;margin-top:2px;">
-            <label >副标题</label>
-            <input type="text" class="form-control" id="subTitle1" readonly="readonly"style="text-align:center;font-size:18px;font-weight:bold">
-        </div>
-<hr>
-        <div class="form-group" id="contentStr1"
-             style="text-align:center;width:800px; height:300px;color:black" align="center">
-            <input type="hidden" class="form-control" id="articleId" readonly="readonly"style="text-align:center ">
-            <label >新闻内容:</label>
-        </div>
 
-
-
-<button data-toggle="modal" data-target="#myModal" style="margin-left: 515px">
-    举报该新闻
-</button>
-<!-- 模态框（Modal） -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;
-                </button>
-                <h4 class="modal-title" id="myModalLabel">
-                    网络并非法外之地
-                </h4>
-            </div>
-            <div class="modal-body" id="toReport">
-                <input type="text" style="height:30px;width:500px;outline:none" id="context" placeholder="请简要阐述举报理由" required>
-            </div>
-            <div class="modal-footer">
-
-                <button type="button" class="btn btn-primary" onclick="report()">
-                    提交
-                </button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
+<div class="button-group">
+    <div class="leaveMsgArea" contenteditable="true" id="leaveMsgArea">
+    </div>
+    <button type="button"   value="评论" onclick="commitComment()">提交评论</button>
 </div>
 
+<!--<input type="textarea" class="LeavingMessage" id="ComMessage"/><br>-->
+<!--<input type="button" value="评论" onclick="commitComment()">-->
+<div id="comment">
 
-           <!--<div id="toReport"style="margin-left: 395px">-->
-                  <!--<input type="text"  id="context" placeholder="请简要阐述举报理由">-->
-                  <!--<button type="button" onclick="report()">举报</button>-->
-           <!--</div>-->
-        <div class="footer"></div>
+</div>
+<div id="addReplyText"></div>
+<div class="table-responsive">
+    <table class="table  table-bordered" id = "dataTable">
+        <tfoot>
+        <tr >
+            <td colspan="6" align="center">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#">上一页</a></li>
+                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">下一页</a></li>
+                </ul>
+            </td>
+        </tr>
+
+        </tfoot>
+    </table>
+</div>
+
+<!--</div>-->
+
+        <!--<div class="form-group" style="text-align:center;margin-bottom:1px;" >-->
+            <!--<label >主标题</label>-->
+            <!--<input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center " >-->
+        <!--</div>-->
+        <!--<div id="hot">-->
+                <!--123123-->
+        <!--</div>-->
+<!--<hr>-->
+        <!--<div class="form-group" style="text-align:center;margin-top:2px;">-->
+            <!--<label >副标题</label>-->
+            <!--<input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center ">-->
+        <!--</div>-->
+<!--<hr>-->
+        <!--<div class="form-group" id="contentStr"-->
+             <!--style="text-align:center;width:800px; height:300px;color:black" align="center">-->
+            <!--<label >新闻内容:</label>-->
+        <!--</div>-->
+
+<!--<hr>-->
+
+        <!--<div class="form-group" style="text-align:center;" id="coverImg"-->
+             <!--style="text-align:center;width:100px; height:100px;color:#0000FF" align="center">-->
+            <!--<label >封面图</label>-->
+            <!--<br>-->
+        <!--</div>-->
+
+
+        <!--<div class="footer"></div>-->
+
 
 <!--        <div align="center" id="textDiv" class="lastDiv">-->
 <!--            <button type="button" class="btn btn-success" onclick="returnCheck()" ><i class="glyphicon glyphicon-edit"></i>返回修改</button>-->
@@ -240,13 +248,12 @@
 
 
 <script type="text/javascript">
-
-
-    $(".footer").load("comment.html");
+    // $("#foot").load("comment.html");
     var strCon;
     // var strCover;
     var str=window.location.search;
     var articleId=str.split("=")[1];
+
 
     $.ajax({
         //请求方式
@@ -260,11 +267,11 @@
         //数据，json字符串
         //请求成功
         success : function(result) {
+
             console.log(result);
-            $("#mainTitle1").val(result.mainTitle);
-            $("#uId").val(result.userId);
-            $("#subTitle1").val(result.subTitle);
-            $("#articleId").val(result.articleId);
+            $("#mainTitle").text(result.mainTitle);
+            $("#subTitle").text(result.subTitle);
+            $("#userName").val(result.nickName);
             // var coverSrc=new Image();
             //
             // coverSrc.src=result.cover;
@@ -274,7 +281,7 @@
             strCon=result.content;
 
             //整体拼接到div里面去
-            $("#contentStr1").append(strCon);
+            $("#contentStr").append(strCon);
             getIp(strCon);
 
         },
@@ -313,7 +320,11 @@
                 trStr+="&nbsp&nbsp&nbsp"+result.articleLoveNum
                 trStr+="&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
                 // trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
-                trStr+="<button   type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
+              if (result.articleCommentStatus==1){
+                    alert(result.articleCommentStatus)
+              } else if (result.articleCommentStatus==0){
+                trStr+="<button id='addCollect'  type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
+              }
                $("#mark").append(trStr);
 
             },
@@ -401,37 +412,6 @@ function clickLoveArticleId() {
     });
 
 }
-
-    function report(){
-
-        $.ajax({
-            //请求方式GET/POST
-            type: "POST",
-            //请求的媒体类型
-            contentType: "application/json;charset=UTF-8",
-            //接受数据类型
-            dataType: "json",
-            //请求地址
-            url: "news/toReport",
-            //传递参数
-            data: JSON.stringify(
-                {
-                    "artile":$("#articleId").val(),
-                    "mainTitle":$("#mainTitle1").val(),
-                    "ruserId":$("#uId").val(),
-                    "context":$("#context").val()
-                }
-            ),
-            //请求成功
-            success: function (result) {
-                console.log(result);
-            },
-            error: function (e) {
-                console.error(e);
-                alert("操作失败！");
-            }
-        });
-    }
 function addCollectByArticleIdAndUserId(articleId) {
     $.ajax({
         //请求方式
@@ -463,10 +443,393 @@ function addCollectByArticleIdAndUserId(articleId) {
         }
     });
 }
-
 </script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    // glyphicon glyphicon-heart style='color: red'
+    //清空table
+    //初始化页面
+    function initPage(){
+        var pageNum=window.location.search.split("=")[1];
+        console.log("pageNum:"+pageNum)
+        //通过文章id显示所有评论
+        var requestURL="news/allComment"
+        if(pageNum==null){
+            pageNum=1
+        }
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+
+            //请求成功
+            success : function(result) {
+                $("#comment").html("");
+                $("#leaveMsgArea").html("");
+                $("#addReplyText").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    // console.log(item);
+                    var   trStr="<img src=\""+item.icon+"\"><br>";
+                    // console.log(item.icon)
+                    trStr+="<div class='user'>"
+                    trStr+="用户名:"+item.nickName+"<br>";
+                    // trStr+="<td><input type=\"checkbox\"></td>";
+                    trStr+=item.createTime+"&nbsp;";
+                    //判断是否已被点赞
+                    if (item.loveStatus==1){
+                        trStr+="<button   type=\"button\" style='color:red ' onclick='clickLoveComment("+item.comId+")' class='glyphicon glyphicon-heart'  ></button>"
+                    } else if (item.loveStatus==0) {
+                        trStr += "<button   type=\"button\"  style='color:black '   onclick='clickLoveComment("+item.comId+")' class='glyphicon glyphicon-heart' ></button>"
+                    }
+                    trStr+=item.comLoveNum
+                    trStr+="</div>"
+                    trStr+="<br>"
+                    trStr+="<div class='content'>"
+                    trStr+=item.content+"<br>";
+                    trStr+="</div>"
+                    trStr+="<hr>"
+                    trStr+="<button type=\"button\" onclick='addReply("+item.repId+","+item.comId+")'><a href='#addReplyText'>回复</a></button>&nbsp;"
+                    trStr+="<button type=\"button\" id='deleteReply' " + "onclick='deleteComment("+item.userId+","+item.comId+")'>删除</button>&nbsp;"
+                    trStr+="<div style='margin-left: 100px; font-size: 15px;' id=\"c"+item.comId+"\">";
+                    trStr+="</div>"
+                    var comName=item.nickName;
+                    console.log("--------"+item.userId)
+                    reply(item.userId,item.comId,comName,item.repId)
+                    $("#comment").append(trStr);
+                });
+
+                if (pageNum<=1){
+                    var   splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var  	splicPage="<li><a href=\"comment.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+
+                }
+                console.log(111)
+                console.log(result.pages)
+                for(var i=1;i<=result.pages;i++){
+                    splicPage +="<li><a href=\"comment.html?pageNum="+i+"\">"+i+"</a></li>";
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a href=\"comment.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    initPage();
+    function reply(userId,comId,comName,repId) {
+        console.log(comId)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/getReplyByComId?comId="+comId,
+            //数据，json字符串
+            data:JSON.stringify({
+                "comId":comId,
+                "userId":userId
+            }),
+            //请求成功
+            success: function (result) {
+                $(result).each(function(index,item){
+                    console.log(item)
+                    console.log(item.createTime)
+                    var trStr="&nbsp&nbsp&nbsp"
+                    if (item.cnickName!=null){
+                        trStr+="<img src=\""+item.icon+"\"><br>";
+                        // console.log(item.icon)
+                        trStr+="用户:"+item.nickName+"回复了"+item.cnickName+"<br>";
+                        trStr+=item.createTime+"<br>"
+                    } else {
+                        trStr+="<img src=\""+item.icon+"\"><br>";
+                        // console.log(item.icon)
+                        trStr+="用户:"+item.nickName+"回复了"+comName+"<br>";
+                        trStr+=item.createTime+"<br>"
+                    }
+                    trStr+="&nbsp&nbsp&nbsp"
+                    trStr+="<div class='content'>"
+                    trStr+=item.content+"<br>";
+                    trStr+="</div>"
+                    trStr+="<hr>"
+                    trStr+="<button type=\"button\" id='addReply' " + "onclick='addReply("+item.repId+","+item.comId+")'><a href='#addReplyText'>回复</a></button>&nbsp;"
+                    trStr+="<button type=\"button\" id='deleteReply' " + "onclick='deleteReply("+item.userId+","+item.repId+")'>删除</button>&nbsp;"
+                    trStr+="<div id='r"+item.repId+"'>"
+                    trStr+="</div>"
+                    $("#c"+comId+"").append(trStr);
+                })
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+
+    }
+    function addReply(repId,comId) {
+        var  str="<div class=\"button-group\">";
+        str+="<div class=\"leaveMsgArea\" contenteditable=\"true\" id=\"replyMsgArea\">"
+        str+="</div>"
+        str+=" <button type=\"button\"   onclick=\"commitReply("+repId+","+comId+")\">提交回复</button>"
+        str+="</div>"
+        $("#addReplyText").append(str);
+
+    }
+    function commitComment() {
+        var text=document.getElementById("leaveMsgArea").innerText;
+        console.log(text)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/addComment",
+            data:JSON.stringify({
+                "content":text
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                //评论的话用userId和新闻id来发私信
+                // sendMessage(repId,comId)
+                if (result) {
+                    initPage();
+                }else {
+                    alert("提交评论失败")
+                }
+
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    function commitReply(repId,comId) {
+        // $("#replyMsgArea").style.display = 'none';
+        var text=document.getElementById("replyMsgArea").innerText;
+        console.log(text)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/addReplyByReplyInfo",
+            data:JSON.stringify({
+                "content":text,
+                "repId":repId,
+                "comId":comId
+
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                sendMessage(repId,comId)
+                if (result) {
+                    initPage();
+                }else {
+                    alert("操作失败")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    function deleteReply(userId,repId) {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/deleteReplyByRepId",
+            data:JSON.stringify({
+                "repId":repId,
+                "userId":userId
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("无法删除他人回复")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    function deleteComment(userId,comId) {
+
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/deleteCommentByComId",
+            data:JSON.stringify({
+                "comId":comId,
+                "userId":userId
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("无法删除他人评论")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+
+
+    //调用方法需要传递被发送者id
+    // function sendMessage(userId) {
+    function sendMessage(repId,comId) {
+        console.log(repId)
+        console.log(comId)
+        // var test=window.location.href.split("#")[0];
+        var test=window.location.href;
+        // alert(test);
+
+        //repId是被回复消息的id
+        //comId被回复评论的id
+        var text=document.getElementById("replyMsgArea").innerText;
+        console.log("消息内容")
+        console.log(text)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/sendMessageByReplyVO",
+            data:JSON.stringify({
+                "content":text,
+                "crepId":repId,
+                "comId":comId,
+                "mgeUrl":test
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("操作失败")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+
+    function clickLoveComment(comId) {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/addLoveComment",
+            data:JSON.stringify({
+                "comId":comId,
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage()
+                    // $(document).click(function(e) { // 在页面任意位置点击而触发此事件
+                    //     $(e.target).attr("id");       // e.target表示被点击的目标
+                    // })//此方法对于想要获取击元素获得当前点击元素信息如id，value，等信息，无法准确定位，获取，因此需要this，及当前之意
+                    // console.log( $(document).click(function(e) { $(e.target).attr("color"); }))
+                    // $('body').on('click','.showModel',function(){
+                    // window.alert(this.innerHTML);
+
+                    // $(document).click(function (e){  //需要第二次才能点赞成功
+                    //     var v_id=e.target.style.color;
+                    //     console.log(v_id);
+                    // });
+                    // var srcElement=window.event.target;
+                    // console.log($(srcElement).)
+                    // console.log($(srcElement).css("color"))
+                    // if ($(srcElement).css("color")=="rgb(255, 0, 0)"){
+                    //     console.log(1)
+                    //     $(srcElement).css("color","rgb(51, 51, 51)")
+                    // }else {
+                    //     console.log(2)
+                    //     $(srcElement).css("color","rgb(255, 0, 0)")
+                    // }
+                }else {
+                    alert("点赞失败")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+
+
+</script>
 
 </body>
 </html>

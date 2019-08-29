@@ -79,7 +79,7 @@ on tb1.articleId =v.articleId and v.createTime >= now()-interval 15 day
     </select>
 
     <select id="getArticleCarousel" resultType="com.qf.news.vo.ArticleTypeVO">
-        select a.*,ar.areaName,t.typeName from article_carousel a
+        select a.*,ar.areaName,t.typeName from area_type_img a
         inner join area ar on ar.areaId = a.areaId
         inner join type t on t.typeId = a.typeId
         ORDER BY a.createTime desc

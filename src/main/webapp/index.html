@@ -887,6 +887,7 @@
 		//请求地址
 		url: "news/getArticleCarousel",
 		success: function (result) {
+			console.log(result)
 			for (var i=0;i<type.length;i++){
 				var topstr = "";
 				var footstr = "";
@@ -894,18 +895,18 @@
 				$("#topimg"+i).empty();
 				$("#footimg"+i).empty();
 				$(result).each(function(index,item) {
-					alert(item.cover);
 					if (item.areaName==area) {
 						if (item.typeName == type[i]) {
 							if (count==0){
 								topstr += "<li><a><img src='"+item.cover+"'></a>";
 								topstr += "<div class='imgTitle'>"+item.mainTitle+"</div>"
-								$("#topimg"+i).append(topstr);
 								count +=1;
+								alert(topstr)
 							}else if (count<3) {
-								footimg += "<li><a><img src='"+item.cover+"'></a>";
-								footimg += "<div class='imgTitle'>"+item.mainTitle+"</div>"
+								footstr += "<li><a><img src='"+item.cover+"'></a>";
+								footstr += "<div class='imgTitle'>"+item.mainTitle+"</div>"
 								count +=1;
+								alert(footstr)
 							}else {
 								return false;
 							}
@@ -916,6 +917,7 @@
 				// 			<div class="imgTitle"><a>图片的标题</a></div>
 				// 	</li>
 				});
+				$("#topimg"+i).append(topstr);
 				$("#footimg"+i).append(footstr);
 			}
 		}
