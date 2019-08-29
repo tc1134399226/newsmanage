@@ -5,6 +5,7 @@ import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.LoveArticle;
 import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.NewsArticleInfoService;
+import com.qf.news.vo.ArticleInfoVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -83,8 +84,8 @@ public class NewsArticleInfoController {
     //根据articleId查询编辑的新闻显示到预览页面
     @RequestMapping("getReleaseInfoById")
     @ResponseBody
-    public ArticleInfo getReleaseInfoById(@RequestParam int articleId,
-                                          HttpSession session){
+    public ArticleInfoVO getReleaseInfoById(@RequestParam int articleId,
+                                            HttpSession session){
 //        long articleId1 = (Long)session.getAttribute("articleId");
         return newsArticleInfoService.getReleaseInfoById(articleId);
     }
@@ -98,12 +99,14 @@ public class NewsArticleInfoController {
     @ResponseBody
     public Object getArticleAndLoveNumAndComNum( HttpSession session){
 //        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-//        long articleId = (Long)session.getAttribute("articleId");
-//        if (userInfo.getUserId()==0||articleId==0){
+        Long articleId = (Long) session.getAttribute("articleId");
+        System.out.print("articleId为");
+        System.out.println(articleId);
+//        if (articleId==0){
 //          return false;
 //      }
-//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId);
-        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1);
+        return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId);
+//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1);
     }
 
 
@@ -269,14 +272,17 @@ public class NewsArticleInfoController {
     }
     @RequestMapping("toArticleContent")
     @ResponseBody
-    public Object toArticleContent(@RequestParam long articleId,HttpSession session) {
+    public Object toArticleContent(@RequestParam Long articleId,HttpSession session) {
+        if (articleId <=0) {
+          return false;
+      }
         session.setAttribute("articleId", articleId);
-        Long attribute = (Long) session.getAttribute("articleId");
-        System.out.println(attribute);
-        if (attribute == null) {
-            return false;
-        }
-        return true;
+//        Long attribute = (Long) session.getAttribute("articleId");
+//        System.out.println(attribute);
+//        if (attribute == null) {
+//            return false;
+//        }
+        return (Long)session.getAttribute("articleId")>0;
 
     }
 }

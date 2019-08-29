@@ -272,6 +272,7 @@
             dataType: "json",
             //请求地址
             url: "news/listAllArticleByStatusAndHotAndTypeIdAndAreaId?pageNum="+pageNum+"&typeId=" + typeId + "&areaId=" + areaId,
+            async: false,
             //数据，json字符串
             // data : JSON.stringify(
             //     {
@@ -362,8 +363,10 @@
             contentType: "application/json;charset=UTF-8",
             //接受数据类型
             dataType: "json",
+
             //请求地址
             url: "news/listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId?pageNum="+pageNum+"&typeId=" + typeId + "&areaId=" + areaId,
+            async: false,
             success: function (result) {
                 // console.log(result);
                 var count = 0;
@@ -376,7 +379,7 @@
                     trStr += " </a>"
                     trStr += " </li>"
                     trStr += " <li >"
-                    trStr += " <h3><a onclick='articleContent("+item.articleId+")' style='text-decoration: none'"
+                    trStr += " <h3 onclick='articleContent(\"+item.articleId+\")'><a onclick='articleContent("+item.articleId+")' style='text-decoration: none'"
                     trStr += " title=" + item.mainTitle + " target=\"_blank\" >" + item.mainTitle + "</a>"
                     trStr += "</h3>"
 
@@ -420,7 +423,9 @@
             }
         });
     }
+
 function articleContent(articleId) {
+       console.log(articleId)
     $.ajax({
         //请求方式
         type : "GET",

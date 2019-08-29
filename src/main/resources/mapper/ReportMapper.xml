@@ -9,4 +9,9 @@
         article a on r.artileId = a.articleId left join userinfo u on r.userId=u.userId where a.status=2
     </select>
 
+    <insert id="sendSystemMessage" parameterType="com.qf.sysuser.pojo.Message">
+        insert into message (userId,senderId,mainTitle,content,createTime,status)
+        values (#{userId},#{senderId},#{mainTitle},#{content},CURRENT_TIMESTAMP,0)
+    </insert>
+
 </mapper>

@@ -21,65 +21,211 @@
 
     <link rel="stylesheet" href="dropzone/basic.min.css" />
     <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+
+
+
+
+
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Blog">
+    <meta name="keywords" content="">
+    <meta name="author" content="kamleshyadav">
+    <meta name="MobileOptimized" content="320"><!--Start Style -->
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="css/theia-sticky-sidebar.js"></script>
+    <script src="css/swiper.min.js"></script>
+    <script src="css/jquery.magnific-popup.min.js"></script>
+    <script src="css/wow.min.js"></script>
+    <script src="css/custom.js"></script><!--Main js file Style-->
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.css">
+    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css"><!-- Favicon Link -->
+    <link rel="shortcut icon" type="image/png" href="http://v.bootstrapmb.com/2018/12/ok2re3231/images/favicon.png">
+    <style id="theia-sticky-sidebar-stylesheet-TSS">.theiaStickySidebar:after {
+        content: "";
+        display: table;
+        clear: both;
+    }</style>
 </head>
-<body style="text-align:center;">
-
-
-<style>
-    body{text-align:center}
-    .form-group{margin:0 auto;width:600px;height:80px;}
-    /* CSS注释：设置对象边框、宽度、高度 便于观察布局效果 */
-    .footer{
-        text-align:left;
-    }
-</style>
-
-<style>
-    /*body{position: relative;height: 1000px;}*/
-    /*.lastDiv{position: absolute;bottom: 0;left: 0;height: 20px;width: 100%;}*/
-
-    body{ padding-bottom:50px;}
-    .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
-        height:50px; z-index:9999;}
-</style>
-<!--<div class="header"></div>-->
-<!--<div class="main"></div>-->
-<!--<div class="lastDiv"></div>-->
+<body class="homepage2">
 
 
 <style type="text/css">
-    <!--设置DIV块的边界为5px-->
-    div{margin:5px;border:0;padding:0;}
-    #mainTitle{
+    li {
+        list-style-type: none;
+        cursor:pointer;
+    }
+    table tbody tr:nth-child(odd){background:#F4F4F4;}
+    table tbody td:nth-child(even){color:#C00;}
+    .content{
+        font-size: 20px;
+    }
+    .button-group{
+        margin: 0px auto;
+        width: 600px;
+        text-align: left;
+    }
+    .leaveMsgArea{
+        margin: 0px auto;
+        width: 600px;
+        height: 200px;
+        border: 1px solid gray;
+    }
+    #comment{
+        margin: 0px 200px;
+    }
+    /*img{*/
+        /*border-radius: 30px;*/
+        /*width:60px;*/
+        /*height:60px;*/
+        /*float: left;*/
+    /*}*/
+    .user{
+        /*float: left;*/
+        font-size: 15px;
+    }
+    button{
+        border: none;
+        outline: none;
+    }
 
-        background-color:lavender;
-    }
-    #subTitle{
-        background-color:lavender;
-    }
-    #hot{
-        text-align: right;
-        margin-right: 30%;
-    }
+    /*#splicPage{*/
+    /*    text-align:center*/
+    /*}*/
 </style>
 
-        <div class="form-group" style="text-align:center;margin-bottom:1px;" >
-            <label >主标题</label>
-            <input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center " >
+
+
+
+<div class="blog_main_wrapper">
+
+
+    <!--内文主体-->
+    <div class="blog_main_wrapper blog_toppadder60 blog_bottompadder60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <!--内文-->
+                    <div class="blog_post_style2 blog_single_div">
+                        <!--&lt;!&ndash;主图片&ndash;&gt;-->
+                        <!--<div class="blog_post_style2_img wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">-->
+                            <!--<img src="./blog_single_big.jpg" class="img-fluid" alt="">-->
+                        <!--</div>-->
+                        <!--内容-->
+                        <div class="blog_post_style2_content wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                            <!--标题-->
+                            <div id="mark"></div>
+                            <h3 id="mainTitle"></h3>
+                            <h4 id="subTitle"></h4>
+                            <!--作者-->
+                            <div class="blog_author_data">
+                                <a href="#">
+                                    <img src="./author_img.jpg" class="img-fluid" alt="" width="34" height="34">
+                                    <input style="border:none;" id="userName"   readonly="readonly">
+                                </a>
+                            </div>
+                            <!--浏览量和评论数-->
+                            <ul class="blog_meta_tags" style="float:right; margin-right: 300px">
+                                <!--浏览量-->
+                                <li>
+                                    <span class="blog_bg_blue">
+                                        <i class="glyphicon glyphicon-eye-open"></i>
+                                        <!--21K-->
+                                    </span>
+                                </li>
+                                <!--评论数-->
+                                <li>
+                                    <span class="blog_bg_pink">
+                                        <i class="glyphicon glyphicon-comment"></i>
+                                        <!--12-->
+                                    </span>
+                                </li>
+                            </ul>
+                            <!--进入内文-->
+                            <div id="editor"style="max-width:800px;margin:50px;" class="editorClass">
+                                <div id="contentStr" style="text-align: left">
+
+                                </div>
+                            </div>
+                        </div>
+    </ol>
+            </div>
         </div>
-        <div id="hot">
-                123123
+    </div>
+
+
+
+            <!--已评论-->
+            <div class="blog_comment_div" id="foot">
+                <!--评论数-->
+                <h3 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    评论
+                    <!--<span>(4)</span>-->
+                </h3>
+
+            </div>
         </div>
-<hr>
-        <div class="form-group" style="text-align:center;margin-top:2px;">
-            <label >副标题</label>
-            <input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center ">
-        </div>
-<hr>
-        <div class="form-group" id="contentStr"
-             style="text-align:center;width:800px; height:300px;color:black" align="center">
-            <label >新闻内容:</label>
-        </div>
+    </div>
+
+</div><!--Main js file Style-->
+
+
+<div class="button-group">
+    <div class="leaveMsgArea" contenteditable="true" id="leaveMsgArea">
+    </div>
+    <button type="button"   value="评论" onclick="commitComment()">提交评论</button>
+</div>
+
+<!--<input type="textarea" class="LeavingMessage" id="ComMessage"/><br>-->
+<!--<input type="button" value="评论" onclick="commitComment()">-->
+<div id="comment">
+
+</div>
+<div id="addReplyText"></div>
+<div class="table-responsive">
+    <table class="table  table-bordered" id = "dataTable">
+        <tfoot>
+        <tr >
+            <td colspan="6" align="center">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#">上一页</a></li>
+                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">下一页</a></li>
+                </ul>
+            </td>
+        </tr>
+
+        </tfoot>
+    </table>
+</div>
+
+<!--</div>-->
+
+        <!--<div class="form-group" style="text-align:center;margin-bottom:1px;" >-->
+            <!--<label >主标题</label>-->
+            <!--<input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center " >-->
+        <!--</div>-->
+        <!--<div id="hot">-->
+                <!--123123-->
+        <!--</div>-->
+<!--<hr>-->
+        <!--<div class="form-group" style="text-align:center;margin-top:2px;">-->
+            <!--<label >副标题</label>-->
+            <!--<input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center ">-->
+        <!--</div>-->
+<!--<hr>-->
+        <!--<div class="form-group" id="contentStr"-->
+             <!--style="text-align:center;width:800px; height:300px;color:black" align="center">-->
+            <!--<label >新闻内容:</label>-->
+        <!--</div>-->
 
 <!--<hr>-->
 
@@ -88,8 +234,10 @@
             <!--<label >封面图</label>-->
             <!--<br>-->
         <!--</div>-->
-        <div class="footer"></div>
-<hr>
+
+
+        <!--<div class="footer"></div>-->
+
 
 <!--        <div align="center" id="textDiv" class="lastDiv">-->
 <!--            <button type="button" class="btn btn-success" onclick="returnCheck()" ><i class="glyphicon glyphicon-edit"></i>返回修改</button>-->
@@ -100,7 +248,7 @@
 
 
 <script type="text/javascript">
-    $(".footer").load("comment.html");
+    // $("#foot").load("comment.html");
     var strCon;
     // var strCover;
     var str=window.location.search;
@@ -121,8 +269,9 @@
         success : function(result) {
 
             console.log(result);
-            $("#mainTitle").val(result.mainTitle);
-            $("#subTitle").val(result.subTitle);
+            $("#mainTitle").text(result.mainTitle);
+            $("#subTitle").text(result.subTitle);
+            $("#userName").val(result.nickName);
             // var coverSrc=new Image();
             //
             // coverSrc.src=result.cover;
@@ -160,17 +309,19 @@
                 // private Long articleLoveNum;//新闻点赞数
                 // private Integer articleLoveStatus;
                 console.log(result);
-                $("#hot").html("");
+                $("#mark").html("");
+
                 var   trStr="<span class='glyphicon glyphicon-fire' > "+result.timeHot+"</span>"
                 if (result.articleLoveStatus==1){
                      trStr+="<button id='loveArticleId' type=\"button\" style='color:red ' onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart'  ></button>"
                 } else if (result.articleLoveStatus==0) {
                       trStr += "<button id='loveArticleId'  type=\"button\"    onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart' ></button>"
                 }
-                trStr+=result.articleLoveNum+"<br>"
-                trStr+="<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
-                trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
-               $("#hot").append(trStr);
+                trStr+="&nbsp&nbsp&nbsp"+result.articleLoveNum
+                trStr+="&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
+                // trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
+                trStr+="<button   type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
+               $("#mark").append(trStr);
 
             },
             //请求失败，包含具体的错误信息
@@ -257,10 +408,424 @@ function clickLoveArticleId() {
     });
 
 }
-
+function addCollectByArticleIdAndUserId(articleId) {
+    $.ajax({
+        //请求方式
+        type : "POST",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/addCollectByArticleIdAndUserId",
+        //数据，json字符串
+        //请求成功
+        data : JSON.stringify({
+            "articleId":articleId
+        }),
+        success : function(result) {
+            console.log(result);
+            if(result){
+                hot()
+            }else{
+                alert("收藏失败")
+                console.log(e);
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
+}
 </script>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    // glyphicon glyphicon-heart style='color: red'
+    //清空table
+    //初始化页面
+    function initPage(){
+        var pageNum=window.location.search.split("=")[1];
+        console.log("pageNum:"+pageNum)
+        //通过文章id显示所有评论
+        var requestURL="news/allComment"
+        if(pageNum==null){
+            pageNum=1
+        }
+        requestURL+="?pageNum="+pageNum;
+        console.log(requestURL)
+        //1.从后台的listAllUserInfo接口获取数据
+        $.ajax({
+            //请求方式GET/POST
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : requestURL,
+
+            //请求成功
+            success : function(result) {
+                $("#comment").html("");
+                $("#leaveMsgArea").html("");
+                $("#addReplyText").html("");
+                // var pagename=window.location.pathname
+                // console.log(pagename);
+                $(result.list).each(function(index,item){
+                    // console.log(item);
+                    var   trStr="<img src=\""+item.icon+"\"><br>";
+                    // console.log(item.icon)
+                    trStr+="<div class='user'>"
+                    trStr+="用户名:"+item.nickName+"<br>";
+                    // trStr+="<td><input type=\"checkbox\"></td>";
+                    trStr+=item.createTime+"&nbsp;";
+                    //判断是否已被点赞
+                    if (item.loveStatus==1){
+                        trStr+="<button   type=\"button\" style='color:red ' onclick='clickLoveComment("+item.comId+")' class='glyphicon glyphicon-heart'  ></button>"
+                    } else if (item.loveStatus==0) {
+                        trStr += "<button   type=\"button\"  style='color:black '   onclick='clickLoveComment("+item.comId+")' class='glyphicon glyphicon-heart' ></button>"
+                    }
+                    trStr+=item.comLoveNum
+                    trStr+="</div>"
+                    trStr+="<br>"
+                    trStr+="<div class='content'>"
+                    trStr+=item.content+"<br>";
+                    trStr+="</div>"
+                    trStr+="<hr>"
+                    trStr+="<button type=\"button\" onclick='addReply("+item.repId+","+item.comId+")'><a href='#addReplyText'>回复</a></button>&nbsp;"
+                    trStr+="<button type=\"button\" id='deleteReply' " + "onclick='deleteComment("+item.userId+","+item.comId+")'>删除</button>&nbsp;"
+                    trStr+="<div style='margin-left: 100px; font-size: 15px;' id=\"c"+item.comId+"\">";
+                    trStr+="</div>"
+                    var comName=item.nickName;
+                    console.log("--------"+item.userId)
+                    reply(item.userId,item.comId,comName,item.repId)
+                    $("#comment").append(trStr);
+                });
+
+                if (pageNum<=1){
+                    var   splicPage="<li class=\"disabled\"><a href=\"#\" id='start'>上一页</a></li>";
+                } else {
+                    var  	splicPage="<li><a href=\"comment.html?pageNum="+(parseInt(pageNum,10)-1 )+"\" id='start'>上一页</a></li>"
+
+                }
+                console.log(111)
+                console.log(result.pages)
+                for(var i=1;i<=result.pages;i++){
+                    splicPage +="<li><a href=\"comment.html?pageNum="+i+"\">"+i+"</a></li>";
+                }
+                if (pageNum>=result.pages) {
+                    splicPage+="<li class=\"disabled\"><a href=\"#\" id='end'>下一页</a></li>";
+                }else {
+                    splicPage+="<li><a href=\"comment.html?pageNum="+(parseInt(pageNum,10)+1 )+"\" id='end'>下一页</a></li>";
+                }
+                $(".pagination").html("");
+                $(".pagination").append(splicPage);
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.error(e);
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }
+    initPage();
+    function reply(userId,comId,comName,repId) {
+        console.log(comId)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/getReplyByComId?comId="+comId,
+            //数据，json字符串
+            data:JSON.stringify({
+                "comId":comId,
+                "userId":userId
+            }),
+            //请求成功
+            success: function (result) {
+                $(result).each(function(index,item){
+                    console.log(item)
+                    console.log(item.createTime)
+                    var trStr="&nbsp&nbsp&nbsp"
+                    if (item.cnickName!=null){
+                        trStr+="<img src=\""+item.icon+"\"><br>";
+                        // console.log(item.icon)
+                        trStr+="用户:"+item.nickName+"回复了"+item.cnickName+"<br>";
+                        trStr+=item.createTime+"<br>"
+                    } else {
+                        trStr+="<img src=\""+item.icon+"\"><br>";
+                        // console.log(item.icon)
+                        trStr+="用户:"+item.nickName+"回复了"+comName+"<br>";
+                        trStr+=item.createTime+"<br>"
+                    }
+                    trStr+="&nbsp&nbsp&nbsp"
+                    trStr+="<div class='content'>"
+                    trStr+=item.content+"<br>";
+                    trStr+="</div>"
+                    trStr+="<hr>"
+                    trStr+="<button type=\"button\" id='addReply' " + "onclick='addReply("+item.repId+","+item.comId+")'><a href='#addReplyText'>回复</a></button>&nbsp;"
+                    trStr+="<button type=\"button\" id='deleteReply' " + "onclick='deleteReply("+item.userId+","+item.repId+")'>删除</button>&nbsp;"
+                    trStr+="<div id='r"+item.repId+"'>"
+                    trStr+="</div>"
+                    $("#c"+comId+"").append(trStr);
+                })
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+
+    }
+    function addReply(repId,comId) {
+        var  str="<div class=\"button-group\">";
+        str+="<div class=\"leaveMsgArea\" contenteditable=\"true\" id=\"replyMsgArea\">"
+        str+="</div>"
+        str+=" <button type=\"button\"   onclick=\"commitReply("+repId+","+comId+")\">提交回复</button>"
+        str+="</div>"
+        $("#addReplyText").append(str);
+
+    }
+    function commitComment() {
+        var text=document.getElementById("leaveMsgArea").innerText;
+        console.log(text)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/addComment",
+            data:JSON.stringify({
+                "content":text
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                //评论的话用userId和新闻id来发私信
+                // sendMessage(repId,comId)
+                if (result) {
+                    initPage();
+                }else {
+                    alert("提交评论失败")
+                }
+
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    function commitReply(repId,comId) {
+        // $("#replyMsgArea").style.display = 'none';
+        var text=document.getElementById("replyMsgArea").innerText;
+        console.log(text)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/addReplyByReplyInfo",
+            data:JSON.stringify({
+                "content":text,
+                "repId":repId,
+                "comId":comId
+
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                sendMessage(repId,comId)
+                if (result) {
+                    initPage();
+                }else {
+                    alert("操作失败")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    function deleteReply(userId,repId) {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/deleteReplyByRepId",
+            data:JSON.stringify({
+                "repId":repId,
+                "userId":userId
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("无法删除他人回复")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    function deleteComment(userId,comId) {
+
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/deleteCommentByComId",
+            data:JSON.stringify({
+                "comId":comId,
+                "userId":userId
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("无法删除他人评论")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+
+
+    //调用方法需要传递被发送者id
+    // function sendMessage(userId) {
+    function sendMessage(repId,comId) {
+        console.log(repId)
+        console.log(comId)
+        // var test=window.location.href.split("#")[0];
+        var test=window.location.href;
+        // alert(test);
+
+        //repId是被回复消息的id
+        //comId被回复评论的id
+        var text=document.getElementById("replyMsgArea").innerText;
+        console.log("消息内容")
+        console.log(text)
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/sendMessageByReplyVO",
+            data:JSON.stringify({
+                "content":text,
+                "crepId":repId,
+                "comId":comId,
+                "mgeUrl":test
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage();
+                }else {
+                    alert("操作失败")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+
+    function clickLoveComment(comId) {
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/addLoveComment",
+            data:JSON.stringify({
+                "comId":comId,
+            }),
+            //数据，json字符串
+            //请求成功
+            success: function (result) {
+                if (result) {
+                    initPage()
+                    // $(document).click(function(e) { // 在页面任意位置点击而触发此事件
+                    //     $(e.target).attr("id");       // e.target表示被点击的目标
+                    // })//此方法对于想要获取击元素获得当前点击元素信息如id，value，等信息，无法准确定位，获取，因此需要this，及当前之意
+                    // console.log( $(document).click(function(e) { $(e.target).attr("color"); }))
+                    // $('body').on('click','.showModel',function(){
+                    // window.alert(this.innerHTML);
+
+                    // $(document).click(function (e){  //需要第二次才能点赞成功
+                    //     var v_id=e.target.style.color;
+                    //     console.log(v_id);
+                    // });
+                    // var srcElement=window.event.target;
+                    // console.log($(srcElement).)
+                    // console.log($(srcElement).css("color"))
+                    // if ($(srcElement).css("color")=="rgb(255, 0, 0)"){
+                    //     console.log(1)
+                    //     $(srcElement).css("color","rgb(51, 51, 51)")
+                    // }else {
+                    //     console.log(2)
+                    //     $(srcElement).css("color","rgb(255, 0, 0)")
+                    // }
+                }else {
+                    alert("点赞失败")
+                }
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+
+
+</script>
 
 </body>
 </html>

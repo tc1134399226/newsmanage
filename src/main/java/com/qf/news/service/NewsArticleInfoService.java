@@ -3,11 +3,12 @@ package com.qf.news.service;
 
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.LoveArticle;
+import com.qf.news.vo.ArticleInfoVO;
 import com.qf.news.vo.ArticleTypeVO;
 
 public interface NewsArticleInfoService {
     //根据articleId查询编辑的新闻显示到预览页面
-    public ArticleInfo getReleaseInfoById(int articleId);
+    public ArticleInfoVO getReleaseInfoById(int articleId);
 
     //用户在前台输入新闻添加到数据库
     public boolean commitArticle(ArticleInfo articleInfo);
@@ -41,7 +42,7 @@ public interface NewsArticleInfoService {
      * @param articleId
      * @return
      */
-    public ArticleTypeVO getArticleAndLoveNumAndComNum( long articleId);
+    public ArticleTypeVO getArticleAndLoveNumAndComNum( Long articleId);
 
     /**
      * 用户点赞(取消)
