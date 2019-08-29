@@ -7,6 +7,7 @@ import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.service.NewsService;
 import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
+import com.qf.sysuser.pojo.ArticleCarousel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -127,4 +128,9 @@ public class NewsController {
         return areaIdTypeId;
     }
 
+    @RequestMapping("getArticleCarousel")
+    @ResponseBody
+    public Object getArticleCarousel(){
+        return newsService.getArticleCarousel();
+    }
 }

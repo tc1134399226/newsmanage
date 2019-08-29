@@ -2,6 +2,7 @@ package com.qf.news.service;
 
 import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
+import com.qf.sysuser.pojo.ArticleCarousel;
 
 import java.util.List;
 
@@ -41,5 +42,8 @@ public interface NewsService {
     public List<ArticleTypeVO> listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId(Integer typeId,Integer areaId);
 
     public AreaTypeVO getAreaIdTypeId(AreaTypeVO areaTypeVO);
+
+    public List<ArticleTypeVO> getArticleCarousel();
+
 }
 
