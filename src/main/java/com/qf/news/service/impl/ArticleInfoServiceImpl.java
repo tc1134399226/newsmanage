@@ -1,9 +1,11 @@
 package com.qf.news.service.impl;
 
 import com.qf.news.dao.NewsArticleInfoMapper;
+import com.qf.news.dto.ReportDTO;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.LoveArticle;
 import com.qf.news.service.NewsArticleInfoService;
+import com.qf.news.vo.ArticleInfoVO;
 import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,12 +14,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ArticleInfoServiceImpl implements NewsArticleInfoService {
 
-    @Qualifier("newsArticleInfoMapper")
     @Autowired
     NewsArticleInfoMapper newsArticleInfoMapper;
 
     //根据articleId查询编辑的新闻显示到预览页面
-    public ArticleInfo getReleaseInfoById(int articleId) {
+    public ArticleInfoVO getReleaseInfoById(int articleId) {
         return newsArticleInfoMapper.getReleaseInfoById(articleId);
     }
 
@@ -74,7 +75,7 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
      * @param articleId
      * @return
      */
-    public ArticleTypeVO getArticleAndLoveNumAndComNum( long articleId){
+    public ArticleTypeVO getArticleAndLoveNumAndComNum( Long articleId){
         return newsArticleInfoMapper.getArticleAndLoveNumAndComNum(articleId);
     }
     /**
@@ -97,8 +98,11 @@ public class ArticleInfoServiceImpl implements NewsArticleInfoService {
         }
     }
 
-    @Override
     public boolean uploadArticle(ArticleInfo articleInfo) {
         return newsArticleInfoMapper.uploadArticle(articleInfo)>0;
+    }
+
+    public boolean toReport(ReportDTO reportDTO) {
+        return newsArticleInfoMapper.toReport(reportDTO)>0;
     }
 }

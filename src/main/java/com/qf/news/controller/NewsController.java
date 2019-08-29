@@ -5,13 +5,16 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.service.NewsService;
+import com.qf.news.vo.AreaTypeVO;
 import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RequestMapping("news")
@@ -100,4 +103,28 @@ public class NewsController {
         System.out.println(articleTypeVOS);
         return articleTypeVoPageInfo;
     }
+
+    @RequestMapping("setSessionMenu")
+    @ResponseBody
+    public Object setSessionMenu(String menu,HttpSession session){
+        session.setAttribute("newsmenu",menu);
+        System.out.println("set............"+session.getAttribute("newsmenu"));
+        return true;
+    }
+
+    @RequestMapping("getSessionMenu")
+    @ResponseBody
+    public Object getSessionMenu(HttpSession session){
+        Object newsmenu = session.getAttribute("newsmenu");
+        return newsmenu;
+    }
+
+    @RequestMapping("getAreaIdTypeId")
+    @ResponseBody
+    public Object getAreaIdTypeId(@RequestBody AreaTypeVO areaTypeVO){
+        AreaTypeVO areaIdTypeId = newsService.getAreaIdTypeId(areaTypeVO);
+        System.out.println(areaIdTypeId);
+        return areaIdTypeId;
+    }
+
 }

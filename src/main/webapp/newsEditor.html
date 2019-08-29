@@ -151,7 +151,7 @@
     </div>
 
     <div class="form-group has-success has-feedback" align="left" style="float:left;" >
-        <div id="bottom-text" class="text-info">点击上传封面图</div>
+        <div id="bottom-text" onclick="showimg()" class="text-info">点击上传封面图</div>
         <div id="dropzoneDiv" class="dropzone" style="display: none">
 <!--            <img  src="" id="cover" width="150" height="150">-->
         </div>
@@ -358,11 +358,18 @@
         // myDropzone.emit("thumbnail", mockFile, "http://localhost:8080/newsmanage/static/upload/icon.jpg");
 
 
-        var str=window.location.search;
-        var articleId=str.split("=")[1];
-        if (typeof(articleId)==undefined){
-            articleId=0;
+        var str=window.location.search.split("?")[1];
+        var str2=str.split("=")[0];
+        var articleId;
+        if(str2=="articleId"){
+            articleId=str.split("=")[1];
+            if (typeof(articleId)==undefined){
+                articleId=0;
+            }
         }
+        // if (typeof(articleId)==undefined){
+        //     articleId=0;
+        // }
         var userId;
         $.ajax({
             //请求方式GET/POST
@@ -374,7 +381,7 @@
             //接受数据类型
             dataType:"json",
             //请求地址
-            url : "sysuser/getSession",
+            url : "news/getSession",
             //请求成功
             success : function(result) {
                 userId = result.userId;
@@ -658,6 +665,7 @@
                     if(result){
                         console.log(result);
                         updateStatus();
+                        window.location.href="userInfo.html?userId="+userId;
                     }else{
                         // console.log(e);
                     }
@@ -704,6 +712,9 @@
 
         }
 
+        function showimg() {
+            $("#dropzoneDiv").show();
+        }
     </script>
 </body>
 </html>

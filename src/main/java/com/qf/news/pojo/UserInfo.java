@@ -1,7 +1,9 @@
 package com.qf.news.pojo;
 
-import java.sql.Timestamp;
+import lombok.Data;
 
+import java.sql.Timestamp;
+@Data
 public class UserInfo {
     private long userId;
     private String account;

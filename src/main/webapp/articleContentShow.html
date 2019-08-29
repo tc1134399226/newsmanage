@@ -10,6 +10,7 @@
     <script src="script/docs.min.js"></script>
 
 
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -21,51 +22,162 @@
 
     <link rel="stylesheet" href="dropzone/basic.min.css" />
     <link rel="stylesheet" href="dropzone/dropzone.min.css" />
+
+
+
+
+
+
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Blog">
+    <meta name="keywords" content="">
+    <meta name="author" content="kamleshyadav">
+    <meta name="MobileOptimized" content="320"><!--Start Style -->
+    <script src="jquery/jquery-2.1.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="css/theia-sticky-sidebar.js"></script>
+    <script src="css/swiper.min.js"></script>
+    <script src="css/jquery.magnific-popup.min.js"></script>
+    <script src="css/wow.min.js"></script>
+    <script src="css/custom.js"></script><!--Main js file Style-->
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/swiper.css">
+    <link rel="stylesheet" type="text/css" href="css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css"><!-- Favicon Link -->
+    <link rel="shortcut icon" type="image/png" href="http://v.bootstrapmb.com/2018/12/ok2re3231/images/favicon.png">
+    <style id="theia-sticky-sidebar-stylesheet-TSS">.theiaStickySidebar:after {
+        content: "";
+        display: table;
+        clear: both;
+    }</style>
 </head>
-<body style="text-align:center;">
-
-
-<style>
-    body{text-align:center}
-    .form-group{margin:0 auto;width:600px;height:80px;}
-    /* CSS注释：设置对象边框、宽度、高度 便于观察布局效果 */
-    .footer{
-        text-align:left;
-    }
-</style>
-
-<style>
-    /*body{position: relative;height: 1000px;}*/
-    /*.lastDiv{position: absolute;bottom: 0;left: 0;height: 20px;width: 100%;}*/
-
-    body{ padding-bottom:50px;}
-    .lastDiv{ position:fixed; left:0px; bottom:0px; width:100%;
-        height:50px; z-index:9999;}
-</style>
-<!--<div class="header"></div>-->
-<!--<div class="main"></div>-->
-<!--<div class="lastDiv"></div>-->
+<body class="homepage2">
 
 
 <style type="text/css">
-    <!--设置DIV块的边界为5px-->
-    div{margin:5px;border:0;padding:0;}
-    #mainTitle{
+    li {
+        list-style-type: none;
+        cursor:pointer;
+    }
+    table tbody tr:nth-child(odd){background:#F4F4F4;}
+    table tbody td:nth-child(even){color:#C00;}
+    .content{
+        font-size: 20px;
+    }
+    .button-group{
+        margin: 0px auto;
+        width: 600px;
+        text-align: left;
+    }
+    .leaveMsgArea{
+        margin: 0px auto;
+        width: 600px;
+        height: 200px;
+        border: 1px solid gray;
+    }
+    #comment{
+        margin: 0px 200px;
+    }
+    /*img{*/
+        /*border-radius: 30px;*/
+        /*width:60px;*/
+        /*height:60px;*/
+        /*float: left;*/
+    /*}*/
+    .user{
+        /*float: left;*/
+        font-size: 15px;
+    }
+    button{
+        border: none;
+        outline: none;
+    }
 
-        background-color:lavender;
-    }
-    #subTitle{
-        background-color:lavender;
-    }
-    #hot{
-        text-align: right;
-        margin-right: 30%;
-    }
+    /*#splicPage{*/
+    /*    text-align:center*/
+    /*}*/
 </style>
+
+
+
+
+<div class="blog_main_wrapper">
+
+
+    <!--内文主体-->
+    <div class="blog_main_wrapper blog_toppadder60 blog_bottompadder60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                    <!--内文-->
+                    <div class="blog_post_style2 blog_single_div">
+                        <!--&lt;!&ndash;主图片&ndash;&gt;-->
+                        <!--<div class="blog_post_style2_img wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">-->
+                            <!--<img src="./blog_single_big.jpg" class="img-fluid" alt="">-->
+                        <!--</div>-->
+                        <!--内容-->
+                        <div class="blog_post_style2_content wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                            <!--标题-->
+                            <div id="mark"></div>
+                            <h3 id="mainTitle"></h3>
+                            <h4 id="subTitle"></h4>
+                            <!--作者-->
+                            <div class="blog_author_data">
+                                <a href="#">
+                                    <img src="./author_img.jpg" class="img-fluid" alt="" width="34" height="34">
+                                    <input style="border:none;" id="userName"   readonly="readonly">
+                                </a>
+                            </div>
+                            <!--浏览量和评论数-->
+                            <ul class="blog_meta_tags" style="float:right; margin-right: 300px">
+                                <!--浏览量-->
+                                <li>
+                                    <!--<span class="blog_bg_blue">-->
+                                        <!--<i class="glyphicon glyphicon-eye-open"></i>-->
+                                        <!--21K-->
+                                    <!--</span>-->
+                                </li>
+                                <!--评论数-->
+                                <li>
+                                    <!--<span class="blog_bg_pink">-->
+                                        <!--<i class="glyphicon glyphicon-comment"></i>-->
+                                        <!--12-->
+                                    <!--</span>-->
+                                </li>
+                            </ul>
+                            <!--进入内文-->
+                            <div id="editor"style="max-width:800px;margin:50px;" class="editorClass">
+                                <div id="contentStr" style="text-align: left">
+
+                                </div>
+                            </div>
+                        </div>
+    </ol>
+            </div>
+        </div>
+    </div>
+
+
+
+            <!--已评论-->
+            <div class="blog_comment_div" id="foot">
+                <!--评论数-->
+                <h3 class="wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    评论
+                    <!--<span>(4)</span>-->
+                </h3>
+
+            </div>
+        </div>
+    </div>
+
+</div><!--Main js file Style-->
 
         <div class="form-group" style="text-align:center;margin-bottom:1px;" >
             <label >主标题</label>
-            <input type="text" class="form-control" id="mainTitle" readonly="readonly" style="text-align:center " >
+            <input type="text" class="form-control" id="mainTitle1" readonly="readonly" style="text-align:center;font-size:24px;font-weight:bold" >
+            <input type="hidden" class="form-control" id="uId" readonly="readonly"style="text-align:center ">
         </div>
         <div id="hot">
                 123123
@@ -73,23 +185,51 @@
 <hr>
         <div class="form-group" style="text-align:center;margin-top:2px;">
             <label >副标题</label>
-            <input type="text" class="form-control" id="subTitle" readonly="readonly"style="text-align:center ">
+            <input type="text" class="form-control" id="subTitle1" readonly="readonly"style="text-align:center;font-size:18px;font-weight:bold">
         </div>
 <hr>
-        <div class="form-group" id="contentStr"
+        <div class="form-group" id="contentStr1"
              style="text-align:center;width:800px; height:300px;color:black" align="center">
+            <input type="hidden" class="form-control" id="articleId" readonly="readonly"style="text-align:center ">
             <label >新闻内容:</label>
         </div>
 
-<!--<hr>-->
 
-        <!--<div class="form-group" style="text-align:center;" id="coverImg"-->
-             <!--style="text-align:center;width:100px; height:100px;color:#0000FF" align="center">-->
-            <!--<label >封面图</label>-->
-            <!--<br>-->
-        <!--</div>-->
+
+<button data-toggle="modal" data-target="#myModal" style="margin-left: 515px">
+    举报该新闻
+</button>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    网络并非法外之地
+                </h4>
+            </div>
+            <div class="modal-body" id="toReport">
+                <input type="text" style="height:30px;width:500px;outline:none" id="context" placeholder="请简要阐述举报理由" required>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-primary" onclick="report()">
+                    提交
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+
+           <!--<div id="toReport"style="margin-left: 395px">-->
+                  <!--<input type="text"  id="context" placeholder="请简要阐述举报理由">-->
+                  <!--<button type="button" onclick="report()">举报</button>-->
+           <!--</div>-->
         <div class="footer"></div>
-<hr>
 
 <!--        <div align="center" id="textDiv" class="lastDiv">-->
 <!--            <button type="button" class="btn btn-success" onclick="returnCheck()" ><i class="glyphicon glyphicon-edit"></i>返回修改</button>-->
@@ -100,12 +240,13 @@
 
 
 <script type="text/javascript">
+
+
     $(".footer").load("comment.html");
     var strCon;
     // var strCover;
     var str=window.location.search;
     var articleId=str.split("=")[1];
-
 
     $.ajax({
         //请求方式
@@ -119,10 +260,11 @@
         //数据，json字符串
         //请求成功
         success : function(result) {
-
             console.log(result);
-            $("#mainTitle").val(result.mainTitle);
-            $("#subTitle").val(result.subTitle);
+            $("#mainTitle1").val(result.mainTitle);
+            $("#uId").val(result.userId);
+            $("#subTitle1").val(result.subTitle);
+            $("#articleId").val(result.articleId);
             // var coverSrc=new Image();
             //
             // coverSrc.src=result.cover;
@@ -132,7 +274,7 @@
             strCon=result.content;
 
             //整体拼接到div里面去
-            $("#contentStr").append(strCon);
+            $("#contentStr1").append(strCon);
             getIp(strCon);
 
         },
@@ -160,17 +302,19 @@
                 // private Long articleLoveNum;//新闻点赞数
                 // private Integer articleLoveStatus;
                 console.log(result);
-                $("#hot").html("");
+                $("#mark").html("");
+
                 var   trStr="<span class='glyphicon glyphicon-fire' > "+result.timeHot+"</span>"
                 if (result.articleLoveStatus==1){
                      trStr+="<button id='loveArticleId' type=\"button\" style='color:red ' onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart'  ></button>"
                 } else if (result.articleLoveStatus==0) {
                       trStr += "<button id='loveArticleId'  type=\"button\"    onclick='clickLoveArticleId("+result.articleId+")' class='glyphicon glyphicon-heart' ></button>"
                 }
-                trStr+=result.articleLoveNum+"<br>"
-                trStr+="<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
-                trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
-               $("#hot").append(trStr);
+                trStr+="&nbsp&nbsp&nbsp"+result.articleLoveNum
+                trStr+="&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
+                // trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
+                trStr+="<button   type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
+               $("#mark").append(trStr);
 
             },
             //请求失败，包含具体的错误信息
@@ -256,6 +400,68 @@ function clickLoveArticleId() {
         }
     });
 
+}
+
+    function report(){
+
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/toReport",
+            //传递参数
+            data: JSON.stringify(
+                {
+                    "artile":$("#articleId").val(),
+                    "mainTitle":$("#mainTitle1").val(),
+                    "ruserId":$("#uId").val(),
+                    "context":$("#context").val()
+                }
+            ),
+            //请求成功
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (e) {
+                console.error(e);
+                alert("操作失败！");
+            }
+        });
+    }
+function addCollectByArticleIdAndUserId(articleId) {
+    $.ajax({
+        //请求方式
+        type : "POST",
+        //请求的媒体类型
+        contentType: "application/json;charset=UTF-8",
+        //接受数据类型
+        dataType:"json",
+        //请求地址
+        url : "news/addCollectByArticleIdAndUserId",
+        //数据，json字符串
+        //请求成功
+        data : JSON.stringify({
+            "articleId":articleId
+        }),
+        success : function(result) {
+            console.log(result);
+            if(result){
+                hot()
+            }else{
+                alert("收藏失败")
+                console.log(e);
+            }
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
 }
 
 </script>

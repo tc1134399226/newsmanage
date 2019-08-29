@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.qf.news.dao.NewsArticleInfoMapper">
 
-<select id="getArticleAndLoveNumAndComNum" parameterType="long" resultType="com.qf.news.vo.ArticleTypeVO">
+<select id="getArticleAndLoveNumAndComNum" parameterType="Long" resultType="com.qf.news.vo.ArticleTypeVO">
 SELECT tb1.*,b.articleLoveNum ,c.timeArticleLoveNum,d.timeComNum
  ,e.timeVisNum,f.visNum from (
 (SELECT a.*,
@@ -27,8 +27,8 @@ where articleId=#{articleId} and createTime >= now()-interval 15 day)f
     update article set hot=#{timeHot} where articleId=#{articleId}
 </update>
     <!--根据articleId查询编辑的新闻显示到预览页面-->
-    <select id="getReleaseInfoById" parameterType="int" resultType="com.qf.news.pojo.ArticleInfo">
-       select * from article where articleId=#{articleId}
+    <select id="getReleaseInfoById" parameterType="int" resultType="com.qf.news.vo.ArticleInfoVO">
+       select a.*,u.nickName from article a left join userinfo u on u.userId=a.userId  where articleId=#{articleId}
     </select>
 
     <!--用户在前台输入新闻添加到数据库-->
@@ -94,4 +94,9 @@ where articleId=#{articleId} and createTime >= now()-interval 15 day)f
         update article set areaId =#{areaId},typeId=#{typeId},mainTitle=#{mainTitle} ,subTitle=#{subTitle},content=#{content}
         where articleId = #{articleId}
     </update>
+
+    <insert id="toReport" parameterType="com.qf.news.dto.ReportDTO">
+        insert into report (userId,ruserId,artile,context,createTime)
+        values(#{userId},#{ruserId},#{artile},#{context},CURRENT_TIMESTAMP)
+    </insert>
 </mapper>
