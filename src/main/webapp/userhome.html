@@ -78,6 +78,7 @@
     <input type="button" value="草稿" onclick="myDraftPage()">
     <input type="button" value="未读消息" onclick="myUnreadMessagePage()">
     <input type="button" value="已读消息" onclick="myReadMessagePage()">
+    <!--<input type="button"  value="我的新闻" onclick="myArticlePage()">-->
     <input type="button" id="myNews" style="display:none;" value="我的新闻" onclick="myArticlePage()">
     <!--    <input type="button" value="选择" onclick="AllCollection()">-->
 <!--    <input type="button" value="删除" onclick="deleteAllArticle()">-->
@@ -133,15 +134,23 @@
             //数据，json字符串
             //请求成功
             success: function (result) {
+                // alert(result)
                 if (result.status==2){
                     $("#myNews").show();
                 }
+            },
+            error : function(e){
+                alert(1)
+                console.log(e);
             }
-        })
+        });
     }
+
     //初始化页面,判断显示什么页面
     //初始化默认显示收藏页面
     function initpage() {
+        getSession()
+        // $("#myNews").show();
         var  select=window.location.search.split("type=")[1]
         if (typeof (select)=="undefined"){
             select = "myCollection";

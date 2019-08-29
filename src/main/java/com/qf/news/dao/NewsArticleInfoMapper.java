@@ -51,7 +51,7 @@ public interface NewsArticleInfoMapper {
      * @param articleId
      * @return
      */
-    public LoveArticle getLoveArticleByArticleIdAndUserId(long userId, long articleId);
+    public LoveArticle getLoveArticleByArticleIdAndUserId(Long userId, Long articleId);
 
     /**
      * 添加文章点赞记录
@@ -59,7 +59,7 @@ public interface NewsArticleInfoMapper {
      * @param articleId
      * @return
      */
-    public Integer addLoveArticle (long userId, long articleId);
+    public Integer addLoveArticle (Long userId, Long articleId);
 
     /**
      * 更新文章点赞状态

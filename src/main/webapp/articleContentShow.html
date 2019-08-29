@@ -284,7 +284,7 @@
                 trStr+="&nbsp&nbsp&nbsp<span class='glyphicon glyphicon-user' > "+result.comNum+"</span>&nbsp&nbsp&nbsp"
                 // trStr+="<span class='glyphicon glyphicon-fire' > "+result.hot+"</span>"
                 if (result.articleCommentStatus==1){
-                    alert(result.articleCommentStatus)
+                    console.log(result.articleCommentStatus)
                 } else if (result.articleCommentStatus==0){
                     trStr+="<button id='addCollect'  type=\"button\"    onclick='addCollectByArticleIdAndUserId("+result.articleId+")' class='glyphicon glyphicon-plus' ></button>"
                 }
@@ -365,6 +365,7 @@
                 }else{
                     alert("点赞失败")
                     console.log(e);
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
             },
             //请求失败，包含具体的错误信息
@@ -396,6 +397,7 @@
                     hot()
                 }else{
                     alert("收藏失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                     console.log(e);
                 }
             },
@@ -708,6 +710,7 @@
                     initPage();
                 }else {
                     alert("提交评论失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
 
             },
@@ -742,7 +745,8 @@
                 if (result) {
                     initPage();
                 }else {
-                    alert("操作失败")
+                    alert("回复失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
             },
             error: function (e) {
@@ -894,6 +898,7 @@
                     // }
                 }else {
                     alert("点赞失败")
+                    window.location.href="http://localhost:8080/newsmanage/login.html"
                 }
             },
             error: function (e) {
@@ -901,6 +906,7 @@
             }
         })
     }
+
 
 </script>
 

@@ -7,10 +7,15 @@ import com.qf.news.pojo.LoveArticle;
 import com.qf.news.pojo.UserInfo;
 import com.qf.news.service.NewsArticleInfoService;
 import com.qf.news.vo.ArticleInfoVO;
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,13 +24,15 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
+import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@RestController
+@Controller
 @RequestMapping("news")
 public class NewsArticleInfoController {
 
@@ -103,12 +110,14 @@ public class NewsArticleInfoController {
         Long articleId = (Long) session.getAttribute("articleId");
         System.out.print("articleId为");
         System.out.println(articleId);
-        System.out.println(userInfo.getUserId());
+        if (userInfo==null){
+            return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId,null);
+        }
+        System.out.println("userId为"+userInfo.getUserId());
 //        if (articleId==0){
 //          return false;
 //      }
         return newsArticleInfoService.getArticleAndLoveNumAndComNum(articleId,userInfo.getUserId());
-//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(1);
     }
 
 
@@ -250,14 +259,15 @@ public class NewsArticleInfoController {
 
     @RequestMapping("loveArticle")
     @ResponseBody
-    public boolean loveArticle(HttpSession session){
-        //        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
-//        long articleId = (Long)session.getAttribute("articleId");
-//        if (userInfo.getUserId()==0||articleId==0){
-//          return false;
-//      }
-//        return newsArticleInfoService.getArticleAndLoveNumAndComNum(userInfo.getUserId(),articleId);
-        return newsArticleInfoService.loveArticle(1,1);
+    public Object loveArticle(HttpSession session
+                              ) throws IOException {
+                UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        long articleId = (Long)session.getAttribute("articleId");
+            if (userInfo == null) {
+                return false;
+            }
+        System.out.println(userInfo.getUserId()+":"+articleId);
+        return newsArticleInfoService.loveArticle(userInfo.getUserId(),articleId);
     }
 
     //显示新闻

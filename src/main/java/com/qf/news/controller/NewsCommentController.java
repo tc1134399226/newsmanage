@@ -114,9 +114,9 @@ public class NewsCommentController {
     public Object addLoveComment(@RequestBody CommentInfo commentInfo , HttpSession session){
         UserInfo user = (UserInfo) session.getAttribute("userInfo");
 
-//       if (user==null){
-//           return "login";
-//       }
+       if (user==null){
+           return false;
+       }
 
         commentInfo.setUserId(user.getUserId());
         System.out.println(commentInfo);
