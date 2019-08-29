@@ -1,6 +1,7 @@
 package com.qf.news.dao;
 
 
+import com.qf.news.dto.ReportDTO;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.LoveArticle;
 import com.qf.news.vo.ArticleInfoVO;
@@ -8,7 +9,7 @@ import com.qf.news.vo.ArticleTypeVO;
 import org.springframework.stereotype.Repository;
 
 
-//@Repository("newsArticleInfoMapper")
+@Repository("newsArticleInfoMapper")
 public interface NewsArticleInfoMapper {
     //根据articleId查询编辑的新闻显示到预览页面
     public ArticleInfoVO getReleaseInfoById(int releaseId);
@@ -81,6 +82,14 @@ public interface NewsArticleInfoMapper {
      * @return
      */
     public Integer updateTimeHotByArticleId (ArticleTypeVO articleTypeVO);
+
+
+    /**
+     * 举报文章
+     * @param reportDTO
+     * @return
+     */
+    public int toReport(ReportDTO reportDTO);
 }
 
 

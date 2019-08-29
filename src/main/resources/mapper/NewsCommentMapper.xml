@@ -23,8 +23,8 @@ from comment c left join userinfo u on c.userId=u.userId
         SELECT count(lc.status=1 or null) comLoveNum from  love_comment lc where comId=#{comId}
     </select>
     <insert id="addComment" parameterType="com.qf.news.pojo.CommentInfo">
-        insert into comment (userId,nickName,content,status,createTime) values (#{userId},#{nickName}
-        ,#{content},1,CURRENT_TIMESTAMP)
+        insert into comment (userId,nickName,content,articleId,status,createTime)
+         values (#{userId},#{nickName},#{content},#{articleId},1,CURRENT_TIMESTAMP)
     </insert>
     <select id="checkLoveComment" parameterType="com.qf.news.pojo.CommentInfo" resultType="com.qf.news.pojo.LoveComment">
         select * from love_comment where userId=#{userId} and comId=#{comId} and status=1

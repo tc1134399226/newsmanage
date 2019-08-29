@@ -1,6 +1,7 @@
 package com.qf.news.controller;
 
 
+import com.qf.news.dto.ReportDTO;
 import com.qf.news.pojo.ArticleInfo;
 import com.qf.news.pojo.LoveArticle;
 import com.qf.news.pojo.UserInfo;
@@ -283,6 +284,21 @@ public class NewsArticleInfoController {
 //            return false;
 //        }
         return (Long)session.getAttribute("articleId")>0;
-
     }
+
+    /**
+     * 上传举报信息
+     * @param reportDTO
+     * @param session
+     * @return
+     */
+    @RequestMapping("toReport")
+    @ResponseBody
+    public boolean toReport(@RequestBody ReportDTO reportDTO,HttpSession session){
+        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        reportDTO.setUserId(userInfo.getUserId());
+        return newsArticleInfoService.toReport(reportDTO);
+    }
+
+
 }

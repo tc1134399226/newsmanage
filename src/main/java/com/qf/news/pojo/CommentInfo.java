@@ -1,7 +1,9 @@
 package com.qf.news.pojo;
 
-import java.sql.Timestamp;
+import lombok.Data;
 
+import java.sql.Timestamp;
+@Data
 public class CommentInfo {
     private long comId;
     private long userId;
@@ -9,6 +11,7 @@ public class CommentInfo {
     private String content;
     private Integer status;
     private Timestamp createTime;
+    private Long articleId;
 
     public String getCreateTime() {
         return createTime.toString();

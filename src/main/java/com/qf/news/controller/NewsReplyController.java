@@ -42,7 +42,7 @@ public class NewsReplyController {
      */
     @RequestMapping("addReplyByReplyInfo")
     public Object addReplyByReplyInfo(@RequestBody ReplyInfo replyInfo , HttpSession session){
-//        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
+        UserInfo user = (UserInfo) session.getAttribute("userInfo");
 //        if (userInfo==null){
 //            return "login";
 //        }
@@ -51,10 +51,10 @@ public class NewsReplyController {
 //        if (userInfo==null){
 //            return false;
 //        }
-        replyInfo.setUserId(1);
-        replyInfo.setNickName("cg");
-////        replyInfo.setUserId(user.getUserId());
-////        replyInfo.setNickName(user.getNickName());
+//        replyInfo.setUserId(1);
+//        replyInfo.setNickName("cg");
+        replyInfo.setUserId(user.getUserId());
+        replyInfo.setNickName(user.getNickName());
         //获得个人信息
        //添加到ReplyInfo对象中
        if (replyInfo==null){
@@ -72,9 +72,9 @@ public class NewsReplyController {
     @RequestMapping("deleteReplyByRepId")
     public Object deleteReplyByRepId(@RequestBody ReplyInfo replyInfo, HttpSession session){
         UserInfo user = (UserInfo) session.getAttribute("userInfo");
-        if (user==null){
-            return "login";
-        }
+//        if (user==null){
+//            return "login";
+//        }
         //保证程序健壮性
         if (user==null){
             return false;
