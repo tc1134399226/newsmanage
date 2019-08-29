@@ -118,13 +118,13 @@
                         <!--内容-->
                         <div class="blog_post_style2_content wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
                             <!--标题-->
-                            <h3><input style="border:none;" id="mainTitle" readonly="readonly"></h3>
-                            <h4><input style="border:none;" id="subTitle" readonly="readonly"></h4>
+                            <h3 id="mainTitle"></h3>
+                            <h4 id="subTitle"></h4>
                             <!--作者-->
                             <div class="blog_author_data">
                                 <a href="#">
                                     <img src="./author_img.jpg" class="img-fluid" alt="" width="34" height="34">
-                                    <input style="border:none;" id="userName"   readonly="readonly">
+                                    <input style="border:none;" id="nickName"   readonly="readonly">
                                 </a>
                             </div>
                             <!--浏览量和评论数-->
@@ -268,9 +268,9 @@
         success : function(result) {
 
             console.log(result);
-            $("#mainTitle").val(result.mainTitle);
-            $("#subTitle").val(result.subTitle);
-            $("#userName").val(result.nickName);
+            $("#mainTitle").text(result.mainTitle);
+            $("#subTitle").text(result.subTitle);
+            $("#nickName").var(result.nickName);
             // var coverSrc=new Image();
             //
             // coverSrc.src=result.cover;
