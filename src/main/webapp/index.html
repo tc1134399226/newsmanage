@@ -810,7 +810,7 @@
 				$("#loginSuccess").append(str);
 			}
         }
-        })
+        });
 
 	//获取轮播图图片
 	$.ajax({
@@ -828,7 +828,19 @@
 			$(result).each(function(index,item) {
 				fiveImg +="<a onclick='articleContent("+item.articleId+")' href='articleContentShow.html?articleId="+item.articleId+"'><li><img src='"+item.cover+"'></li></a>"
 			})
-			$("#dataImg").append(fiveImg)
+			$("#dataImg").append(fiveImg);
+			var strtop = "";
+			$(result).each(function(index,item) {
+				strtop += '<dl class="right_new">';
+				strtop += '<dt>';
+				strtop += "<h2><a href='articleContentShow.html?articleId="+item.articleId+"'>"+item.mainTitle+"</a></h2>";
+				strtop += "<dd><p>"+item.subTitle+"</p></dd></dt></dl>";
+				if (index>2){
+					return false;
+				}
+			})
+			$(".dl-box").empty();
+			$(".dl-box").append(strtop);
 		}
 		});
 
@@ -901,12 +913,12 @@
 								topstr += "<li><a><img src='"+item.cover+"'></a>";
 								topstr += "<div class='imgTitle'>"+item.mainTitle+"</div>"
 								count +=1;
-								alert(topstr)
+								// alert(topstr)
 							}else if (count<3) {
 								footstr += "<li><a><img src='"+item.cover+"'></a>";
 								footstr += "<div class='imgTitle'>"+item.mainTitle+"</div>"
 								count +=1;
-								alert(footstr)
+								// alert(footstr)
 							}else {
 								return false;
 							}
