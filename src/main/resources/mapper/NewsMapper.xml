@@ -32,20 +32,20 @@
         <result column="updateTime" property="updateTime"/>
     </resultMap>
 <select id="listAllArticleByStatusAndHotAndTypeIdAndAreaId" parameterType="Integer" resultMap="ArticleTypeVO">
-select tb1.*,COUNT(DISTINCT comId) timeComNum ,COUNT(DISTINCT la.articleId) timeArticleLoveNum
-,COUNT(DISTINCT la.articleId)*10+COUNT(DISTINCT comId)*20+COUNT(DISTINCT visitorId)  timeHot ,
-COUNT(DISTINCT visitorId) timeVisNum from
-(select a.* from article a
-        where `status` = 2 and typeId=#{param1} and areaId=#{param2}) tb1
-left JOIN love_article la on la.articleId=tb1.articleId
-and la.updateTime>=now()-interval 15 day
-LEFT JOIN comment c
-on tb1.articleId =c.articleId
-and c.createTime >= now()-interval 15 day
-LEFT JOIN visitor v
-on tb1.articleId =v.articleId and v.createTime >= now()-interval 15 day
-  GROUP BY tb1.articleId
- order by COUNT(la.articleId)*10+COUNT(comId)*20+COUNT(visitorId) desc
+    select tb1.*,COUNT(DISTINCT comId) timeComNum ,COUNT(DISTINCT la.articleId) timeArticleLoveNum
+    ,COUNT(DISTINCT la.articleId)*10+COUNT(DISTINCT comId)*20+COUNT(DISTINCT visitorId)  timeHot ,
+    COUNT(DISTINCT visitorId) timeVisNum from
+    (select a.* from article a
+            where `status` = 2 and typeId=#{param1} and areaId=#{param2}) tb1
+    left JOIN love_article la on la.articleId=tb1.articleId
+    and la.updateTime>=now()-interval 15 day
+    LEFT JOIN comment c
+    on tb1.articleId =c.articleId
+    and c.createTime >= now()-interval 15 day
+    LEFT JOIN visitor v
+    on tb1.articleId =v.articleId and v.createTime >= now()-interval 15 day
+      GROUP BY tb1.articleId
+     order by COUNT(la.articleId)*10+COUNT(comId)*20+COUNT(visitorId) desc
 </select>
     <select id="listAllArticleByStatusAndCreateTimeAndTypeIdAndAreaId" parameterType="Integer" resultMap="ArticleTypeVO">
 select tb1.*,COUNT(DISTINCT comId) timeComNum ,COUNT(DISTINCT la.articleId) timeArticleLoveNum

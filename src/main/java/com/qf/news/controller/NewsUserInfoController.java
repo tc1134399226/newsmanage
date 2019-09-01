@@ -56,7 +56,6 @@ public class NewsUserInfoController {
     //用户注册
     @RequestMapping("registerUserInfo")
     public Object registerUserInfo(@RequestBody UserInfo userInfo){
-        System.out.println(userInfo);
         boolean register = userInfoService.register(userInfo);
         return register;
     }

@@ -56,7 +56,7 @@
 
         <div >
           <input type="text" class="form-control" id="realName" placeholder="请输入您的真实姓名" style="margin-top:10px;">
-
+          <input type="text" class="form-control" id="idCard" placeholder="请输入您的真实身份证" style="margin-top:10px;">
         </div>
         <br>
 
@@ -69,6 +69,7 @@
           </div>
 
         <a class="btn btn-lg btn-success btn-block" onclick="register()"> 申请</a>
+        <a class="btn btn-lg btn-success btn-block" href="userInfo.html" > 返回</a>
       </form>
     </div>
     <script src="jquery/jquery-2.1.1.min.js"></script>
@@ -205,6 +206,7 @@
                   //数据，json字符串
                   data : JSON.stringify(
                           {
+                            "idCard":$("#idCard").val(),
                             "userId":userId,
                             "realName":$("#realName").val(),
                             "idCardBack":img1,

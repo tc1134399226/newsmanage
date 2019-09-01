@@ -92,16 +92,57 @@
         border: none;
         outline: none;
     }
+    .gotoindex{
+        float: right;
+        position: absolute;
+        top: 75px;
+        left: 1158px;
+    }
 
     /*#splicPage{*/
     /*    text-align:center*/
     /*}*/
+    .jubao{
+        position: absolute;
+        top: 75px;
+        left: 1063px;
+    }
 </style>
 
 
 
 
+<div class="gotoindex"><a href="index.html">返回首页</a></div>
+
 <div class="blog_main_wrapper">
+
+    <div data-toggle="modal" data-target="#myModal" class="jubao">
+        举报该新闻
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        网络并非法外之地
+                    </h4>
+                </div>
+                <div class="modal-body" id="toReport">
+                    <input type="text" style="height:30px;width:500px;outline:none" id="context" placeholder="请简要阐述举报理由" required>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" onclick="report()">
+                        提交
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
 
 
     <!--内文主体-->
@@ -126,6 +167,7 @@
                                 <a>
                                     <img src="" id="icon" class="img-fluid" alt="" width="80" height="80">
                                     <div id="followimg" onclick="userfollow()" style="display: inline"><img src="img/follow.png" width="34px" height="34px"></div>
+                                    作者:
                                     <input style="border:none;" id="userName"   readonly="readonly">
                                 </a>
                             </div>
@@ -173,6 +215,7 @@
     </div>
 
 </div><!--Main js file Style-->
+
 
 
 <div class="button-group">
@@ -254,6 +297,9 @@
             console.log(e.responseText);
         }
     });
+
+
+
 
     function hot() {
         $.ajax({
@@ -466,6 +512,37 @@
         });
     }
 
+    function report(){
+
+        $.ajax({
+            //请求方式GET/POST
+            type: "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType: "json",
+            //请求地址
+            url: "news/toReport",
+            //传递参数
+            data: JSON.stringify(
+                {
+                    "artile":articleId,
+                    "mainTitle":$("#mainTitle1").val(),
+                    "ruserId":user.userId,
+                    "context":$("#context").val()
+                }
+            ),
+            //请求成功
+            success: function (result) {
+                console.log(result);
+                alert("成功")
+            },
+            error: function (e) {
+                console.error(e);
+                alert("操作失败！");
+            }
+        });
+    }
     function userfollow() {
         var attribute = $("#followimg img").attr("src");
         if ("img/follow.png"==attribute){
@@ -670,12 +747,12 @@
                     console.log(item.createTime)
                     var trStr="&nbsp&nbsp&nbsp"
                     if (item.cnickName!=null){
-                        trStr+="<img src=\""+item.icon+"\"><br>";
+                        trStr+="<img style='width: 40px;height: 40px;border-radius: 50%;' src=\""+item.icon+"\"><br>";
                         // console.log(item.icon)
                         trStr+="用户:"+item.nickName+"回复了"+item.cnickName+"<br>";
                         trStr+=item.createTime+"<br>"
                     } else {
-                        trStr+="<img src=\""+item.icon+"\"><br>";
+                        trStr+="<img style='width: 40px;height: 40px;border-radius: 50%;' src=\""+item.icon+"\"><br>";
                         // console.log(item.icon)
                         trStr+="用户:"+item.nickName+"回复了"+comName+"<br>";
                         trStr+=item.createTime+"<br>"

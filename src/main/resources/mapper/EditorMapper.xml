@@ -5,7 +5,7 @@
 
     <!--数据库中添加(更新)申请成为编辑的个人信息-->
     <update id="applyEditor" parameterType="com.qf.sysuser.dto.EditorApplyDTO">
-        update userinfo set realName =#{realName},idCardBack =#{idCardBack},idCardFront =#{idCardFront},status = 1,updateTime=CURRENT_TIMESTAMP where userId=#{userId} ;
+        update userinfo set idCard=#{idCard},realName =#{realName},idCardBack =#{idCardBack},idCardFront =#{idCardFront},status = 1,updateTime=CURRENT_TIMESTAMP where userId=#{userId} ;
     </update>
 
     <!--获取所有申请成为编辑的用户信息-->

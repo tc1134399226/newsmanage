@@ -19,7 +19,7 @@
     <select id="getCollectionByUserId" parameterType="com.qf.news.pojo.UserInfo" resultMap="collectlist">
         select c.colId,c.userId,c.articleId,a.createTime colTime, a.areaId,a.typeId,a.mainTitle,
         a.subTitle,a.content,a.createTime artTime
-        from collection c left join article a on a.userId=c.userId  where c.userId=#{userId}
+        from collection c left join article a on a.articleId=c.articleId  where c.userId=#{userId}
         and c.status=1 and a.status=2
     </select>
     <update id="deleteCollectionByColId" parameterType="Long" >

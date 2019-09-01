@@ -56,6 +56,10 @@ public class UserServiceImpl implements SysUserService {
         if (user1!=null){
             return false;
         }else {
+            System.out.println("头像"+user.getIcon());
+            if (user.getIcon()==null||user.getIcon()==""){
+                user.setIcon("static/upload/icon.jpg");
+            }
             int i = sysUserDao.saveUser(user);
             return i > 0;
         }
@@ -122,6 +126,9 @@ public class UserServiceImpl implements SysUserService {
      * @return
      */
     public boolean insertUser(User user){
+        if (user.getIcon()==""||user.getIcon()==null){
+            user.setIcon("static/upload/icon.jpg");
+        }
         int i = sysUserDao.insertUser(user);
         return i > 0;
     }

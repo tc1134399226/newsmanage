@@ -26,6 +26,9 @@ public class NewsUserInfoServiceImpl implements NewsUserInfoService {
     public boolean register(UserInfo userInfo) {
         String s = MD5.encodePassword(userInfo.getPassword());
         userInfo.setPassword(s);
+        if (userInfo.getIcon()==null){
+            userInfo.setIcon("static/upload/icon.jpg");
+        }
         int register = userInfoMapper.register(userInfo);
         return register>0;
     }

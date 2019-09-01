@@ -733,6 +733,7 @@
 			//数据，json字符串
 			//请求成功
 			success : function(result) {
+				console.log(result);
 				for (var i=0;i<type.length;i++){
 					var str = "";
 					var count = 0;
@@ -740,7 +741,7 @@
 					$(result).each(function(index,item) {
 						if (item.areaName==area){
 							if (item.typeName==type[i]){
-								if (count>=10){
+								if (count>10){
 									return false;
 								}
 								str += "<dd>";

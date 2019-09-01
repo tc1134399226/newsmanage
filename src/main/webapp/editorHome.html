@@ -306,7 +306,7 @@
                     trStr+="<div class='partThree'>"+item.artTime+"</div>";
                     trStr+="<div class='partThree'>"+item.colTime+"</div>";
                     trStr+="<div class='button'>";
-                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='read("+item.articleId+")'></i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt("+item.articleId+")'></i></button>&nbsp;"
                     trStr+="</div>";
                     trStr+="<br>";
                     trStr+="</div>";
@@ -385,7 +385,7 @@
                     trStr+="<div class='partThree'>"+item.artTime+"</div>";
                     trStr+="<div class='partThree'>"+item.colTime+"</div>";
                     trStr+="<div class='button'>";
-                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='read("+item.articleId+")'></i></button>&nbsp;"
+                    trStr+="<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt("+item.articleId+")'></i></button>&nbsp;"
                     trStr+="</div>";
                     trStr+="<br>";
                     trStr+="</div>";
@@ -466,7 +466,7 @@
                     trStr+="<div class='partFour'>"+item.createTime+"</div>";
                     trStr+="<div class='partFour'>"+item.updateTime+"</div>";
                     trStr+="<div class='partFive'>"+statusName(item.status)+"</div>";
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='read(" + item.articleId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.articleId + ")'></i></button>&nbsp;"
                     trStr+="<div class='button'>";
                     trStr+="</div>";
                     trStr+="<br>";
@@ -547,7 +547,7 @@
                     trStr+="<div class='partFour'>"+item.createTime+"</div>";
                     trStr+="<div class='partFour'>"+item.updateTime+"</div>";
                     trStr+="<div class='partFive'>"+statusName(item.status)+"</div>";
-                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='read(" + item.articleId + ")'></i></button>&nbsp;"
+                    trStr += "<button type=\"button\" class='btn btn-success btn-xs'><i class=' glyphicon glyphicon-check' onclick='readArt(" + item.articleId + ")'></i></button>&nbsp;"
                     trStr+="<div class='button'>";
                     trStr+="</div>";
                     trStr+="<br>";
@@ -584,33 +584,6 @@
             }
         });
     }
-    //传session 跳转页面
-    function read(articleId) {
-        $.ajax({
-            //请求方式
-            type : "GET",
-            //请求的媒体类型
-            contentType: "application/json;charset=UTF-8",
-            //接受数据类型
-            dataType:"json",
-            //请求地址
-            url : "news/toArticleContent?articleId="+articleId,
-            //数据，json字符串
-            //请求成功
-            success : function(result) {
-                if (result) {
-                    window.location.href="articleContentShow.html?articleId="+articleId
-                }
-            },
-            //请求失败，包含具体的错误信息
-            error : function(e){
-                console.log("报错");
-                console.log(e.status);
-                console.log(e.responseText);
-            }
-        });
-
-    }
 
 
 
@@ -632,8 +605,6 @@
     function typeName(typeId) {
         if (typeId == 1) {
             return "军事"
-        } else if (typeId == 2) {
-            return "财经"
         } else if (typeId == 2) {
             return "财经"
         } else if (typeId == 3) {
@@ -844,5 +815,33 @@
             }
         })
     }
+    //内容点击跳转详情页
+    function readArt(articleId) {
+        $.ajax({
+            //请求方式
+            type : "GET",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //接受数据类型
+            dataType:"json",
+            //请求地址
+            url : "news/toArticleContent?articleId="+articleId,
+            //数据，json字符串
+            //请求成功
+            success : function(result) {
+                if (result) {
+                    window.location.href="articleContentShow.html?articleId="+articleId
+                }
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log("报错");
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+
+    }
+
 </script>
 </html>

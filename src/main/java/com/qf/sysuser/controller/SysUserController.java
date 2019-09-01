@@ -120,7 +120,7 @@ public class SysUserController {
     @RequestMapping("insertUser")
     @ResponseBody
     public boolean insertUser(@RequestBody User user){
-        return sysUserService.insertUser(user);
+        return sysUserService.registerUser(user);
     }
 
     /**

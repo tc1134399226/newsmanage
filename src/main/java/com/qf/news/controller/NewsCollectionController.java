@@ -33,6 +33,8 @@ public class NewsCollectionController {
         //,produces = "text/html;charset=UTF-8"
       UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
 
+        System.out.print("userinfo");
+        System.out.println(userInfo);
 //        System.out.println(userInfo);
         //测试
 //        UserInfo userInfo=new UserInfo();

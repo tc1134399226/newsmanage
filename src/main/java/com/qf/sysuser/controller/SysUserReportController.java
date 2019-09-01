@@ -22,7 +22,7 @@ public class SysUserReportController {
 
     @RequestMapping("getAllReport")
     public  Object getAllReport(@RequestParam(required = true,defaultValue = "1",value = "pageNum") int pageNum){
-        int pageSize=3;//每页显示记录数
+        int pageSize=5;//每页显示记录数
         //初始化pageHelper对象
         PageHelper.startPage(pageNum, pageSize);
         //获取所有申请的文章信息

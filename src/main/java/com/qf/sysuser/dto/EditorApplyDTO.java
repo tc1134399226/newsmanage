@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class EditorApplyDTO {
+    Integer idCard;
     Integer userId;
     String realName;
     String idCardBack;
@@ -45,7 +46,8 @@ public class EditorApplyDTO {
     @Override
     public String toString() {
         return "EditorApplyDTO{" +
-                "userId=" + userId +
+                "idCard=" + idCard +
+                ", userId=" + userId +
                 ", realName='" + realName + '\'' +
                 ", idCardBack='" + idCardBack + '\'' +
                 ", idCardFront='" + idCardFront + '\'' +

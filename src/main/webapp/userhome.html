@@ -193,6 +193,8 @@
 
             //请求成功
             success : function(result) {
+                console.log("....................")
+                console.log(result);
                 $(".content").html("");
                 // var pagename=window.location.pathname
                 // console.log(pagename);
@@ -728,7 +730,7 @@
                     trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
                     // trStr+="<div class='partOne'><input type=\"checkbox\"></div>";
                     if (item.senderId==666) {
-                        trStr+="<div class='partSev'>"+item.nickName+"</div>";
+                        trStr+="<div class='partSev'>系统消息</div>";
                     }else {
                         trStr += "<div class='partSev'>发信人:" + item.nickName + "</div>";
                     }
@@ -738,7 +740,7 @@
                     trStr += "<button type=\"button\" class='btn btn-primary btn-xs'><i class=' glyphicon glyphicon-check' onclick='removeUnread(" + item.mgeId + ")'>标记已读</i></button>&nbsp;"
                     trStr+="<button type=\"button\" class='btn btn-danger btn-xs' onclick='deleteMessage("+ item.mgeId+")'><i class=' glyphicon glyphicon-remove' >删除</i></button>"
                     if (item.senderId!=666) {
-                        trStr += "<button><a class=' glyphicon glyphicon-check' href="+item.mgeUrl+" ><i>查看回复</i></a></button>;"
+                        trStr += "<a class=' btn btn-danger btn-xs' href="+item.mgeUrl+" ><i>查看回复</i></a>;"
                         // +"#c"+item.comId
                     }
                     trStr+="</div>";
@@ -814,7 +816,7 @@
                     //获取id并拼接
                     trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
                     if (item.senderId==666) {
-                        trStr+="<div class='partSev'>"+item.nickName+"</div>";
+                        trStr+="<div class='partSev'>系统消息</div>";
                     }else {
                         trStr += "<div class='partSev'>发信人:" + item.nickName + "</div>";
                     }
@@ -893,7 +895,7 @@
                     trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
                     // trStr+="<div class='partOne'><input type=\"checkbox\"></div>";
                     if (item.senderId==666) {
-                        trStr+="<div class='partSev'>"+item.nickName+"</div>";
+                        trStr+="<div class='partSev'>系统消息</div>";
                     }else {
                         trStr += "<div class='partSev'>发信人:" + item.nickName + "</div>";
                     }
@@ -975,7 +977,7 @@
                     trStr+="<div class='mainTitle'>"+item.mainTitle+"</div>";
                     // trStr+="<div class='partOne'><input type=\"checkbox\"></div>";
                     if (item.senderId==666) {
-                        trStr+="<div class='partSev'>"+item.nickName+"</div>";
+                        trStr+="<div class='partSev'>系统消息</div>";
                     }else {
                         trStr += "<div class='partSev'>发信人:" + item.nickName + "</div>";
                     }

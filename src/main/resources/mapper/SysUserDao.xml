@@ -8,7 +8,7 @@
     </select>
 
     <insert id="saveUser">
-        insert into sysuser values(default,#{username},#{password},#{account},#{email},#{mobile},#{areaCode},#{status},#{icon})
+        insert into sysuser values(default,#{account} ,#{username} ,#{password} ,#{email},#{mobile},#{areaCode},#{status},#{icon})
     </insert>
 
     <select id="getUserById" resultType="com.qf.sysuser.pojo.User">
@@ -54,8 +54,8 @@
     </update>
 
     <insert id="insertUser">
-        insert into sysuser values(default,#{username},#{password},#{account},#{email},#{mobile},
-        #{areaCode},#{status},null)
+        insert into sysuser(username,password,account,email,mobile,areaCode,status,icon) values(#{username},#{password},#{account},#{email},#{mobile},
+        #{areaCode},#{status},#{icon})
     </insert>
 
     <resultMap id="sysuserMap" type="com.qf.sysuser.vo.MenuInfoVO">
