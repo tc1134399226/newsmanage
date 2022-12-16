@@ -22,7 +22,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <spring-version>4.3.6.RELEASE</spring-version>
+        <spring-version>5.2.20.RELEASE</spring-version>
     </properties>
     <dependencies>
         <!--单元测试-->
